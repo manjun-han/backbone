@@ -1081,7 +1081,9 @@
     // collection.
     _prepareModel: function(attrs, options) {
       if (this._isModel(attrs)) {
+      	if (attrs.collection && attrs.collection != this) attrs.collection.remove(attrs) ;
         if (!attrs.collection) attrs.collection = this;
+
         return attrs;
       }
       options = options ? _.clone(options) : {};
