@@ -1,51 +1,56 @@
-(function() {
+(function(QUnit) {
 
   var view;
 
-  QUnit.module("Backbone.View", {
+  QUnit.module('Backbone.View', {
 
-    beforeEach: function(assert) {
+    beforeEach: function() {
       $('#qunit-fixture').append(
         '<div id="testElement"><h1>Test</h1></div>'
-      );
+     );
 
       view = new Backbone.View({
-        id        : 'test-view',
-        className : 'test-view',
-        other     : 'non-special-option'
+        id: 'test-view',
+        className: 'test-view',
+        other: 'non-special-option'
       });
+    },
+
+    afterEach: function() {
+      $('#testElement').remove();
+      $('#test-view').remove();
     }
 
   });
 
-  QUnit.test("constructor", function(assert) {
+  QUnit.test('constructor', function(assert) {
     assert.expect(3);
     assert.equal(view.el.id, 'test-view');
     assert.equal(view.el.className, 'test-view');
     assert.equal(view.el.other, void 0);
   });
 
-  QUnit.test("$", function(assert) {
+  QUnit.test('$', function(assert) {
     assert.expect(2);
-    var view = new Backbone.View;
-    view.setElement('<p><a><b>test</b></a></p>');
-    var result = view.$('a b');
+    var myView = new Backbone.View;
+    myView.setElement('<p><a><b>test</b></a></p>');
+    var result = myView.$('a b');
 
     assert.strictEqual(result[0].innerHTML, 'test');
     assert.ok(result.length === +result.length);
   });
 
-  QUnit.test("$el", function(assert) {
+  QUnit.test('$el', function(assert) {
     assert.expect(3);
-    var view = new Backbone.View;
-    view.setElement('<p><a><b>test</b></a></p>');
-    assert.strictEqual(view.el.nodeType, 1);
+    var myView = new Backbone.View;
+    myView.setElement('<p><a><b>test</b></a></p>');
+    assert.strictEqual(myView.el.nodeType, 1);
 
-    assert.ok(view.$el instanceof Backbone.$);
-    assert.strictEqual(view.$el[0], view.el);
+    assert.ok(myView.$el instanceof Backbone.$);
+    assert.strictEqual(myView.$el[0], myView.el);
   });
 
-  QUnit.test("initialize", function(assert) {
+  QUnit.test('initialize', function(assert) {
     assert.expect(1);
     var View = Backbone.View.extend({
       initialize: function() {
@@ -56,55 +61,77 @@
     assert.strictEqual(new View().one, 1);
   });
 
-  QUnit.test("render", function(assert) {
+  QUnit.test('preinitialize', function(assert) {
     assert.expect(1);
-    var view = new Backbone.View;
-    assert.equal(view.render(), view, '#render returns the view instance');
+    var View = Backbone.View.extend({
+      preinitialize: function() {
+        this.one = 1;
+      }
+    });
+
+    assert.strictEqual(new View().one, 1);
   });
 
-  QUnit.test("delegateEvents", function(assert) {
+  QUnit.test('preinitialize occurs before the view is set up', function(assert) {
+    assert.expect(2);
+    var View = Backbone.View.extend({
+      preinitialize: function() {
+        assert.equal(this.el, undefined);
+      }
+    });
+    var _view = new View({});
+    assert.notEqual(_view.el, undefined);
+  });
+
+  QUnit.test('render', function(assert) {
+    assert.expect(1);
+    var myView = new Backbone.View;
+    assert.equal(myView.render(), myView, '#render returns the view instance');
+  });
+
+  QUnit.test('delegateEvents', function(assert) {
     assert.expect(6);
     var counter1 = 0, counter2 = 0;
 
-    var view = new Backbone.View({el: '#testElement'});
-    view.increment = function(){ counter1++; };
-    view.$el.on('click', function(){ counter2++; });
+    var myView = new Backbone.View({el: '#testElement'});
+    myView.increment = function() { counter1++; };
+    myView.$el.on('click', function() { counter2++; });
 
     var events = {'click h1': 'increment'};
 
-    view.delegateEvents(events);
-    view.$('h1').trigger('click');
+    myView.delegateEvents(events);
+    myView.$('h1').trigger('click');
     assert.equal(counter1, 1);
     assert.equal(counter2, 1);
 
-    view.$('h1').trigger('click');
+    myView.$('h1').trigger('click');
     assert.equal(counter1, 2);
     assert.equal(counter2, 2);
 
-    view.delegateEvents(events);
-    view.$('h1').trigger('click');
+    myView.delegateEvents(events);
+    myView.$('h1').trigger('click');
     assert.equal(counter1, 3);
     assert.equal(counter2, 3);
   });
 
-  QUnit.test("delegate", function(assert) {
+  QUnit.test('delegate', function(assert) {
     assert.expect(3);
-    var view = new Backbone.View({el: '#testElement'});
-    view.delegate('click', 'h1', function() {
+    var myView = new Backbone.View({el: '#testElement'});
+    myView.delegate('click', 'h1', function() {
       assert.ok(true);
     });
-    view.delegate('click', function() {
+    myView.delegate('click', function() {
       assert.ok(true);
     });
-    view.$('h1').trigger('click');
+    myView.$('h1').trigger('click');
 
-    assert.equal(view.delegate(), view, '#delegate returns the view instance');
+    assert.equal(myView.delegate(), myView, '#delegate returns the view instance');
   });
 
-  QUnit.test("delegateEvents allows functions for callbacks", function(assert) {
+  QUnit.test('delegateEvents allows functions for callbacks', function(assert) {
     assert.expect(3);
-    var view = new Backbone.View({el: '<p></p>'});
-    view.counter = 0;
+    var myView = new Backbone.View({el: '<p></p>'});
+    myView.counter = 0;
 
     var events = {
       click: function() {
@@ -112,100 +139,99 @@
       }
     };
 
-    view.delegateEvents(events);
-    view.$el.trigger('click');
-    assert.equal(view.counter, 1);
+    myView.delegateEvents(events);
+    myView.$el.trigger('click');
+    assert.equal(myView.counter, 1);
 
-    view.$el.trigger('click');
-    assert.equal(view.counter, 2);
+    myView.$el.trigger('click');
+    assert.equal(myView.counter, 2);
 
-    view.delegateEvents(events);
-    view.$el.trigger('click');
-    assert.equal(view.counter, 3);
+    myView.delegateEvents(events);
+    myView.$el.trigger('click');
+    assert.equal(myView.counter, 3);
   });
 
-
-  QUnit.test("delegateEvents ignore undefined methods", function(assert) {
+  QUnit.test('delegateEvents ignore undefined methods', function(assert) {
     assert.expect(0);
-    var view = new Backbone.View({el: '<p></p>'});
-    view.delegateEvents({'click': 'undefinedMethod'});
-    view.$el.trigger('click');
+    var myView = new Backbone.View({el: '<p></p>'});
+    myView.delegateEvents({click: 'undefinedMethod'});
+    myView.$el.trigger('click');
   });
 
-  QUnit.test("undelegateEvents", function(assert) {
+  QUnit.test('undelegateEvents', function(assert) {
     assert.expect(7);
     var counter1 = 0, counter2 = 0;
 
-    var view = new Backbone.View({el: '#testElement'});
-    view.increment = function(){ counter1++; };
-    view.$el.on('click', function(){ counter2++; });
+    var myView = new Backbone.View({el: '#testElement'});
+    myView.increment = function() { counter1++; };
+    myView.$el.on('click', function() { counter2++; });
 
     var events = {'click h1': 'increment'};
 
-    view.delegateEvents(events);
-    view.$('h1').trigger('click');
+    myView.delegateEvents(events);
+    myView.$('h1').trigger('click');
     assert.equal(counter1, 1);
     assert.equal(counter2, 1);
 
-    view.undelegateEvents();
-    view.$('h1').trigger('click');
+    myView.undelegateEvents();
+    myView.$('h1').trigger('click');
     assert.equal(counter1, 1);
     assert.equal(counter2, 2);
 
-    view.delegateEvents(events);
-    view.$('h1').trigger('click');
+    myView.delegateEvents(events);
+    myView.$('h1').trigger('click');
     assert.equal(counter1, 2);
     assert.equal(counter2, 3);
 
-    assert.equal(view.undelegateEvents(), view, '#undelegateEvents returns the view instance');
+    assert.equal(myView.undelegateEvents(), myView, '#undelegateEvents returns the view instance');
   });
 
-  QUnit.test("undelegate", function(assert) {
+  QUnit.test('undelegate', function(assert) {
     assert.expect(1);
-    view = new Backbone.View({el: '#testElement'});
-    view.delegate('click', function() { assert.ok(false); });
-    view.delegate('click', 'h1', function() { assert.ok(false); });
+    var myView = new Backbone.View({el: '#testElement'});
+    myView.delegate('click', function() { assert.ok(false); });
+    myView.delegate('click', 'h1', function() { assert.ok(false); });
 
-    view.undelegate('click');
+    myView.undelegate('click');
 
-    view.$('h1').trigger('click');
-    view.$el.trigger('click');
+    myView.$('h1').trigger('click');
+    myView.$el.trigger('click');
 
-    assert.equal(view.undelegate(), view, '#undelegate returns the view instance');
+    assert.equal(myView.undelegate(), myView, '#undelegate returns the view instance');
   });
 
-  QUnit.test("undelegate with passed handler", function(assert) {
+  QUnit.test('undelegate with passed handler', function(assert) {
     assert.expect(1);
-    view = new Backbone.View({el: '#testElement'});
+    var myView = new Backbone.View({el: '#testElement'});
     var listener = function() { assert.ok(false); };
-    view.delegate('click', listener);
-    view.delegate('click', function() { assert.ok(true); });
-    view.undelegate('click', listener);
-    view.$el.trigger('click');
+    myView.delegate('click', listener);
+    myView.delegate('click', function() { assert.ok(true); });
+    myView.undelegate('click', listener);
+    myView.$el.trigger('click');
   });
 
-  QUnit.test("undelegate with selector", function(assert) {
+  QUnit.test('undelegate with selector', function(assert) {
     assert.expect(2);
-    view = new Backbone.View({el: '#testElement'});
-    view.delegate('click', function() { assert.ok(true); });
-    view.delegate('click', 'h1', function() { assert.ok(false); });
-    view.undelegate('click', 'h1');
-    view.$('h1').trigger('click');
-    view.$el.trigger('click');
+    var myView = new Backbone.View({el: '#testElement'});
+    myView.delegate('click', function() { assert.ok(true); });
+    myView.delegate('click', 'h1', function() { assert.ok(false); });
+    myView.undelegate('click', 'h1');
+    myView.$('h1').trigger('click');
+    myView.$el.trigger('click');
   });
 
-  QUnit.test("undelegate with handler and selector", function(assert) {
+  QUnit.test('undelegate with handler and selector', function(assert) {
     assert.expect(2);
-    view = new Backbone.View({el: '#testElement'});
-    view.delegate('click', function() { assert.ok(true); });
-    var handler = function(){ assert.ok(false); };
-    view.delegate('click', 'h1', handler);
-    view.undelegate('click', 'h1', handler);
-    view.$('h1').trigger('click');
-    view.$el.trigger('click');
+    var myView = new Backbone.View({el: '#testElement'});
+    myView.delegate('click', function() { assert.ok(true); });
+    var handler = function() { assert.ok(false); };
+    myView.delegate('click', 'h1', handler);
+    myView.undelegate('click', 'h1', handler);
+    myView.$('h1').trigger('click');
+    myView.$el.trigger('click');
   });
 
-  QUnit.test("tagName can be provided as a string", function(assert) {
+  QUnit.test('tagName can be provided as a string', function(assert) {
     assert.expect(1);
     var View = Backbone.View.extend({
       tagName: 'span'
@@ -214,7 +240,7 @@
     assert.equal(new View().el.tagName, 'SPAN');
   });
 
-  QUnit.test("tagName can be provided as a function", function(assert) {
+  QUnit.test('tagName can be provided as a function', function(assert) {
     assert.expect(1);
     var View = Backbone.View.extend({
       tagName: function() {
@@ -225,7 +251,7 @@
     assert.ok(new View().$el.is('p'));
   });
 
-  QUnit.test("_ensureElement with DOM node el", function(assert) {
+  QUnit.test('_ensureElement with DOM node el', function(assert) {
     assert.expect(1);
     var View = Backbone.View.extend({
       el: document.body
@@ -234,25 +260,25 @@
     assert.equal(new View().el, document.body);
   });
 
-  QUnit.test("_ensureElement with string el", function(assert) {
+  QUnit.test('_ensureElement with string el', function(assert) {
     assert.expect(3);
     var View = Backbone.View.extend({
-      el: "body"
+      el: 'body'
     });
     assert.strictEqual(new View().el, document.body);
 
     View = Backbone.View.extend({
-      el: "#testElement > h1"
+      el: '#testElement > h1'
     });
-    assert.strictEqual(new View().el, $("#testElement > h1").get(0));
+    assert.strictEqual(new View().el, $('#testElement > h1').get(0));
 
     View = Backbone.View.extend({
-      el: "#nonexistent"
+      el: '#nonexistent'
     });
     assert.ok(!new View().el);
   });
 
-  QUnit.test("with className and id functions", function(assert) {
+  QUnit.test('with className and id functions', function(assert) {
     assert.expect(2);
     var View = Backbone.View.extend({
       className: function() {
@@ -267,11 +293,11 @@
     assert.strictEqual(new View().el.id, 'id');
   });
 
-  QUnit.test("with attributes", function(assert) {
+  QUnit.test('with attributes', function(assert) {
     assert.expect(2);
     var View = Backbone.View.extend({
       attributes: {
-        id: 'id',
+        'id': 'id',
         'class': 'class'
       }
     });
@@ -280,7 +306,7 @@
     assert.strictEqual(new View().el.id, 'id');
   });
 
-  QUnit.test("with attributes as a function", function(assert) {
+  QUnit.test('with attributes as a function', function(assert) {
     assert.expect(1);
     var View = Backbone.View.extend({
       attributes: function() {
@@ -291,7 +317,7 @@
     assert.strictEqual(new View().el.className, 'dynamic');
   });
 
-  QUnit.test("should default to className/id properties", function(assert) {
+  QUnit.test('should default to className/id properties', function(assert) {
     assert.expect(4);
     var View = Backbone.View.extend({
       className: 'backboneClass',
@@ -302,14 +328,14 @@
       }
     });
 
-    var view = new View;
-    assert.strictEqual(view.el.className, 'backboneClass');
-    assert.strictEqual(view.el.id, 'backboneId');
-    assert.strictEqual(view.$el.attr('class'), 'backboneClass');
-    assert.strictEqual(view.$el.attr('id'), 'backboneId');
+    var myView = new View;
+    assert.strictEqual(myView.el.className, 'backboneClass');
+    assert.strictEqual(myView.el.id, 'backboneId');
+    assert.strictEqual(myView.$el.attr('class'), 'backboneClass');
+    assert.strictEqual(myView.$el.attr('id'), 'backboneId');
   });
 
-  QUnit.test("multiple views per element", function(assert) {
+  QUnit.test('multiple views per element', function(assert) {
     assert.expect(3);
     var count = 0;
     var $el = $('<p></p>');
@@ -324,46 +350,46 @@
     });
 
     var view1 = new View;
-    $el.trigger("click");
+    $el.trigger('click');
     assert.equal(1, count);
 
     var view2 = new View;
-    $el.trigger("click");
+    $el.trigger('click');
     assert.equal(3, count);
 
     view1.delegateEvents();
-    $el.trigger("click");
+    $el.trigger('click');
     assert.equal(5, count);
   });
 
-  QUnit.test("custom events", function(assert) {
+  QUnit.test('custom events', function(assert) {
     assert.expect(2);
     var View = Backbone.View.extend({
       el: $('body'),
       events: {
-        "fake$event": function() { assert.ok(true); }
+        fake$event: function() { assert.ok(true); }
       }
     });
 
-    var view = new View;
+    var myView = new View;
     $('body').trigger('fake$event').trigger('fake$event');
 
     $('body').off('fake$event');
     $('body').trigger('fake$event');
   });
 
-  QUnit.test("#1048 - setElement uses provided object.", function(assert) {
+  QUnit.test('#1048 - setElement uses provided object.', function(assert) {
     assert.expect(2);
     var $el = $('body');
 
-    var view = new Backbone.View({el: $el});
-    assert.ok(view.$el === $el);
+    var myView = new Backbone.View({el: $el});
+    assert.ok(myView.$el === $el);
 
-    view.setElement($el = $($el));
-    assert.ok(view.$el === $el);
+    myView.setElement($el = $($el));
+    assert.ok(myView.$el === $el);
   });
 
-  QUnit.test("#986 - Undelegate before changing element.", function(assert) {
+  QUnit.test('#986 - Undelegate before changing element.', function(assert) {
     assert.expect(1);
     var button1 = $('<button></button>');
     var button2 = $('<button></button>');
@@ -371,19 +397,19 @@
     var View = Backbone.View.extend({
       events: {
         click: function(e) {
-          assert.ok(view.el === e.target);
+          assert.ok(myView.el === e.target);
         }
       }
     });
 
-    var view = new View({el: button1});
-    view.setElement(button2);
+    var myView = new View({el: button1});
+    myView.setElement(button2);
 
     button1.trigger('click');
     button2.trigger('click');
   });
 
-  QUnit.test("#1172 - Clone attributes object", function(assert) {
+  QUnit.test('#1172 - Clone attributes object', function(assert) {
     assert.expect(2);
     var View = Backbone.View.extend({
       attributes: {foo: 'bar'}
@@ -396,39 +422,39 @@
     assert.ok(!view2.el.id);
   });
 
-  QUnit.test("views stopListening", function(assert) {
+  QUnit.test('views stopListening', function(assert) {
     assert.expect(0);
     var View = Backbone.View.extend({
       initialize: function() {
-        this.listenTo(this.model, 'all x', function(){ assert.ok(false); });
-        this.listenTo(this.collection, 'all x', function(){ assert.ok(false); });
+        this.listenTo(this.model, 'all x', function() { assert.ok(false); });
+        this.listenTo(this.collection, 'all x', function() { assert.ok(false); });
       }
     });
 
-    var view = new View({
+    var myView = new View({
       model: new Backbone.Model,
       collection: new Backbone.Collection
     });
 
-    view.stopListening();
-    view.model.trigger('x');
-    view.collection.trigger('x');
+    myView.stopListening();
+    myView.model.trigger('x');
+    myView.collection.trigger('x');
   });
 
-  QUnit.test("Provide function for el.", function(assert) {
+  QUnit.test('Provide function for el.', function(assert) {
     assert.expect(2);
     var View = Backbone.View.extend({
       el: function() {
-        return "<p><a></a></p>";
+        return '<p><a></a></p>';
       }
     });
 
-    var view = new View;
-    assert.ok(view.$el.is('p'));
-    assert.ok(view.$el.has('a'));
+    var myView = new View;
+    assert.ok(myView.$el.is('p'));
+    assert.ok(myView.$el.has('a'));
   });
 
-  QUnit.test("events passed in options", function(assert) {
+  QUnit.test('events passed in options', function(assert) {
     assert.expect(1);
     var counter = 0;
 
@@ -439,52 +465,52 @@
       }
     });
 
-    var view = new View({
+    var myView = new View({
       events: {
         'click h1': 'increment'
       }
     });
 
-    view.$('h1').trigger('click').trigger('click');
+    myView.$('h1').trigger('click').trigger('click');
     assert.equal(counter, 2);
   });
 
-  QUnit.test("remove", function(assert) {
+  QUnit.test('remove', function(assert) {
     assert.expect(2);
-    var view = new Backbone.View;
+    var myView = new Backbone.View;
     document.body.appendChild(view.el);
 
-    view.delegate('click', function() { assert.ok(false); });
-    view.listenTo(view, 'all x', function() { assert.ok(false); });
+    myView.delegate('click', function() { assert.ok(false); });
+    myView.listenTo(myView, 'all x', function() { assert.ok(false); });
 
-    assert.equal(view.remove(), view, '#remove returns the view instance');
-    view.$el.trigger('click');
-    view.trigger('x');
+    assert.equal(myView.remove(), myView, '#remove returns the view instance');
+    myView.$el.trigger('click');
+    myView.trigger('x');
 
     // In IE8 and below, parentNode still exists but is not document.body.
-    assert.notEqual(view.el.parentNode, document.body);
+    assert.notEqual(myView.el.parentNode, document.body);
   });
 
-  QUnit.test("setElement", function(assert) {
+  QUnit.test('setElement', function(assert) {
     assert.expect(3);
-    var view = new Backbone.View({
+    var myView = new Backbone.View({
       events: {
         click: function() { assert.ok(false); }
       }
     });
-    view.events = {
+    myView.events = {
       click: function() { assert.ok(true); }
     };
-    var oldEl = view.el;
-    var $oldEl = view.$el;
+    var oldEl = myView.el;
+    var $oldEl = myView.$el;
 
-    view.setElement(document.createElement('div'));
+    myView.setElement(document.createElement('div'));
 
     $oldEl.click();
-    view.$el.click();
+    myView.$el.click();
 
-    assert.notEqual(oldEl, view.el);
-    assert.notEqual($oldEl, view.$el);
+    assert.notEqual(oldEl, myView.el);
+    assert.notEqual($oldEl, myView.$el);
   });
 
-})();
+})(QUnit);
