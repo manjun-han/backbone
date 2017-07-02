@@ -59,8 +59,8 @@ http:<span class="hljs-comment">//backbonejs.org</span>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Establish the root object, <code>window</code> (<code>self</code>) in the browser, or <code>global</code> on the server.
-We use <code>self</code> instead of <code>window</code> for <code>WebWorker</code> support.</p>
+              <p>建立root对象，在浏览器中是<code>window</code> (<code>self</code>) ，在服务器端是<code>global</code>。我们使用<code>self</code>而不是<code>window</code>(<code>self</code>)，为了支持
+<code>WebWorker</code></p>
 
             </div>
             
@@ -76,7 +76,7 @@ We use <code>self</code> instead of <code>window</code> for <code>WebWorker</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-4">&#182;</a>
               </div>
-              <p>Set up Backbone appropriately for the environment. Start with AMD.</p>
+              <p>根据当前环境适当地设置Backbone。先从AMD开始。</p>
 
             </div>
             
@@ -92,8 +92,7 @@ We use <code>self</code> instead of <code>window</code> for <code>WebWorker</cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-5">&#182;</a>
               </div>
-              <p>Export global even in AMD case in case this script is loaded with
-others that may still expect a global Backbone.</p>
+              <p>导出到全局，即使是在AMD下，为的是防止其它脚本需要全局环境下的Backbone。</p>
 
             </div>
             
@@ -109,7 +108,7 @@ others that may still expect a global Backbone.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-6">&#182;</a>
               </div>
-              <p>Next for Node.js or CommonJS. jQuery may not be needed as a module.</p>
+              <p>接下来是在Node.js或CommonJS下。jQuery可能不是必须的模块。</p>
 
             </div>
             
@@ -127,7 +126,7 @@ others that may still expect a global Backbone.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-7">&#182;</a>
               </div>
-              <p>Finally, as a browser global.</p>
+              <p>最后是在浏览器环境下。</p>
 
             </div>
             
@@ -517,9 +516,9 @@ the callback to all events fired.</p>
             
             <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> internalOn = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">obj, name, callback, context, listening</span>) </span>{
     obj._events = eventsApi(onApi, obj._events || {}, name, callback, {
-      context: context,
-      ctx: obj,
-      listening: listening
+      <span class="hljs-attr">context</span>: context,
+      <span class="hljs-attr">ctx</span>: obj,
+      <span class="hljs-attr">listening</span>: listening
     });
 
     <span class="hljs-keyword">if</span> (listening) {
@@ -567,7 +566,7 @@ Setup the necessary references to track the listening callbacks.</p>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (!listening) {
       <span class="hljs-keyword">var</span> thisId = <span class="hljs-keyword">this</span>._listenId || (<span class="hljs-keyword">this</span>._listenId = _.uniqueId(<span class="hljs-string">'l'</span>));
-      listening = listeningTo[id] = {obj: obj, objId: id, id: thisId, listeningTo: listeningTo, count: <span class="hljs-number">0</span>};
+      listening = listeningTo[id] = {<span class="hljs-attr">obj</span>: obj, <span class="hljs-attr">objId</span>: id, <span class="hljs-attr">id</span>: thisId, <span class="hljs-attr">listeningTo</span>: listeningTo, <span class="hljs-attr">count</span>: <span class="hljs-number">0</span>};
     }</pre></div></div>
             
         </li>
@@ -606,7 +605,7 @@ Setup the necessary references to track the listening callbacks.</p>
       <span class="hljs-keyword">var</span> context = options.context, ctx = options.ctx, listening = options.listening;
       <span class="hljs-keyword">if</span> (listening) listening.count++;
 
-      handlers.push({callback: callback, context: context, ctx: context || ctx, listening: listening});
+      handlers.push({<span class="hljs-attr">callback</span>: callback, <span class="hljs-attr">context</span>: context, <span class="hljs-attr">ctx</span>: context || ctx, <span class="hljs-attr">listening</span>: listening});
     }
     <span class="hljs-keyword">return</span> events;
   };</pre></div></div>
@@ -630,8 +629,8 @@ callbacks for all events.</p>
             <div class="content"><div class='highlight'><pre>  Events.off = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, callback, context</span>) </span>{
     <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">this</span>._events) <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
     <span class="hljs-keyword">this</span>._events = eventsApi(offApi, <span class="hljs-keyword">this</span>._events, name, callback, {
-      context: context,
-      listeners: <span class="hljs-keyword">this</span>._listeners
+      <span class="hljs-attr">context</span>: context,
+      <span class="hljs-attr">listeners</span>: <span class="hljs-keyword">this</span>._listeners
     });
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
   };</pre></div></div>
@@ -1449,7 +1448,7 @@ if the attribute doesn’t exist.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    unset: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">attr, options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(attr, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, _.extend({}, options, {unset: <span class="hljs-literal">true</span>}));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(attr, <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>, _.extend({}, options, {<span class="hljs-attr">unset</span>: <span class="hljs-literal">true</span>}));
     },</pre></div></div>
             
         </li>
@@ -1468,7 +1467,7 @@ if the attribute doesn’t exist.</p>
             <div class="content"><div class='highlight'><pre>    clear: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
       <span class="hljs-keyword">var</span> attrs = {};
       <span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> key <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.attributes) attrs[key] = <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(attrs, _.extend({}, options, {unset: <span class="hljs-literal">true</span>}));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(attrs, _.extend({}, options, {<span class="hljs-attr">unset</span>: <span class="hljs-literal">true</span>}));
     },</pre></div></div>
             
         </li>
@@ -1572,7 +1571,7 @@ local attributes. Any changed attributes will trigger a “change” event.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
-      options = _.extend({parse: <span class="hljs-literal">true</span>}, options);
+      options = _.extend({<span class="hljs-attr">parse</span>: <span class="hljs-literal">true</span>}, options);
       <span class="hljs-keyword">var</span> model = <span class="hljs-keyword">this</span>;
       <span class="hljs-keyword">var</span> success = options.success;
       options.success = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resp</span>) </span>{
@@ -1623,7 +1622,7 @@ state will be <code>set</code> again.</p>
         (attrs = {})[key] = val;
       }
 
-      options = _.extend({validate: <span class="hljs-literal">true</span>, parse: <span class="hljs-literal">true</span>}, options);
+      options = _.extend({<span class="hljs-attr">validate</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">parse</span>: <span class="hljs-literal">true</span>}, options);
       <span class="hljs-keyword">var</span> wait = options.wait;</pre></div></div>
             
         </li>
@@ -1859,7 +1858,7 @@ the model. The default implementation is just to pass the response along.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    isValid: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._validate({}, _.extend({}, options, {validate: <span class="hljs-literal">true</span>}));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>._validate({}, _.extend({}, options, {<span class="hljs-attr">validate</span>: <span class="hljs-literal">true</span>}));
     },</pre></div></div>
             
         </li>
@@ -1881,7 +1880,7 @@ returning <code>true</code> if all is well. Otherwise, fire an <code>&quot;inval
       attrs = _.extend({}, <span class="hljs-keyword">this</span>.attributes, attrs);
       <span class="hljs-keyword">var</span> error = <span class="hljs-keyword">this</span>.validationError = <span class="hljs-keyword">this</span>.validate(attrs, options) || <span class="hljs-literal">null</span>;
       <span class="hljs-keyword">if</span> (!error) <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
-      <span class="hljs-keyword">this</span>.trigger(<span class="hljs-string">'invalid'</span>, <span class="hljs-keyword">this</span>, error, _.extend(options, {validationError: error}));
+      <span class="hljs-keyword">this</span>.trigger(<span class="hljs-string">'invalid'</span>, <span class="hljs-keyword">this</span>, error, _.extend(options, {<span class="hljs-attr">validationError</span>: error}));
       <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
     }
 
@@ -1901,8 +1900,8 @@ number of arguments they take.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> modelMethods = {keys: <span class="hljs-number">1</span>, values: <span class="hljs-number">1</span>, pairs: <span class="hljs-number">1</span>, invert: <span class="hljs-number">1</span>, pick: <span class="hljs-number">0</span>,
-      omit: <span class="hljs-number">0</span>, chain: <span class="hljs-number">1</span>, isEmpty: <span class="hljs-number">1</span>};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> modelMethods = {<span class="hljs-attr">keys</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">values</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">pairs</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">invert</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">pick</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">omit</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">chain</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">isEmpty</span>: <span class="hljs-number">1</span>};</pre></div></div>
             
         </li>
         
@@ -1983,7 +1982,7 @@ its models in sort order, as they’re added and removed.</p>
     <span class="hljs-keyword">if</span> (options.comparator !== <span class="hljs-keyword">void</span> <span class="hljs-number">0</span>) <span class="hljs-keyword">this</span>.comparator = options.comparator;
     <span class="hljs-keyword">this</span>._reset();
     <span class="hljs-keyword">this</span>.initialize.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
-    <span class="hljs-keyword">if</span> (models) <span class="hljs-keyword">this</span>.reset(models, _.extend({silent: <span class="hljs-literal">true</span>}, options));
+    <span class="hljs-keyword">if</span> (models) <span class="hljs-keyword">this</span>.reset(models, _.extend({<span class="hljs-attr">silent</span>: <span class="hljs-literal">true</span>}, options));
   };</pre></div></div>
             
         </li>
@@ -1999,8 +1998,8 @@ its models in sort order, as they’re added and removed.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> setOptions = {add: <span class="hljs-literal">true</span>, remove: <span class="hljs-literal">true</span>, merge: <span class="hljs-literal">true</span>};
-  <span class="hljs-keyword">var</span> addOptions = {add: <span class="hljs-literal">true</span>, remove: <span class="hljs-literal">false</span>};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> setOptions = {<span class="hljs-attr">add</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">remove</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">merge</span>: <span class="hljs-literal">true</span>};
+  <span class="hljs-keyword">var</span> addOptions = {<span class="hljs-attr">add</span>: <span class="hljs-literal">true</span>, <span class="hljs-attr">remove</span>: <span class="hljs-literal">false</span>};</pre></div></div>
             
         </li>
         
@@ -2123,7 +2122,7 @@ combination of the two.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    add: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">models, options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(models, _.extend({merge: <span class="hljs-literal">false</span>}, options, addOptions));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(models, _.extend({<span class="hljs-attr">merge</span>: <span class="hljs-literal">false</span>}, options, addOptions));
     },</pre></div></div>
             
         </li>
@@ -2145,7 +2144,7 @@ combination of the two.</p>
       models = singular ? [models] : models.slice();
       <span class="hljs-keyword">var</span> removed = <span class="hljs-keyword">this</span>._removeModels(models, options);
       <span class="hljs-keyword">if</span> (!options.silent &amp;&amp; removed.length) {
-        options.changes = {added: [], merged: [], removed: removed};
+        options.changes = {<span class="hljs-attr">added</span>: [], <span class="hljs-attr">merged</span>: [], <span class="hljs-attr">removed</span>: removed};
         <span class="hljs-keyword">this</span>.trigger(<span class="hljs-string">'update'</span>, <span class="hljs-keyword">this</span>, options);
       }
       <span class="hljs-keyword">return</span> singular ? removed[<span class="hljs-number">0</span>] : removed;
@@ -2330,7 +2329,7 @@ optionally merge it into the existing model.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (sort) <span class="hljs-keyword">this</span>.sort({silent: <span class="hljs-literal">true</span>});</pre></div></div>
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">if</span> (sort) <span class="hljs-keyword">this</span>.sort({<span class="hljs-attr">silent</span>: <span class="hljs-literal">true</span>});</pre></div></div>
             
         </li>
         
@@ -2354,9 +2353,9 @@ optionally merge it into the existing model.</p>
         <span class="hljs-keyword">if</span> (sort || orderChanged) <span class="hljs-keyword">this</span>.trigger(<span class="hljs-string">'sort'</span>, <span class="hljs-keyword">this</span>, options);
         <span class="hljs-keyword">if</span> (toAdd.length || toRemove.length || toMerge.length) {
           options.changes = {
-            added: toAdd,
-            removed: toRemove,
-            merged: toMerge
+            <span class="hljs-attr">added</span>: toAdd,
+            <span class="hljs-attr">removed</span>: toRemove,
+            <span class="hljs-attr">merged</span>: toMerge
           };
           <span class="hljs-keyword">this</span>.trigger(<span class="hljs-string">'update'</span>, <span class="hljs-keyword">this</span>, options);
         }
@@ -2401,7 +2400,7 @@ Useful for bulk operations and optimizations.</p>
       }
       options.previousModels = <span class="hljs-keyword">this</span>.models;
       <span class="hljs-keyword">this</span>._reset();
-      models = <span class="hljs-keyword">this</span>.add(models, _.extend({silent: <span class="hljs-literal">true</span>}, options));
+      models = <span class="hljs-keyword">this</span>.add(models, _.extend({<span class="hljs-attr">silent</span>: <span class="hljs-literal">true</span>}, options));
       <span class="hljs-keyword">if</span> (!options.silent) <span class="hljs-keyword">this</span>.trigger(<span class="hljs-string">'reset'</span>, <span class="hljs-keyword">this</span>, options);
       <span class="hljs-keyword">return</span> models;
     },</pre></div></div>
@@ -2420,7 +2419,7 @@ Useful for bulk operations and optimizations.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    push: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">model, options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.add(model, _.extend({at: <span class="hljs-keyword">this</span>.length}, options));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.add(model, _.extend({<span class="hljs-attr">at</span>: <span class="hljs-keyword">this</span>.length}, options));
     },</pre></div></div>
             
         </li>
@@ -2455,7 +2454,7 @@ Useful for bulk operations and optimizations.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    unshift: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">model, options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.add(model, _.extend({at: <span class="hljs-number">0</span>}, options));
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.add(model, _.extend({<span class="hljs-attr">at</span>: <span class="hljs-number">0</span>}, options));
     },</pre></div></div>
             
         </li>
@@ -2663,7 +2662,7 @@ data will be passed through the <code>reset</code> method instead of <code>set</
             </div>
             
             <div class="content"><div class='highlight'><pre>    fetch: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
-      options = _.extend({parse: <span class="hljs-literal">true</span>}, options);
+      options = _.extend({<span class="hljs-attr">parse</span>: <span class="hljs-literal">true</span>}, options);
       <span class="hljs-keyword">var</span> success = options.success;
       <span class="hljs-keyword">var</span> collection = <span class="hljs-keyword">this</span>;
       options.success = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">resp</span>) </span>{
@@ -2740,8 +2739,8 @@ collection. The default implementation is just to pass it through.</p>
             
             <div class="content"><div class='highlight'><pre>    clone: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
       <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">this</span>.constructor(<span class="hljs-keyword">this</span>.models, {
-        model: <span class="hljs-keyword">this</span>.model,
-        comparator: <span class="hljs-keyword">this</span>.comparator
+        <span class="hljs-attr">model</span>: <span class="hljs-keyword">this</span>.model,
+        <span class="hljs-attr">comparator</span>: <span class="hljs-keyword">this</span>.comparator
       });
     },</pre></div></div>
             
@@ -2969,14 +2968,14 @@ right here:</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> collectionMethods = {forEach: <span class="hljs-number">3</span>, each: <span class="hljs-number">3</span>, map: <span class="hljs-number">3</span>, collect: <span class="hljs-number">3</span>, reduce: <span class="hljs-number">0</span>,
-      foldl: <span class="hljs-number">0</span>, inject: <span class="hljs-number">0</span>, reduceRight: <span class="hljs-number">0</span>, foldr: <span class="hljs-number">0</span>, find: <span class="hljs-number">3</span>, detect: <span class="hljs-number">3</span>, filter: <span class="hljs-number">3</span>,
-      select: <span class="hljs-number">3</span>, reject: <span class="hljs-number">3</span>, every: <span class="hljs-number">3</span>, all: <span class="hljs-number">3</span>, some: <span class="hljs-number">3</span>, any: <span class="hljs-number">3</span>, include: <span class="hljs-number">3</span>, includes: <span class="hljs-number">3</span>,
-      contains: <span class="hljs-number">3</span>, invoke: <span class="hljs-number">0</span>, max: <span class="hljs-number">3</span>, min: <span class="hljs-number">3</span>, toArray: <span class="hljs-number">1</span>, size: <span class="hljs-number">1</span>, first: <span class="hljs-number">3</span>,
-      head: <span class="hljs-number">3</span>, take: <span class="hljs-number">3</span>, initial: <span class="hljs-number">3</span>, rest: <span class="hljs-number">3</span>, tail: <span class="hljs-number">3</span>, drop: <span class="hljs-number">3</span>, last: <span class="hljs-number">3</span>,
-      without: <span class="hljs-number">0</span>, difference: <span class="hljs-number">0</span>, indexOf: <span class="hljs-number">3</span>, shuffle: <span class="hljs-number">1</span>, lastIndexOf: <span class="hljs-number">3</span>,
-      isEmpty: <span class="hljs-number">1</span>, chain: <span class="hljs-number">1</span>, sample: <span class="hljs-number">3</span>, partition: <span class="hljs-number">3</span>, groupBy: <span class="hljs-number">3</span>, countBy: <span class="hljs-number">3</span>,
-      sortBy: <span class="hljs-number">3</span>, indexBy: <span class="hljs-number">3</span>, findIndex: <span class="hljs-number">3</span>, findLastIndex: <span class="hljs-number">3</span>};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>  <span class="hljs-keyword">var</span> collectionMethods = {<span class="hljs-attr">forEach</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">each</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">map</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">collect</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">reduce</span>: <span class="hljs-number">0</span>,
+      <span class="hljs-attr">foldl</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">inject</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">reduceRight</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">foldr</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">find</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">detect</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">filter</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">select</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">reject</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">every</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">all</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">some</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">any</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">include</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">includes</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">contains</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">invoke</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">max</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">min</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">toArray</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">size</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">first</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">head</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">take</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">initial</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">rest</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">tail</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">drop</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">last</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">without</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">difference</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">indexOf</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">shuffle</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">lastIndexOf</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">isEmpty</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">chain</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">sample</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">partition</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">groupBy</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">countBy</span>: <span class="hljs-number">3</span>,
+      <span class="hljs-attr">sortBy</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">indexBy</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">findIndex</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">findLastIndex</span>: <span class="hljs-number">3</span>};</pre></div></div>
             
         </li>
         
@@ -3483,8 +3482,8 @@ it difficult to read the body of <code>PUT</code> requests.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    _.defaults(options || (options = {}), {
-      emulateHTTP: Backbone.emulateHTTP,
-      emulateJSON: Backbone.emulateJSON
+      <span class="hljs-attr">emulateHTTP</span>: Backbone.emulateHTTP,
+      <span class="hljs-attr">emulateJSON</span>: Backbone.emulateJSON
     });</pre></div></div>
             
         </li>
@@ -3500,7 +3499,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> params = {type: type, dataType: <span class="hljs-string">'json'</span>};</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">var</span> params = {<span class="hljs-attr">type</span>: type, <span class="hljs-attr">dataType</span>: <span class="hljs-string">'json'</span>};</pre></div></div>
             
         </li>
         
@@ -3552,7 +3551,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
             
             <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (options.emulateJSON) {
       params.contentType = <span class="hljs-string">'application/x-www-form-urlencoded'</span>;
-      params.data = params.data ? {model: params.data} : {};
+      params.data = params.data ? {<span class="hljs-attr">model</span>: params.data} : {};
     }</pre></div></div>
             
         </li>
@@ -4253,7 +4252,7 @@ Is pushState desired … is it available?</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">this</span>.options          = _.extend({root: <span class="hljs-string">'/'</span>}, <span class="hljs-keyword">this</span>.options, options);
+            <div class="content"><div class='highlight'><pre>      <span class="hljs-keyword">this</span>.options          = _.extend({<span class="hljs-attr">root</span>: <span class="hljs-string">'/'</span>}, <span class="hljs-keyword">this</span>.options, options);
       <span class="hljs-keyword">this</span>.root             = <span class="hljs-keyword">this</span>.options.root;
       <span class="hljs-keyword">this</span>._wantsHashChange = <span class="hljs-keyword">this</span>.options.hashChange !== <span class="hljs-literal">false</span>;
       <span class="hljs-keyword">this</span>._hasHashChange   = <span class="hljs-string">'onhashchange'</span> <span class="hljs-keyword">in</span> <span class="hljs-built_in">window</span> &amp;&amp; (<span class="hljs-built_in">document</span>.documentMode === <span class="hljs-keyword">void</span> <span class="hljs-number">0</span> || <span class="hljs-built_in">document</span>.documentMode &gt; <span class="hljs-number">7</span>);
@@ -4342,7 +4341,7 @@ in a browser where it could be <code>pushState</code>-based instead…</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>._hasPushState &amp;&amp; <span class="hljs-keyword">this</span>.atRoot()) {
-          <span class="hljs-keyword">this</span>.navigate(<span class="hljs-keyword">this</span>.getHash(), {replace: <span class="hljs-literal">true</span>});
+          <span class="hljs-keyword">this</span>.navigate(<span class="hljs-keyword">this</span>.getHash(), {<span class="hljs-attr">replace</span>: <span class="hljs-literal">true</span>});
         }
 
       }</pre></div></div>
@@ -4532,7 +4531,7 @@ may override previous routes.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>    route: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">route, callback</span>) </span>{
-      <span class="hljs-keyword">this</span>.handlers.unshift({route: route, callback: callback});
+      <span class="hljs-keyword">this</span>.handlers.unshift({<span class="hljs-attr">route</span>: route, <span class="hljs-attr">callback</span>: callback});
     },</pre></div></div>
             
         </li>
@@ -4635,7 +4634,7 @@ you wish to modify the current URL without adding an entry to the history.</p>
             
             <div class="content"><div class='highlight'><pre>    navigate: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">fragment, options</span>) </span>{
       <span class="hljs-keyword">if</span> (!History.started) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
-      <span class="hljs-keyword">if</span> (!options || options === <span class="hljs-literal">true</span>) options = {trigger: !!options};</pre></div></div>
+      <span class="hljs-keyword">if</span> (!options || options === <span class="hljs-literal">true</span>) options = {<span class="hljs-attr">trigger</span>: !!options};</pre></div></div>
             
         </li>
         

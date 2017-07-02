@@ -7,33 +7,32 @@
 
 (function(factory) {
 
-  // Establish the root object, `window` (`self`) in the browser, or `global` on the server.
-  // We use `self` instead of `window` for `WebWorker` support.
+  // 建立root对象，在浏览器中是`window` (`self`) ，在服务器端是`global`。我们使用`self`而不是`window`(`self`)，为了支持
+  // `WebWorker`
   var root = (typeof self == 'object' && self.self === self && self) ||
             (typeof global == 'object' && global.global === global && global);
 
-  // Set up Backbone appropriately for the environment. Start with AMD.
+  // 根据当前环境适当地设置Backbone。先从AMD开始。
   if (typeof define === 'function' && define.amd) {
     define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
-      // Export global even in AMD case in case this script is loaded with
-      // others that may still expect a global Backbone.
+      // 导出到全局，即使是在AMD下，为的是防止其它脚本需要全局环境下的Backbone。
       root.Backbone = factory(root, exports, _, $);
     });
 
-  // Next for Node.js or CommonJS. jQuery may not be needed as a module.
+  // 接下来是在Node.js或CommonJS下。jQuery可能不是必须的模块。
   } else if (typeof exports !== 'undefined') {
     var _ = require('underscore'), $;
     try { $ = require('jquery'); } catch (e) {}
     factory(root, exports, _, $);
 
-  // Finally, as a browser global.
+  // 最后是在浏览器环境下。
   } else {
     root.Backbone = factory(root, {}, root._, (root.jQuery || root.Zepto || root.ender || root.$));
   }
 
 })(function(root, Backbone, _, $) {
 
-  // Initial Setup
+  // 初始化设置 - Initial Setup
   // -------------
 
   // Save the previous value of the `Backbone` variable, so that it can be
