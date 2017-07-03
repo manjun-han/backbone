@@ -55,24 +55,21 @@
     return this;
   };
 
-  // Turn on `emulateHTTP` to support legacy HTTP servers. Setting this option
-  // will fake `"PATCH"`, `"PUT"` and `"DELETE"` requests via the `_method` parameter and
-  // set a `X-Http-Method-Override` header.
+  // 开启`emulateHTTP`参数，支持传统的HTTP服务器。此选项设置后，会通过`_method`参数和设置一个`X-Http-Method-Override`
+  // 消息头，来伪装`"PATCH"`, `"PUT"` 和 `"DELETE"`请求。
   Backbone.emulateHTTP = false;
 
-  // Turn on `emulateJSON` to support legacy servers that can't deal with direct
-  // `application/json` requests ... this will encode the body as
-  // `application/x-www-form-urlencoded` instead and will send the model in a
-  // form param named `model`.
+
+  // 开启`emulateJSON`参数，以支持那些传统的服务器，它们无法处理`application/json`请求...这会以`application/x-www-form-urlencoded`格式
+  // 编码消息体，将模型数据以表单形式发送出去，并参数名称为`model`。
   Backbone.emulateJSON = false;
 
-  // Proxy Backbone class methods to Underscore functions, wrapping the model's
-  // `attributes` object or collection's `models` array behind the scenes.
+  // 将Backbone类的方法代理给Underscore的函数，封装model的`attributes`对象或collection的`models`数组，将其隐藏在后面。
   //
   // collection.filter(function(model) { return model.get('age') > 10 });
   // collection.each(this.addView);
   //
-  // `Function#apply` can be slow so we use the method's arg count, if we know it.
+  // `Function#apply`可能比较慢，所以如果我们提前知道方法参数的个数，我们会直接调用函数。
   var addMethod = function(length, method, attribute) {
     switch (length) {
       case 1: return function() {
@@ -100,7 +97,7 @@
     });
   };
 
-  // Support `collection.sortBy('attr')` and `collection.findWhere({id: 1})`.
+  // 支持 `collection.sortBy('attr')` 和 `collection.findWhere({id: 1})`.
   var cb = function(iteratee, instance) {
     if (_.isFunction(iteratee)) return iteratee;
     if (_.isObject(iteratee) && !instance._isModel(iteratee)) return modelMatcher(iteratee);
@@ -114,54 +111,51 @@
     };
   };
 
-  // Backbone.Events
+  // 事件 - Backbone.Events
   // ---------------
 
-  // A module that can be mixed in to *any object* in order to provide it with
-  // a custom event channel. You may bind a callback to an event with `on` or
-  // remove with `off`; `trigger`-ing an event fires all callbacks in
-  // succession.
+  //
+  // 一个可以混入*任何对象*的模型，为的是提供对象自定义事件频道的功能。你可以使用`on`在事件上绑定一个回调，
+  // 也可以使用`off`将回调移除；`trigger`ing一个事件会依次触发所有回调。
   //
   //     var object = {};
   //     _.extend(object, Backbone.Events);
   //     object.on('expand', function(){ alert('expanded'); });
   //     object.trigger('expand');
   //
+  //
   var Events = Backbone.Events = {};
 
-  // Regular expression used to split event strings.
+  // 用来分割事件字符串的正则表达式。
   var eventSplitter = /\s+/;
 
-  // Iterates over the standard `event, callback` (as well as the fancy multiple
-  // space-separated events `"change blur", callback` and jQuery-style event
-  // maps `{event: callback}`).
+  // 遍历标准的`event, callback`（同时也支持巧妙的多空白符分割的事件`"change blur", callback`，以及jQuery风格的事件映射`{event: callback}`）。
   var eventsApi = function(iteratee, events, name, callback, opts) {
     var i = 0, names;
     if (name && typeof name === 'object') {
-      // Handle event maps.
+      // 处理事件映射。
       if (callback !== void 0 && 'context' in opts && opts.context === void 0) opts.context = callback;
       for (names = _.keys(name); i < names.length ; i++) {
         events = eventsApi(iteratee, events, names[i], name[names[i]], opts);
       }
     } else if (name && eventSplitter.test(name)) {
-      // Handle space-separated event names by delegating them individually.
+      // 处理空白符分割的事件名称，单独的对其进行代理。
       for (names = name.split(eventSplitter); i < names.length; i++) {
         events = iteratee(events, names[i], callback, opts);
       }
     } else {
-      // Finally, standard events.
+      // 最终，标准的事件。
       events = iteratee(events, name, callback, opts);
     }
     return events;
   };
 
-  // Bind an event to a `callback` function. Passing `"all"` will bind
-  // the callback to all events fired.
+  // 将一个事件绑定到`callback`函数上。传入`"all"`会将回调绑定到所有触发的事件上。
   Events.on = function(name, callback, context) {
     return internalOn(this, name, callback, context);
   };
 
-  // Guard the `listening` argument from the public API.
+  // 在公共API上保护`listening`参数。
   var internalOn = function(obj, name, callback, context, listening) {
     obj._events = eventsApi(onApi, obj._events || {}, name, callback, {
       context: context,
@@ -177,28 +171,26 @@
     return obj;
   };
 
-  // Inversion-of-control versions of `on`. Tell *this* object to listen to
-  // an event in another object... keeping track of what it's listening to
-  // for easier unbinding later.
+  // `on`的反转版本。告诉**this**对象监听另一个对象的事件...跟踪监听的对象，以便之后更容易解绑。
   Events.listenTo = function(obj, name, callback) {
     if (!obj) return this;
     var id = obj._listenId || (obj._listenId = _.uniqueId('l'));
     var listeningTo = this._listeningTo || (this._listeningTo = {});
     var listening = listeningTo[id];
 
-    // This object is not listening to any other events on `obj` yet.
-    // Setup the necessary references to track the listening callbacks.
+    // 这个对象还没有监听`obj`对象的事件。
+    // 设置必须的引用，跟踪所有监听的回调。
     if (!listening) {
       var thisId = this._listenId || (this._listenId = _.uniqueId('l'));
       listening = listeningTo[id] = {obj: obj, objId: id, id: thisId, listeningTo: listeningTo, count: 0};
     }
 
-    // Bind callbacks on obj, and keep track of them on listening.
+    // 在obj上绑定callbacks，在listening对象追踪它们。
     internalOn(obj, name, callback, this, listening);
     return this;
   };
 
-  // The reducing API that adds a callback to the `events` object.
+  // reducing API，在`events`对象上添加回调。
   var onApi = function(events, name, callback, options) {
     if (callback) {
       var handlers = events[name] || (events[name] = []);
@@ -210,10 +202,8 @@
     return events;
   };
 
-  // Remove one or many callbacks. If `context` is null, removes all
-  // callbacks with that function. If `callback` is null, removes all
-  // callbacks for the event. If `name` is null, removes all bound
-  // callbacks for all events.
+  // 移除一个或多个回调。如果`context`是null，移除那个函数的所有回调。如果`callback`是null，
+  // 移除那个event的所有回调。如果`name`是null,移除所有事件绑定的所有callback。
   Events.off = function(name, callback, context) {
     if (!this._events) return this;
     this._events = eventsApi(offApi, this._events, name, callback, {
@@ -223,8 +213,7 @@
     return this;
   };
 
-  // Tell this object to stop listening to either specific events ... or
-  // to every object it's currently listening to.
+  // 告诉这个对象不再监听给定的事件...或不再监听它当前正在监听的对象。
   Events.stopListening = function(obj, name, callback) {
     var listeningTo = this._listeningTo;
     if (!listeningTo) return this;
@@ -234,8 +223,8 @@
     for (var i = 0; i < ids.length; i++) {
       var listening = listeningTo[ids[i]];
 
-      // If listening doesn't exist, this object is not currently
-      // listening to obj. Break out early.
+
+      // 如果listening对象不存在，则对象当前没有监听obj。尽早中断。
       if (!listening) break;
 
       listening.obj.off(name, callback, this);
@@ -244,14 +233,14 @@
     return this;
   };
 
-  // The reducing API that removes a callback from the `events` object.
+  // reducing API，从`events`对象上移除一个回调。
   var offApi = function(events, name, callback, options) {
     if (!events) return;
 
     var i = 0, listening;
     var context = options.context, listeners = options.listeners;
 
-    // Delete all events listeners and "drop" events.
+    // 删除所有事件监听器，丢弃events对象。
     if (!name && !callback && !context) {
       var ids = _.keys(listeners);
       for (; i < ids.length; i++) {
@@ -267,10 +256,10 @@
       name = names[i];
       var handlers = events[name];
 
-      // Bail out if there are no events stored.
+      // 如果没有存储事件则跳出。
       if (!handlers) break;
 
-      // Replace events if there are any remaining.  Otherwise, clean up.
+      // 如果有剩余事件则替换events对象。否则，清除它。
       var remaining = [];
       for (var j = 0; j < handlers.length; j++) {
         var handler = handlers[j];
@@ -289,7 +278,7 @@
         }
       }
 
-      // Update tail event if the list has any events.  Otherwise, clean up.
+      // 如果列表中有事件，更新后面的事件。否则，清除它。
       if (remaining.length) {
         events[name] = remaining;
       } else {
@@ -298,27 +287,25 @@
     }
     return events;
   };
-
-  // Bind an event to only be triggered a single time. After the first time
-  // the callback is invoked, its listener will be removed. If multiple events
-  // are passed in using the space-separated syntax, the handler will fire
-  // once for each event, not once for a combination of all events.
+  //
+  // 绑定一个事件，只能触发一次的。回调在第一次调用后，它的监听器就会被删除。如果多个事件以空白分隔符语法传入，
+  // 处理器会在每个事件上触发一次，而不是在所有事件的组合上触发一次。
+  //
   Events.once = function(name, callback, context) {
-    // Map the event into a `{event: once}` object.
+    // 将事件映射到`{event: once}`对象。
     var events = eventsApi(onceMap, {}, name, callback, _.bind(this.off, this));
     if (typeof name === 'string' && context == null) callback = void 0;
     return this.on(events, callback, context);
   };
 
-  // Inversion-of-control versions of `once`.
+  // `once`的反转版本。
   Events.listenToOnce = function(obj, name, callback) {
-    // Map the event into a `{event: once}` object.
+    // 将事件映射到`{event: once}`对象。
     var events = eventsApi(onceMap, {}, name, callback, _.bind(this.stopListening, this, obj));
     return this.listenTo(obj, events);
   };
 
-  // Reduces the event callbacks into a map of `{event: onceWrapper}`.
-  // `offer` unbinds the `onceWrapper` after it has been called.
+  // 将事件回调压缩到一个`{event: onceWrapper}`的map中去。在事件调用后，`offer`会解绑`onceWrapper`。
   var onceMap = function(map, name, callback, offer) {
     if (callback) {
       var once = map[name] = _.once(function() {
@@ -330,10 +317,8 @@
     return map;
   };
 
-  // Trigger one or many events, firing all bound callbacks. Callbacks are
-  // passed the same arguments as `trigger` is, apart from the event name
-  // (unless you're listening on `"all"`, which will cause your callback to
-  // receive the true name of the event as the first argument).
+  // 触发一个或多个事件，调用所有绑定的回调。除了事件名称参数外，回调的参数与`trigger`函数的参数相同（除非你在监听
+  // `all`事件，这会使得回调接收到的第一个参数为事件的真实名字）。
   Events.trigger = function(name) {
     if (!this._events) return this;
 
@@ -345,7 +330,7 @@
     return this;
   };
 
-  // Handles triggering the appropriate event callbacks.
+  // 处理触发合适的事件回调。
   var triggerApi = function(objEvents, name, callback, args) {
     if (objEvents) {
       var events = objEvents[name];
@@ -357,9 +342,8 @@
     return objEvents;
   };
 
-  // A difficult-to-believe, but optimized internal dispatch function for
-  // triggering events. Tries to keep the usual cases speedy (most internal
-  // Backbone events have 3 arguments).
+  // 一个难于理解，但却优化过的内部派发函数，用来触发事件。
+  // 尝试保持常用用例的速度（多数的Backbone事件有3个参数）。
   var triggerEvents = function(events, args) {
     var ev, i = -1, l = events.length, a1 = args[0], a2 = args[1], a3 = args[2];
     switch (args.length) {
@@ -371,7 +355,7 @@
     }
   };
 
-  // Aliases for backwards compatibility.
+  // 保持向后兼容性的别名。
   Events.bind   = Events.on;
   Events.unbind = Events.off;
 
@@ -379,7 +363,7 @@
   // want global "pubsub" in a convenient place.
   _.extend(Backbone, Events);
 
-  // Backbone.Model
+  // 模型 - Backbone.Model
   // --------------
 
   // Backbone **Models** are the basic data object in the framework --
