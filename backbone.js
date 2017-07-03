@@ -12,7 +12,7 @@
   var root = (typeof self == 'object' && self.self === self && self) ||
             (typeof global == 'object' && global.global === global && global);
 
-  // 根据当前环境适当地设置Backbone。先从AMD开始。
+  // 根据当前环境设置Backbone。先从AMD开始。
   if (typeof define === 'function' && define.amd) {
     define(['underscore', 'jquery', 'exports'], function(_, $, exports) {
       // 导出到全局，即使是在AMD下，为的是防止其它脚本需要全局环境下的Backbone。
@@ -35,22 +35,21 @@
   // 初始化设置 - Initial Setup
   // -------------
 
-  // Save the previous value of the `Backbone` variable, so that it can be
-  // restored later on, if `noConflict` is used.
+  // 保存上一个`Backbone`变量的值，为的是如果之后调用`noConflict`后，仍能恢复它。
   var previousBackbone = root.Backbone;
 
-  // Create a local reference to a common array method we'll want to use later.
+  // 创建一个本地的指向数组常用方法的引用，我们稍后会用到它。
   var slice = Array.prototype.slice;
 
-  // Current version of the library. Keep in sync with `package.json`.
+  // 当前库的版本。需要与`package.json`中的version保持一致。
   Backbone.VERSION = '1.3.3';
 
   // For Backbone's purposes, jQuery, Zepto, Ender, or My Library (kidding) owns
   // the `$` variable.
+  //
   Backbone.$ = $;
 
-  // Runs Backbone.js in *noConflict* mode, returning the `Backbone` variable
-  // to its previous owner. Returns a reference to this Backbone object.
+  // 在*noConflict*模式下运行Backbone.js，将`Backbone`变量的控制权返回给之前的所有者。返回Backbone对象的引用。
   Backbone.noConflict = function() {
     root.Backbone = previousBackbone;
     return this;
