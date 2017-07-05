@@ -581,6 +581,7 @@
       // If we're not waiting and attributes exist, save acts as
       // `set(attr).save(null, opts)` with validation. Otherwise, check if
       // the model will be valid when the attributes, if any, are set.
+      // 如果我们
       if (attrs && !wait) {
         if (!this.set(attrs, options)) return false;
       } else if (!this._validate(attrs, options)) {
@@ -616,9 +617,9 @@
       return xhr;
     },
 
-    // Destroy this model on the server if it was already persisted.
-    // Optimistically removes the model from its collection, if it has one.
-    // If `wait: true` is passed, waits for the server to respond before removal.
+    // 如果model已经持久化了，那么就在服务器端销毁它。
+    // 如果modelc存在于collection中，那么就把他移除掉。
+    // 如果传入`wait: true`，要等到服务器相应后再销毁model。
     destroy: function(options) {
       options = options ? _.clone(options) : {};
       var model = this;
@@ -647,9 +648,7 @@
       return xhr;
     },
 
-    // Default URL for the model's representation on the server -- if you're
-    // using Backbone's restful methods, override this to change the endpoint
-    // that will be called.
+    // model在服务器端的默认的URL - 如果你正在使用Backbone的restful方法，可以覆盖当前方法来改变调用终点。
     url: function() {
       var base =
         _.result(this, 'urlRoot') ||
@@ -660,8 +659,7 @@
       return base.replace(/[^\/]$/, '$&/') + encodeURIComponent(id);
     },
 
-    // **parse** converts a response into the hash of attributes to be `set` on
-    // the model. The default implementation is just to pass the response along.
+    // **parse**将response转换为一个属性的hash，用来`set`到model上。默认只会直接返回response。
     parse: function(resp, options) {
       return resp;
     },
@@ -681,8 +679,7 @@
       return this._validate({}, _.extend({}, options, {validate: true}));
     },
 
-    // Run validation against the next complete set of model attributes,
-    // returning `true` if all is well. Otherwise, fire an `"invalid"` event.
+    // 在设置model属性之前执行校验，如果校验通过，返回`true`。否则触发一个`"invalid"`事件。
     _validate: function(attrs, options) {
       if (!options.validate || !this.validate) return true;
       attrs = _.extend({}, this.attributes, attrs);
@@ -694,27 +691,24 @@
 
   });
 
-  // Underscore methods that we want to implement on the Model, mapped to the
-  // number of arguments they take.
+  // 我们希望Model实现的Underscore的方法，这里是一个每个方法接受参数个数的映射。
   var modelMethods = {keys: 1, values: 1, pairs: 1, invert: 1, pick: 0,
       omit: 0, chain: 1, isEmpty: 1};
 
-  // Mix in each Underscore method as a proxy to `Model#attributes`.
+  // 以`Model#attributes`代理的形式，混入Underscore的每个方法。
   addUnderscoreMethods(Model, modelMethods, 'attributes');
 
   // Backbone.Collection
   // -------------------
 
-  // If models tend to represent a single row of data, a Backbone Collection is
-  // more analogous to a table full of data ... or a small slice or page of that
-  // table, or a collection of rows that belong together for a particular reason
-  // -- all of the messages in this particular folder, all of the documents
-  // belonging to this particular author, and so on. Collections maintain
-  // indexes of their models, both in order, and for lookup by `id`.
-
-  // Create a new **Collection**, perhaps to contain a specific type of `model`.
-  // If a `comparator` is specified, the Collection will maintain
-  // its models in sort order, as they're added and removed.
+  //
+  // 如果model代表了一行数据，那么Backbone的Collection则更像是数据表...或表的一部分或一页，
+  // 或者是因为特定原因而聚集在一起的一组行 - 比如，在特定目录下的所有消息，属于特定作者的所有文档，等等。
+  // Collection维护了它们model的索引，它们都是有序的，并且可以根据`id`进行查找。
+  //
+  // 创建一个新的 **Collection**，可能会包含了给定类型的`model`。如果指定了一个`comparator`，当新增或移除model时，Collection会
+  // 维护model顺序。
+  //
   var Collection = Backbone.Collection = function(models, options) {
     options || (options = {});
     if (options.model) this.model = options.model;
@@ -724,11 +718,11 @@
     if (models) this.reset(models, _.extend({silent: true}, options));
   };
 
-  // Default options for `Collection#set`.
+  // `Collection#set`的默认选项.
   var setOptions = {add: true, remove: true, merge: true};
   var addOptions = {add: true, remove: false};
 
-  // Splices `insert` into `array` at index `at`.
+  // 在`at`指定的索引处，插入元素到数组中
   var splice = function(array, insert, at) {
     at = Math.min(Math.max(at, 0), array.length);
     var tail = Array(array.length - at);
@@ -739,36 +733,33 @@
     for (i = 0; i < tail.length; i++) array[i + length + at] = tail[i];
   };
 
-  // Define the Collection's inheritable methods.
+  // 定义Collection的可继承方法。
   _.extend(Collection.prototype, Events, {
 
-    // The default model for a collection is just a **Backbone.Model**.
-    // This should be overridden in most cases.
+    // 集合默认的model类型仅仅是一个**Backbone.Model**。
+    // 多数情况下会覆盖掉它。
     model: Model,
 
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
+    // 初始化函数默认是个空函数。用以自己的初始化逻辑覆盖它。
     initialize: function(){},
 
-    // The JSON representation of a Collection is an array of the
-    // models' attributes.
+    // 一个集合JSON的表示是由models的属性组成的一个数组。
     toJSON: function(options) {
       return this.map(function(model) { return model.toJSON(options); });
     },
 
-    // Proxy `Backbone.sync` by default.
+    // 默认代理`Backbone.sync`。
     sync: function() {
       return Backbone.sync.apply(this, arguments);
     },
 
-    // Add a model, or list of models to the set. `models` may be Backbone
-    // Models or raw JavaScript objects to be converted to Models, or any
-    // combination of the two.
+    // 添加一个model，或一个model的列表。`models`可以是Backbone的Models或JavaScript的原始对象，
+    // 此对象可以转换为Models，或这两种类型的结合。
     add: function(models, options) {
       return this.set(models, _.extend({merge: false}, options, addOptions));
     },
 
-    // Remove a model, or a list of models from the set.
+    // 删除一个model，或一个model的列表。
     remove: function(models, options) {
       options = _.extend({}, options);
       var singular = !_.isArray(models);
@@ -916,35 +907,34 @@
       return models;
     },
 
-    // Add a model to the end of the collection.
+    // 将一个model添加到collection的最后。
     push: function(model, options) {
       return this.add(model, _.extend({at: this.length}, options));
     },
 
-    // Remove a model from the end of the collection.
+    // 移除collection最后一个model。
     pop: function(options) {
       var model = this.at(this.length - 1);
       return this.remove(model, options);
     },
 
-    // Add a model to the beginning of the collection.
+    // 在collection的开始出添加一个model。
     unshift: function(model, options) {
       return this.add(model, _.extend({at: 0}, options));
     },
 
-    // Remove a model from the beginning of the collection.
+    // 移除collection的第一个model。
     shift: function(options) {
       var model = this.at(0);
       return this.remove(model, options);
     },
 
-    // Slice out a sub-array of models from the collection.
+    // 从集合的模型中分割出一个子数组。
     slice: function() {
       return slice.apply(this.models, arguments);
     },
 
-    // Get a model from the set by id, cid, model object with id or cid
-    // properties, or an attributes object that is transformed through modelId.
+    // 获得一个model，可以给定id，cid，也可以给定带有id或cid属性的model对象，同时还可以给定一个由modelId方法转换的属性对象。
     get: function(obj) {
       if (obj == null) return void 0;
       return this._byId[obj] ||
@@ -952,7 +942,7 @@
         obj.cid && this._byId[obj.cid];
     },
 
-    // Returns `true` if the model is in the collection.
+    // 如果model在collection中，返回`True`。
     has: function(obj) {
       return this.get(obj) != null;
     },
@@ -1079,7 +1069,7 @@
       return false;
     },
 
-    // Internal method called by both remove and set.
+    // 内部方法，供remove和set方法调用。
     _removeModels: function(models, options) {
       var removed = [];
       for (var i = 0; i < models.length; i++) {
@@ -1090,8 +1080,7 @@
         this.models.splice(index, 1);
         this.length--;
 
-        // Remove references before triggering 'remove' event to prevent an
-        // infinite loop. #3693
+        // 在触发 'remove' 事件前，移除引用，防止死循环。#3693
         delete this._byId[model.cid];
         var id = this.modelId(model.attributes);
         if (id != null) delete this._byId[id];
@@ -1113,7 +1102,7 @@
       return model instanceof Model;
     },
 
-    // Internal method to create a model's ties to a collection.
+    // 内部方法，用来关联model与collection。
     _addReference: function(model, options) {
       this._byId[model.cid] = model;
       var id = this.modelId(model.attributes);
@@ -1121,7 +1110,7 @@
       model.on('all', this._onModelEvent, this);
     },
 
-    // Internal method to sever a model's ties to a collection.
+    // 内部方法，用来切断model与collection的关联。
     _removeReference: function(model, options) {
       delete this._byId[model.cid];
       var id = this.modelId(model.attributes);
@@ -1865,7 +1854,7 @@
   // Set up inheritance for the model, collection, router, view and history.
   Model.extend = Collection.extend = Router.extend = View.extend = History.extend = extend;
 
-  // Throw an error when a URL is needed, and none is supplied.
+  // 在需要URL但又未提供时，抛出一个错误。
   var urlError = function() {
     throw new Error('A "url" property or function must be specified');
   };
