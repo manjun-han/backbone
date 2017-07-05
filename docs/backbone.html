@@ -967,8 +967,7 @@ object.trigger(<span class="hljs-string">'expand'</span>);
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-50">&#182;</a>
               </div>
-              <p>Allow the <code>Backbone</code> object to serve as a global event bus, for folks who
-want global “pubsub” in a convenient place.</p>
+              <p>将<code>Backbone</code>对象当做全局的事件中心，为那些需要全局”pubsub”的folks准备的。</p>
 
             </div>
             
@@ -1008,10 +1007,8 @@ want global “pubsub” in a convenient place.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-53">&#182;</a>
               </div>
-              <p>Backbone <strong>Models</strong> are the basic data object in the framework –
-frequently representing a row in a table in a database on your server.
-A discrete chunk of data and a bunch of useful, related methods for
-performing computations and transformations on that data.</p>
+              <p>Backbone的 <strong>Models</strong>是框架内的基本数据对象 – 经常代表了服务器端数据库表的一个行。
+一些离散的数据块，和许多有用的相关方法，用来在这些数据上执行计算和进行转换。</p>
 
             </div>
             
@@ -1024,8 +1021,7 @@ performing computations and transformations on that data.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-54">&#182;</a>
               </div>
-              <p>Create a new model with the specified attributes. A client id (<code>cid</code>)
-is automatically generated and assigned for you.</p>
+              <p>根据给定的属性，创建一个新的模式model。会为你自动生成一个客户端id（<code>cid</code>）。</p>
 
             </div>
             
@@ -1052,7 +1048,7 @@ is automatically generated and assigned for you.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-55">&#182;</a>
               </div>
-              <p>Attach all inheritable methods to the Model prototype.</p>
+              <p>将所有可继承方法添加到Model的prototype上。</p>
 
             </div>
             
@@ -1067,7 +1063,7 @@ is automatically generated and assigned for you.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-56">&#182;</a>
               </div>
-              <p>A hash of attributes whose current and previous value differ.</p>
+              <p>一个所有属性的hash，当前值和上一个值是不同的。</p>
 
             </div>
             
@@ -1082,7 +1078,7 @@ is automatically generated and assigned for you.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-57">&#182;</a>
               </div>
-              <p>The value returned during the last failed validation.</p>
+              <p>上一次校验失败后的返回值。</p>
 
             </div>
             
@@ -1097,8 +1093,7 @@ is automatically generated and assigned for you.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-58">&#182;</a>
               </div>
-              <p>The default name for the JSON <code>id</code> attribute is <code>&quot;id&quot;</code>. MongoDB and
-CouchDB users may want to set this to <code>&quot;_id&quot;</code>.</p>
+              <p>JSON<code>id</code>属性的默认名称是<code>&quot;id&quot;</code>。MongoDB和CouchDB的用户可能会把名称替换为<code>&quot;_id&quot;</code>。</p>
 
             </div>
             
@@ -1113,8 +1108,7 @@ CouchDB users may want to set this to <code>&quot;_id&quot;</code>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-59">&#182;</a>
               </div>
-              <p>The prefix is used to create the client id which is used to identify models locally.
-You may want to override this if you’re experiencing name clashes with model ids.</p>
+              <p>前缀是用来创建客户端id，此id用来在本地标识models。如果你的model的id与它冲突，你可以覆盖它。</p>
 
             </div>
             
@@ -1129,8 +1123,7 @@ You may want to override this if you’re experiencing name clashes with model i
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-60">&#182;</a>
               </div>
-              <p>Initialize is an empty function by default. Override it with your own
-initialization logic.</p>
+              <p>Initialize默认是空函数。可以用你自己的初始化逻辑覆盖它。</p>
 
             </div>
             
@@ -1145,7 +1138,7 @@ initialization logic.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-61">&#182;</a>
               </div>
-              <p>Return a copy of the model’s <code>attributes</code> object.</p>
+              <p>返回model的<code>attributes</code>对象的拷贝。</p>
 
             </div>
             
@@ -1162,8 +1155,7 @@ initialization logic.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-62">&#182;</a>
               </div>
-              <p>Proxy <code>Backbone.sync</code> by default – but override this if you need
-custom syncing semantics for <em>this</em> particular model.</p>
+              <p>默认代理<code>Backbone.sync</code> – 但如果你需要为当前<strong>这个</strong>特殊的model自定义同步语义，可以覆盖它。</p>
 
             </div>
             
@@ -1180,7 +1172,7 @@ custom syncing semantics for <em>this</em> particular model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-63">&#182;</a>
               </div>
-              <p>Get the value of an attribute.</p>
+              <p>返回一个属性的值。</p>
 
             </div>
             
@@ -1197,7 +1189,7 @@ custom syncing semantics for <em>this</em> particular model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-64">&#182;</a>
               </div>
-              <p>Get the HTML-escaped value of an attribute.</p>
+              <p>返回属性值的HTML转义后的值。</p>
 
             </div>
             
@@ -1214,8 +1206,7 @@ custom syncing semantics for <em>this</em> particular model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-65">&#182;</a>
               </div>
-              <p>Returns <code>true</code> if the attribute contains a value that is not null
-or undefined.</p>
+              <p>如果属性的值不是null或undefined，则返回<code>true</code>。</p>
 
             </div>
             
@@ -1232,7 +1223,7 @@ or undefined.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-66">&#182;</a>
               </div>
-              <p>Special-cased proxy to underscore’s <code>_.matches</code> method.</p>
+              <p>underscore的<code>_.matches</code>的特殊代理。</p>
 
             </div>
             
@@ -1249,9 +1240,8 @@ or undefined.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-67">&#182;</a>
               </div>
-              <p>Set a hash of model attributes on the object, firing <code>&quot;change&quot;</code>. This is
-the core primitive operation of a model, updating the data and notifying
-anyone who needs to know about the change in state. The heart of the beast.</p>
+              <p>设置model的属性，并触发<code>&quot;change&quot;</code>事件。这是model的核心操作，更新数据，
+通知想要知道状态变更的对象。这是model的核心。</p>
 
             </div>
             
@@ -1267,7 +1257,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-68">&#182;</a>
               </div>
-              <p>Handle both <code>&quot;key&quot;, value</code> and <code>{key: value}</code> -style arguments.</p>
+              <p>同时处理<code>&quot;key&quot;, value</code> 和 <code>{key: value}</code>风格的参数。</p>
 
             </div>
             
@@ -1290,7 +1280,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-69">&#182;</a>
               </div>
-              <p>Run validation.</p>
+              <p>执行校验。</p>
 
             </div>
             
@@ -1305,7 +1295,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-70">&#182;</a>
               </div>
-              <p>Extract attributes and options.</p>
+              <p>提取属性和选项。</p>
 
             </div>
             
@@ -1333,7 +1323,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-71">&#182;</a>
               </div>
-              <p>For each <code>set</code> attribute, update or delete the current value.</p>
+              <p>对于每个要<code>设置</code>的属性，更新或删除当前值。</p>
 
             </div>
             
@@ -1357,7 +1347,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-72">&#182;</a>
               </div>
-              <p>Update the <code>id</code>.</p>
+              <p>更新<code>id</code>。</p>
 
             </div>
             
@@ -1372,7 +1362,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-73">&#182;</a>
               </div>
-              <p>Trigger all relevant attribute changes.</p>
+              <p>触发所有相关属性的变更事件。</p>
 
             </div>
             
@@ -1392,8 +1382,7 @@ anyone who needs to know about the change in state. The heart of the beast.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-74">&#182;</a>
               </div>
-              <p>You might be wondering why there’s a <code>while</code> loop here. Changes can
-be recursively nested within <code>&quot;change&quot;</code> events.</p>
+              <p>可能你会迷惑为什么这里有个<code>while</code>循环。<code>&quot;change&quot;</code>事件可能引起嵌套的变更。</p>
 
             </div>
             
@@ -1419,8 +1408,7 @@ be recursively nested within <code>&quot;change&quot;</code> events.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-75">&#182;</a>
               </div>
-              <p>Remove an attribute from the model, firing <code>&quot;change&quot;</code>. <code>unset</code> is a noop
-if the attribute doesn’t exist.</p>
+              <p>从model中删除一个属性，触发<code>&quot;change&quot;</code>事件。如属性不存在，<code>unset</code>会是空操作。</p>
 
             </div>
             
@@ -1437,7 +1425,7 @@ if the attribute doesn’t exist.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-76">&#182;</a>
               </div>
-              <p>Clear all attributes on the model, firing <code>&quot;change&quot;</code>.</p>
+              <p>清除model上的所有属性，触发<code>&quot;change&quot;</code>事件。</p>
 
             </div>
             
@@ -1456,8 +1444,8 @@ if the attribute doesn’t exist.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-77">&#182;</a>
               </div>
-              <p>Determine if the model has changed since the last <code>&quot;change&quot;</code> event.
-If you specify an attribute name, determine if that attribute has changed.</p>
+              <p>判断model自从上次的<code>&quot;change&quot;</code>事件以来是否发生了变化。
+如果给定一个属性名称，会判断是否此属性发生了变化。</p>
 
             </div>
             
@@ -1475,12 +1463,9 @@ If you specify an attribute name, determine if that attribute has changed.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-78">&#182;</a>
               </div>
-              <p>Return an object containing all the attributes that have changed, or
-false if there are no changed attributes. Useful for determining what
-parts of a view need to be updated and/or what attributes need to be
-persisted to the server. Unset attributes will be set to undefined.
-You can also pass an attributes object to diff against the model,
-determining if there <em>would be</em> a change.</p>
+              <p>返回一个对象，包含所有已经变更的属性，如果属性没有变更那么返回值为false。有益于用来决定一个视图
+是否需要更新，或属性是否需要持久化到服务器端。复位的属性会被设置为undefined。
+你可以传入一个属性对象与model做差异比较，决定是否有变更发生。</p>
 
             </div>
             
@@ -1505,8 +1490,7 @@ determining if there <em>would be</em> a change.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-79">&#182;</a>
               </div>
-              <p>Get the previous value of an attribute, recorded at the time the last
-<code>&quot;change&quot;</code> event was fired.</p>
+              <p>获取之前属性的值，在上次<code>&quot;change&quot;</code>事件变更后记录的。</p>
 
             </div>
             
@@ -1524,8 +1508,7 @@ determining if there <em>would be</em> a change.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-80">&#182;</a>
               </div>
-              <p>Get all of the attributes of the model at the time of the previous
-<code>&quot;change&quot;</code> event.</p>
+              <p>获取上次<code>&quot;change&quot;</code>事件发生后的，所有model的属性，</p>
 
             </div>
             
@@ -1542,8 +1525,7 @@ determining if there <em>would be</em> a change.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-81">&#182;</a>
               </div>
-              <p>Fetch the model from the server, merging the response with the model’s
-local attributes. Any changed attributes will trigger a “change” event.</p>
+              <p>从服务器端拉取molde的数据，将响应同model的本地属性进行合并。任何变更的属性都会触发一个”change” 事件。</p>
 
             </div>
             
@@ -1570,9 +1552,7 @@ local attributes. Any changed attributes will trigger a “change” event.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-82">&#182;</a>
               </div>
-              <p>Set a hash of model attributes, and sync the model to the server.
-If the server returns an attributes hash that differs, the model’s
-state will be <code>set</code> again.</p>
+              <p>设置model的属性，将model同步到服务器端。如果服务器返回一个不同的属性的hash，会重新设置model的状态。</p>
 
             </div>
             
@@ -1587,7 +1567,7 @@ state will be <code>set</code> again.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-83">&#182;</a>
               </div>
-              <p>Handle both <code>&quot;key&quot;, value</code> and <code>{key: value}</code> -style arguments.</p>
+              <p>同时处理<code>&quot;key&quot;, value</code> 和 <code>{key: value}</code>风格的参数。</p>
 
             </div>
             
@@ -1613,7 +1593,8 @@ state will be <code>set</code> again.</p>
               </div>
               <p>If we’re not waiting and attributes exist, save acts as
 <code>set(attr).save(null, opts)</code> with validation. Otherwise, check if
-the model will be valid when the attributes, if any, are set.</p>
+the model will be valid when the attributes, if any, are set.
+如果我们</p>
 
             </div>
             
@@ -1710,9 +1691,9 @@ updated with the server-side state.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-89">&#182;</a>
               </div>
-              <p>Destroy this model on the server if it was already persisted.
-Optimistically removes the model from its collection, if it has one.
-If <code>wait: true</code> is passed, waits for the server to respond before removal.</p>
+              <p>如果model已经持久化了，那么就在服务器端销毁它。
+如果modelc存在于collection中，那么就把他移除掉。
+如果传入<code>wait: true</code>，要等到服务器相应后再销毁model。</p>
 
             </div>
             
@@ -1753,9 +1734,7 @@ If <code>wait: true</code> is passed, waits for the server to respond before rem
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-90">&#182;</a>
               </div>
-              <p>Default URL for the model’s representation on the server – if you’re
-using Backbone’s restful methods, override this to change the endpoint
-that will be called.</p>
+              <p>model在服务器端的默认的URL - 如果你正在使用Backbone的restful方法，可以覆盖当前方法来改变调用终点。</p>
 
             </div>
             
@@ -1778,8 +1757,7 @@ that will be called.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-91">&#182;</a>
               </div>
-              <p><strong>parse</strong> converts a response into the hash of attributes to be <code>set</code> on
-the model. The default implementation is just to pass the response along.</p>
+              <p><strong>parse</strong>将response转换为一个属性的hash，用来<code>set</code>到model上。默认只会直接返回response。</p>
 
             </div>
             
@@ -1796,7 +1774,7 @@ the model. The default implementation is just to pass the response along.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-92">&#182;</a>
               </div>
-              <p>Create a new model with identical attributes to this one.</p>
+              <p>使用当前model的属性，创建一个新的model。</p>
 
             </div>
             
@@ -1813,7 +1791,7 @@ the model. The default implementation is just to pass the response along.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-93">&#182;</a>
               </div>
-              <p>A model is new if it has never been saved to the server, and lacks an id.</p>
+              <p>如果model没有保存到服务器，并且缺少一个id，那么model就是新的。</p>
 
             </div>
             
@@ -1830,7 +1808,7 @@ the model. The default implementation is just to pass the response along.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-94">&#182;</a>
               </div>
-              <p>Check if the model is currently in a valid state.</p>
+              <p>检查model当前是否是有效状态。</p>
 
             </div>
             
@@ -1847,8 +1825,7 @@ the model. The default implementation is just to pass the response along.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-95">&#182;</a>
               </div>
-              <p>Run validation against the next complete set of model attributes,
-returning <code>true</code> if all is well. Otherwise, fire an <code>&quot;invalid&quot;</code> event.</p>
+              <p>在设置model属性之前执行校验，如果校验通过，返回<code>true</code>。否则触发一个<code>&quot;invalid&quot;</code>事件。</p>
 
             </div>
             
@@ -1872,8 +1849,7 @@ returning <code>true</code> if all is well. Otherwise, fire an <code>&quot;inval
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-96">&#182;</a>
               </div>
-              <p>Underscore methods that we want to implement on the Model, mapped to the
-number of arguments they take.</p>
+              <p>我们希望Model实现的Underscore的方法，这里是一个每个方法接受参数个数的映射。</p>
 
             </div>
             
@@ -1889,7 +1865,7 @@ number of arguments they take.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-97">&#182;</a>
               </div>
-              <p>Mix in each Underscore method as a proxy to <code>Model#attributes</code>.</p>
+              <p>以<code>Model#attributes</code>代理的形式，混入Underscore的每个方法。</p>
 
             </div>
             
@@ -1929,27 +1905,11 @@ number of arguments they take.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-100">&#182;</a>
               </div>
-              <p>If models tend to represent a single row of data, a Backbone Collection is
-more analogous to a table full of data … or a small slice or page of that
-table, or a collection of rows that belong together for a particular reason
-– all of the messages in this particular folder, all of the documents
-belonging to this particular author, and so on. Collections maintain
-indexes of their models, both in order, and for lookup by <code>id</code>.</p>
-
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-101">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-101">&#182;</a>
-              </div>
-              <p>Create a new <strong>Collection</strong>, perhaps to contain a specific type of <code>model</code>.
-If a <code>comparator</code> is specified, the Collection will maintain
-its models in sort order, as they’re added and removed.</p>
+              <p>如果model代表了一行数据，那么Backbone的Collection则更像是数据表…或表的一部分或一页，
+或者是因为特定原因而聚集在一起的一组行 - 比如，在特定目录下的所有消息，属于特定作者的所有文档，等等。
+Collection维护了它们model的索引，它们都是有序的，并且可以根据<code>id</code>进行查找。</p>
+<p>创建一个新的 <strong>Collection</strong>，可能会包含了给定类型的<code>model</code>。如果指定了一个<code>comparator</code>，当新增或移除model时，Collection会
+维护model顺序。</p>
 
             </div>
             
@@ -1965,13 +1925,13 @@ its models in sort order, as they’re added and removed.</p>
         </li>
         
         
-        <li id="section-102">
+        <li id="section-101">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-102">&#182;</a>
+                <a class="pilcrow" href="#section-101">&#182;</a>
               </div>
-              <p>Default options for <code>Collection#set</code>.</p>
+              <p><code>Collection#set</code>的默认选项.</p>
 
             </div>
             
@@ -1981,13 +1941,13 @@ its models in sort order, as they’re added and removed.</p>
         </li>
         
         
-        <li id="section-103">
+        <li id="section-102">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-103">&#182;</a>
+                <a class="pilcrow" href="#section-102">&#182;</a>
               </div>
-              <p>Splices <code>insert</code> into <code>array</code> at index <code>at</code>.</p>
+              <p>在<code>at</code>指定的索引处，插入元素到数组中</p>
 
             </div>
             
@@ -2004,17 +1964,33 @@ its models in sort order, as they’re added and removed.</p>
         </li>
         
         
+        <li id="section-103">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-103">&#182;</a>
+              </div>
+              <p>定义Collection的可继承方法。</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>  _.extend(Collection.prototype, Events, {</pre></div></div>
+            
+        </li>
+        
+        
         <li id="section-104">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-104">&#182;</a>
               </div>
-              <p>Define the Collection’s inheritable methods.</p>
+              <p>集合默认的model类型仅仅是一个<strong>Backbone.Model</strong>。
+多数情况下会覆盖掉它。</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>  _.extend(Collection.prototype, Events, {</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    model: Model,</pre></div></div>
             
         </li>
         
@@ -2025,12 +2001,11 @@ its models in sort order, as they’re added and removed.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-105">&#182;</a>
               </div>
-              <p>The default model for a collection is just a <strong>Backbone.Model</strong>.
-This should be overridden in most cases.</p>
+              <p>初始化函数默认是个空函数。用以自己的初始化逻辑覆盖它。</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    model: Model,</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{},</pre></div></div>
             
         </li>
         
@@ -2041,12 +2016,13 @@ This should be overridden in most cases.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-106">&#182;</a>
               </div>
-              <p>Initialize is an empty function by default. Override it with your own
-initialization logic.</p>
+              <p>一个集合JSON的表示是由models的属性组成的一个数组。</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    initialize: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{},</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    toJSON: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">model</span>) </span>{ <span class="hljs-keyword">return</span> model.toJSON(options); });
+    },</pre></div></div>
             
         </li>
         
@@ -2057,13 +2033,12 @@ initialization logic.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-107">&#182;</a>
               </div>
-              <p>The JSON representation of a Collection is an array of the
-models’ attributes.</p>
+              <p>默认代理<code>Backbone.sync</code>。</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    toJSON: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.map(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">model</span>) </span>{ <span class="hljs-keyword">return</span> model.toJSON(options); });
+            <div class="content"><div class='highlight'><pre>    sync: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+      <span class="hljs-keyword">return</span> Backbone.sync.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
     },</pre></div></div>
             
         </li>
@@ -2075,12 +2050,13 @@ models’ attributes.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-108">&#182;</a>
               </div>
-              <p>Proxy <code>Backbone.sync</code> by default.</p>
+              <p>添加一个model，或一个model的列表。<code>models</code>可以是Backbone的Models或JavaScript的原始对象，
+此对象可以转换为Models，或这两种类型的结合。</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    sync: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
-      <span class="hljs-keyword">return</span> Backbone.sync.apply(<span class="hljs-keyword">this</span>, <span class="hljs-built_in">arguments</span>);
+            <div class="content"><div class='highlight'><pre>    add: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">models, options</span>) </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(models, _.extend({<span class="hljs-attr">merge</span>: <span class="hljs-literal">false</span>}, options, addOptions));
     },</pre></div></div>
             
         </li>
@@ -2092,26 +2068,7 @@ models’ attributes.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-109">&#182;</a>
               </div>
-              <p>Add a model, or list of models to the set. <code>models</code> may be Backbone
-Models or raw JavaScript objects to be converted to Models, or any
-combination of the two.</p>
-
-            </div>
-            
-            <div class="content"><div class='highlight'><pre>    add: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">models, options</span>) </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.set(models, _.extend({<span class="hljs-attr">merge</span>: <span class="hljs-literal">false</span>}, options, addOptions));
-    },</pre></div></div>
-            
-        </li>
-        
-        
-        <li id="section-110">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-110">&#182;</a>
-              </div>
-              <p>Remove a model, or a list of models from the set.</p>
+              <p>删除一个model，或一个model的列表。</p>
 
             </div>
             
@@ -2130,11 +2087,11 @@ combination of the two.</p>
         </li>
         
         
-        <li id="section-111">
+        <li id="section-110">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-111">&#182;</a>
+                <a class="pilcrow" href="#section-110">&#182;</a>
               </div>
               <p>Update a collection by <code>set</code>-ing a new list of models, adding new ones,
 removing models that are no longer present, and merging models that
@@ -2176,11 +2133,11 @@ the core operation for updating the data contained by the collection.</p>
         </li>
         
         
-        <li id="section-112">
+        <li id="section-111">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-112">&#182;</a>
+                <a class="pilcrow" href="#section-111">&#182;</a>
               </div>
               <p>Turn bare objects into model references, and prevent invalid models
 from being added.</p>
@@ -2194,11 +2151,11 @@ from being added.</p>
         </li>
         
         
-        <li id="section-113">
+        <li id="section-112">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-113">&#182;</a>
+                <a class="pilcrow" href="#section-112">&#182;</a>
               </div>
               <p>If a duplicate is found, prevent it from being added and
 optionally merge it into the existing model.</p>
@@ -2223,11 +2180,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-114">
+        <li id="section-113">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-114">&#182;</a>
+                <a class="pilcrow" href="#section-113">&#182;</a>
               </div>
               <p>If this is a new, valid model, push it to the <code>toAdd</code> list.</p>
 
@@ -2247,11 +2204,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-115">
+        <li id="section-114">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-115">&#182;</a>
+                <a class="pilcrow" href="#section-114">&#182;</a>
               </div>
               <p>Remove stale models.</p>
 
@@ -2268,11 +2225,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-116">
+        <li id="section-115">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-116">&#182;</a>
+                <a class="pilcrow" href="#section-115">&#182;</a>
               </div>
               <p>See if sorting is needed, update <code>length</code> and splice in new models.</p>
 
@@ -2296,11 +2253,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-117">
+        <li id="section-116">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-117">&#182;</a>
+                <a class="pilcrow" href="#section-116">&#182;</a>
               </div>
               <p>Silently sort the collection if appropriate.</p>
 
@@ -2311,11 +2268,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-118">
+        <li id="section-117">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-118">&#182;</a>
+                <a class="pilcrow" href="#section-117">&#182;</a>
               </div>
               <p>Unless silenced, it’s time to fire all appropriate add/sort/update events.</p>
 
@@ -2341,11 +2298,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-119">
+        <li id="section-118">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-119">&#182;</a>
+                <a class="pilcrow" href="#section-118">&#182;</a>
               </div>
               <p>Return the added (or merged) model (or models).</p>
 
@@ -2357,11 +2314,11 @@ optionally merge it into the existing model.</p>
         </li>
         
         
-        <li id="section-120">
+        <li id="section-119">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-120">&#182;</a>
+                <a class="pilcrow" href="#section-119">&#182;</a>
               </div>
               <p>When you have more items than you want to add or remove individually,
 you can reset the entire set with a new list of models, without firing
@@ -2385,13 +2342,13 @@ Useful for bulk operations and optimizations.</p>
         </li>
         
         
-        <li id="section-121">
+        <li id="section-120">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-121">&#182;</a>
+                <a class="pilcrow" href="#section-120">&#182;</a>
               </div>
-              <p>Add a model to the end of the collection.</p>
+              <p>将一个model添加到collection的最后。</p>
 
             </div>
             
@@ -2402,13 +2359,13 @@ Useful for bulk operations and optimizations.</p>
         </li>
         
         
-        <li id="section-122">
+        <li id="section-121">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-122">&#182;</a>
+                <a class="pilcrow" href="#section-121">&#182;</a>
               </div>
-              <p>Remove a model from the end of the collection.</p>
+              <p>移除collection最后一个model。</p>
 
             </div>
             
@@ -2420,13 +2377,13 @@ Useful for bulk operations and optimizations.</p>
         </li>
         
         
-        <li id="section-123">
+        <li id="section-122">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-123">&#182;</a>
+                <a class="pilcrow" href="#section-122">&#182;</a>
               </div>
-              <p>Add a model to the beginning of the collection.</p>
+              <p>在collection的开始出添加一个model。</p>
 
             </div>
             
@@ -2437,13 +2394,13 @@ Useful for bulk operations and optimizations.</p>
         </li>
         
         
-        <li id="section-124">
+        <li id="section-123">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-124">&#182;</a>
+                <a class="pilcrow" href="#section-123">&#182;</a>
               </div>
-              <p>Remove a model from the beginning of the collection.</p>
+              <p>移除collection的第一个model。</p>
 
             </div>
             
@@ -2455,13 +2412,13 @@ Useful for bulk operations and optimizations.</p>
         </li>
         
         
-        <li id="section-125">
+        <li id="section-124">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-125">&#182;</a>
+                <a class="pilcrow" href="#section-124">&#182;</a>
               </div>
-              <p>Slice out a sub-array of models from the collection.</p>
+              <p>从集合的模型中分割出一个子数组。</p>
 
             </div>
             
@@ -2472,14 +2429,13 @@ Useful for bulk operations and optimizations.</p>
         </li>
         
         
-        <li id="section-126">
+        <li id="section-125">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-126">&#182;</a>
+                <a class="pilcrow" href="#section-125">&#182;</a>
               </div>
-              <p>Get a model from the set by id, cid, model object with id or cid
-properties, or an attributes object that is transformed through modelId.</p>
+              <p>获得一个model，可以给定id，cid，也可以给定带有id或cid属性的model对象，同时还可以给定一个由modelId方法转换的属性对象。</p>
 
             </div>
             
@@ -2493,13 +2449,13 @@ properties, or an attributes object that is transformed through modelId.</p>
         </li>
         
         
-        <li id="section-127">
+        <li id="section-126">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-127">&#182;</a>
+                <a class="pilcrow" href="#section-126">&#182;</a>
               </div>
-              <p>Returns <code>true</code> if the model is in the collection.</p>
+              <p>如果model在collection中，返回<code>True</code>。</p>
 
             </div>
             
@@ -2510,11 +2466,11 @@ properties, or an attributes object that is transformed through modelId.</p>
         </li>
         
         
-        <li id="section-128">
+        <li id="section-127">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-128">&#182;</a>
+                <a class="pilcrow" href="#section-127">&#182;</a>
               </div>
               <p>Get the model at the given index.</p>
 
@@ -2528,11 +2484,11 @@ properties, or an attributes object that is transformed through modelId.</p>
         </li>
         
         
-        <li id="section-129">
+        <li id="section-128">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-129">&#182;</a>
+                <a class="pilcrow" href="#section-128">&#182;</a>
               </div>
               <p>Return models with matching attributes. Useful for simple cases of
 <code>filter</code>.</p>
@@ -2546,11 +2502,11 @@ properties, or an attributes object that is transformed through modelId.</p>
         </li>
         
         
-        <li id="section-130">
+        <li id="section-129">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-130">&#182;</a>
+                <a class="pilcrow" href="#section-129">&#182;</a>
               </div>
               <p>Return the first model with matching attributes. Useful for simple cases
 of <code>find</code>.</p>
@@ -2564,11 +2520,11 @@ of <code>find</code>.</p>
         </li>
         
         
-        <li id="section-131">
+        <li id="section-130">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-131">&#182;</a>
+                <a class="pilcrow" href="#section-130">&#182;</a>
               </div>
               <p>Force the collection to re-sort itself. You don’t need to call this under
 normal circumstances, as the set will maintain sort order as each item
@@ -2587,11 +2543,11 @@ is added.</p>
         </li>
         
         
-        <li id="section-132">
+        <li id="section-131">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-132">&#182;</a>
+                <a class="pilcrow" href="#section-131">&#182;</a>
               </div>
               <p>Run sort based on type of <code>comparator</code>.</p>
 
@@ -2609,11 +2565,11 @@ is added.</p>
         </li>
         
         
-        <li id="section-133">
+        <li id="section-132">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-133">&#182;</a>
+                <a class="pilcrow" href="#section-132">&#182;</a>
               </div>
               <p>Pluck an attribute from each model in the collection.</p>
 
@@ -2626,11 +2582,11 @@ is added.</p>
         </li>
         
         
-        <li id="section-134">
+        <li id="section-133">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-134">&#182;</a>
+                <a class="pilcrow" href="#section-133">&#182;</a>
               </div>
               <p>Fetch the default set of models for this collection, resetting the
 collection when they arrive. If <code>reset: true</code> is passed, the response
@@ -2655,11 +2611,11 @@ data will be passed through the <code>reset</code> method instead of <code>set</
         </li>
         
         
-        <li id="section-135">
+        <li id="section-134">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-135">&#182;</a>
+                <a class="pilcrow" href="#section-134">&#182;</a>
               </div>
               <p>Create a new instance of a model in this collection. Add the model to the
 collection immediately, unless <code>wait: true</code> is passed, in which case we
@@ -2686,11 +2642,11 @@ wait for the server to agree.</p>
         </li>
         
         
-        <li id="section-136">
+        <li id="section-135">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-136">&#182;</a>
+                <a class="pilcrow" href="#section-135">&#182;</a>
               </div>
               <p><strong>parse</strong> converts a response into a list of models to be added to the
 collection. The default implementation is just to pass it through.</p>
@@ -2704,11 +2660,11 @@ collection. The default implementation is just to pass it through.</p>
         </li>
         
         
-        <li id="section-137">
+        <li id="section-136">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-137">&#182;</a>
+                <a class="pilcrow" href="#section-136">&#182;</a>
               </div>
               <p>Create a new collection with an identical list of models as this one.</p>
 
@@ -2724,11 +2680,11 @@ collection. The default implementation is just to pass it through.</p>
         </li>
         
         
-        <li id="section-138">
+        <li id="section-137">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-138">&#182;</a>
+                <a class="pilcrow" href="#section-137">&#182;</a>
               </div>
               <p>Define how to uniquely identify models in the collection.</p>
 
@@ -2741,11 +2697,11 @@ collection. The default implementation is just to pass it through.</p>
         </li>
         
         
-        <li id="section-139">
+        <li id="section-138">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-139">&#182;</a>
+                <a class="pilcrow" href="#section-138">&#182;</a>
               </div>
               <p>Private method to reset all internal state. Called when the collection
 is first initialized or reset.</p>
@@ -2761,11 +2717,11 @@ is first initialized or reset.</p>
         </li>
         
         
-        <li id="section-140">
+        <li id="section-139">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-140">&#182;</a>
+                <a class="pilcrow" href="#section-139">&#182;</a>
               </div>
               <p>Prepare a hash of attributes (or other model) to be added to this
 collection.</p>
@@ -2788,13 +2744,13 @@ collection.</p>
         </li>
         
         
-        <li id="section-141">
+        <li id="section-140">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-141">&#182;</a>
+                <a class="pilcrow" href="#section-140">&#182;</a>
               </div>
-              <p>Internal method called by both remove and set.</p>
+              <p>内部方法，供remove和set方法调用。</p>
 
             </div>
             
@@ -2811,14 +2767,13 @@ collection.</p>
         </li>
         
         
-        <li id="section-142">
+        <li id="section-141">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-142">&#182;</a>
+                <a class="pilcrow" href="#section-141">&#182;</a>
               </div>
-              <p>Remove references before triggering ‘remove’ event to prevent an
-infinite loop. #3693</p>
+              <p>在触发 ‘remove’ 事件前，移除引用，防止死循环。#3693</p>
 
             </div>
             
@@ -2840,11 +2795,11 @@ infinite loop. #3693</p>
         </li>
         
         
-        <li id="section-143">
+        <li id="section-142">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-143">&#182;</a>
+                <a class="pilcrow" href="#section-142">&#182;</a>
               </div>
               <p>Method for checking whether an object should be considered a model for
 the purposes of adding to the collection.</p>
@@ -2858,13 +2813,13 @@ the purposes of adding to the collection.</p>
         </li>
         
         
-        <li id="section-144">
+        <li id="section-143">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-144">&#182;</a>
+                <a class="pilcrow" href="#section-143">&#182;</a>
               </div>
-              <p>Internal method to create a model’s ties to a collection.</p>
+              <p>内部方法，用来关联model与collection。</p>
 
             </div>
             
@@ -2878,13 +2833,13 @@ the purposes of adding to the collection.</p>
         </li>
         
         
-        <li id="section-145">
+        <li id="section-144">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-145">&#182;</a>
+                <a class="pilcrow" href="#section-144">&#182;</a>
               </div>
-              <p>Internal method to sever a model’s ties to a collection.</p>
+              <p>内部方法，用来切断model与collection的关联。</p>
 
             </div>
             
@@ -2899,11 +2854,11 @@ the purposes of adding to the collection.</p>
         </li>
         
         
-        <li id="section-146">
+        <li id="section-145">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-146">&#182;</a>
+                <a class="pilcrow" href="#section-145">&#182;</a>
               </div>
               <p>Internal method called every time a model in the set fires an event.
 Sets need to update their indexes when models change ids. All other
@@ -2933,11 +2888,11 @@ in other collections are ignored.</p>
         </li>
         
         
-        <li id="section-147">
+        <li id="section-146">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-147">&#182;</a>
+                <a class="pilcrow" href="#section-146">&#182;</a>
               </div>
               <p>Underscore methods that we want to implement on the Collection.
 90% of the core usefulness of Backbone Collections is actually implemented
@@ -2957,11 +2912,11 @@ right here:</p>
         </li>
         
         
-        <li id="section-148">
+        <li id="section-147">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-148">&#182;</a>
+                <a class="pilcrow" href="#section-147">&#182;</a>
               </div>
               <p>Mix in each Underscore method as a proxy to <code>Collection#models</code>.</p>
 
@@ -2972,14 +2927,26 @@ right here:</p>
         </li>
         
         
+        <li id="section-148">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-148">&#182;</a>
+              </div>
+              <h2 id="backbone-view">Backbone.View</h2>
+
+            </div>
+            
+        </li>
+        
+        
         <li id="section-149">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-149">&#182;</a>
               </div>
-              <h2 id="backbone-view">Backbone.View</h2>
-
+              
             </div>
             
         </li>
@@ -2990,18 +2957,6 @@ right here:</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-150">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-151">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-151">&#182;</a>
               </div>
               <p>Backbone Views are almost more convention than they are actual code. A View
 is simply a JavaScript object that represents a logical chunk of UI in the
@@ -3016,11 +2971,11 @@ react to specific changes in the state of your models.</p>
         </li>
         
         
-        <li id="section-152">
+        <li id="section-151">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-152">&#182;</a>
+                <a class="pilcrow" href="#section-151">&#182;</a>
               </div>
               <p>Creating a Backbone.View creates its initial element outside of the DOM,
 if an existing element is not provided…</p>
@@ -3037,11 +2992,11 @@ if an existing element is not provided…</p>
         </li>
         
         
-        <li id="section-153">
+        <li id="section-152">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-153">&#182;</a>
+                <a class="pilcrow" href="#section-152">&#182;</a>
               </div>
               <p>Cached regex to split keys for <code>delegate</code>.</p>
 
@@ -3052,11 +3007,11 @@ if an existing element is not provided…</p>
         </li>
         
         
-        <li id="section-154">
+        <li id="section-153">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-154">&#182;</a>
+                <a class="pilcrow" href="#section-153">&#182;</a>
               </div>
               <p>List of view options to be set as properties.</p>
 
@@ -3067,11 +3022,11 @@ if an existing element is not provided…</p>
         </li>
         
         
-        <li id="section-155">
+        <li id="section-154">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-155">&#182;</a>
+                <a class="pilcrow" href="#section-154">&#182;</a>
               </div>
               <p>Set up all inheritable <strong>Backbone.View</strong> properties and methods.</p>
 
@@ -3082,11 +3037,11 @@ if an existing element is not provided…</p>
         </li>
         
         
-        <li id="section-156">
+        <li id="section-155">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-156">&#182;</a>
+                <a class="pilcrow" href="#section-155">&#182;</a>
               </div>
               <p>The default <code>tagName</code> of a View’s element is <code>&quot;div&quot;</code>.</p>
 
@@ -3097,11 +3052,11 @@ if an existing element is not provided…</p>
         </li>
         
         
-        <li id="section-157">
+        <li id="section-156">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-157">&#182;</a>
+                <a class="pilcrow" href="#section-156">&#182;</a>
               </div>
               <p>jQuery delegate for element lookup, scoped to DOM elements within the
 current view. This should be preferred to global lookups where possible.</p>
@@ -3115,11 +3070,11 @@ current view. This should be preferred to global lookups where possible.</p>
         </li>
         
         
-        <li id="section-158">
+        <li id="section-157">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-158">&#182;</a>
+                <a class="pilcrow" href="#section-157">&#182;</a>
               </div>
               <p>Initialize is an empty function by default. Override it with your own
 initialization logic.</p>
@@ -3131,11 +3086,11 @@ initialization logic.</p>
         </li>
         
         
-        <li id="section-159">
+        <li id="section-158">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-159">&#182;</a>
+                <a class="pilcrow" href="#section-158">&#182;</a>
               </div>
               <p><strong>render</strong> is the core function that your view should override, in order
 to populate its element (<code>this.el</code>), with the appropriate HTML. The
@@ -3150,11 +3105,11 @@ convention is for <strong>render</strong> to always return <code>this</code>.</p
         </li>
         
         
-        <li id="section-160">
+        <li id="section-159">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-160">&#182;</a>
+                <a class="pilcrow" href="#section-159">&#182;</a>
               </div>
               <p>Remove this view by taking the element out of the DOM, and removing any
 applicable Backbone.Events listeners.</p>
@@ -3170,11 +3125,11 @@ applicable Backbone.Events listeners.</p>
         </li>
         
         
-        <li id="section-161">
+        <li id="section-160">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-161">&#182;</a>
+                <a class="pilcrow" href="#section-160">&#182;</a>
               </div>
               <p>Remove this view’s element from the document and all event listeners
 attached to it. Exposed for subclasses using an alternative DOM
@@ -3189,11 +3144,11 @@ manipulation API.</p>
         </li>
         
         
-        <li id="section-162">
+        <li id="section-161">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-162">&#182;</a>
+                <a class="pilcrow" href="#section-161">&#182;</a>
               </div>
               <p>Change the view’s element (<code>this.el</code> property) and re-delegate the
 view’s events on the new element.</p>
@@ -3210,11 +3165,11 @@ view’s events on the new element.</p>
         </li>
         
         
-        <li id="section-163">
+        <li id="section-162">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-163">&#182;</a>
+                <a class="pilcrow" href="#section-162">&#182;</a>
               </div>
               <p>Creates the <code>this.el</code> and <code>this.$el</code> references for this view using the
 given <code>el</code>. <code>el</code> can be a CSS selector or an HTML string, a jQuery
@@ -3232,11 +3187,11 @@ alternative DOM manipulation API and are only required to set the
         </li>
         
         
-        <li id="section-164">
+        <li id="section-163">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-164">&#182;</a>
+                <a class="pilcrow" href="#section-163">&#182;</a>
               </div>
               <p>Set callbacks, where <code>this.events</code> is a hash of</p>
 <p><em>{“event selector”: “callback”}</em></p>
@@ -3268,11 +3223,11 @@ Omitting the selector binds the event to <code>this.el</code>.</p>
         </li>
         
         
-        <li id="section-165">
+        <li id="section-164">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-165">&#182;</a>
+                <a class="pilcrow" href="#section-164">&#182;</a>
               </div>
               <p>Add a single event listener to the view’s element (or a child element
 using <code>selector</code>). This only works for delegate-able events: not <code>focus</code>,
@@ -3288,11 +3243,11 @@ using <code>selector</code>). This only works for delegate-able events: not <cod
         </li>
         
         
-        <li id="section-166">
+        <li id="section-165">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-166">&#182;</a>
+                <a class="pilcrow" href="#section-165">&#182;</a>
               </div>
               <p>Clears all callbacks previously bound to the view by <code>delegateEvents</code>.
 You usually don’t need to use this, but may wish to if you have multiple
@@ -3308,11 +3263,11 @@ Backbone views attached to the same DOM element.</p>
         </li>
         
         
-        <li id="section-167">
+        <li id="section-166">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-167">&#182;</a>
+                <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
               <p>A finer-grained <code>undelegateEvents</code> for removing a single delegated event.
 <code>selector</code> and <code>listener</code> are both optional.</p>
@@ -3327,11 +3282,11 @@ Backbone views attached to the same DOM element.</p>
         </li>
         
         
-        <li id="section-168">
+        <li id="section-167">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-168">&#182;</a>
+                <a class="pilcrow" href="#section-167">&#182;</a>
               </div>
               <p>Produces a DOM element to be assigned to your view. Exposed for
 subclasses using an alternative DOM manipulation API.</p>
@@ -3345,11 +3300,11 @@ subclasses using an alternative DOM manipulation API.</p>
         </li>
         
         
-        <li id="section-169">
+        <li id="section-168">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-169">&#182;</a>
+                <a class="pilcrow" href="#section-168">&#182;</a>
               </div>
               <p>Ensure that the View has a DOM element to render into.
 If <code>this.el</code> is a string, pass it through <code>$()</code>, take the first
@@ -3373,11 +3328,11 @@ an element from the <code>id</code>, <code>className</code> and <code>tagName</c
         </li>
         
         
-        <li id="section-170">
+        <li id="section-169">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-170">&#182;</a>
+                <a class="pilcrow" href="#section-169">&#182;</a>
               </div>
               <p>Set attributes from a hash on this view’s element.  Exposed for
 subclasses using an alternative DOM manipulation API.</p>
@@ -3393,14 +3348,26 @@ subclasses using an alternative DOM manipulation API.</p>
         </li>
         
         
+        <li id="section-170">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-170">&#182;</a>
+              </div>
+              <h2 id="backbone-sync">Backbone.sync</h2>
+
+            </div>
+            
+        </li>
+        
+        
         <li id="section-171">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-171">&#182;</a>
               </div>
-              <h2 id="backbone-sync">Backbone.sync</h2>
-
+              
             </div>
             
         </li>
@@ -3411,18 +3378,6 @@ subclasses using an alternative DOM manipulation API.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-172">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-173">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-173">&#182;</a>
               </div>
               <p>Override this function to change the manner in which Backbone persists
 models to the server. You will be passed the type of request, and the
@@ -3448,11 +3403,11 @@ it difficult to read the body of <code>PUT</code> requests.</p>
         </li>
         
         
-        <li id="section-174">
+        <li id="section-173">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-174">&#182;</a>
+                <a class="pilcrow" href="#section-173">&#182;</a>
               </div>
               <p>Default options, unless specified.</p>
 
@@ -3466,11 +3421,11 @@ it difficult to read the body of <code>PUT</code> requests.</p>
         </li>
         
         
-        <li id="section-175">
+        <li id="section-174">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-175">&#182;</a>
+                <a class="pilcrow" href="#section-174">&#182;</a>
               </div>
               <p>Default JSON-request options.</p>
 
@@ -3481,11 +3436,11 @@ it difficult to read the body of <code>PUT</code> requests.</p>
         </li>
         
         
-        <li id="section-176">
+        <li id="section-175">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-176">&#182;</a>
+                <a class="pilcrow" href="#section-175">&#182;</a>
               </div>
               <p>Ensure that we have a URL.</p>
 
@@ -3498,11 +3453,11 @@ it difficult to read the body of <code>PUT</code> requests.</p>
         </li>
         
         
-        <li id="section-177">
+        <li id="section-176">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-177">&#182;</a>
+                <a class="pilcrow" href="#section-176">&#182;</a>
               </div>
               <p>Ensure that we have the appropriate request data.</p>
 
@@ -3516,11 +3471,11 @@ it difficult to read the body of <code>PUT</code> requests.</p>
         </li>
         
         
-        <li id="section-178">
+        <li id="section-177">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-178">&#182;</a>
+                <a class="pilcrow" href="#section-177">&#182;</a>
               </div>
               <p>For older servers, emulate JSON by encoding the request into an HTML-form.</p>
 
@@ -3534,11 +3489,11 @@ it difficult to read the body of <code>PUT</code> requests.</p>
         </li>
         
         
-        <li id="section-179">
+        <li id="section-178">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-179">&#182;</a>
+                <a class="pilcrow" href="#section-178">&#182;</a>
               </div>
               <p>For older servers, emulate HTTP by mimicking the HTTP method with <code>_method</code>
 And an <code>X-HTTP-Method-Override</code> header.</p>
@@ -3558,11 +3513,11 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
         </li>
         
         
-        <li id="section-180">
+        <li id="section-179">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-180">&#182;</a>
+                <a class="pilcrow" href="#section-179">&#182;</a>
               </div>
               <p>Don’t process data on a non-GET request.</p>
 
@@ -3575,11 +3530,11 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
         </li>
         
         
-        <li id="section-181">
+        <li id="section-180">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-181">&#182;</a>
+                <a class="pilcrow" href="#section-180">&#182;</a>
               </div>
               <p>Pass along <code>textStatus</code> and <code>errorThrown</code> from jQuery.</p>
 
@@ -3595,11 +3550,11 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
         </li>
         
         
-        <li id="section-182">
+        <li id="section-181">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-182">&#182;</a>
+                <a class="pilcrow" href="#section-181">&#182;</a>
               </div>
               <p>Make the request, allowing the user to override any Ajax options.</p>
 
@@ -3613,11 +3568,11 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
         </li>
         
         
-        <li id="section-183">
+        <li id="section-182">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-183">&#182;</a>
+                <a class="pilcrow" href="#section-182">&#182;</a>
               </div>
               <p>Map from CRUD to HTTP for our default <code>Backbone.sync</code> implementation.</p>
 
@@ -3634,11 +3589,11 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
         </li>
         
         
-        <li id="section-184">
+        <li id="section-183">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-184">&#182;</a>
+                <a class="pilcrow" href="#section-183">&#182;</a>
               </div>
               <p>Set the default implementation of <code>Backbone.ajax</code> to proxy through to <code>$</code>.
 Override this if you’d like to use a different library.</p>
@@ -3652,14 +3607,26 @@ Override this if you’d like to use a different library.</p>
         </li>
         
         
+        <li id="section-184">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-184">&#182;</a>
+              </div>
+              <h2 id="backbone-router">Backbone.Router</h2>
+
+            </div>
+            
+        </li>
+        
+        
         <li id="section-185">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-185">&#182;</a>
               </div>
-              <h2 id="backbone-router">Backbone.Router</h2>
-
+              
             </div>
             
         </li>
@@ -3670,18 +3637,6 @@ Override this if you’d like to use a different library.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-186">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-187">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-187">&#182;</a>
               </div>
               <p>Routers map faux-URLs to actions, and fire events when routes are
 matched. Creating a new one sets its <code>routes</code> hash, if not set statically.</p>
@@ -3698,11 +3653,11 @@ matched. Creating a new one sets its <code>routes</code> hash, if not set static
         </li>
         
         
-        <li id="section-188">
+        <li id="section-187">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-188">&#182;</a>
+                <a class="pilcrow" href="#section-187">&#182;</a>
               </div>
               <p>Cached regular expressions for matching named param parts and splatted
 parts of route strings.</p>
@@ -3717,11 +3672,11 @@ parts of route strings.</p>
         </li>
         
         
-        <li id="section-189">
+        <li id="section-188">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-189">&#182;</a>
+                <a class="pilcrow" href="#section-188">&#182;</a>
               </div>
               <p>Set up all inheritable <strong>Backbone.Router</strong> properties and methods.</p>
 
@@ -3732,11 +3687,11 @@ parts of route strings.</p>
         </li>
         
         
-        <li id="section-190">
+        <li id="section-189">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-190">&#182;</a>
+                <a class="pilcrow" href="#section-189">&#182;</a>
               </div>
               <p>Initialize is an empty function by default. Override it with your own
 initialization logic.</p>
@@ -3748,11 +3703,11 @@ initialization logic.</p>
         </li>
         
         
-        <li id="section-191">
+        <li id="section-190">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-191">&#182;</a>
+                <a class="pilcrow" href="#section-190">&#182;</a>
               </div>
               <p>Manually bind a single named route to a callback. For example:</p>
 <pre><code><span class="hljs-keyword">this</span>.route(<span class="hljs-string">'search/:query/p:num'</span>, <span class="hljs-string">'search'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">query, num</span>) </span>{
@@ -3783,11 +3738,11 @@ initialization logic.</p>
         </li>
         
         
-        <li id="section-192">
+        <li id="section-191">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-192">&#182;</a>
+                <a class="pilcrow" href="#section-191">&#182;</a>
               </div>
               <p>Execute a route handler with the provided parameters.  This is an
 excellent place to do pre-route setup or post-route cleanup.</p>
@@ -3801,11 +3756,11 @@ excellent place to do pre-route setup or post-route cleanup.</p>
         </li>
         
         
-        <li id="section-193">
+        <li id="section-192">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-193">&#182;</a>
+                <a class="pilcrow" href="#section-192">&#182;</a>
               </div>
               <p>Simple proxy to <code>Backbone.history</code> to save a fragment into the history.</p>
 
@@ -3819,11 +3774,11 @@ excellent place to do pre-route setup or post-route cleanup.</p>
         </li>
         
         
-        <li id="section-194">
+        <li id="section-193">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-194">&#182;</a>
+                <a class="pilcrow" href="#section-193">&#182;</a>
               </div>
               <p>Bind all defined routes to <code>Backbone.history</code>. We have to reverse the
 order of the routes here to support behavior where the most general
@@ -3843,11 +3798,11 @@ routes can be defined at the bottom of the route map.</p>
         </li>
         
         
-        <li id="section-195">
+        <li id="section-194">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-195">&#182;</a>
+                <a class="pilcrow" href="#section-194">&#182;</a>
               </div>
               <p>Convert a route string into a regular expression, suitable for matching
 against the current location hash.</p>
@@ -3867,11 +3822,11 @@ against the current location hash.</p>
         </li>
         
         
-        <li id="section-196">
+        <li id="section-195">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-196">&#182;</a>
+                <a class="pilcrow" href="#section-195">&#182;</a>
               </div>
               <p>Given a route, and a URL fragment that it matches, return the array of
 extracted decoded parameters. Empty or unmatched parameters will be
@@ -3886,11 +3841,11 @@ treated as <code>null</code> to normalize cross-browser behavior.</p>
         </li>
         
         
-        <li id="section-197">
+        <li id="section-196">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-197">&#182;</a>
+                <a class="pilcrow" href="#section-196">&#182;</a>
               </div>
               <p>Don’t decode the search params.</p>
 
@@ -3906,14 +3861,26 @@ treated as <code>null</code> to normalize cross-browser behavior.</p>
         </li>
         
         
+        <li id="section-197">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-197">&#182;</a>
+              </div>
+              <h2 id="backbone-history">Backbone.History</h2>
+
+            </div>
+            
+        </li>
+        
+        
         <li id="section-198">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-198">&#182;</a>
               </div>
-              <h2 id="backbone-history">Backbone.History</h2>
-
+              
             </div>
             
         </li>
@@ -3924,18 +3891,6 @@ treated as <code>null</code> to normalize cross-browser behavior.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-199">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-200">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-200">&#182;</a>
               </div>
               <p>Handles cross-browser history management, based on either
 <a href="http://diveintohtml5.info/history.html">pushState</a> and real URLs, or
@@ -3952,11 +3907,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-201">
+        <li id="section-200">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-201">&#182;</a>
+                <a class="pilcrow" href="#section-200">&#182;</a>
               </div>
               <p>Ensure that <code>History</code> can be used outside of the browser.</p>
 
@@ -3971,11 +3926,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-202">
+        <li id="section-201">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-202">&#182;</a>
+                <a class="pilcrow" href="#section-201">&#182;</a>
               </div>
               <p>Cached regex for stripping a leading hash/slash and trailing space.</p>
 
@@ -3986,11 +3941,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-203">
+        <li id="section-202">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-203">&#182;</a>
+                <a class="pilcrow" href="#section-202">&#182;</a>
               </div>
               <p>Cached regex for stripping leading and trailing slashes.</p>
 
@@ -4001,11 +3956,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-204">
+        <li id="section-203">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-204">&#182;</a>
+                <a class="pilcrow" href="#section-203">&#182;</a>
               </div>
               <p>Cached regex for stripping urls of hash.</p>
 
@@ -4016,11 +3971,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-205">
+        <li id="section-204">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-205">&#182;</a>
+                <a class="pilcrow" href="#section-204">&#182;</a>
               </div>
               <p>Has the history handling already been started?</p>
 
@@ -4031,11 +3986,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-206">
+        <li id="section-205">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-206">&#182;</a>
+                <a class="pilcrow" href="#section-205">&#182;</a>
               </div>
               <p>Set up all inheritable <strong>Backbone.History</strong> properties and methods.</p>
 
@@ -4046,11 +4001,11 @@ falls back to polling.</p>
         </li>
         
         
-        <li id="section-207">
+        <li id="section-206">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-207">&#182;</a>
+                <a class="pilcrow" href="#section-206">&#182;</a>
               </div>
               <p>The default interval to poll for hash changes, if necessary, is
 twenty times a second.</p>
@@ -4062,11 +4017,11 @@ twenty times a second.</p>
         </li>
         
         
-        <li id="section-208">
+        <li id="section-207">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-208">&#182;</a>
+                <a class="pilcrow" href="#section-207">&#182;</a>
               </div>
               <p>Are we at the app root?</p>
 
@@ -4080,11 +4035,11 @@ twenty times a second.</p>
         </li>
         
         
-        <li id="section-209">
+        <li id="section-208">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-209">&#182;</a>
+                <a class="pilcrow" href="#section-208">&#182;</a>
               </div>
               <p>Does the pathname match the root?</p>
 
@@ -4099,11 +4054,11 @@ twenty times a second.</p>
         </li>
         
         
-        <li id="section-210">
+        <li id="section-209">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-210">&#182;</a>
+                <a class="pilcrow" href="#section-209">&#182;</a>
               </div>
               <p>Unicode characters in <code>location.pathname</code> are percent encoded so they’re
 decoded for comparison. <code>%25</code> should not be decoded since it may be part
@@ -4118,11 +4073,11 @@ of an encoded parameter.</p>
         </li>
         
         
-        <li id="section-211">
+        <li id="section-210">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-211">&#182;</a>
+                <a class="pilcrow" href="#section-210">&#182;</a>
               </div>
               <p>In IE6, the hash fragment and search params are incorrect if the
 fragment contains <code>?</code>.</p>
@@ -4137,11 +4092,11 @@ fragment contains <code>?</code>.</p>
         </li>
         
         
-        <li id="section-212">
+        <li id="section-211">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-212">&#182;</a>
+                <a class="pilcrow" href="#section-211">&#182;</a>
               </div>
               <p>Gets the true hash value. Cannot use location.hash directly due to bug
 in Firefox where location.hash will always be decoded.</p>
@@ -4156,11 +4111,11 @@ in Firefox where location.hash will always be decoded.</p>
         </li>
         
         
-        <li id="section-213">
+        <li id="section-212">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-213">&#182;</a>
+                <a class="pilcrow" href="#section-212">&#182;</a>
               </div>
               <p>Get the pathname and search params, without the root.</p>
 
@@ -4176,11 +4131,11 @@ in Firefox where location.hash will always be decoded.</p>
         </li>
         
         
-        <li id="section-214">
+        <li id="section-213">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-214">&#182;</a>
+                <a class="pilcrow" href="#section-213">&#182;</a>
               </div>
               <p>Get the cross-browser normalized URL fragment from the path or hash.</p>
 
@@ -4200,11 +4155,11 @@ in Firefox where location.hash will always be decoded.</p>
         </li>
         
         
-        <li id="section-215">
+        <li id="section-214">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-215">&#182;</a>
+                <a class="pilcrow" href="#section-214">&#182;</a>
               </div>
               <p>Start the hash change handling, returning <code>true</code> if the current URL matches
 an existing route, and <code>false</code> otherwise.</p>
@@ -4218,11 +4173,11 @@ an existing route, and <code>false</code> otherwise.</p>
         </li>
         
         
-        <li id="section-216">
+        <li id="section-215">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-216">&#182;</a>
+                <a class="pilcrow" href="#section-215">&#182;</a>
               </div>
               <p>Figure out the initial configuration. Do we need an iframe?
 Is pushState desired … is it available?</p>
@@ -4242,11 +4197,11 @@ Is pushState desired … is it available?</p>
         </li>
         
         
-        <li id="section-217">
+        <li id="section-216">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-217">&#182;</a>
+                <a class="pilcrow" href="#section-216">&#182;</a>
               </div>
               <p>Normalize root to always include a leading and trailing slash.</p>
 
@@ -4257,11 +4212,11 @@ Is pushState desired … is it available?</p>
         </li>
         
         
-        <li id="section-218">
+        <li id="section-217">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-218">&#182;</a>
+                <a class="pilcrow" href="#section-217">&#182;</a>
               </div>
               <p>Transition from hashChange to pushState or vice versa if both are
 requested.</p>
@@ -4273,11 +4228,11 @@ requested.</p>
         </li>
         
         
-        <li id="section-219">
+        <li id="section-218">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-219">&#182;</a>
+                <a class="pilcrow" href="#section-218">&#182;</a>
               </div>
               <p>If we’ve started off with a route from a <code>pushState</code>-enabled
 browser, but we’re currently in a browser that doesn’t support it…</p>
@@ -4291,11 +4246,11 @@ browser, but we’re currently in a browser that doesn’t support it…</p>
         </li>
         
         
-        <li id="section-220">
+        <li id="section-219">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-220">&#182;</a>
+                <a class="pilcrow" href="#section-219">&#182;</a>
               </div>
               <p>Return immediately as browser will do redirect to new url</p>
 
@@ -4306,11 +4261,11 @@ browser, but we’re currently in a browser that doesn’t support it…</p>
         </li>
         
         
-        <li id="section-221">
+        <li id="section-220">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-221">&#182;</a>
+                <a class="pilcrow" href="#section-220">&#182;</a>
               </div>
               <p>Or if we’ve started out with a hash-based route, but we’re currently
 in a browser where it could be <code>pushState</code>-based instead…</p>
@@ -4326,11 +4281,11 @@ in a browser where it could be <code>pushState</code>-based instead…</p>
         </li>
         
         
-        <li id="section-222">
+        <li id="section-221">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-222">&#182;</a>
+                <a class="pilcrow" href="#section-221">&#182;</a>
               </div>
               <p>Proxy an iframe to handle location events if the browser doesn’t
 support the <code>hashchange</code> event, HTML5 history, or the user wants
@@ -4348,11 +4303,11 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
         </li>
         
         
-        <li id="section-223">
+        <li id="section-222">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-223">&#182;</a>
+                <a class="pilcrow" href="#section-222">&#182;</a>
               </div>
               <p>Using <code>appendChild</code> will throw on IE &lt; 9 if the document is not ready.</p>
 
@@ -4367,11 +4322,11 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
         </li>
         
         
-        <li id="section-224">
+        <li id="section-223">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-224">&#182;</a>
+                <a class="pilcrow" href="#section-223">&#182;</a>
               </div>
               <p>Add a cross-platform <code>addEventListener</code> shim for older browsers.</p>
 
@@ -4384,11 +4339,11 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
         </li>
         
         
-        <li id="section-225">
+        <li id="section-224">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-225">&#182;</a>
+                <a class="pilcrow" href="#section-224">&#182;</a>
               </div>
               <p>Depending on whether we’re using pushState or hashes, and whether
 ‘onhashchange’ is supported, determine how we check the URL state.</p>
@@ -4409,11 +4364,11 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
         </li>
         
         
-        <li id="section-226">
+        <li id="section-225">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-226">&#182;</a>
+                <a class="pilcrow" href="#section-225">&#182;</a>
               </div>
               <p>Disable Backbone.history, perhaps temporarily. Not useful in a real app,
 but possibly useful for unit testing Routers.</p>
@@ -4425,11 +4380,11 @@ but possibly useful for unit testing Routers.</p>
         </li>
         
         
-        <li id="section-227">
+        <li id="section-226">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-227">&#182;</a>
+                <a class="pilcrow" href="#section-226">&#182;</a>
               </div>
               <p>Add a cross-platform <code>removeEventListener</code> shim for older browsers.</p>
 
@@ -4442,11 +4397,11 @@ but possibly useful for unit testing Routers.</p>
         </li>
         
         
-        <li id="section-228">
+        <li id="section-227">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-228">&#182;</a>
+                <a class="pilcrow" href="#section-227">&#182;</a>
               </div>
               <p>Remove window listeners.</p>
 
@@ -4461,11 +4416,11 @@ but possibly useful for unit testing Routers.</p>
         </li>
         
         
-        <li id="section-229">
+        <li id="section-228">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-229">&#182;</a>
+                <a class="pilcrow" href="#section-228">&#182;</a>
               </div>
               <p>Clean up the iframe if necessary.</p>
 
@@ -4479,11 +4434,11 @@ but possibly useful for unit testing Routers.</p>
         </li>
         
         
-        <li id="section-230">
+        <li id="section-229">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-230">&#182;</a>
+                <a class="pilcrow" href="#section-229">&#182;</a>
               </div>
               <p>Some environments will throw when clearing an undefined interval.</p>
 
@@ -4496,11 +4451,11 @@ but possibly useful for unit testing Routers.</p>
         </li>
         
         
-        <li id="section-231">
+        <li id="section-230">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-231">&#182;</a>
+                <a class="pilcrow" href="#section-230">&#182;</a>
               </div>
               <p>Add a route to be tested when the fragment changes. Routes added later
 may override previous routes.</p>
@@ -4514,11 +4469,11 @@ may override previous routes.</p>
         </li>
         
         
-        <li id="section-232">
+        <li id="section-231">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-232">&#182;</a>
+                <a class="pilcrow" href="#section-231">&#182;</a>
               </div>
               <p>Checks the current URL to see if it has changed, and if it has,
 calls <code>loadUrl</code>, normalizing across the hidden iframe.</p>
@@ -4531,11 +4486,11 @@ calls <code>loadUrl</code>, normalizing across the hidden iframe.</p>
         </li>
         
         
-        <li id="section-233">
+        <li id="section-232">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-233">&#182;</a>
+                <a class="pilcrow" href="#section-232">&#182;</a>
               </div>
               <p>If the user pressed the back button, the iframe’s hash will have
 changed and we should use that for comparison.</p>
@@ -4554,11 +4509,11 @@ changed and we should use that for comparison.</p>
         </li>
         
         
-        <li id="section-234">
+        <li id="section-233">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-234">&#182;</a>
+                <a class="pilcrow" href="#section-233">&#182;</a>
               </div>
               <p>Attempt to load the current URL fragment. If a route succeeds with a
 match, returns <code>true</code>. If no defined routes matches the fragment,
@@ -4571,11 +4526,11 @@ returns <code>false</code>.</p>
         </li>
         
         
-        <li id="section-235">
+        <li id="section-234">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-235">&#182;</a>
+                <a class="pilcrow" href="#section-234">&#182;</a>
               </div>
               <p>If the root doesn’t match, no routes can match either.</p>
 
@@ -4594,11 +4549,11 @@ returns <code>false</code>.</p>
         </li>
         
         
-        <li id="section-236">
+        <li id="section-235">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-236">&#182;</a>
+                <a class="pilcrow" href="#section-235">&#182;</a>
               </div>
               <p>Save a fragment into the hash history, or replace the URL state if the
 ‘replace’ option is passed. You are responsible for properly URL-encoding
@@ -4616,11 +4571,11 @@ you wish to modify the current URL without adding an entry to the history.</p>
         </li>
         
         
-        <li id="section-237">
+        <li id="section-236">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-237">&#182;</a>
+                <a class="pilcrow" href="#section-236">&#182;</a>
               </div>
               <p>Normalize the fragment.</p>
 
@@ -4631,11 +4586,11 @@ you wish to modify the current URL without adding an entry to the history.</p>
         </li>
         
         
-        <li id="section-238">
+        <li id="section-237">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-238">&#182;</a>
+                <a class="pilcrow" href="#section-237">&#182;</a>
               </div>
               <p>Don’t include a trailing slash on the root.</p>
 
@@ -4650,11 +4605,11 @@ you wish to modify the current URL without adding an entry to the history.</p>
         </li>
         
         
-        <li id="section-239">
+        <li id="section-238">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-239">&#182;</a>
+                <a class="pilcrow" href="#section-238">&#182;</a>
               </div>
               <p>Strip the hash and decode for matching.</p>
 
@@ -4668,11 +4623,11 @@ you wish to modify the current URL without adding an entry to the history.</p>
         </li>
         
         
-        <li id="section-240">
+        <li id="section-239">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-240">&#182;</a>
+                <a class="pilcrow" href="#section-239">&#182;</a>
               </div>
               <p>If pushState is available, we use it to set the fragment as a real URL.</p>
 
@@ -4684,11 +4639,11 @@ you wish to modify the current URL without adding an entry to the history.</p>
         </li>
         
         
-        <li id="section-241">
+        <li id="section-240">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-241">&#182;</a>
+                <a class="pilcrow" href="#section-240">&#182;</a>
               </div>
               <p>If hash changes haven’t been explicitly disabled, update the hash
 fragment to store history.</p>
@@ -4703,11 +4658,11 @@ fragment to store history.</p>
         </li>
         
         
-        <li id="section-242">
+        <li id="section-241">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-242">&#182;</a>
+                <a class="pilcrow" href="#section-241">&#182;</a>
               </div>
               <p>Opening and closing the iframe tricks IE7 and earlier to push a
 history entry on hash-tag change.  When replace is true, we don’t
@@ -4726,11 +4681,11 @@ want this.</p>
         </li>
         
         
-        <li id="section-243">
+        <li id="section-242">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-243">&#182;</a>
+                <a class="pilcrow" href="#section-242">&#182;</a>
               </div>
               <p>If you’ve told us that you explicitly don’t want fallback hashchange-
 based history, then <code>navigate</code> becomes a page refresh.</p>
@@ -4746,11 +4701,11 @@ based history, then <code>navigate</code> becomes a page refresh.</p>
         </li>
         
         
-        <li id="section-244">
+        <li id="section-243">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-244">&#182;</a>
+                <a class="pilcrow" href="#section-243">&#182;</a>
               </div>
               <p>Update the hash location, either replacing the current entry, or adding
 a new one to the browser history.</p>
@@ -4766,11 +4721,11 @@ a new one to the browser history.</p>
         </li>
         
         
-        <li id="section-245">
+        <li id="section-244">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-245">&#182;</a>
+                <a class="pilcrow" href="#section-244">&#182;</a>
               </div>
               <p>Some browsers require that <code>hash</code> contains a leading #.</p>
 
@@ -4785,11 +4740,11 @@ a new one to the browser history.</p>
         </li>
         
         
-        <li id="section-246">
+        <li id="section-245">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-246">&#182;</a>
+                <a class="pilcrow" href="#section-245">&#182;</a>
               </div>
               <p>Create the default Backbone.history.</p>
 
@@ -4800,14 +4755,26 @@ a new one to the browser history.</p>
         </li>
         
         
+        <li id="section-246">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-246">&#182;</a>
+              </div>
+              <h2 id="helpers">Helpers</h2>
+
+            </div>
+            
+        </li>
+        
+        
         <li id="section-247">
             <div class="annotation">
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-247">&#182;</a>
               </div>
-              <h2 id="helpers">Helpers</h2>
-
+              
             </div>
             
         </li>
@@ -4818,18 +4785,6 @@ a new one to the browser history.</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-248">&#182;</a>
-              </div>
-              
-            </div>
-            
-        </li>
-        
-        
-        <li id="section-249">
-            <div class="annotation">
-              
-              <div class="pilwrap ">
-                <a class="pilcrow" href="#section-249">&#182;</a>
               </div>
               <p>Helper function to correctly set up the prototype chain for subclasses.
 Similar to <code>goog.inherits</code>, but uses a hash of prototype properties and
@@ -4844,11 +4799,11 @@ class properties to be extended.</p>
         </li>
         
         
-        <li id="section-250">
+        <li id="section-249">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-250">&#182;</a>
+                <a class="pilcrow" href="#section-249">&#182;</a>
               </div>
               <p>The constructor function for the new subclass is either defined by you
 (the “constructor” property in your <code>extend</code> definition), or defaulted
@@ -4865,11 +4820,11 @@ by us to simply call the parent constructor.</p>
         </li>
         
         
-        <li id="section-251">
+        <li id="section-250">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-251">&#182;</a>
+                <a class="pilcrow" href="#section-250">&#182;</a>
               </div>
               <p>Add static properties to the constructor function, if supplied.</p>
 
@@ -4880,11 +4835,11 @@ by us to simply call the parent constructor.</p>
         </li>
         
         
-        <li id="section-252">
+        <li id="section-251">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-252">&#182;</a>
+                <a class="pilcrow" href="#section-251">&#182;</a>
               </div>
               <p>Set the prototype chain to inherit from <code>parent</code>, without calling
 <code>parent</code>‘s constructor function and add the prototype properties.</p>
@@ -4897,11 +4852,11 @@ by us to simply call the parent constructor.</p>
         </li>
         
         
-        <li id="section-253">
+        <li id="section-252">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-253">&#182;</a>
+                <a class="pilcrow" href="#section-252">&#182;</a>
               </div>
               <p>Set a convenience property in case the parent’s prototype is needed
 later.</p>
@@ -4916,11 +4871,11 @@ later.</p>
         </li>
         
         
-        <li id="section-254">
+        <li id="section-253">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-254">&#182;</a>
+                <a class="pilcrow" href="#section-253">&#182;</a>
               </div>
               <p>Set up inheritance for the model, collection, router, view and history.</p>
 
@@ -4931,13 +4886,13 @@ later.</p>
         </li>
         
         
-        <li id="section-255">
+        <li id="section-254">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-255">&#182;</a>
+                <a class="pilcrow" href="#section-254">&#182;</a>
               </div>
-              <p>Throw an error when a URL is needed, and none is supplied.</p>
+              <p>在需要URL但又未提供时，抛出一个错误。</p>
 
             </div>
             
@@ -4948,13 +4903,13 @@ later.</p>
         </li>
         
         
-        <li id="section-256">
+        <li id="section-255">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-256">&#182;</a>
+                <a class="pilcrow" href="#section-255">&#182;</a>
               </div>
-              <p>Wrap an optional error callback with a fallback error event.</p>
+              <p>封装一个可选的错误回调，触发一个error事件。</p>
 
             </div>
             
