@@ -721,7 +721,7 @@
   // Mix in each Underscore method as a proxy to `Model#attributes`.
   addUnderscoreMethods(Model, modelMethods, 'attributes');
 
-  // Backbone.Collection
+  // 集合 - Backbone.Collection
   // -------------------
 
   // If models tend to represent a single row of data, a Backbone Collection is
