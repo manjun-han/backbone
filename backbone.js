@@ -359,20 +359,17 @@
   Events.bind   = Events.on;
   Events.unbind = Events.off;
 
-  // Allow the `Backbone` object to serve as a global event bus, for folks who
-  // want global "pubsub" in a convenient place.
+  // 将`Backbone`对象当做全局的事件中心，为那些需要全局"pubsub"的folks准备的。
   _.extend(Backbone, Events);
 
   // 模型 - Backbone.Model
   // --------------
 
-  // Backbone **Models** are the basic data object in the framework --
-  // frequently representing a row in a table in a database on your server.
-  // A discrete chunk of data and a bunch of useful, related methods for
-  // performing computations and transformations on that data.
+  // Backbone的 **Models**是框架内的基本数据对象 -- 经常代表了服务器端数据库表的一个行。
+  // 一些离散的数据块，和许多有用的相关方法，用来在这些数据上执行计算和进行转换。
 
-  // Create a new model with the specified attributes. A client id (`cid`)
-  // is automatically generated and assigned for you.
+
+  // 根据给定的属性，创建一个新的模式model。会为你自动生成一个客户端id（`cid`）。
   var Model = Backbone.Model = function(attributes, options) {
     var attrs = attributes || {};
     options || (options = {});
@@ -387,66 +384,60 @@
     this.initialize.apply(this, arguments);
   };
 
-  // Attach all inheritable methods to the Model prototype.
+  // 将所有可继承方法添加到Model的prototype上。
   _.extend(Model.prototype, Events, {
 
-    // A hash of attributes whose current and previous value differ.
+    // 一个所有属性的hash，当前值和上一个值是不同的。
     changed: null,
 
-    // The value returned during the last failed validation.
+    // 上一次校验失败后的返回值。
     validationError: null,
 
-    // The default name for the JSON `id` attribute is `"id"`. MongoDB and
-    // CouchDB users may want to set this to `"_id"`.
+    // JSON`id`属性的默认名称是`"id"`。MongoDB和CouchDB的用户可能会把名称替换为`"_id"`。
     idAttribute: 'id',
 
-    // The prefix is used to create the client id which is used to identify models locally.
-    // You may want to override this if you're experiencing name clashes with model ids.
+    // 前缀是用来创建客户端id，此id用来在本地标识models。如果你的model的id与它冲突，你可以覆盖它。
     cidPrefix: 'c',
 
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
+    // Initialize默认是空函数。可以用你自己的初始化逻辑覆盖它。
     initialize: function(){},
 
-    // Return a copy of the model's `attributes` object.
+    // 返回model的`attributes`对象的拷贝。
     toJSON: function(options) {
       return _.clone(this.attributes);
     },
 
-    // Proxy `Backbone.sync` by default -- but override this if you need
-    // custom syncing semantics for *this* particular model.
+    // 默认代理`Backbone.sync` -- 但如果你需要为当前**这个**特殊的model自定义同步语义，可以覆盖它。
     sync: function() {
       return Backbone.sync.apply(this, arguments);
     },
 
-    // Get the value of an attribute.
+    // 返回一个属性的值。
     get: function(attr) {
       return this.attributes[attr];
     },
 
-    // Get the HTML-escaped value of an attribute.
+    // 返回属性值的HTML转义后的值。
     escape: function(attr) {
       return _.escape(this.get(attr));
     },
 
-    // Returns `true` if the attribute contains a value that is not null
-    // or undefined.
+    // 如果属性的值不是null或undefined，则返回`true`。
     has: function(attr) {
       return this.get(attr) != null;
     },
 
-    // Special-cased proxy to underscore's `_.matches` method.
+    // underscore的`_.matches`的特殊代理。
     matches: function(attrs) {
       return !!_.iteratee(attrs, this)(this.attributes);
     },
 
-    // Set a hash of model attributes on the object, firing `"change"`. This is
-    // the core primitive operation of a model, updating the data and notifying
-    // anyone who needs to know about the change in state. The heart of the beast.
+    // 设置model的属性，并触发`"change"`事件。这是model的核心操作，更新数据，
+    // 通知想要知道状态变更的对象。这是model的核心。
     set: function(key, val, options) {
       if (key == null) return this;
 
-      // Handle both `"key", value` and `{key: value}` -style arguments.
+      // 同时处理`"key", value` 和 `{key: value}`风格的参数。
       var attrs;
       if (typeof key === 'object') {
         attrs = key;
@@ -457,10 +448,10 @@
 
       options || (options = {});
 
-      // Run validation.
+      // 执行校验。
       if (!this._validate(attrs, options)) return false;
 
-      // Extract attributes and options.
+      // 提取属性和选项。
       var unset      = options.unset;
       var silent     = options.silent;
       var changes    = [];
@@ -476,7 +467,7 @@
       var changed = this.changed;
       var prev    = this._previousAttributes;
 
-      // For each `set` attribute, update or delete the current value.
+      // 对于每个要`设置`的属性，更新或删除当前值。
       for (var attr in attrs) {
         val = attrs[attr];
         if (!_.isEqual(current[attr], val)) changes.push(attr);
@@ -488,10 +479,10 @@
         unset ? delete current[attr] : current[attr] = val;
       }
 
-      // Update the `id`.
+      // 更新`id`。
       if (this.idAttribute in attrs) this.id = this.get(this.idAttribute);
 
-      // Trigger all relevant attribute changes.
+      // 触发所有相关属性的变更事件。
       if (!silent) {
         if (changes.length) this._pending = options;
         for (var i = 0; i < changes.length; i++) {
@@ -499,8 +490,7 @@
         }
       }
 
-      // You might be wondering why there's a `while` loop here. Changes can
-      // be recursively nested within `"change"` events.
+      // 可能你会迷惑为什么这里有个`while`循环。`"change"`事件可能引起嵌套的变更。
       if (changing) return this;
       if (!silent) {
         while (this._pending) {
@@ -514,32 +504,28 @@
       return this;
     },
 
-    // Remove an attribute from the model, firing `"change"`. `unset` is a noop
-    // if the attribute doesn't exist.
+    // 从model中删除一个属性，触发`"change"`事件。如属性不存在，`unset`会是空操作。
     unset: function(attr, options) {
       return this.set(attr, void 0, _.extend({}, options, {unset: true}));
     },
 
-    // Clear all attributes on the model, firing `"change"`.
+    // 清除model上的所有属性，触发`"change"`事件。
     clear: function(options) {
       var attrs = {};
       for (var key in this.attributes) attrs[key] = void 0;
       return this.set(attrs, _.extend({}, options, {unset: true}));
     },
 
-    // Determine if the model has changed since the last `"change"` event.
-    // If you specify an attribute name, determine if that attribute has changed.
+    // 判断model自从上次的`"change"`事件以来是否发生了变化。
+    // 如果给定一个属性名称，会判断是否此属性发生了变化。
     hasChanged: function(attr) {
       if (attr == null) return !_.isEmpty(this.changed);
       return _.has(this.changed, attr);
     },
 
-    // Return an object containing all the attributes that have changed, or
-    // false if there are no changed attributes. Useful for determining what
-    // parts of a view need to be updated and/or what attributes need to be
-    // persisted to the server. Unset attributes will be set to undefined.
-    // You can also pass an attributes object to diff against the model,
-    // determining if there *would be* a change.
+    // 返回一个对象，包含所有已经变更的属性，如果属性没有变更那么返回值为false。有益于用来决定一个视图
+    // 是否需要更新，或属性是否需要持久化到服务器端。复位的属性会被设置为undefined。
+    // 你可以传入一个属性对象与model做差异比较，决定是否有变更发生。
     changedAttributes: function(diff) {
       if (!diff) return this.hasChanged() ? _.clone(this.changed) : false;
       var old = this._changing ? this._previousAttributes : this.attributes;
@@ -552,21 +538,18 @@
       return _.size(changed) ? changed : false;
     },
 
-    // Get the previous value of an attribute, recorded at the time the last
-    // `"change"` event was fired.
+    // 获取之前属性的值，在上次`"change"`事件变更后记录的。
     previous: function(attr) {
       if (attr == null || !this._previousAttributes) return null;
       return this._previousAttributes[attr];
     },
 
-    // Get all of the attributes of the model at the time of the previous
-    // `"change"` event.
+    // 获取上次`"change"`事件发生后的，所有model的属性，
     previousAttributes: function() {
       return _.clone(this._previousAttributes);
     },
 
-    // Fetch the model from the server, merging the response with the model's
-    // local attributes. Any changed attributes will trigger a "change" event.
+    // 从服务器端拉取molde的数据，将响应同model的本地属性进行合并。任何变更的属性都会触发一个"change" 事件。
     fetch: function(options) {
       options = _.extend({parse: true}, options);
       var model = this;
@@ -581,11 +564,9 @@
       return this.sync('read', this, options);
     },
 
-    // Set a hash of model attributes, and sync the model to the server.
-    // If the server returns an attributes hash that differs, the model's
-    // state will be `set` again.
+    // 设置model的属性，将model同步到服务器端。如果服务器返回一个不同的属性的hash，会重新设置model的状态。
     save: function(key, val, options) {
-      // Handle both `"key", value` and `{key: value}` -style arguments.
+     // 同时处理`"key", value` 和 `{key: value}`风格的参数。
       var attrs;
       if (key == null || typeof key === 'object') {
         attrs = key;
@@ -600,6 +581,7 @@
       // If we're not waiting and attributes exist, save acts as
       // `set(attr).save(null, opts)` with validation. Otherwise, check if
       // the model will be valid when the attributes, if any, are set.
+      // 如果我们
       if (attrs && !wait) {
         if (!this.set(attrs, options)) return false;
       } else if (!this._validate(attrs, options)) {
@@ -635,9 +617,9 @@
       return xhr;
     },
 
-    // Destroy this model on the server if it was already persisted.
-    // Optimistically removes the model from its collection, if it has one.
-    // If `wait: true` is passed, waits for the server to respond before removal.
+    // 如果model已经持久化了，那么就在服务器端销毁它。
+    // 如果modelc存在于collection中，那么就把他移除掉。
+    // 如果传入`wait: true`，要等到服务器相应后再销毁model。
     destroy: function(options) {
       options = options ? _.clone(options) : {};
       var model = this;
@@ -666,9 +648,7 @@
       return xhr;
     },
 
-    // Default URL for the model's representation on the server -- if you're
-    // using Backbone's restful methods, override this to change the endpoint
-    // that will be called.
+    // model在服务器端的默认的URL - 如果你正在使用Backbone的restful方法，可以覆盖当前方法来改变调用终点。
     url: function() {
       var base =
         _.result(this, 'urlRoot') ||
@@ -679,29 +659,27 @@
       return base.replace(/[^\/]$/, '$&/') + encodeURIComponent(id);
     },
 
-    // **parse** converts a response into the hash of attributes to be `set` on
-    // the model. The default implementation is just to pass the response along.
+    // **parse**将response转换为一个属性的hash，用来`set`到model上。默认只会直接返回response。
     parse: function(resp, options) {
       return resp;
     },
 
-    // Create a new model with identical attributes to this one.
+    // 使用当前model的属性，创建一个新的model。
     clone: function() {
       return new this.constructor(this.attributes);
     },
 
-    // A model is new if it has never been saved to the server, and lacks an id.
+    // 如果model没有保存到服务器，并且缺少一个id，那么model就是新的。
     isNew: function() {
       return !this.has(this.idAttribute);
     },
 
-    // Check if the model is currently in a valid state.
+    // 检查model当前是否是有效状态。
     isValid: function(options) {
       return this._validate({}, _.extend({}, options, {validate: true}));
     },
 
-    // Run validation against the next complete set of model attributes,
-    // returning `true` if all is well. Otherwise, fire an `"invalid"` event.
+    // 在设置model属性之前执行校验，如果校验通过，返回`true`。否则触发一个`"invalid"`事件。
     _validate: function(attrs, options) {
       if (!options.validate || !this.validate) return true;
       attrs = _.extend({}, this.attributes, attrs);
@@ -713,27 +691,24 @@
 
   });
 
-  // Underscore methods that we want to implement on the Model, mapped to the
-  // number of arguments they take.
+  // 我们希望Model实现的Underscore的方法，这里是一个每个方法接受参数个数的映射。
   var modelMethods = {keys: 1, values: 1, pairs: 1, invert: 1, pick: 0,
       omit: 0, chain: 1, isEmpty: 1};
 
-  // Mix in each Underscore method as a proxy to `Model#attributes`.
+  // 以`Model#attributes`代理的形式，混入Underscore的每个方法。
   addUnderscoreMethods(Model, modelMethods, 'attributes');
 
   // 集合 - Backbone.Collection
   // -------------------
 
-  // If models tend to represent a single row of data, a Backbone Collection is
-  // more analogous to a table full of data ... or a small slice or page of that
-  // table, or a collection of rows that belong together for a particular reason
-  // -- all of the messages in this particular folder, all of the documents
-  // belonging to this particular author, and so on. Collections maintain
-  // indexes of their models, both in order, and for lookup by `id`.
-
-  // Create a new **Collection**, perhaps to contain a specific type of `model`.
-  // If a `comparator` is specified, the Collection will maintain
-  // its models in sort order, as they're added and removed.
+  //
+  // 如果model代表了一行数据，那么Backbone的Collection则更像是数据表...或表的一部分或一页，
+  // 或者是因为特定原因而聚集在一起的一组行 - 比如，在特定目录下的所有消息，属于特定作者的所有文档，等等。
+  // Collection维护了它们model的索引，它们都是有序的，并且可以根据`id`进行查找。
+  //
+  // 创建一个新的 **Collection**，可能会包含了给定类型的`model`。如果指定了一个`comparator`，当新增或移除model时，Collection会
+  // 维护model顺序。
+  //
   var Collection = Backbone.Collection = function(models, options) {
     options || (options = {});
     if (options.model) this.model = options.model;
@@ -743,11 +718,11 @@
     if (models) this.reset(models, _.extend({silent: true}, options));
   };
 
-  // Default options for `Collection#set`.
+  // `Collection#set`的默认选项.
   var setOptions = {add: true, remove: true, merge: true};
   var addOptions = {add: true, remove: false};
 
-  // Splices `insert` into `array` at index `at`.
+  // 在`at`指定的索引处，插入元素到数组中
   var splice = function(array, insert, at) {
     at = Math.min(Math.max(at, 0), array.length);
     var tail = Array(array.length - at);
@@ -758,36 +733,33 @@
     for (i = 0; i < tail.length; i++) array[i + length + at] = tail[i];
   };
 
-  // Define the Collection's inheritable methods.
+  // 定义Collection的可继承方法。
   _.extend(Collection.prototype, Events, {
 
-    // The default model for a collection is just a **Backbone.Model**.
-    // This should be overridden in most cases.
+    // 集合默认的model类型仅仅是一个**Backbone.Model**。
+    // 多数情况下会覆盖掉它。
     model: Model,
 
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
+    // 初始化函数默认是个空函数。用以自己的初始化逻辑覆盖它。
     initialize: function(){},
 
-    // The JSON representation of a Collection is an array of the
-    // models' attributes.
+    // 一个集合JSON的表示是由models的属性组成的一个数组。
     toJSON: function(options) {
       return this.map(function(model) { return model.toJSON(options); });
     },
 
-    // Proxy `Backbone.sync` by default.
+    // 默认代理`Backbone.sync`。
     sync: function() {
       return Backbone.sync.apply(this, arguments);
     },
 
-    // Add a model, or list of models to the set. `models` may be Backbone
-    // Models or raw JavaScript objects to be converted to Models, or any
-    // combination of the two.
+    // 添加一个model，或一个model的列表。`models`可以是Backbone的Models或JavaScript的原始对象，
+    // 此对象可以转换为Models，或这两种类型的结合。
     add: function(models, options) {
       return this.set(models, _.extend({merge: false}, options, addOptions));
     },
 
-    // Remove a model, or a list of models from the set.
+    // 删除一个model，或一个model的列表。
     remove: function(models, options) {
       options = _.extend({}, options);
       var singular = !_.isArray(models);
@@ -935,35 +907,34 @@
       return models;
     },
 
-    // Add a model to the end of the collection.
+    // 将一个model添加到collection的最后。
     push: function(model, options) {
       return this.add(model, _.extend({at: this.length}, options));
     },
 
-    // Remove a model from the end of the collection.
+    // 移除collection最后一个model。
     pop: function(options) {
       var model = this.at(this.length - 1);
       return this.remove(model, options);
     },
 
-    // Add a model to the beginning of the collection.
+    // 在collection的开始出添加一个model。
     unshift: function(model, options) {
       return this.add(model, _.extend({at: 0}, options));
     },
 
-    // Remove a model from the beginning of the collection.
+    // 移除collection的第一个model。
     shift: function(options) {
       var model = this.at(0);
       return this.remove(model, options);
     },
 
-    // Slice out a sub-array of models from the collection.
+    // 从集合的模型中分割出一个子数组。
     slice: function() {
       return slice.apply(this.models, arguments);
     },
 
-    // Get a model from the set by id, cid, model object with id or cid
-    // properties, or an attributes object that is transformed through modelId.
+    // 获得一个model，可以给定id，cid，也可以给定带有id或cid属性的model对象，同时还可以给定一个由modelId方法转换的属性对象。
     get: function(obj) {
       if (obj == null) return void 0;
       return this._byId[obj] ||
@@ -971,7 +942,7 @@
         obj.cid && this._byId[obj.cid];
     },
 
-    // Returns `true` if the model is in the collection.
+    // 如果model在collection中，返回`True`。
     has: function(obj) {
       return this.get(obj) != null;
     },
@@ -1098,7 +1069,7 @@
       return false;
     },
 
-    // Internal method called by both remove and set.
+    // 内部方法，供remove和set方法调用。
     _removeModels: function(models, options) {
       var removed = [];
       for (var i = 0; i < models.length; i++) {
@@ -1109,8 +1080,7 @@
         this.models.splice(index, 1);
         this.length--;
 
-        // Remove references before triggering 'remove' event to prevent an
-        // infinite loop. #3693
+        // 在触发 'remove' 事件前，移除引用，防止死循环。#3693
         delete this._byId[model.cid];
         var id = this.modelId(model.attributes);
         if (id != null) delete this._byId[id];
@@ -1132,7 +1102,7 @@
       return model instanceof Model;
     },
 
-    // Internal method to create a model's ties to a collection.
+    // 内部方法，用来关联model与collection。
     _addReference: function(model, options) {
       this._byId[model.cid] = model;
       var id = this.modelId(model.attributes);
@@ -1140,7 +1110,7 @@
       model.on('all', this._onModelEvent, this);
     },
 
-    // Internal method to sever a model's ties to a collection.
+    // 内部方法，用来切断model与collection的关联。
     _removeReference: function(model, options) {
       delete this._byId[model.cid];
       var id = this.modelId(model.attributes);
@@ -1884,12 +1854,12 @@
   // Set up inheritance for the model, collection, router, view and history.
   Model.extend = Collection.extend = Router.extend = View.extend = History.extend = extend;
 
-  // Throw an error when a URL is needed, and none is supplied.
+  // 在需要URL但又未提供时，抛出一个错误。
   var urlError = function() {
     throw new Error('A "url" property or function must be specified');
   };
 
-  // Wrap an optional error callback with a fallback error event.
+  // 封装一个可选的错误回调，触发一个error事件。
   var wrapError = function(model, options) {
     var error = options.error;
     options.error = function(resp) {
