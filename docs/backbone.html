@@ -1880,7 +1880,7 @@ updated with the server-side state.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-98">&#182;</a>
               </div>
-              <h2 id="backbone-collection">Backbone.Collection</h2>
+              <h2 id="-backbone-collection">集合 - Backbone.Collection</h2>
 
             </div>
             
@@ -2472,7 +2472,7 @@ Useful for bulk operations and optimizations.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-127">&#182;</a>
               </div>
-              <p>Get the model at the given index.</p>
+              <p>根据索引获取model。</p>
 
             </div>
             
@@ -2490,8 +2490,7 @@ Useful for bulk operations and optimizations.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-128">&#182;</a>
               </div>
-              <p>Return models with matching attributes. Useful for simple cases of
-<code>filter</code>.</p>
+              <p>返回与给定属性匹配的models。用来当做<code>filter</code>比较有用。</p>
 
             </div>
             
@@ -2508,8 +2507,7 @@ Useful for bulk operations and optimizations.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-129">&#182;</a>
               </div>
-              <p>Return the first model with matching attributes. Useful for simple cases
-of <code>find</code>.</p>
+              <p>返回第一个与给定属性匹配的model。用来当做<code>find</code>比较有用。</p>
 
             </div>
             
@@ -2526,9 +2524,7 @@ of <code>find</code>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-130">&#182;</a>
               </div>
-              <p>Force the collection to re-sort itself. You don’t need to call this under
-normal circumstances, as the set will maintain sort order as each item
-is added.</p>
+              <p>强制collection重排序。通常情况下不需要调用此方法，因为在添加新的元素时set方法会维护它的顺序。</p>
 
             </div>
             
@@ -2549,7 +2545,7 @@ is added.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-131">&#182;</a>
               </div>
-              <p>Run sort based on type of <code>comparator</code>.</p>
+              <p>根据 <code>comparator</code>的类型排序。</p>
 
             </div>
             
@@ -2571,7 +2567,7 @@ is added.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-132">&#182;</a>
               </div>
-              <p>Pluck an attribute from each model in the collection.</p>
+              <p>从集合中的每个模型中获取一个属性。</p>
 
             </div>
             
@@ -2588,9 +2584,8 @@ is added.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-133">&#182;</a>
               </div>
-              <p>Fetch the default set of models for this collection, resetting the
-collection when they arrive. If <code>reset: true</code> is passed, the response
-data will be passed through the <code>reset</code> method instead of <code>set</code>.</p>
+              <p>为collection抓取默认的model的集合，在数据返回后重置collection。如果传入<code>reset: true</code>，
+响应数据会传入<code>reset</code>方法而不是<code>set</code>方法。</p>
 
             </div>
             
@@ -2617,9 +2612,8 @@ data will be passed through the <code>reset</code> method instead of <code>set</
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-134">&#182;</a>
               </div>
-              <p>Create a new instance of a model in this collection. Add the model to the
-collection immediately, unless <code>wait: true</code> is passed, in which case we
-wait for the server to agree.</p>
+              <p>在collection中创建一个新的model实例。除非传入<code>wait: true</code>以等待服务器响应，
+否则model会马上添加到collection中，</p>
 
             </div>
             
@@ -2648,8 +2642,8 @@ wait for the server to agree.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-135">&#182;</a>
               </div>
-              <p><strong>parse</strong> converts a response into a list of models to be added to the
-collection. The default implementation is just to pass it through.</p>
+              <p><strong>parse</strong>将一个服务器的响应（response）转换为一个model的列表，之后加入collection。
+默认实现是直接返回response。</p>
 
             </div>
             
@@ -2666,7 +2660,7 @@ collection. The default implementation is just to pass it through.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-136">&#182;</a>
               </div>
-              <p>Create a new collection with an identical list of models as this one.</p>
+              <p>创建一个新集合，与当前集合的model列表相同。</p>
 
             </div>
             
@@ -2686,7 +2680,7 @@ collection. The default implementation is just to pass it through.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-137">&#182;</a>
               </div>
-              <p>Define how to uniquely identify models in the collection.</p>
+              <p>定义在collection中如何唯一标识一个model。</p>
 
             </div>
             
@@ -2703,8 +2697,7 @@ collection. The default implementation is just to pass it through.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-138">&#182;</a>
               </div>
-              <p>Private method to reset all internal state. Called when the collection
-is first initialized or reset.</p>
+              <p>私有方法，用来重置所有内部状态。collection首次初始化或重置时调用。</p>
 
             </div>
             
@@ -2723,8 +2716,7 @@ is first initialized or reset.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-139">&#182;</a>
               </div>
-              <p>Prepare a hash of attributes (or other model) to be added to this
-collection.</p>
+              <p>准备将一个属性的hash(或别的model)加入到collection中。</p>
 
             </div>
             
@@ -2860,10 +2852,8 @@ the purposes of adding to the collection.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-145">&#182;</a>
               </div>
-              <p>Internal method called every time a model in the set fires an event.
-Sets need to update their indexes when models change ids. All other
-events simply proxy through. “add” and “remove” events that originate
-in other collections are ignored.</p>
+              <p>内部方法，每次set方法中的model触发事件时都会调用。在model改变id后，集合中的元素会更新索引。
+所有其它的事件都是代理的此方法。会忽略其它集合中触发的“add”和“remove”事件。</p>
 
             </div>
             
@@ -2894,9 +2884,7 @@ in other collections are ignored.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-146">&#182;</a>
               </div>
-              <p>Underscore methods that we want to implement on the Collection.
-90% of the core usefulness of Backbone Collections is actually implemented
-right here:</p>
+              <p>在Collection中我们需要实现的Underscore的方法。Backbone Collections中9%的个性方法事实上都是在这实现的。</p>
 
             </div>
             
@@ -2918,7 +2906,7 @@ right here:</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-147">&#182;</a>
               </div>
-              <p>Mix in each Underscore method as a proxy to <code>Collection#models</code>.</p>
+              <p>混入每个Underscore的方法，作为<code>Collection#models</code>的代理。</p>
 
             </div>
             

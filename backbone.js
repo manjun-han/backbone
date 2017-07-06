@@ -947,27 +947,23 @@
       return this.get(obj) != null;
     },
 
-    // Get the model at the given index.
+    // 根据索引获取model。
     at: function(index) {
       if (index < 0) index += this.length;
       return this.models[index];
     },
 
-    // Return models with matching attributes. Useful for simple cases of
-    // `filter`.
+    // 返回与给定属性匹配的models。用来当做`filter`比较有用。
     where: function(attrs, first) {
       return this[first ? 'find' : 'filter'](attrs);
     },
 
-    // Return the first model with matching attributes. Useful for simple cases
-    // of `find`.
+    // 返回第一个与给定属性匹配的model。用来当做`find`比较有用。
     findWhere: function(attrs) {
       return this.where(attrs, true);
     },
 
-    // Force the collection to re-sort itself. You don't need to call this under
-    // normal circumstances, as the set will maintain sort order as each item
-    // is added.
+    // 强制collection重排序。通常情况下不需要调用此方法，因为在添加新的元素时set方法会维护它的顺序。
     sort: function(options) {
       var comparator = this.comparator;
       if (!comparator) throw new Error('Cannot sort a set without a comparator');
@@ -976,7 +972,7 @@
       var length = comparator.length;
       if (_.isFunction(comparator)) comparator = _.bind(comparator, this);
 
-      // Run sort based on type of `comparator`.
+      // 根据 `comparator`的类型排序。
       if (length === 1 || _.isString(comparator)) {
         this.models = this.sortBy(comparator);
       } else {
@@ -986,14 +982,13 @@
       return this;
     },
 
-    // Pluck an attribute from each model in the collection.
+    // 从集合中的每个模型中获取一个属性。
     pluck: function(attr) {
       return this.map(attr + '');
     },
 
-    // Fetch the default set of models for this collection, resetting the
-    // collection when they arrive. If `reset: true` is passed, the response
-    // data will be passed through the `reset` method instead of `set`.
+    // 为collection抓取默认的model的集合，在数据返回后重置collection。如果传入`reset: true`，
+    // 响应数据会传入`reset`方法而不是`set`方法。
     fetch: function(options) {
       options = _.extend({parse: true}, options);
       var success = options.success;
@@ -1008,9 +1003,9 @@
       return this.sync('read', this, options);
     },
 
-    // Create a new instance of a model in this collection. Add the model to the
-    // collection immediately, unless `wait: true` is passed, in which case we
-    // wait for the server to agree.
+    // 在collection中创建一个新的model实例。除非传入`wait: true`以等待服务器响应，
+    // 否则model会马上添加到collection中，
+    //
     create: function(model, options) {
       options = options ? _.clone(options) : {};
       var wait = options.wait;
@@ -1027,13 +1022,13 @@
       return model;
     },
 
-    // **parse** converts a response into a list of models to be added to the
-    // collection. The default implementation is just to pass it through.
+    // **parse**将一个服务器的响应（response）转换为一个model的列表，之后加入collection。
+    // 默认实现是直接返回response。
     parse: function(resp, options) {
       return resp;
     },
 
-    // Create a new collection with an identical list of models as this one.
+    // 创建一个新集合，与当前集合的model列表相同。
     clone: function() {
       return new this.constructor(this.models, {
         model: this.model,
@@ -1041,21 +1036,19 @@
       });
     },
 
-    // Define how to uniquely identify models in the collection.
+    // 定义在collection中如何唯一标识一个model。
     modelId: function(attrs) {
       return attrs[this.model.prototype.idAttribute || 'id'];
     },
 
-    // Private method to reset all internal state. Called when the collection
-    // is first initialized or reset.
+    // 私有方法，用来重置所有内部状态。collection首次初始化或重置时调用。
     _reset: function() {
       this.length = 0;
       this.models = [];
       this._byId  = {};
     },
 
-    // Prepare a hash of attributes (or other model) to be added to this
-    // collection.
+    // 准备将一个属性的hash(或别的model)加入到collection中。
     _prepareModel: function(attrs, options) {
       if (this._isModel(attrs)) {
         if (!attrs.collection) attrs.collection = this;
@@ -1119,10 +1112,10 @@
       model.off('all', this._onModelEvent, this);
     },
 
-    // Internal method called every time a model in the set fires an event.
-    // Sets need to update their indexes when models change ids. All other
-    // events simply proxy through. "add" and "remove" events that originate
-    // in other collections are ignored.
+    //
+    // 内部方法，每次set方法中的model触发事件时都会调用。在model改变id后，集合中的元素会更新索引。
+    // 所有其它的事件都是代理的此方法。会忽略其它集合中触发的“add”和“remove”事件。
+    //
     _onModelEvent: function(event, model, collection, options) {
       if (model) {
         if ((event === 'add' || event === 'remove') && collection !== this) return;
@@ -1141,9 +1134,7 @@
 
   });
 
-  // Underscore methods that we want to implement on the Collection.
-  // 90% of the core usefulness of Backbone Collections is actually implemented
-  // right here:
+  // 在Collection中我们需要实现的Underscore的方法。Backbone Collections中9%的个性方法事实上都是在这实现的。
   var collectionMethods = {forEach: 3, each: 3, map: 3, collect: 3, reduce: 0,
       foldl: 0, inject: 0, reduceRight: 0, foldr: 0, find: 3, detect: 3, filter: 3,
       select: 3, reject: 3, every: 3, all: 3, some: 3, any: 3, include: 3, includes: 3,
@@ -1153,7 +1144,7 @@
       isEmpty: 1, chain: 1, sample: 3, partition: 3, groupBy: 3, countBy: 3,
       sortBy: 3, indexBy: 3, findIndex: 3, findLastIndex: 3};
 
-  // Mix in each Underscore method as a proxy to `Collection#models`.
+  // 混入每个Underscore的方法，作为`Collection#models`的代理。
   addUnderscoreMethods(Collection, collectionMethods, 'models');
 
   // Backbone.View
