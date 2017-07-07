@@ -578,23 +578,20 @@
       options = _.extend({validate: true, parse: true}, options);
       var wait = options.wait;
 
-      // If we're not waiting and attributes exist, save acts as
-      // `set(attr).save(null, opts)` with validation. Otherwise, check if
-      // the model will be valid when the attributes, if any, are set.
-      // 如果我们
+      // 如果我们在等待，且属性已存在，save操作等价于带校验的`set(attr).save(null, opts)`。否则，
+      // 检测在设置属性时，需要检查model是否是合法的。
       if (attrs && !wait) {
         if (!this.set(attrs, options)) return false;
       } else if (!this._validate(attrs, options)) {
         return false;
       }
 
-      // After a successful server-side save, the client is (optionally)
-      // updated with the server-side state.
+      // 在成功保存到服务器端后，客户端需要更新到服务器端的状态（可选的）。
       var model = this;
       var success = options.success;
       var attributes = this.attributes;
       options.success = function(resp) {
-        // Ensure attributes are restored during synchronous saves.
+        // 保证在同步保存过程中存储属性。
         model.attributes = attributes;
         var serverAttrs = options.parse ? model.parse(resp, options) : resp;
         if (wait) serverAttrs = _.extend({}, attrs, serverAttrs);
@@ -604,14 +601,14 @@
       };
       wrapError(this, options);
 
-      // Set temporary attributes if `{wait: true}` to properly find new ids.
+      // 如果`{wait: true}`，就设置临时属性来寻找新的ids。
       if (attrs && wait) this.attributes = _.extend({}, attributes, attrs);
 
       var method = this.isNew() ? 'create' : (options.patch ? 'patch' : 'update');
       if (method === 'patch' && !options.attrs) options.attrs = attrs;
       var xhr = this.sync(method, this, options);
 
-      // Restore attributes.
+      // 恢复属性。
       this.attributes = attributes;
 
       return xhr;
@@ -772,10 +769,8 @@
       return singular ? removed[0] : removed;
     },
 
-    // Update a collection by `set`-ing a new list of models, adding new ones,
-    // removing models that are no longer present, and merging models that
-    // already exist in the collection, as necessary. Similar to **Model#set**,
-    // the core operation for updating the data contained by the collection.
+    // 通过设置一个新的model列表来更新一个collection，按需添加新的，删除不存在的，合并collection中
+    // 已存在的。类似于**Model#set**，是用来更新collection中数据的核心操作。
     set: function(models, options) {
       if (models == null) return;
 
@@ -806,14 +801,12 @@
       var sortable = this.comparator && at == null && options.sort !== false;
       var sortAttr = _.isString(this.comparator) ? this.comparator : null;
 
-      // Turn bare objects into model references, and prevent invalid models
-      // from being added.
+      // 将裸对象转换为model的引用，阻止添加不合法的model。
       var model, i;
       for (i = 0; i < models.length; i++) {
         model = models[i];
 
-        // If a duplicate is found, prevent it from being added and
-        // optionally merge it into the existing model.
+        // 如果发现了一个重复的model，就不在添加新的了，而是选择性的将它合并到这个已存在的model上。
         var existing = this.get(model);
         if (existing) {
           if (merge && model !== existing) {
@@ -829,7 +822,7 @@
           }
           models[i] = existing;
 
-        // If this is a new, valid model, push it to the `toAdd` list.
+        // 如果是一个新的合法的model，就将它push到`toAdd`列表中去。
         } else if (add) {
           model = models[i] = this._prepareModel(model, options);
           if (model) {
@@ -841,7 +834,7 @@
         }
       }
 
-      // Remove stale models.
+      // 删除就的models。
       if (remove) {
         for (i = 0; i < this.length; i++) {
           model = this.models[i];
@@ -850,7 +843,7 @@
         if (toRemove.length) this._removeModels(toRemove, options);
       }
 
-      // See if sorting is needed, update `length` and splice in new models.
+      // 查看是否需要排序，更新`length` 属性，插入新的models。
       var orderChanged = false;
       var replace = !sortable && add && remove;
       if (set.length && replace) {
@@ -866,10 +859,10 @@
         this.length = this.models.length;
       }
 
-      // Silently sort the collection if appropriate.
+      // 如何合适的话，无声的将collection排序。
       if (sort) this.sort({silent: true});
 
-      // Unless silenced, it's time to fire all appropriate add/sort/update events.
+      // 如果不是无声的更新，是时候触发所有合适的add/sort/update事件了。
       if (!options.silent) {
         for (i = 0; i < toAdd.length; i++) {
           if (at != null) options.index = at + i;
@@ -887,14 +880,12 @@
         }
       }
 
-      // Return the added (or merged) model (or models).
+      // 返回新增的（或合并后的）model（或models）。
       return singular ? models[0] : models;
     },
 
-    // When you have more items than you want to add or remove individually,
-    // you can reset the entire set with a new list of models, without firing
-    // any granular `add` or `remove` events. Fires `reset` when finished.
-    // Useful for bulk operations and optimizations.
+    // 在你有许多需要单独添加或删除的元素时，你可以使用一个新的model列表重置整个集合，
+    // 这不会细粒度的触发`add`和`remove`事件。在重置完成后仅触发一个`resets`事件。
     reset: function(models, options) {
       options = options ? _.clone(options) : {};
       for (var i = 0; i < this.models.length; i++) {
@@ -1089,8 +1080,7 @@
       return removed;
     },
 
-    // Method for checking whether an object should be considered a model for
-    // the purposes of adding to the collection.
+    // 用来检查一个对象是否是Model类型，用来添加到collection中。
     _isModel: function(model) {
       return model instanceof Model;
     },
@@ -1147,19 +1137,15 @@
   // 混入每个Underscore的方法，作为`Collection#models`的代理。
   addUnderscoreMethods(Collection, collectionMethods, 'models');
 
-  // Backbone.View
+  // 试图 - Backbone.View
   // -------------
 
-  // Backbone Views are almost more convention than they are actual code. A View
-  // is simply a JavaScript object that represents a logical chunk of UI in the
-  // DOM. This might be a single item, an entire list, a sidebar or panel, or
-  // even the surrounding frame which wraps your whole app. Defining a chunk of
-  // UI as a **View** allows you to define your DOM events declaratively, without
-  // having to worry about render order ... and makes it easy for the view to
-  // react to specific changes in the state of your models.
+  // Backbone的视图比起它们的代码来，更加约定俗称化。一个视图就是一个简单的JavaScript对象，它代表了
+  // DOM中的一块带有逻辑的UI。可能是单个条目，一整个列表，一个侧栏或面板，更或者是囊括你整个应用的周围的框架。
+  // 将一块UI定义为一个**View**，允许你以声明式方式定义DOM的事件，而不用担心渲染次序...让视图能够更容易通过特殊的
+  // 事件来响应model状态的变化。
 
-  // Creating a Backbone.View creates its initial element outside of the DOM,
-  // if an existing element is not provided...
+  // 创建一个Backbone.View，如果未提供一个已存在的元素，那么它会在DOM之外创建它的初始化元素。
   var View = Backbone.View = function(options) {
     this.cid = _.uniqueId('view');
     _.extend(this, _.pick(options, viewOptions));
@@ -1167,52 +1153,45 @@
     this.initialize.apply(this, arguments);
   };
 
-  // Cached regex to split keys for `delegate`.
+  // 缓存的正则表达式，用来分割`delegate`的关键字。
   var delegateEventSplitter = /^(\S+)\s*(.*)$/;
 
-  // List of view options to be set as properties.
+  // view的选项列表，用来当做属性设置。
   var viewOptions = ['model', 'collection', 'el', 'id', 'attributes', 'className', 'tagName', 'events'];
 
-  // Set up all inheritable **Backbone.View** properties and methods.
+  // 设置所有可继承的 **Backbone.View**的属性和方法。
   _.extend(View.prototype, Events, {
 
-    // The default `tagName` of a View's element is `"div"`.
+    // View的element的默认`tagName`是`"div"`。
     tagName: 'div',
 
-    // jQuery delegate for element lookup, scoped to DOM elements within the
-    // current view. This should be preferred to global lookups where possible.
+    // jQuery的代理，用来在当前视图包含的DOM元素中查找元素。比起全局查找来，这种方式更优。
     $: function(selector) {
       return this.$el.find(selector);
     },
 
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
+    // Initialize默认是个空函数。用你自己的初始化逻辑覆盖它。
     initialize: function(){},
 
-    // **render** is the core function that your view should override, in order
-    // to populate its element (`this.el`), with the appropriate HTML. The
-    // convention is for **render** to always return `this`.
+    // **render**是view应该覆盖的核心函数，为的是向它的元素(`this.el`)填充合适的HTML。
+    // **render**方法约定总要返回`this`.
     render: function() {
       return this;
     },
 
-    // Remove this view by taking the element out of the DOM, and removing any
-    // applicable Backbone.Events listeners.
+    // 将视图的元素从DOM中移除，然后移除任何Backbone.Event的事件监听，这样便将View移除掉了。
     remove: function() {
       this._removeElement();
       this.stopListening();
       return this;
     },
 
-    // Remove this view's element from the document and all event listeners
-    // attached to it. Exposed for subclasses using an alternative DOM
-    // manipulation API.
+    // 从文档中删除视图的元素以及所有添加到元素上的事件监听。子类可以使用其它的DOM操作的API。
     _removeElement: function() {
       this.$el.remove();
     },
 
-    // Change the view's element (`this.el` property) and re-delegate the
-    // view's events on the new element.
+    // 更改视图的元素(`this.el`属性）并且在新元素上重新代理视图的事件。
     setElement: function(element) {
       this.undelegateEvents();
       this._setElement(element);
@@ -1220,29 +1199,23 @@
       return this;
     },
 
-    // Creates the `this.el` and `this.$el` references for this view using the
-    // given `el`. `el` can be a CSS selector or an HTML string, a jQuery
-    // context or an element. Subclasses can override this to utilize an
-    // alternative DOM manipulation API and are only required to set the
-    // `this.el` property.
+    // 使用给定的`el`在视图上创建 `this.el`和 `this.$el`引用。`el`属性可以是CSS选择器，或者是
+    // 一段HTML字符串，一个jQuery的上下文或一个DOM元素。子类可以覆盖此方法，来利用别的DOM操作的API来设置
+    // `this.el`属性。
     _setElement: function(el) {
       this.$el = el instanceof Backbone.$ ? el : Backbone.$(el);
       this.el = this.$el[0];
     },
 
-    // Set callbacks, where `this.events` is a hash of
-    //
-    // *{"event selector": "callback"}*
-    //
+    // 设置回调，`this.events`是一个形如以下类型的hash对。
+    //    *{"event selector": "callback"}*
     //     {
     //       'mousedown .title':  'edit',
     //       'click .button':     'save',
     //       'click .open':       function(e) { ... }
     //     }
-    //
-    // pairs. Callbacks will be bound to the view, with `this` set properly.
-    // Uses event delegation for efficiency.
-    // Omitting the selector binds the event to `this.el`.
+    // 回调函数会绑定在视图对象上，并且会正确的设置`this`引用。使用时间代理为的是效率。
+    // 请忽略掉用来绑定时间到`this.el`时使用的选择器。
     delegateEvents: function(events) {
       events || (events = _.result(this, 'events'));
       if (!events) return this;
@@ -1257,39 +1230,35 @@
       return this;
     },
 
-    // Add a single event listener to the view's element (or a child element
-    // using `selector`). This only works for delegate-able events: not `focus`,
-    // `blur`, and not `change`, `submit`, and `reset` in Internet Explorer.
+    //
+    // 添加单个事件监听到视图的DOM元素上（或者是使用`selector`指定的子元素上）。这只能在可代理的事件上工作：
+    // `focus`，`blur`事件不行，IE下`change`, `submit`, 和 `reset`事件也不行。
+    //
     delegate: function(eventName, selector, listener) {
       this.$el.on(eventName + '.delegateEvents' + this.cid, selector, listener);
       return this;
     },
 
-    // Clears all callbacks previously bound to the view by `delegateEvents`.
-    // You usually don't need to use this, but may wish to if you have multiple
-    // Backbone views attached to the same DOM element.
+    // 清除之前所有通过`delegateEvents`绑定到视图上的回调。你可能不需要使用本方法，但如果你有多个Backbone的
+    // 视图添加到了同一个DOM元素上，或许你会用到它。
     undelegateEvents: function() {
       if (this.$el) this.$el.off('.delegateEvents' + this.cid);
       return this;
     },
 
-    // A finer-grained `undelegateEvents` for removing a single delegated event.
-    // `selector` and `listener` are both optional.
+    // 一个细粒度的`undelegateEvents`方法，用来移除单个代理事件。`selector` 和 `listener`都是可选的。
     undelegate: function(eventName, selector, listener) {
       this.$el.off(eventName + '.delegateEvents' + this.cid, selector, listener);
       return this;
     },
 
-    // Produces a DOM element to be assigned to your view. Exposed for
-    // subclasses using an alternative DOM manipulation API.
+    // 生成一个可以赋给视图的DOM元素。子类可以覆盖此方法，已使用别的DOM操作的API。
     _createElement: function(tagName) {
       return document.createElement(tagName);
     },
 
-    // Ensure that the View has a DOM element to render into.
-    // If `this.el` is a string, pass it through `$()`, take the first
-    // matching element, and re-assign it to `el`. Otherwise, create
-    // an element from the `id`, `className` and `tagName` properties.
+    // 保证视图有一个可渲染的DOM元素。如果`this.el`是一个字符串，它会被传入给`$()`，之后
+    // 拿到第一个匹配的元素，重新赋给`el`属性。否则，就根据 `id`, `className` 和 `tagName`属性创建一个新的元素。
     _ensureElement: function() {
       if (!this.el) {
         var attrs = _.extend({}, _.result(this, 'attributes'));
@@ -1302,8 +1271,7 @@
       }
     },
 
-    // Set attributes from a hash on this view's element.  Exposed for
-    // subclasses using an alternative DOM manipulation API.
+    // 将一个hash对象设置到视图元素的属性上。子类可以使用别的DOM操作的API覆盖本方法。
     _setAttributes: function(attributes) {
       this.$el.attr(attributes);
     }
@@ -1808,35 +1776,32 @@
   // Create the default Backbone.history.
   Backbone.history = new History;
 
-  // Helpers
+  // 辅助工具 - Helpers
   // -------
 
-  // Helper function to correctly set up the prototype chain for subclasses.
-  // Similar to `goog.inherits`, but uses a hash of prototype properties and
-  // class properties to be extended.
+
+  // 辅助函数，用来正确的设置子类的原型链。类似于`goog.inherits`，
+  // 但使用的是原型属性的hash和class属性的hash来进行继承。
   var extend = function(protoProps, staticProps) {
     var parent = this;
     var child;
 
-    // The constructor function for the new subclass is either defined by you
-    // (the "constructor" property in your `extend` definition), or defaulted
-    // by us to simply call the parent constructor.
+    // 新的子类的构造器函数要么是你自己定义的（`extend`调用时传入的"constructor"属性），要么
+    // 就是有我们定义的类，它只简单的调用了父类的构造器。
     if (protoProps && _.has(protoProps, 'constructor')) {
       child = protoProps.constructor;
     } else {
       child = function(){ return parent.apply(this, arguments); };
     }
 
-    // Add static properties to the constructor function, if supplied.
+    // 如果提供了静态属性，那么久添加到构造器函数上。
     _.extend(child, parent, staticProps);
 
-    // Set the prototype chain to inherit from `parent`, without calling
-    // `parent`'s constructor function and add the prototype properties.
+    // 在不调用`parent`的构造器函数以及没有添加原型属性的情况下，设置原型链以继承`parent`。
     child.prototype = _.create(parent.prototype, protoProps);
     child.prototype.constructor = child;
 
-    // Set a convenience property in case the parent's prototype is needed
-    // later.
+    // 设置一个便捷的属性，以防自后需要使用父类的原型对象。
     child.__super__ = parent.prototype;
 
     return child;

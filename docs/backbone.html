@@ -1591,10 +1591,8 @@ object.trigger(<span class="hljs-string">'expand'</span>);
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-84">&#182;</a>
               </div>
-              <p>If we’re not waiting and attributes exist, save acts as
-<code>set(attr).save(null, opts)</code> with validation. Otherwise, check if
-the model will be valid when the attributes, if any, are set.
-如果我们</p>
+              <p>如果我们在等待，且属性已存在，save操作等价于带校验的<code>set(attr).save(null, opts)</code>。否则，
+检测在设置属性时，需要检查model是否是合法的。</p>
 
             </div>
             
@@ -1613,8 +1611,7 @@ the model will be valid when the attributes, if any, are set.
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-85">&#182;</a>
               </div>
-              <p>After a successful server-side save, the client is (optionally)
-updated with the server-side state.</p>
+              <p>在成功保存到服务器端后，客户端需要更新到服务器端的状态（可选的）。</p>
 
             </div>
             
@@ -1632,7 +1629,7 @@ updated with the server-side state.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-86">&#182;</a>
               </div>
-              <p>Ensure attributes are restored during synchronous saves.</p>
+              <p>保证在同步保存过程中存储属性。</p>
 
             </div>
             
@@ -1654,7 +1651,7 @@ updated with the server-side state.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-87">&#182;</a>
               </div>
-              <p>Set temporary attributes if <code>{wait: true}</code> to properly find new ids.</p>
+              <p>如果<code>{wait: true}</code>，就设置临时属性来寻找新的ids。</p>
 
             </div>
             
@@ -1673,7 +1670,7 @@ updated with the server-side state.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-88">&#182;</a>
               </div>
-              <p>Restore attributes.</p>
+              <p>恢复属性。</p>
 
             </div>
             
@@ -2093,10 +2090,8 @@ Collection维护了它们model的索引，它们都是有序的，并且可以�
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-110">&#182;</a>
               </div>
-              <p>Update a collection by <code>set</code>-ing a new list of models, adding new ones,
-removing models that are no longer present, and merging models that
-already exist in the collection, as necessary. Similar to <strong>Model#set</strong>,
-the core operation for updating the data contained by the collection.</p>
+              <p>通过设置一个新的model列表来更新一个collection，按需添加新的，删除不存在的，合并collection中
+已存在的。类似于<strong>Model#set</strong>，是用来更新collection中数据的核心操作。</p>
 
             </div>
             
@@ -2139,8 +2134,7 @@ the core operation for updating the data contained by the collection.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-111">&#182;</a>
               </div>
-              <p>Turn bare objects into model references, and prevent invalid models
-from being added.</p>
+              <p>将裸对象转换为model的引用，阻止添加不合法的model。</p>
 
             </div>
             
@@ -2157,8 +2151,7 @@ from being added.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-112">&#182;</a>
               </div>
-              <p>If a duplicate is found, prevent it from being added and
-optionally merge it into the existing model.</p>
+              <p>如果发现了一个重复的model，就不在添加新的了，而是选择性的将它合并到这个已存在的model上。</p>
 
             </div>
             
@@ -2186,7 +2179,7 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-113">&#182;</a>
               </div>
-              <p>If this is a new, valid model, push it to the <code>toAdd</code> list.</p>
+              <p>如果是一个新的合法的model，就将它push到<code>toAdd</code>列表中去。</p>
 
             </div>
             
@@ -2210,7 +2203,7 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-114">&#182;</a>
               </div>
-              <p>Remove stale models.</p>
+              <p>删除就的models。</p>
 
             </div>
             
@@ -2231,7 +2224,7 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-115">&#182;</a>
               </div>
-              <p>See if sorting is needed, update <code>length</code> and splice in new models.</p>
+              <p>查看是否需要排序，更新<code>length</code> 属性，插入新的models。</p>
 
             </div>
             
@@ -2259,7 +2252,7 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-116">&#182;</a>
               </div>
-              <p>Silently sort the collection if appropriate.</p>
+              <p>如何合适的话，无声的将collection排序。</p>
 
             </div>
             
@@ -2274,7 +2267,7 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-117">&#182;</a>
               </div>
-              <p>Unless silenced, it’s time to fire all appropriate add/sort/update events.</p>
+              <p>如果不是无声的更新，是时候触发所有合适的add/sort/update事件了。</p>
 
             </div>
             
@@ -2304,7 +2297,7 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-118">&#182;</a>
               </div>
-              <p>Return the added (or merged) model (or models).</p>
+              <p>返回新增的（或合并后的）model（或models）。</p>
 
             </div>
             
@@ -2320,10 +2313,8 @@ optionally merge it into the existing model.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-119">&#182;</a>
               </div>
-              <p>When you have more items than you want to add or remove individually,
-you can reset the entire set with a new list of models, without firing
-any granular <code>add</code> or <code>remove</code> events. Fires <code>reset</code> when finished.
-Useful for bulk operations and optimizations.</p>
+              <p>在你有许多需要单独添加或删除的元素时，你可以使用一个新的model列表重置整个集合，
+这不会细粒度的触发<code>add</code>和<code>remove</code>事件。在重置完成后仅触发一个<code>resets</code>事件。</p>
 
             </div>
             
@@ -2793,8 +2784,7 @@ Useful for bulk operations and optimizations.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-142">&#182;</a>
               </div>
-              <p>Method for checking whether an object should be considered a model for
-the purposes of adding to the collection.</p>
+              <p>用来检查一个对象是否是Model类型，用来添加到collection中。</p>
 
             </div>
             
@@ -2921,7 +2911,7 @@ the purposes of adding to the collection.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-148">&#182;</a>
               </div>
-              <h2 id="backbone-view">Backbone.View</h2>
+              <h2 id="-backbone-view">试图 - Backbone.View</h2>
 
             </div>
             
@@ -2946,13 +2936,10 @@ the purposes of adding to the collection.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-150">&#182;</a>
               </div>
-              <p>Backbone Views are almost more convention than they are actual code. A View
-is simply a JavaScript object that represents a logical chunk of UI in the
-DOM. This might be a single item, an entire list, a sidebar or panel, or
-even the surrounding frame which wraps your whole app. Defining a chunk of
-UI as a <strong>View</strong> allows you to define your DOM events declaratively, without
-having to worry about render order … and makes it easy for the view to
-react to specific changes in the state of your models.</p>
+              <p>Backbone的视图比起它们的代码来，更加约定俗称化。一个视图就是一个简单的JavaScript对象，它代表了
+DOM中的一块带有逻辑的UI。可能是单个条目，一整个列表，一个侧栏或面板，更或者是囊括你整个应用的周围的框架。
+将一块UI定义为一个<strong>View</strong>，允许你以声明式方式定义DOM的事件，而不用担心渲染次序…让视图能够更容易通过特殊的
+事件来响应model状态的变化。</p>
 
             </div>
             
@@ -2965,8 +2952,7 @@ react to specific changes in the state of your models.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-151">&#182;</a>
               </div>
-              <p>Creating a Backbone.View creates its initial element outside of the DOM,
-if an existing element is not provided…</p>
+              <p>创建一个Backbone.View，如果未提供一个已存在的元素，那么它会在DOM之外创建它的初始化元素。</p>
 
             </div>
             
@@ -2986,7 +2972,7 @@ if an existing element is not provided…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-152">&#182;</a>
               </div>
-              <p>Cached regex to split keys for <code>delegate</code>.</p>
+              <p>缓存的正则表达式，用来分割<code>delegate</code>的关键字。</p>
 
             </div>
             
@@ -3001,7 +2987,7 @@ if an existing element is not provided…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-153">&#182;</a>
               </div>
-              <p>List of view options to be set as properties.</p>
+              <p>view的选项列表，用来当做属性设置。</p>
 
             </div>
             
@@ -3016,7 +3002,7 @@ if an existing element is not provided…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-154">&#182;</a>
               </div>
-              <p>Set up all inheritable <strong>Backbone.View</strong> properties and methods.</p>
+              <p>设置所有可继承的 <strong>Backbone.View</strong>的属性和方法。</p>
 
             </div>
             
@@ -3031,7 +3017,7 @@ if an existing element is not provided…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-155">&#182;</a>
               </div>
-              <p>The default <code>tagName</code> of a View’s element is <code>&quot;div&quot;</code>.</p>
+              <p>View的element的默认<code>tagName</code>是<code>&quot;div&quot;</code>。</p>
 
             </div>
             
@@ -3046,8 +3032,7 @@ if an existing element is not provided…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-156">&#182;</a>
               </div>
-              <p>jQuery delegate for element lookup, scoped to DOM elements within the
-current view. This should be preferred to global lookups where possible.</p>
+              <p>jQuery的代理，用来在当前视图包含的DOM元素中查找元素。比起全局查找来，这种方式更优。</p>
 
             </div>
             
@@ -3064,8 +3049,7 @@ current view. This should be preferred to global lookups where possible.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-157">&#182;</a>
               </div>
-              <p>Initialize is an empty function by default. Override it with your own
-initialization logic.</p>
+              <p>Initialize默认是个空函数。用你自己的初始化逻辑覆盖它。</p>
 
             </div>
             
@@ -3080,9 +3064,8 @@ initialization logic.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-158">&#182;</a>
               </div>
-              <p><strong>render</strong> is the core function that your view should override, in order
-to populate its element (<code>this.el</code>), with the appropriate HTML. The
-convention is for <strong>render</strong> to always return <code>this</code>.</p>
+              <p><strong>render</strong>是view应该覆盖的核心函数，为的是向它的元素(<code>this.el</code>)填充合适的HTML。
+<strong>render</strong>方法约定总要返回<code>this</code>.</p>
 
             </div>
             
@@ -3099,8 +3082,7 @@ convention is for <strong>render</strong> to always return <code>this</code>.</p
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-159">&#182;</a>
               </div>
-              <p>Remove this view by taking the element out of the DOM, and removing any
-applicable Backbone.Events listeners.</p>
+              <p>将视图的元素从DOM中移除，然后移除任何Backbone.Event的事件监听，这样便将View移除掉了。</p>
 
             </div>
             
@@ -3119,9 +3101,7 @@ applicable Backbone.Events listeners.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-160">&#182;</a>
               </div>
-              <p>Remove this view’s element from the document and all event listeners
-attached to it. Exposed for subclasses using an alternative DOM
-manipulation API.</p>
+              <p>从文档中删除视图的元素以及所有添加到元素上的事件监听。子类可以使用其它的DOM操作的API。</p>
 
             </div>
             
@@ -3138,8 +3118,7 @@ manipulation API.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-161">&#182;</a>
               </div>
-              <p>Change the view’s element (<code>this.el</code> property) and re-delegate the
-view’s events on the new element.</p>
+              <p>更改视图的元素(<code>this.el</code>属性）并且在新元素上重新代理视图的事件。</p>
 
             </div>
             
@@ -3159,11 +3138,9 @@ view’s events on the new element.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-162">&#182;</a>
               </div>
-              <p>Creates the <code>this.el</code> and <code>this.$el</code> references for this view using the
-given <code>el</code>. <code>el</code> can be a CSS selector or an HTML string, a jQuery
-context or an element. Subclasses can override this to utilize an
-alternative DOM manipulation API and are only required to set the
-<code>this.el</code> property.</p>
+              <p>使用给定的<code>el</code>在视图上创建 <code>this.el</code>和 <code>this.$el</code>引用。<code>el</code>属性可以是CSS选择器，或者是
+一段HTML字符串，一个jQuery的上下文或一个DOM元素。子类可以覆盖此方法，来利用别的DOM操作的API来设置
+<code>this.el</code>属性。</p>
 
             </div>
             
@@ -3181,16 +3158,15 @@ alternative DOM manipulation API and are only required to set the
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-163">&#182;</a>
               </div>
-              <p>Set callbacks, where <code>this.events</code> is a hash of</p>
-<p><em>{“event selector”: “callback”}</em></p>
-<pre><code>{
-  <span class="hljs-string">'mousedown .title'</span>:  <span class="hljs-string">'edit'</span>,
-  <span class="hljs-string">'click .button'</span>:     <span class="hljs-string">'save'</span>,
-  <span class="hljs-string">'click .open'</span>:       <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">e</span>) </span>{ ... }
-}
-</code></pre><p>pairs. Callbacks will be bound to the view, with <code>this</code> set properly.
-Uses event delegation for efficiency.
-Omitting the selector binds the event to <code>this.el</code>.</p>
+              <p>设置回调，<code>this.events</code>是一个形如以下类型的hash对。
+   <em>{“event selector”: “callback”}</em>
+    {
+      ‘mousedown .title’:  ‘edit’,
+      ‘click .button’:     ‘save’,
+      ‘click .open’:       function(e) { … }
+    }
+回调函数会绑定在视图对象上，并且会正确的设置<code>this</code>引用。使用时间代理为的是效率。
+请忽略掉用来绑定时间到<code>this.el</code>时使用的选择器。</p>
 
             </div>
             
@@ -3217,9 +3193,8 @@ Omitting the selector binds the event to <code>this.el</code>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-164">&#182;</a>
               </div>
-              <p>Add a single event listener to the view’s element (or a child element
-using <code>selector</code>). This only works for delegate-able events: not <code>focus</code>,
-<code>blur</code>, and not <code>change</code>, <code>submit</code>, and <code>reset</code> in Internet Explorer.</p>
+              <p>添加单个事件监听到视图的DOM元素上（或者是使用<code>selector</code>指定的子元素上）。这只能在可代理的事件上工作：
+<code>focus</code>，<code>blur</code>事件不行，IE下<code>change</code>, <code>submit</code>, 和 <code>reset</code>事件也不行。</p>
 
             </div>
             
@@ -3237,9 +3212,8 @@ using <code>selector</code>). This only works for delegate-able events: not <cod
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-165">&#182;</a>
               </div>
-              <p>Clears all callbacks previously bound to the view by <code>delegateEvents</code>.
-You usually don’t need to use this, but may wish to if you have multiple
-Backbone views attached to the same DOM element.</p>
+              <p>清除之前所有通过<code>delegateEvents</code>绑定到视图上的回调。你可能不需要使用本方法，但如果你有多个Backbone的
+视图添加到了同一个DOM元素上，或许你会用到它。</p>
 
             </div>
             
@@ -3257,8 +3231,7 @@ Backbone views attached to the same DOM element.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-166">&#182;</a>
               </div>
-              <p>A finer-grained <code>undelegateEvents</code> for removing a single delegated event.
-<code>selector</code> and <code>listener</code> are both optional.</p>
+              <p>一个细粒度的<code>undelegateEvents</code>方法，用来移除单个代理事件。<code>selector</code> 和 <code>listener</code>都是可选的。</p>
 
             </div>
             
@@ -3276,8 +3249,7 @@ Backbone views attached to the same DOM element.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-167">&#182;</a>
               </div>
-              <p>Produces a DOM element to be assigned to your view. Exposed for
-subclasses using an alternative DOM manipulation API.</p>
+              <p>生成一个可以赋给视图的DOM元素。子类可以覆盖此方法，已使用别的DOM操作的API。</p>
 
             </div>
             
@@ -3294,10 +3266,8 @@ subclasses using an alternative DOM manipulation API.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-168">&#182;</a>
               </div>
-              <p>Ensure that the View has a DOM element to render into.
-If <code>this.el</code> is a string, pass it through <code>$()</code>, take the first
-matching element, and re-assign it to <code>el</code>. Otherwise, create
-an element from the <code>id</code>, <code>className</code> and <code>tagName</code> properties.</p>
+              <p>保证视图有一个可渲染的DOM元素。如果<code>this.el</code>是一个字符串，它会被传入给<code>$()</code>，之后
+拿到第一个匹配的元素，重新赋给<code>el</code>属性。否则，就根据 <code>id</code>, <code>className</code> 和 <code>tagName</code>属性创建一个新的元素。</p>
 
             </div>
             
@@ -3322,8 +3292,7 @@ an element from the <code>id</code>, <code>className</code> and <code>tagName</c
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-169">&#182;</a>
               </div>
-              <p>Set attributes from a hash on this view’s element.  Exposed for
-subclasses using an alternative DOM manipulation API.</p>
+              <p>将一个hash对象设置到视图元素的属性上。子类可以使用别的DOM操作的API覆盖本方法。</p>
 
             </div>
             
