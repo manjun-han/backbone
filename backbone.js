@@ -1278,55 +1278,51 @@
 
   });
 
-  // Backbone.sync
+  // 同步 - Backbone.sync
   // -------------
 
-  // Override this function to change the manner in which Backbone persists
-  // models to the server. You will be passed the type of request, and the
-  // model in question. By default, makes a RESTful Ajax request
-  // to the model's `url()`. Some possible customizations could be:
+  //
+  // 覆盖此方法，改变Backbone持久化数据到服务器的方式。你需要传入请求的类型，以及model。
+  // 默认，会向model的 `url()`指向的链接地址发送RESTful ajax请求。某些可能的环境下会：
   //
   // * Use `setTimeout` to batch rapid-fire updates into a single request.
-  // * Send up the models as XML instead of JSON.
-  // * Persist models via WebSockets instead of Ajax.
+  // * 以XML格式而不是JSON格式发送模型。
+  // * 通过WebSocket而不是Ajax持久化模型。
   //
-  // Turn on `Backbone.emulateHTTP` in order to send `PUT` and `DELETE` requests
-  // as `POST`, with a `_method` parameter containing the true HTTP method,
-  // as well as all requests with the body as `application/x-www-form-urlencoded`
-  // instead of `application/json` with the model in a param named `model`.
-  // Useful when interfacing with server-side languages like **PHP** that make
-  // it difficult to read the body of `PUT` requests.
+  // 开启`Backbone.emulateHTTP`，将`PUT`和`DELETE`以`POST`格式发送，使用`_method`
+  // 参数包含真正的HTTP方法，同时所有的请求体`model`为参数名称，以`application/x-www-form-urlencoded`格式而不是
+  // `application/json`格式发送。在与像**PHP**这种服务器端交互时很有用，它在读取`PUT`请求体时比较困难。
+  // 
   Backbone.sync = function(method, model, options) {
     var type = methodMap[method];
 
-    // Default options, unless specified.
+    // 没有指定选项，则使用默认选项。
     _.defaults(options || (options = {}), {
       emulateHTTP: Backbone.emulateHTTP,
       emulateJSON: Backbone.emulateJSON
     });
 
-    // Default JSON-request options.
+    // 默认JSON请求的选项。
     var params = {type: type, dataType: 'json'};
 
-    // Ensure that we have a URL.
+    // 保证我们有一个URL
     if (!options.url) {
       params.url = _.result(model, 'url') || urlError();
     }
 
-    // Ensure that we have the appropriate request data.
+    // 保证我们有合适的请求数据。
     if (options.data == null && model && (method === 'create' || method === 'update' || method === 'patch')) {
       params.contentType = 'application/json';
       params.data = JSON.stringify(options.attrs || model.toJSON(options));
     }
 
-    // For older servers, emulate JSON by encoding the request into an HTML-form.
+    // 对于更老旧的服务器，通过将请求转义为一个HTML-form的格式来模拟JSON类型。
     if (options.emulateJSON) {
       params.contentType = 'application/x-www-form-urlencoded';
       params.data = params.data ? {model: params.data} : {};
     }
 
-    // For older servers, emulate HTTP by mimicking the HTTP method with `_method`
-    // And an `X-HTTP-Method-Override` header.
+    // 对于老旧服务器，通过`_method`伪造一个HTTP方法来模拟HTTP请求。添加一个`X-HTTP-Method-Override`头。
     if (options.emulateHTTP && (type === 'PUT' || type === 'DELETE' || type === 'PATCH')) {
       params.type = 'POST';
       if (options.emulateJSON) params.data._method = type;
@@ -1337,12 +1333,12 @@
       };
     }
 
-    // Don't process data on a non-GET request.
+    // 在非GET请求下，不处理数据。
     if (params.type !== 'GET' && !options.emulateJSON) {
       params.processData = false;
     }
 
-    // Pass along `textStatus` and `errorThrown` from jQuery.
+    // 在jQuery中回传`textStatus`和`errorThrown`。
     var error = options.error;
     options.error = function(xhr, textStatus, errorThrown) {
       options.textStatus = textStatus;
@@ -1350,13 +1346,13 @@
       if (error) error.call(options.context, xhr, textStatus, errorThrown);
     };
 
-    // Make the request, allowing the user to override any Ajax options.
+    // 发送请求，允许用户覆盖任何Ajax的选项。
     var xhr = options.xhr = Backbone.ajax(_.extend(params, options));
     model.trigger('request', model, xhr, options);
     return xhr;
   };
 
-  // Map from CRUD to HTTP for our default `Backbone.sync` implementation.
+  // CRUD操作到HTTP的映射，`Backbone.sync`默认的实现方式。
   var methodMap = {
     'create': 'POST',
     'update': 'PUT',
@@ -1365,17 +1361,17 @@
     'read': 'GET'
   };
 
-  // Set the default implementation of `Backbone.ajax` to proxy through to `$`.
-  // Override this if you'd like to use a different library.
+
+  // 设置默认的`Backbone.ajax`实现，代理的是`$`。如果要用不同的库，请覆盖此方法。
   Backbone.ajax = function() {
     return Backbone.$.ajax.apply(Backbone.$, arguments);
   };
 
-  // Backbone.Router
+  // 路由 - Backbone.Router
   // ---------------
 
-  // Routers map faux-URLs to actions, and fire events when routes are
-  // matched. Creating a new one sets its `routes` hash, if not set statically.
+  // 路由用来映射假的URL到action上，路由匹配时会触发事件。
+  // 创建一个新的路由，设置它的`routes`的hash。
   var Router = Backbone.Router = function(options) {
     options || (options = {});
     if (options.routes) this.routes = options.routes;
@@ -1383,26 +1379,23 @@
     this.initialize.apply(this, arguments);
   };
 
-  // Cached regular expressions for matching named param parts and splatted
-  // parts of route strings.
+  // 缓存的正则表达式，用来匹配路由字符串中具名参数部分和中间部分（splatted parts）。
   var optionalParam = /\((.*?)\)/g;
   var namedParam    = /(\(\?)?:\w+/g;
   var splatParam    = /\*\w+/g;
   var escapeRegExp  = /[\-{}\[\]+?.,\\\^$|#\s]/g;
 
-  // Set up all inheritable **Backbone.Router** properties and methods.
+  // 建立**Backbone.Router**所有可继承的属性和方法。
   _.extend(Router.prototype, Events, {
 
-    // Initialize is an empty function by default. Override it with your own
-    // initialization logic.
+    // Initialize默认是个空函数。用你自己的初始化逻辑覆盖它。
     initialize: function(){},
 
-    // Manually bind a single named route to a callback. For example:
+    //手工绑定单个具名路由到回调上。比如：
     //
     //     this.route('search/:query/p:num', 'search', function(query, num) {
     //       ...
     //     });
-    //
     route: function(route, name, callback) {
       if (!_.isRegExp(route)) route = this._routeToRegExp(route);
       if (_.isFunction(name)) {
@@ -1422,21 +1415,19 @@
       return this;
     },
 
-    // Execute a route handler with the provided parameters.  This is an
-    // excellent place to do pre-route setup or post-route cleanup.
+    // 提供给定参数，执行一个路由处理函数。这是一个路由触发前进行设置或路由触发后进行清空的绝佳场所。
     execute: function(callback, args, name) {
       if (callback) callback.apply(this, args);
     },
 
-    // Simple proxy to `Backbone.history` to save a fragment into the history.
+    // 只是简单的代理了`Backbone.history`，保存一个fragment到history中。
     navigate: function(fragment, options) {
       Backbone.history.navigate(fragment, options);
       return this;
     },
 
-    // Bind all defined routes to `Backbone.history`. We have to reverse the
-    // order of the routes here to support behavior where the most general
-    // routes can be defined at the bottom of the route map.
+    // 将所有定义的路由绑定到`Backbone.history`上。这里我们必须反转路由的次序，以支持
+    // 最笼统的路由应该定义在路由映射的最下方这一行为。
     _bindRoutes: function() {
       if (!this.routes) return;
       this.routes = _.result(this, 'routes');
@@ -1446,8 +1437,7 @@
       }
     },
 
-    // Convert a route string into a regular expression, suitable for matching
-    // against the current location hash.
+    // 将一个路由字符串转换为一个正则表达式，适合用来匹配当前location的hash字符串。
     _routeToRegExp: function(route) {
       route = route.replace(escapeRegExp, '\\$&')
                    .replace(optionalParam, '(?:$1)?')
@@ -1458,13 +1448,12 @@
       return new RegExp('^' + route + '(?:\\?([\\s\\S]*))?$');
     },
 
-    // Given a route, and a URL fragment that it matches, return the array of
-    // extracted decoded parameters. Empty or unmatched parameters will be
-    // treated as `null` to normalize cross-browser behavior.
+    // 给定一个路由，和一个匹配的URL片段，返回提起并解码后的参数数组。空的或者未匹配的参数会
+    // 当做`null`来统一跨浏览器行为。
     _extractParameters: function(route, fragment) {
       var params = route.exec(fragment).slice(1);
       return _.map(params, function(param, i) {
-        // Don't decode the search params.
+        // 不对搜索参数进行解码。
         if (i === params.length - 1) return param || null;
         return param ? decodeURIComponent(param) : null;
       });
@@ -1472,19 +1461,17 @@
 
   });
 
-  // Backbone.History
+  // 历史记录 - Backbone.History
   // ----------------
 
-  // Handles cross-browser history management, based on either
-  // [pushState](http://diveintohtml5.info/history.html) and real URLs, or
-  // [onhashchange](https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange)
-  // and URL fragments. If the browser supports neither (old IE, natch),
-  // falls back to polling.
+  // 处理跨浏览器历史管理，要么基于[pushState](http://diveintohtml5.info/history.html)和真实的URLs，
+  // 要么基于[onhashchange](https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange)和URL片段。
+  // 如果浏览器都不支持二者（当然指的是老版本IE），则回滚值轮训方式。
   var History = Backbone.History = function() {
     this.handlers = [];
     this.checkUrl = _.bind(this.checkUrl, this);
 
-    // Ensure that `History` can be used outside of the browser.
+    // 保证`History`可以在浏览器外使用。
     if (typeof window !== 'undefined') {
       this.location = window.location;
       this.history = window.history;
@@ -1492,59 +1479,56 @@
   };
 
   // Cached regex for stripping a leading hash/slash and trailing space.
+  // 缓存的正则表达式用来移除起始位置的#，反斜杠或最后的空白符。
   var routeStripper = /^[#\/]|\s+$/g;
 
-  // Cached regex for stripping leading and trailing slashes.
+  // 缓存的正则表达式，用来删除起始或末尾的反斜杠。
   var rootStripper = /^\/+|\/+$/g;
 
-  // Cached regex for stripping urls of hash.
+  // 缓存的正则表达式URL的hash部分。
   var pathStripper = /#.*$/;
 
-  // Has the history handling already been started?
+  // 标记history处理是否已经启动。
   History.started = false;
 
-  // Set up all inheritable **Backbone.History** properties and methods.
+  // 建立**Backbone.History**所有可继承的属性和方法。
   _.extend(History.prototype, Events, {
 
-    // The default interval to poll for hash changes, if necessary, is
-    // twenty times a second.
+    // 默认轮训检测hash辩护的间隔，如果有必要的话，一秒钟检测二十次。
     interval: 50,
 
-    // Are we at the app root?
+    // 我们是否处在应用的根部？
     atRoot: function() {
       var path = this.location.pathname.replace(/[^\/]$/, '$&/');
       return path === this.root && !this.getSearch();
     },
 
-    // Does the pathname match the root?
+    // 路径名是否匹配根路径名？
     matchRoot: function() {
       var path = this.decodeFragment(this.location.pathname);
       var rootPath = path.slice(0, this.root.length - 1) + '/';
       return rootPath === this.root;
     },
 
-    // Unicode characters in `location.pathname` are percent encoded so they're
-    // decoded for comparison. `%25` should not be decoded since it may be part
-    // of an encoded parameter.
+    // `location.pathname`中的Unicode字符是以编码后的形式存在的，所以比较前需要解码。`%25`不应该解码
+    // 因为它可能是一个编码参数的一部分。
     decodeFragment: function(fragment) {
       return decodeURI(fragment.replace(/%25/g, '%2525'));
     },
 
-    // In IE6, the hash fragment and search params are incorrect if the
-    // fragment contains `?`.
+    // 在IE6下，如果hash的片段包含`?`，那么如果hash的片段和搜索参数是不正确的
     getSearch: function() {
       var match = this.location.href.replace(/#.*/, '').match(/\?.+/);
       return match ? match[0] : '';
     },
 
-    // Gets the true hash value. Cannot use location.hash directly due to bug
-    // in Firefox where location.hash will always be decoded.
+    // 获取真正的hash值。Firefox的location.hash会是编码形式的，因为此bug我们不能直接使用location.hash。
     getHash: function(window) {
       var match = (window || this).location.href.match(/#(.*)$/);
       return match ? match[1] : '';
     },
 
-    // Get the pathname and search params, without the root.
+    // 在不带根路径字符春的情况下，获取路径名和搜索参数。
     getPath: function() {
       var path = this.decodeFragment(
         this.location.pathname + this.getSearch()
@@ -1552,7 +1536,7 @@
       return path.charAt(0) === '/' ? path.slice(1) : path;
     },
 
-    // Get the cross-browser normalized URL fragment from the path or hash.
+    // 从path或hash中获取跨浏览器一直的URL片段。
     getFragment: function(fragment) {
       if (fragment == null) {
         if (this._usePushState || !this._wantsHashChange) {
@@ -1564,14 +1548,12 @@
       return fragment.replace(routeStripper, '');
     },
 
-    // Start the hash change handling, returning `true` if the current URL matches
-    // an existing route, and `false` otherwise.
+    // 开始处理hash的变更，如果当前的URL与已存在的一个路由匹配的话，返回`true`，否则返回`false`。
     start: function(options) {
       if (History.started) throw new Error('Backbone.history has already been started');
       History.started = true;
 
-      // Figure out the initial configuration. Do we need an iframe?
-      // Is pushState desired ... is it available?
+      // 计算初始的配置。我们是否需要一个iframe？是否需要pushState... 它存在吗？
       this.options          = _.extend({root: '/'}, this.options, options);
       this.root             = this.options.root;
       this._wantsHashChange = this.options.hashChange !== false;
@@ -1582,52 +1564,47 @@
       this._usePushState    = this._wantsPushState && this._hasPushState;
       this.fragment         = this.getFragment();
 
-      // Normalize root to always include a leading and trailing slash.
+      // 一致化root，总在首位包含一个反斜杠。
       this.root = ('/' + this.root + '/').replace(rootStripper, '/');
 
-      // Transition from hashChange to pushState or vice versa if both are
-      // requested.
+      // 从hashChange转换到pushState，如果同时都需要二者，反之亦然。
       if (this._wantsHashChange && this._wantsPushState) {
 
-        // If we've started off with a route from a `pushState`-enabled
-        // browser, but we're currently in a browser that doesn't support it...
+        // 如果我们从一个`pushState`开始，但现在浏览器不支持它...
         if (!this._hasPushState && !this.atRoot()) {
           var rootPath = this.root.slice(0, -1) || '/';
           this.location.replace(rootPath + '#' + this.getPath());
-          // Return immediately as browser will do redirect to new url
+          // 立即返回，因为浏览器会重定向到新的url上。
           return true;
 
-        // Or if we've started out with a hash-based route, but we're currently
-        // in a browser where it could be `pushState`-based instead...
+        // 或者，如果我们在基于hash的路由下开始，但我们当前在一个支持`pushState`...
         } else if (this._hasPushState && this.atRoot()) {
           this.navigate(this.getHash(), {replace: true});
         }
 
       }
 
-      // Proxy an iframe to handle location events if the browser doesn't
-      // support the `hashchange` event, HTML5 history, or the user wants
-      // `hashChange` but not `pushState`.
+      // 如果浏览器不支持`hashchange`事件，HTML5的history，或用户希望`hashChange`而不是`pushState`，
+      // 就代理一个iframe来处理location事件。
       if (!this._hasHashChange && this._wantsHashChange && !this._usePushState) {
         this.iframe = document.createElement('iframe');
         this.iframe.src = 'javascript:0';
         this.iframe.style.display = 'none';
         this.iframe.tabIndex = -1;
         var body = document.body;
-        // Using `appendChild` will throw on IE < 9 if the document is not ready.
+        // 如果文档没有ready呢，使用`appendChild`在IE<9下会抛出异常。
         var iWindow = body.insertBefore(this.iframe, body.firstChild).contentWindow;
         iWindow.document.open();
         iWindow.document.close();
         iWindow.location.hash = '#' + this.fragment;
       }
 
-      // Add a cross-platform `addEventListener` shim for older browsers.
+      // 为老旧版本的浏览器添加跨平台的`addEventListener`的shim。
       var addEventListener = window.addEventListener || function(eventName, listener) {
         return attachEvent('on' + eventName, listener);
       };
 
-      // Depending on whether we're using pushState or hashes, and whether
-      // 'onhashchange' is supported, determine how we check the URL state.
+      // 根据是否我们正使用pushState或hash，以及浏览器是否支持`onhashchange`，来决定我们检测URL状态的方式。
       if (this._usePushState) {
         addEventListener('popstate', this.checkUrl, false);
       } else if (this._useHashChange && !this.iframe) {
@@ -1639,45 +1616,41 @@
       if (!this.options.silent) return this.loadUrl();
     },
 
-    // Disable Backbone.history, perhaps temporarily. Not useful in a real app,
-    // but possibly useful for unit testing Routers.
+    // 禁用 Backbone.history，可能是临时性的。在真实的应用中或许没用，但在路由的单元测试中可能有用。
     stop: function() {
-      // Add a cross-platform `removeEventListener` shim for older browsers.
+      // 为老旧版本的浏览器添加跨平台的`removeEventListener`的shim。
       var removeEventListener = window.removeEventListener || function(eventName, listener) {
         return detachEvent('on' + eventName, listener);
       };
 
-      // Remove window listeners.
+      // 移除window的监听器。
       if (this._usePushState) {
         removeEventListener('popstate', this.checkUrl, false);
       } else if (this._useHashChange && !this.iframe) {
         removeEventListener('hashchange', this.checkUrl, false);
       }
 
-      // Clean up the iframe if necessary.
+      // 如果需要，清理iframe。
       if (this.iframe) {
         document.body.removeChild(this.iframe);
         this.iframe = null;
       }
 
-      // Some environments will throw when clearing an undefined interval.
+      // 某些环境下在清除一个undefined的间隔时会抛出异常。
       if (this._checkUrlInterval) clearInterval(this._checkUrlInterval);
       History.started = false;
     },
 
-    // Add a route to be tested when the fragment changes. Routes added later
-    // may override previous routes.
+    // 添加一个路由，在片段变更时会检测它。后添加的路由可能覆盖之前的路由。
     route: function(route, callback) {
       this.handlers.unshift({route: route, callback: callback});
     },
 
-    // Checks the current URL to see if it has changed, and if it has,
-    // calls `loadUrl`, normalizing across the hidden iframe.
+    // 查看当前的URL，检测它是否变化了，如果变化了，就调用`loadUrl`，通过隐藏的iframe一致化处理。
     checkUrl: function(e) {
       var current = this.getFragment();
 
-      // If the user pressed the back button, the iframe's hash will have
-      // changed and we should use that for comparison.
+      // 如果用户按了回退按钮，iframe的hash会变化，我们应该使用变化后的进行比较。
       if (current === this.fragment && this.iframe) {
         current = this.getHash(this.iframe.contentWindow);
       }
@@ -1687,9 +1660,7 @@
       this.loadUrl();
     },
 
-    // Attempt to load the current URL fragment. If a route succeeds with a
-    // match, returns `true`. If no defined routes matches the fragment,
-    // returns `false`.
+    // 尝试加载当前URL的片段。如果路由成功匹配了，返回`true`。如果定义的路由没有匹配的，返回`false`。
     loadUrl: function(fragment) {
       // If the root doesn't match, no routes can match either.
       if (!this.matchRoot()) return false;
@@ -1702,47 +1673,43 @@
       });
     },
 
-    // Save a fragment into the hash history, or replace the URL state if the
-    // 'replace' option is passed. You are responsible for properly URL-encoding
-    // the fragment in advance.
     //
-    // The options object can contain `trigger: true` if you wish to have the
-    // route callback be fired (not usually desirable), or `replace: true`, if
-    // you wish to modify the current URL without adding an entry to the history.
+    // 将一个片段保存进hash历史中，或者如果传入`replace`选项就替换当前的URL状态。你需要负责提前进行正确的URL编码。
+    //
+    // 如果你希望触发路由的回调（通常不会），可以在选项对象包含`trigger: true`,或者如果你希望在不添加历史记录的前提下
+    // 修改当前的URL，就传入 `replace: true`。
+    // 
     navigate: function(fragment, options) {
       if (!History.started) return false;
       if (!options || options === true) options = {trigger: !!options};
 
-      // Normalize the fragment.
+      // 一致化片段
       fragment = this.getFragment(fragment || '');
 
-      // Don't include a trailing slash on the root.
+      // 不要再root的尾部添加反斜杠。
       var rootPath = this.root;
       if (fragment === '' || fragment.charAt(0) === '?') {
         rootPath = rootPath.slice(0, -1) || '/';
       }
       var url = rootPath + fragment;
 
-      // Strip the hash and decode for matching.
+      // 为匹配的路由删除hash符号并转码。
       fragment = this.decodeFragment(fragment.replace(pathStripper, ''));
 
       if (this.fragment === fragment) return;
       this.fragment = fragment;
 
-      // If pushState is available, we use it to set the fragment as a real URL.
+      // 如果pushState可用，我们使用它来设置片段为真正的URL。
       if (this._usePushState) {
         this.history[options.replace ? 'replaceState' : 'pushState']({}, document.title, url);
 
-      // If hash changes haven't been explicitly disabled, update the hash
-      // fragment to store history.
+      // 如果hash changes被显示的禁用了，就更新hash片段来存储记录。
       } else if (this._wantsHashChange) {
         this._updateHash(this.location, fragment, options.replace);
         if (this.iframe && fragment !== this.getHash(this.iframe.contentWindow)) {
           var iWindow = this.iframe.contentWindow;
 
-          // Opening and closing the iframe tricks IE7 and earlier to push a
-          // history entry on hash-tag change.  When replace is true, we don't
-          // want this.
+          // IE7及早期版本浏览器打开和关闭iframe的技巧，用以将hash变更push进历史中。当replace是true时，我们就不用这么干了。
           if (!options.replace) {
             iWindow.document.open();
             iWindow.document.close();
@@ -1751,29 +1718,27 @@
           this._updateHash(iWindow.location, fragment, options.replace);
         }
 
-      // If you've told us that you explicitly don't want fallback hashchange-
-      // based history, then `navigate` becomes a page refresh.
+      // 如果你不需要基于hashchange的历史，那么`navigate`就变成了一次页面刷新。
       } else {
         return this.location.assign(url);
       }
       if (options.trigger) return this.loadUrl(fragment);
     },
 
-    // Update the hash location, either replacing the current entry, or adding
-    // a new one to the browser history.
+    // 更新hash地址，要么替换当前的记录，要么添加一个新的到浏览器历史中。
     _updateHash: function(location, fragment, replace) {
       if (replace) {
         var href = location.href.replace(/(javascript:|#).*$/, '');
         location.replace(href + '#' + fragment);
       } else {
-        // Some browsers require that `hash` contains a leading #.
+        // 一些浏览器需要在`hash`的起始位置包含一个#。
         location.hash = '#' + fragment;
       }
     }
 
   });
 
-  // Create the default Backbone.history.
+  // 创建默认的Backbone.history对象。
   Backbone.history = new History;
 
   // 辅助工具 - Helpers
@@ -1807,7 +1772,7 @@
     return child;
   };
 
-  // Set up inheritance for the model, collection, router, view and history.
+  // 设置model，collection，router，view和history的继承性。
   Model.extend = Collection.extend = Router.extend = View.extend = History.extend = extend;
 
   // 在需要URL但又未提供时，抛出一个错误。

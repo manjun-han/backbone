@@ -3311,7 +3311,7 @@ DOM中的一块带有逻辑的UI。可能是单个条目，一整个列表，一
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-170">&#182;</a>
               </div>
-              <h2 id="backbone-sync">Backbone.sync</h2>
+              <h2 id="-backbone-sync">同步 - Backbone.sync</h2>
 
             </div>
             
@@ -3336,21 +3336,16 @@ DOM中的一块带有逻辑的UI。可能是单个条目，一整个列表，一
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-172">&#182;</a>
               </div>
-              <p>Override this function to change the manner in which Backbone persists
-models to the server. You will be passed the type of request, and the
-model in question. By default, makes a RESTful Ajax request
-to the model’s <code>url()</code>. Some possible customizations could be:</p>
+              <p>覆盖此方法，改变Backbone持久化数据到服务器的方式。你需要传入请求的类型，以及model。
+默认，会向model的 <code>url()</code>指向的链接地址发送RESTful ajax请求。某些可能的环境下会：</p>
 <ul>
 <li>Use <code>setTimeout</code> to batch rapid-fire updates into a single request.</li>
-<li>Send up the models as XML instead of JSON.</li>
-<li>Persist models via WebSockets instead of Ajax.</li>
+<li>以XML格式而不是JSON格式发送模型。</li>
+<li>通过WebSocket而不是Ajax持久化模型。</li>
 </ul>
-<p>Turn on <code>Backbone.emulateHTTP</code> in order to send <code>PUT</code> and <code>DELETE</code> requests
-as <code>POST</code>, with a <code>_method</code> parameter containing the true HTTP method,
-as well as all requests with the body as <code>application/x-www-form-urlencoded</code>
-instead of <code>application/json</code> with the model in a param named <code>model</code>.
-Useful when interfacing with server-side languages like <strong>PHP</strong> that make
-it difficult to read the body of <code>PUT</code> requests.</p>
+<p>开启<code>Backbone.emulateHTTP</code>，将<code>PUT</code>和<code>DELETE</code>以<code>POST</code>格式发送，使用<code>_method</code>
+参数包含真正的HTTP方法，同时所有的请求体<code>model</code>为参数名称，以<code>application/x-www-form-urlencoded</code>格式而不是
+<code>application/json</code>格式发送。在与像<strong>PHP</strong>这种服务器端交互时很有用，它在读取<code>PUT</code>请求体时比较困难。</p>
 
             </div>
             
@@ -3366,7 +3361,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-173">&#182;</a>
               </div>
-              <p>Default options, unless specified.</p>
+              <p>没有指定选项，则使用默认选项。</p>
 
             </div>
             
@@ -3384,7 +3379,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-174">&#182;</a>
               </div>
-              <p>Default JSON-request options.</p>
+              <p>默认JSON请求的选项。</p>
 
             </div>
             
@@ -3399,7 +3394,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-175">&#182;</a>
               </div>
-              <p>Ensure that we have a URL.</p>
+              <p>保证我们有一个URL</p>
 
             </div>
             
@@ -3416,7 +3411,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-176">&#182;</a>
               </div>
-              <p>Ensure that we have the appropriate request data.</p>
+              <p>保证我们有合适的请求数据。</p>
 
             </div>
             
@@ -3434,7 +3429,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-177">&#182;</a>
               </div>
-              <p>For older servers, emulate JSON by encoding the request into an HTML-form.</p>
+              <p>对于更老旧的服务器，通过将请求转义为一个HTML-form的格式来模拟JSON类型。</p>
 
             </div>
             
@@ -3452,8 +3447,7 @@ it difficult to read the body of <code>PUT</code> requests.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-178">&#182;</a>
               </div>
-              <p>For older servers, emulate HTTP by mimicking the HTTP method with <code>_method</code>
-And an <code>X-HTTP-Method-Override</code> header.</p>
+              <p>对于老旧服务器，通过<code>_method</code>伪造一个HTTP方法来模拟HTTP请求。添加一个<code>X-HTTP-Method-Override</code>头。</p>
 
             </div>
             
@@ -3476,7 +3470,7 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-179">&#182;</a>
               </div>
-              <p>Don’t process data on a non-GET request.</p>
+              <p>在非GET请求下，不处理数据。</p>
 
             </div>
             
@@ -3493,7 +3487,7 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-180">&#182;</a>
               </div>
-              <p>Pass along <code>textStatus</code> and <code>errorThrown</code> from jQuery.</p>
+              <p>在jQuery中回传<code>textStatus</code>和<code>errorThrown</code>。</p>
 
             </div>
             
@@ -3513,7 +3507,7 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-181">&#182;</a>
               </div>
-              <p>Make the request, allowing the user to override any Ajax options.</p>
+              <p>发送请求，允许用户覆盖任何Ajax的选项。</p>
 
             </div>
             
@@ -3531,7 +3525,7 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-182">&#182;</a>
               </div>
-              <p>Map from CRUD to HTTP for our default <code>Backbone.sync</code> implementation.</p>
+              <p>CRUD操作到HTTP的映射，<code>Backbone.sync</code>默认的实现方式。</p>
 
             </div>
             
@@ -3552,8 +3546,7 @@ And an <code>X-HTTP-Method-Override</code> header.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-183">&#182;</a>
               </div>
-              <p>Set the default implementation of <code>Backbone.ajax</code> to proxy through to <code>$</code>.
-Override this if you’d like to use a different library.</p>
+              <p>设置默认的<code>Backbone.ajax</code>实现，代理的是<code>$</code>。如果要用不同的库，请覆盖此方法。</p>
 
             </div>
             
@@ -3570,7 +3563,7 @@ Override this if you’d like to use a different library.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-184">&#182;</a>
               </div>
-              <h2 id="backbone-router">Backbone.Router</h2>
+              <h2 id="-backbone-router">路由 - Backbone.Router</h2>
 
             </div>
             
@@ -3595,8 +3588,8 @@ Override this if you’d like to use a different library.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-186">&#182;</a>
               </div>
-              <p>Routers map faux-URLs to actions, and fire events when routes are
-matched. Creating a new one sets its <code>routes</code> hash, if not set statically.</p>
+              <p>路由用来映射假的URL到action上，路由匹配时会触发事件。
+创建一个新的路由，设置它的<code>routes</code>的hash。</p>
 
             </div>
             
@@ -3616,8 +3609,7 @@ matched. Creating a new one sets its <code>routes</code> hash, if not set static
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-187">&#182;</a>
               </div>
-              <p>Cached regular expressions for matching named param parts and splatted
-parts of route strings.</p>
+              <p>缓存的正则表达式，用来匹配路由字符串中具名参数部分和中间部分（splatted parts）。</p>
 
             </div>
             
@@ -3635,7 +3627,7 @@ parts of route strings.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-188">&#182;</a>
               </div>
-              <p>Set up all inheritable <strong>Backbone.Router</strong> properties and methods.</p>
+              <p>建立<strong>Backbone.Router</strong>所有可继承的属性和方法。</p>
 
             </div>
             
@@ -3650,8 +3642,7 @@ parts of route strings.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-189">&#182;</a>
               </div>
-              <p>Initialize is an empty function by default. Override it with your own
-initialization logic.</p>
+              <p>Initialize默认是个空函数。用你自己的初始化逻辑覆盖它。</p>
 
             </div>
             
@@ -3666,7 +3657,7 @@ initialization logic.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-190">&#182;</a>
               </div>
-              <p>Manually bind a single named route to a callback. For example:</p>
+              <p>手工绑定单个具名路由到回调上。比如：</p>
 <pre><code><span class="hljs-keyword">this</span>.route(<span class="hljs-string">'search/:query/p:num'</span>, <span class="hljs-string">'search'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">query, num</span>) </span>{
   ...
 });
@@ -3701,8 +3692,7 @@ initialization logic.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-191">&#182;</a>
               </div>
-              <p>Execute a route handler with the provided parameters.  This is an
-excellent place to do pre-route setup or post-route cleanup.</p>
+              <p>提供给定参数，执行一个路由处理函数。这是一个路由触发前进行设置或路由触发后进行清空的绝佳场所。</p>
 
             </div>
             
@@ -3719,7 +3709,7 @@ excellent place to do pre-route setup or post-route cleanup.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-192">&#182;</a>
               </div>
-              <p>Simple proxy to <code>Backbone.history</code> to save a fragment into the history.</p>
+              <p>只是简单的代理了<code>Backbone.history</code>，保存一个fragment到history中。</p>
 
             </div>
             
@@ -3737,9 +3727,8 @@ excellent place to do pre-route setup or post-route cleanup.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-193">&#182;</a>
               </div>
-              <p>Bind all defined routes to <code>Backbone.history</code>. We have to reverse the
-order of the routes here to support behavior where the most general
-routes can be defined at the bottom of the route map.</p>
+              <p>将所有定义的路由绑定到<code>Backbone.history</code>上。这里我们必须反转路由的次序，以支持
+最笼统的路由应该定义在路由映射的最下方这一行为。</p>
 
             </div>
             
@@ -3761,8 +3750,7 @@ routes can be defined at the bottom of the route map.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-194">&#182;</a>
               </div>
-              <p>Convert a route string into a regular expression, suitable for matching
-against the current location hash.</p>
+              <p>将一个路由字符串转换为一个正则表达式，适合用来匹配当前location的hash字符串。</p>
 
             </div>
             
@@ -3785,9 +3773,8 @@ against the current location hash.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-195">&#182;</a>
               </div>
-              <p>Given a route, and a URL fragment that it matches, return the array of
-extracted decoded parameters. Empty or unmatched parameters will be
-treated as <code>null</code> to normalize cross-browser behavior.</p>
+              <p>给定一个路由，和一个匹配的URL片段，返回提起并解码后的参数数组。空的或者未匹配的参数会
+当做<code>null</code>来统一跨浏览器行为。</p>
 
             </div>
             
@@ -3804,7 +3791,7 @@ treated as <code>null</code> to normalize cross-browser behavior.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-196">&#182;</a>
               </div>
-              <p>Don’t decode the search params.</p>
+              <p>不对搜索参数进行解码。</p>
 
             </div>
             
@@ -3824,7 +3811,7 @@ treated as <code>null</code> to normalize cross-browser behavior.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-197">&#182;</a>
               </div>
-              <h2 id="backbone-history">Backbone.History</h2>
+              <h2 id="-backbone-history">历史记录 - Backbone.History</h2>
 
             </div>
             
@@ -3849,11 +3836,9 @@ treated as <code>null</code> to normalize cross-browser behavior.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-199">&#182;</a>
               </div>
-              <p>Handles cross-browser history management, based on either
-<a href="http://diveintohtml5.info/history.html">pushState</a> and real URLs, or
-<a href="https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange">onhashchange</a>
-and URL fragments. If the browser supports neither (old IE, natch),
-falls back to polling.</p>
+              <p>处理跨浏览器历史管理，要么基于<a href="http://diveintohtml5.info/history.html">pushState</a>和真实的URLs，
+要么基于<a href="https://developer.mozilla.org/en-US/docs/DOM/window.onhashchange">onhashchange</a>和URL片段。
+如果浏览器都不支持二者（当然指的是老版本IE），则回滚值轮训方式。</p>
 
             </div>
             
@@ -3870,7 +3855,7 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-200">&#182;</a>
               </div>
-              <p>Ensure that <code>History</code> can be used outside of the browser.</p>
+              <p>保证<code>History</code>可以在浏览器外使用。</p>
 
             </div>
             
@@ -3889,7 +3874,8 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-201">&#182;</a>
               </div>
-              <p>Cached regex for stripping a leading hash/slash and trailing space.</p>
+              <p>Cached regex for stripping a leading hash/slash and trailing space.
+缓存的正则表达式用来移除起始位置的#，反斜杠或最后的空白符。</p>
 
             </div>
             
@@ -3904,7 +3890,7 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-202">&#182;</a>
               </div>
-              <p>Cached regex for stripping leading and trailing slashes.</p>
+              <p>缓存的正则表达式，用来删除起始或末尾的反斜杠。</p>
 
             </div>
             
@@ -3919,7 +3905,7 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-203">&#182;</a>
               </div>
-              <p>Cached regex for stripping urls of hash.</p>
+              <p>缓存的正则表达式URL的hash部分。</p>
 
             </div>
             
@@ -3934,7 +3920,7 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-204">&#182;</a>
               </div>
-              <p>Has the history handling already been started?</p>
+              <p>标记history处理是否已经启动。</p>
 
             </div>
             
@@ -3949,7 +3935,7 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-205">&#182;</a>
               </div>
-              <p>Set up all inheritable <strong>Backbone.History</strong> properties and methods.</p>
+              <p>建立<strong>Backbone.History</strong>所有可继承的属性和方法。</p>
 
             </div>
             
@@ -3964,8 +3950,7 @@ falls back to polling.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-206">&#182;</a>
               </div>
-              <p>The default interval to poll for hash changes, if necessary, is
-twenty times a second.</p>
+              <p>默认轮训检测hash辩护的间隔，如果有必要的话，一秒钟检测二十次。</p>
 
             </div>
             
@@ -3980,7 +3965,7 @@ twenty times a second.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-207">&#182;</a>
               </div>
-              <p>Are we at the app root?</p>
+              <p>我们是否处在应用的根部？</p>
 
             </div>
             
@@ -3998,7 +3983,7 @@ twenty times a second.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-208">&#182;</a>
               </div>
-              <p>Does the pathname match the root?</p>
+              <p>路径名是否匹配根路径名？</p>
 
             </div>
             
@@ -4017,9 +4002,8 @@ twenty times a second.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-209">&#182;</a>
               </div>
-              <p>Unicode characters in <code>location.pathname</code> are percent encoded so they’re
-decoded for comparison. <code>%25</code> should not be decoded since it may be part
-of an encoded parameter.</p>
+              <p><code>location.pathname</code>中的Unicode字符是以编码后的形式存在的，所以比较前需要解码。<code>%25</code>不应该解码
+因为它可能是一个编码参数的一部分。</p>
 
             </div>
             
@@ -4036,8 +4020,7 @@ of an encoded parameter.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-210">&#182;</a>
               </div>
-              <p>In IE6, the hash fragment and search params are incorrect if the
-fragment contains <code>?</code>.</p>
+              <p>在IE6下，如果hash的片段包含<code>?</code>，那么如果hash的片段和搜索参数是不正确的</p>
 
             </div>
             
@@ -4055,8 +4038,7 @@ fragment contains <code>?</code>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-211">&#182;</a>
               </div>
-              <p>Gets the true hash value. Cannot use location.hash directly due to bug
-in Firefox where location.hash will always be decoded.</p>
+              <p>获取真正的hash值。Firefox的location.hash会是编码形式的，因为此bug我们不能直接使用location.hash。</p>
 
             </div>
             
@@ -4074,7 +4056,7 @@ in Firefox where location.hash will always be decoded.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-212">&#182;</a>
               </div>
-              <p>Get the pathname and search params, without the root.</p>
+              <p>在不带根路径字符春的情况下，获取路径名和搜索参数。</p>
 
             </div>
             
@@ -4094,7 +4076,7 @@ in Firefox where location.hash will always be decoded.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-213">&#182;</a>
               </div>
-              <p>Get the cross-browser normalized URL fragment from the path or hash.</p>
+              <p>从path或hash中获取跨浏览器一直的URL片段。</p>
 
             </div>
             
@@ -4118,8 +4100,7 @@ in Firefox where location.hash will always be decoded.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-214">&#182;</a>
               </div>
-              <p>Start the hash change handling, returning <code>true</code> if the current URL matches
-an existing route, and <code>false</code> otherwise.</p>
+              <p>开始处理hash的变更，如果当前的URL与已存在的一个路由匹配的话，返回<code>true</code>，否则返回<code>false</code>。</p>
 
             </div>
             
@@ -4136,8 +4117,7 @@ an existing route, and <code>false</code> otherwise.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-215">&#182;</a>
               </div>
-              <p>Figure out the initial configuration. Do we need an iframe?
-Is pushState desired … is it available?</p>
+              <p>计算初始的配置。我们是否需要一个iframe？是否需要pushState… 它存在吗？</p>
 
             </div>
             
@@ -4160,7 +4140,7 @@ Is pushState desired … is it available?</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-216">&#182;</a>
               </div>
-              <p>Normalize root to always include a leading and trailing slash.</p>
+              <p>一致化root，总在首位包含一个反斜杠。</p>
 
             </div>
             
@@ -4175,8 +4155,7 @@ Is pushState desired … is it available?</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-217">&#182;</a>
               </div>
-              <p>Transition from hashChange to pushState or vice versa if both are
-requested.</p>
+              <p>从hashChange转换到pushState，如果同时都需要二者，反之亦然。</p>
 
             </div>
             
@@ -4191,8 +4170,7 @@ requested.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-218">&#182;</a>
               </div>
-              <p>If we’ve started off with a route from a <code>pushState</code>-enabled
-browser, but we’re currently in a browser that doesn’t support it…</p>
+              <p>如果我们从一个<code>pushState</code>开始，但现在浏览器不支持它…</p>
 
             </div>
             
@@ -4209,7 +4187,7 @@ browser, but we’re currently in a browser that doesn’t support it…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-219">&#182;</a>
               </div>
-              <p>Return immediately as browser will do redirect to new url</p>
+              <p>立即返回，因为浏览器会重定向到新的url上。</p>
 
             </div>
             
@@ -4224,8 +4202,7 @@ browser, but we’re currently in a browser that doesn’t support it…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-220">&#182;</a>
               </div>
-              <p>Or if we’ve started out with a hash-based route, but we’re currently
-in a browser where it could be <code>pushState</code>-based instead…</p>
+              <p>或者，如果我们在基于hash的路由下开始，但我们当前在一个支持<code>pushState</code>…</p>
 
             </div>
             
@@ -4244,9 +4221,8 @@ in a browser where it could be <code>pushState</code>-based instead…</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-221">&#182;</a>
               </div>
-              <p>Proxy an iframe to handle location events if the browser doesn’t
-support the <code>hashchange</code> event, HTML5 history, or the user wants
-<code>hashChange</code> but not <code>pushState</code>.</p>
+              <p>如果浏览器不支持<code>hashchange</code>事件，HTML5的history，或用户希望<code>hashChange</code>而不是<code>pushState</code>，
+就代理一个iframe来处理location事件。</p>
 
             </div>
             
@@ -4266,7 +4242,7 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-222">&#182;</a>
               </div>
-              <p>Using <code>appendChild</code> will throw on IE &lt; 9 if the document is not ready.</p>
+              <p>如果文档没有ready呢，使用<code>appendChild</code>在IE&lt;9下会抛出异常。</p>
 
             </div>
             
@@ -4285,7 +4261,7 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-223">&#182;</a>
               </div>
-              <p>Add a cross-platform <code>addEventListener</code> shim for older browsers.</p>
+              <p>为老旧版本的浏览器添加跨平台的<code>addEventListener</code>的shim。</p>
 
             </div>
             
@@ -4302,8 +4278,7 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-224">&#182;</a>
               </div>
-              <p>Depending on whether we’re using pushState or hashes, and whether
-‘onhashchange’ is supported, determine how we check the URL state.</p>
+              <p>根据是否我们正使用pushState或hash，以及浏览器是否支持<code>onhashchange</code>，来决定我们检测URL状态的方式。</p>
 
             </div>
             
@@ -4327,8 +4302,7 @@ support the <code>hashchange</code> event, HTML5 history, or the user wants
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-225">&#182;</a>
               </div>
-              <p>Disable Backbone.history, perhaps temporarily. Not useful in a real app,
-but possibly useful for unit testing Routers.</p>
+              <p>禁用 Backbone.history，可能是临时性的。在真实的应用中或许没用，但在路由的单元测试中可能有用。</p>
 
             </div>
             
@@ -4343,7 +4317,7 @@ but possibly useful for unit testing Routers.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-226">&#182;</a>
               </div>
-              <p>Add a cross-platform <code>removeEventListener</code> shim for older browsers.</p>
+              <p>为老旧版本的浏览器添加跨平台的<code>removeEventListener</code>的shim。</p>
 
             </div>
             
@@ -4360,7 +4334,7 @@ but possibly useful for unit testing Routers.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-227">&#182;</a>
               </div>
-              <p>Remove window listeners.</p>
+              <p>移除window的监听器。</p>
 
             </div>
             
@@ -4379,7 +4353,7 @@ but possibly useful for unit testing Routers.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-228">&#182;</a>
               </div>
-              <p>Clean up the iframe if necessary.</p>
+              <p>如果需要，清理iframe。</p>
 
             </div>
             
@@ -4397,7 +4371,7 @@ but possibly useful for unit testing Routers.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-229">&#182;</a>
               </div>
-              <p>Some environments will throw when clearing an undefined interval.</p>
+              <p>某些环境下在清除一个undefined的间隔时会抛出异常。</p>
 
             </div>
             
@@ -4414,8 +4388,7 @@ but possibly useful for unit testing Routers.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-230">&#182;</a>
               </div>
-              <p>Add a route to be tested when the fragment changes. Routes added later
-may override previous routes.</p>
+              <p>添加一个路由，在片段变更时会检测它。后添加的路由可能覆盖之前的路由。</p>
 
             </div>
             
@@ -4432,8 +4405,7 @@ may override previous routes.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-231">&#182;</a>
               </div>
-              <p>Checks the current URL to see if it has changed, and if it has,
-calls <code>loadUrl</code>, normalizing across the hidden iframe.</p>
+              <p>查看当前的URL，检测它是否变化了，如果变化了，就调用<code>loadUrl</code>，通过隐藏的iframe一致化处理。</p>
 
             </div>
             
@@ -4449,8 +4421,7 @@ calls <code>loadUrl</code>, normalizing across the hidden iframe.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-232">&#182;</a>
               </div>
-              <p>If the user pressed the back button, the iframe’s hash will have
-changed and we should use that for comparison.</p>
+              <p>如果用户按了回退按钮，iframe的hash会变化，我们应该使用变化后的进行比较。</p>
 
             </div>
             
@@ -4472,9 +4443,7 @@ changed and we should use that for comparison.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-233">&#182;</a>
               </div>
-              <p>Attempt to load the current URL fragment. If a route succeeds with a
-match, returns <code>true</code>. If no defined routes matches the fragment,
-returns <code>false</code>.</p>
+              <p>尝试加载当前URL的片段。如果路由成功匹配了，返回<code>true</code>。如果定义的路由没有匹配的，返回<code>false</code>。</p>
 
             </div>
             
@@ -4512,12 +4481,9 @@ returns <code>false</code>.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-235">&#182;</a>
               </div>
-              <p>Save a fragment into the hash history, or replace the URL state if the
-‘replace’ option is passed. You are responsible for properly URL-encoding
-the fragment in advance.</p>
-<p>The options object can contain <code>trigger: true</code> if you wish to have the
-route callback be fired (not usually desirable), or <code>replace: true</code>, if
-you wish to modify the current URL without adding an entry to the history.</p>
+              <p>将一个片段保存进hash历史中，或者如果传入<code>replace</code>选项就替换当前的URL状态。你需要负责提前进行正确的URL编码。</p>
+<p>如果你希望触发路由的回调（通常不会），可以在选项对象包含<code>trigger: true</code>,或者如果你希望在不添加历史记录的前提下
+修改当前的URL，就传入 <code>replace: true</code>。</p>
 
             </div>
             
@@ -4534,7 +4500,7 @@ you wish to modify the current URL without adding an entry to the history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-236">&#182;</a>
               </div>
-              <p>Normalize the fragment.</p>
+              <p>一致化片段</p>
 
             </div>
             
@@ -4549,7 +4515,7 @@ you wish to modify the current URL without adding an entry to the history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-237">&#182;</a>
               </div>
-              <p>Don’t include a trailing slash on the root.</p>
+              <p>不要再root的尾部添加反斜杠。</p>
 
             </div>
             
@@ -4568,7 +4534,7 @@ you wish to modify the current URL without adding an entry to the history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-238">&#182;</a>
               </div>
-              <p>Strip the hash and decode for matching.</p>
+              <p>为匹配的路由删除hash符号并转码。</p>
 
             </div>
             
@@ -4586,7 +4552,7 @@ you wish to modify the current URL without adding an entry to the history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-239">&#182;</a>
               </div>
-              <p>If pushState is available, we use it to set the fragment as a real URL.</p>
+              <p>如果pushState可用，我们使用它来设置片段为真正的URL。</p>
 
             </div>
             
@@ -4602,8 +4568,7 @@ you wish to modify the current URL without adding an entry to the history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-240">&#182;</a>
               </div>
-              <p>If hash changes haven’t been explicitly disabled, update the hash
-fragment to store history.</p>
+              <p>如果hash changes被显示的禁用了，就更新hash片段来存储记录。</p>
 
             </div>
             
@@ -4621,9 +4586,7 @@ fragment to store history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-241">&#182;</a>
               </div>
-              <p>Opening and closing the iframe tricks IE7 and earlier to push a
-history entry on hash-tag change.  When replace is true, we don’t
-want this.</p>
+              <p>IE7及早期版本浏览器打开和关闭iframe的技巧，用以将hash变更push进历史中。当replace是true时，我们就不用这么干了。</p>
 
             </div>
             
@@ -4644,8 +4607,7 @@ want this.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-242">&#182;</a>
               </div>
-              <p>If you’ve told us that you explicitly don’t want fallback hashchange-
-based history, then <code>navigate</code> becomes a page refresh.</p>
+              <p>如果你不需要基于hashchange的历史，那么<code>navigate</code>就变成了一次页面刷新。</p>
 
             </div>
             
@@ -4664,8 +4626,7 @@ based history, then <code>navigate</code> becomes a page refresh.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-243">&#182;</a>
               </div>
-              <p>Update the hash location, either replacing the current entry, or adding
-a new one to the browser history.</p>
+              <p>更新hash地址，要么替换当前的记录，要么添加一个新的到浏览器历史中。</p>
 
             </div>
             
@@ -4684,7 +4645,7 @@ a new one to the browser history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-244">&#182;</a>
               </div>
-              <p>Some browsers require that <code>hash</code> contains a leading #.</p>
+              <p>一些浏览器需要在<code>hash</code>的起始位置包含一个#。</p>
 
             </div>
             
@@ -4703,7 +4664,7 @@ a new one to the browser history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-245">&#182;</a>
               </div>
-              <p>Create the default Backbone.history.</p>
+              <p>创建默认的Backbone.history对象。</p>
 
             </div>
             
@@ -4718,7 +4679,7 @@ a new one to the browser history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-246">&#182;</a>
               </div>
-              <h2 id="helpers">Helpers</h2>
+              <h2 id="-helpers">辅助工具 - Helpers</h2>
 
             </div>
             
@@ -4743,9 +4704,8 @@ a new one to the browser history.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-248">&#182;</a>
               </div>
-              <p>Helper function to correctly set up the prototype chain for subclasses.
-Similar to <code>goog.inherits</code>, but uses a hash of prototype properties and
-class properties to be extended.</p>
+              <p>辅助函数，用来正确的设置子类的原型链。类似于<code>goog.inherits</code>，
+但使用的是原型属性的hash和class属性的hash来进行继承。</p>
 
             </div>
             
@@ -4762,9 +4722,8 @@ class properties to be extended.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-249">&#182;</a>
               </div>
-              <p>The constructor function for the new subclass is either defined by you
-(the “constructor” property in your <code>extend</code> definition), or defaulted
-by us to simply call the parent constructor.</p>
+              <p>新的子类的构造器函数要么是你自己定义的（<code>extend</code>调用时传入的”constructor”属性），要么
+就是有我们定义的类，它只简单的调用了父类的构造器。</p>
 
             </div>
             
@@ -4783,7 +4742,7 @@ by us to simply call the parent constructor.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-250">&#182;</a>
               </div>
-              <p>Add static properties to the constructor function, if supplied.</p>
+              <p>如果提供了静态属性，那么久添加到构造器函数上。</p>
 
             </div>
             
@@ -4798,8 +4757,7 @@ by us to simply call the parent constructor.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-251">&#182;</a>
               </div>
-              <p>Set the prototype chain to inherit from <code>parent</code>, without calling
-<code>parent</code>‘s constructor function and add the prototype properties.</p>
+              <p>在不调用<code>parent</code>的构造器函数以及没有添加原型属性的情况下，设置原型链以继承<code>parent</code>。</p>
 
             </div>
             
@@ -4815,8 +4773,7 @@ by us to simply call the parent constructor.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-252">&#182;</a>
               </div>
-              <p>Set a convenience property in case the parent’s prototype is needed
-later.</p>
+              <p>设置一个便捷的属性，以防自后需要使用父类的原型对象。</p>
 
             </div>
             
@@ -4834,7 +4791,7 @@ later.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-253">&#182;</a>
               </div>
-              <p>Set up inheritance for the model, collection, router, view and history.</p>
+              <p>设置model，collection，router，view和history的继承性。</p>
 
             </div>
             

@@ -539,60 +539,45 @@
     </p>
 
     <p>
-      Backbone.js gives structure to web applications
-      by providing <b>models</b> with key-value binding and custom events,
-      <b>collections</b> with a rich API of enumerable functions,
-      <b>views</b> with declarative event handling, and connects it all to your
-      existing API over a RESTful JSON interface.
+      Backbone.js为Web应用提供了组织结构，它提供了键值绑定的<b>模型</b>，自定义事件，拥有丰富的可枚举函数API的<b>集合</b>，
+      带有声明式事件处理的<b>视图</b>，并且它通过一个RESTful的JSON接口与你所有已存在的API相互连接起来。
     </p>
 
     <p>
-      The project is <a href="http://github.com/jashkenas/backbone/">hosted on GitHub</a>,
-      and the <a href="docs/backbone.html">annotated source code</a> is available,
-      as well as an online <a href="test/">test suite</a>,
-      an <a href="examples/todos/index.html">example application</a>,
-      a <a href="https://github.com/jashkenas/backbone/wiki/Tutorials%2C-blog-posts-and-example-sites">list of tutorials</a>
-      and a <a href="#examples">long list of real-world projects</a> that use Backbone.
-      Backbone is available for use under the <a href="http://github.com/jashkenas/backbone/blob/master/LICENSE">MIT software license</a>.
+      本项目托管在<a href="http://github.com/jashkenas/backbone/">GitHub</a>上，有一份<a href="docs/backbone.html">带有注释的源码</a>，一份线上的<a href="test/">测试套件</a>，一个<a href="examples/todos/index.html">示例应用</a>，以及一个使用Backbone的<a href="#examples">真实项目的列表</a>。遵循 <a href="http://github.com/jashkenas/backbone/blob/master/LICENSE">MIT软件许可证</a>的情况下就可以使用Backbone。
     </p>
 
     <p>
-      You can report bugs and discuss features on the
-      <a href="http://github.com/jashkenas/backbone/issues">GitHub issues page</a>,
-      on Freenode IRC in the <tt>#documentcloud</tt> channel, post questions to the
-      <a href="https://groups.google.com/forum/#!forum/backbonejs">Google Group</a>,
-      add pages to the <a href="https://github.com/jashkenas/backbone/wiki">wiki</a>
-      or send tweets to <a href="http://twitter.com/documentcloud">@documentcloud</a>.
+      你可以在<a href="http://github.com/jashkenas/backbone/issues">GitHub issues page</a>上，在Freenode IRC的<tt>#documentcloud</tt>上，报告bugs和讨论新功能，在<a href="https://groups.google.com/forum/#!forum/backbonejs">Google Group</a>上提交问题，在<a href="https://github.com/jashkenas/backbone/wiki">wiki</a>上添加页面，或者在<a href="http://twitter.com/documentcloud">@documentcloud</a>上发tweets。
     </p>
 
     <p>
       <i>
-        Backbone is an open-source component of
-        <a href="http://documentcloud.org/">DocumentCloud</a>.
+        Backbone是<a href="http://documentcloud.org/">DocumentCloud</a>的开源组件。
       </i>
     </p>
 
     <h2 id="downloads">
-      Downloads &amp; Dependencies
-      <span style="padding-left: 7px; font-size:11px; font-weight: normal;" class="interface">(Right-click, and use "Save As")</span>
+      下载 &amp; 依赖
+      <span style="padding-left: 7px; font-size:11px; font-weight: normal;" class="interface">(右键,使用“另存为”)</span>
     </h2>
 
     <table>
       <tr>
-        <td><a class="punch" href="backbone.js">Development Version (1.3.3)</a></td>
-        <td class="text"><i>72kb, Full source, tons of comments</i></td>
+        <td><a class="punch" href="backbone.js">开发版本 (1.3.3)</a></td>
+        <td class="text"><i>72kb, 全部源码，大量的注释</i></td>
       </tr>
       <tr>
-        <td><a class="punch" href="backbone-min.js">Production Version (1.3.3)</a></td>
+        <td><a class="punch" href="backbone-min.js">生产版本 (1.3.3)</a></td>
         <td class="text" style="line-height: 16px;">
-          <i>7.6kb, Packed and gzipped</i><br />
+          <i>7.6kb, 打包和gzipped压缩后</i><br />
           <small>(<a href="backbone-min.map">Source Map</a>)</small>
         </td>
       </tr>
       <tr>
         <td><a class="punch" href="https://raw.github.com/jashkenas/backbone/master/backbone.js">Edge Version (master)</a></td>
         <td>
-          <i>Unreleased, use at your own risk</i>
+          <i>未发布, 使用风险自负</i>
           <a class="travis-badge" href="https://travis-ci.org/jashkenas/backbone">
             <img src="https://travis-ci.org/jashkenas/backbone.png" />
           </a>
@@ -601,111 +586,63 @@
     </table>
 
     <p>
-      Backbone's only hard dependency is
-      <a href="http://underscorejs.org/">Underscore.js</a> <small>( >= 1.8.3)</small>.
-      For RESTful persistence and DOM manipulation with <a href="#View">Backbone.View</a>,
-      include <b><a href="https://jquery.com/">jQuery</a></b> ( >= 1.11.0), and
-      <b><a href="https://github.com/douglascrockford/JSON-js">json2.js</a></b> for older
-      Internet Explorer support.
-      <i>(Mimics of the Underscore and jQuery APIs, such as
-      <a href="https://lodash.com/">Lodash</a> and
-      <a href="http://zeptojs.com/">Zepto</a>, will
-      also tend to work, with varying degrees of compatibility.)</i>
+      Backbone仅严重依赖 <a href="http://underscorejs.org/">Underscore.js</a> <small>( >= 1.8.3)</small>。为了进行RESTful数据持久化和在<a href="#View">Backbone.View</a>中操作DOM，需要包含<b><a href="https://jquery.com/">jQuery</a></b> ( >= 1.11.0)，为了支持老版本IE还要包含<b><a href="https://github.com/douglascrockford/JSON-js">json2.js</a></b>。<i>（Underscore和jQuery的类似品，如<a href="https://lodash.com/">Lodash</a> 和 <a href="http://zeptojs.com/">Zepto</a>，在不同的兼容度下也可以工作）</i>
     </p>
-    <h2 id="Getting-started">Getting Started</h2>
+    <h2 id="Getting-started">入门指南</h2>
 
     <p>
-      When working on a web application that involves a lot of JavaScript, one
-      of the first things you learn is to stop tying your data to the DOM. It's all
-      too easy to create JavaScript applications that end up as tangled piles of
-      jQuery selectors and callbacks, all trying frantically to keep data in
-      sync between the HTML UI, your JavaScript logic, and the database on your
-      server. For rich client-side applications, a more structured approach
-      is often helpful.
+      当工作在一个包含了许多JavaScript的web应用中时，第一件你需要学习的事是停止将你的数据绑定到DOM上。在JavaScript应用中你最终很容易创建许多缠绕在一起的jQuery选择器和回调，并且慌慌张张的尝试在HTML UI，JavaScript逻辑以及服务器端的数据库之间同步数据。对于富客户端应用来说，一个更加结构化的方法通常会比较有用。
     </p>
 
     <p>
-      With Backbone, you represent your data as
-      <a href="#Model">Models</a>, which can be created, validated, destroyed,
-      and saved to the server. Whenever a UI action causes an attribute of
-      a model to change, the model triggers a <i>"change"</i> event; all
-      the <a href="#View">Views</a> that display the model's state can be notified of the
-      change, so that they are able to respond accordingly, re-rendering themselves with
-      the new information. In a finished Backbone app, you don't have to write the glue
-      code that looks into the DOM to find an element with a specific <i>id</i>,
-      and update the HTML manually
-      &mdash; when the model changes, the views simply update themselves.
+      使用Backbone，你用<a href="#Model">Models</a>代表你的数据，可以对模型执行创建，校验，销毁以及保存到服务器中。无论何时一个界面的action引起模型的属性变更，它都会触发一个“change”事件；所有的展示那么模型状态的<a href="#View">Views</a>都会收到变更通知，以便做出反应，根据新的信息重新渲染自己。在一个完整的Backbone应用中，你不必去写胶水代码去查询DOM，找到一个带有特殊<i>id</i>的元素，然后手工更新HTML — 当模型变更后，视图只要简单的更新它们自己即可。
     </p>
 
     <p>
-      Philosophically, Backbone is an attempt to discover the minimal set
-      of data-structuring (models and collections) and user interface (views
-      and URLs) primitives that are generally useful when building web applications with
-      JavaScript. In an ecosystem where overarching, decides-everything-for-you
-      frameworks are commonplace, and many libraries require your site to be
-      reorganized to suit their look, feel, and default behavior — Backbone should
-      continue to be a tool that gives you the <i>freedom</i> to design the full
-      experience of your web application.
+      哲学上，Backbone尝试找到一组数据结构（模型和集合）以及基本的用户界面（视图和URLs）的最小集合，它们是构建JavaScript应用通常所需的。在一个无所不包的生态系统中，帮你决定好一切的框架是陈腐的，许多库要求你的网站按照它们的外观，感觉以及默认的行为来进行组织 - Backbone是一个工具，让你<i>随心所欲</i>地设计你web应用的整体体验。
     </p>
 
     <p>
-      If you're new here, and aren't yet quite sure what Backbone is for, start by
-      browsing the <a href="#examples">list of Backbone-based projects</a>.
+      如果你是新手，不是很确定Backbone到底可以用在什么地方，请先浏览这个<a href="#examples">基于Backbone的项目列表</a>。
     </p>
 
     <p>
-      Many of the code examples in this documentation are runnable, because
-      Backbone is included on this page.
-      Click the <i>play</i> button to execute them.
+      文档中的许多代码示例是可以运行的，因为这个页面包含了Backbone。
     </p>
 
-    <h2 id="Model-View-separation">Models and Views</h2>
+    <h2 id="Model-View-separation">模型和视图</h2>
 
     <img class="figure" src="docs/images/intro-model-view.svg" alt="Model-View Separation.">
 
     <p>
-      The single most important thing that Backbone can help you with is keeping
-      your business logic separate from your user interface. When the two are
-      entangled, change is hard; when logic doesn't depend on UI, your
-      interface becomes easier to work with.
+      Backbone可以帮助你的一个最重要的事，是将你的业务逻辑与你的用户界面分离。当这二者纠缠在一起时，很难进行变更；当业务逻辑不依赖你的用户界面时，你的界面会更易处理。
     </p>
 
     <div class="columns">
       <div class="col-50">
-        <b>Model</b>
+        <b>模型</b>
         <ul>
-          <li>Orchestrates data and business logic.</li>
-          <li>Loads and saves from the server.</li>
-          <li>Emits events when data changes.</li>
+          <li>协调数据和业务逻辑。</li>
+          <li>从服务器加载数据或保存数据。</li>
+          <li>数据变更时触发事件。</li>
         </ul>
       </div>
       <div class="col-50">
-        <b>View</b>
+        <b>视图</b>
         <ul>
-          <li>Listens for changes and renders UI.</li>
-          <li>Handles user input and interactivity.</li>
-          <li>Sends captured input to the model.</li>
+          <li>监听模型的变更，渲染界面。</li>
+          <li>处理用户输入和交互。</li>
+          <li>将捕获到的输入发送给模型。</li>
         </ul>
       </div>
     </div>
 
     <p>
-      A <b>Model</b> manages an internal table of data attributes, and
-      triggers <tt>"change"</tt> events when any of its data is modified.
-      Models handle syncing data with a persistence layer — usually a REST API
-      with a backing database. Design your models as the atomic reusable objects
-      containing all of the helpful functions for manipulating their particular
-      bit of data. Models should be able to be passed around throughout your app,
-      and used anywhere that bit of data is needed.
+      一个<b>模型</b>管理了一个数据属性的内部表，任何数据的变更都会触发<tt>"change"</tt>事件。模型在持久层上处理数据同步 - 使用REST API操作后台数据库。将你的模型设计成原子性可重用对象，包含所有辅助函数来操作它们特有的数据。模型应该在你的应用中进行传递，用在任何需要数据的地方。
     </p>
 
     <p>
-      A <b>View</b> is an atomic chunk of user interface. It often renders the
-      data from a specific model, or number of models &mdash; but views can
-      also be data-less chunks of UI that stand alone.
-      Models should be generally unaware of views. Instead, views listen to
-      the model <tt>"change"</tt> events, and react or re-render themselves
-      appropriately.
+      一个<b>视图</b>就是一块原子的用户界面。它通常是用来渲染的数据，数据来自一个特定模型，或许多模型 - 但视图也可能是数据无关的单独的一块界面。模型通常不知道视图的存在。相反，视图监听模型的<tt>"change"</tt>事件，做出相应或适时的重新渲染它们自己。
     </p>
 
     <h2 id="Model-Collections">Collections</h2>
@@ -713,19 +650,13 @@
     <img class="figure" src="docs/images/intro-collections.svg" alt="Model Collections.">
 
     <p>
-      A <b>Collection</b> helps you deal with a group of related models, handling
-      the loading and saving of new models to the server and providing helper
-      functions for performing aggregations or computations against a list of models.
-      Aside from their own events, collections also proxy through all of the
-      events that occur to models within them, allowing you to listen in one place
-      for any change that might happen to any model in the collection.
+      一个<b>集合</b>帮助你处理一组相关的模型，负责加载模型，或保存新的模型到服务器端，提供辅助函数，用以在模型的列表上执行聚合或计算操作。除了它们自己的事件外，集合也会代理所有发生在内部模型上的事件，允许你在一个地方监听任何可能发生在模型上的变更。
     </p>
 
-    <h2 id="API-integration">API Integration</h2>
+    <h2 id="API-integration">API 集成</h2>
 
     <p>
-      Backbone is pre-configured to sync with a RESTful API. Simply create a
-      new Collection with the <tt>url</tt> of your resource endpoint:
+      Backbone提前配置好与RESTful API风格保持一致。简单的创建一个新的集合，它带有指向你资源终点的<tt>url</tt>：
     </p>
 
 <pre>
@@ -735,8 +666,7 @@ var Books = Backbone.Collection.extend({
 </pre>
 
     <p>
-      The <b>Collection</b> and <b>Model</b> components together form a direct
-      mapping of REST resources using the following methods:
+      使用以下方法，<b>集合</b> 和 <b>模型</b>组件一起直接组成了REST资源的映射：
     </p>
 
 <pre>
@@ -748,10 +678,7 @@ DEL  /books/1 ... model.destroy();
 </pre>
 
     <p>
-      When fetching raw JSON data from an API, a <b>Collection</b> will
-      automatically populate itself with data formatted as an array, while
-      a <b>Model</b> will automatically populate itself with data formatted
-      as an object:
+      当从API中抓取JSON数据时，一个<b>集合</b>会自动将数据以数组格式进行填充，而一个<b>模型</b>会自动将数据以对象格式进行填充：
     </p>
 
 <pre>
@@ -760,10 +687,7 @@ DEL  /books/1 ... model.destroy();
 </pre>
 
     <p>
-      However, it's fairly common to encounter APIs that return data in a
-      different format than what Backbone expects. For example, consider
-      fetching a <b>Collection</b> from an API that returns the real data
-      array wrapped in metadata:
+      然而，经常会遇到一些APIs，它们返回的数据格式与Backbone期望的不一致。比如，考虑从一个API中抓取一个<b>集合</b>，它返回的真实数据数组是封装在元数据中的：
     </p>
 
 <pre>
@@ -779,10 +703,7 @@ DEL  /books/1 ... model.destroy();
 </pre>
 
     <p>
-      In the above example data, a <b>Collection</b> should populate using the
-      <tt>"books"</tt> array rather than the root object structure. This
-      difference is easily reconciled using a <tt>parse</tt> method that
-      returns (or transforms) the desired portion of API data:
+      在上面例子中的数据，一个<b>集合</b>应该使用<tt>"books"</tt>数组而不是根对象填充数据。这种差异使用<tt>parse</tt>方法很容易协调，它会返回（或转换）API数据的所需部分：
     </p>
 
 <pre>
@@ -794,43 +715,27 @@ var Books = Backbone.Collection.extend({
 });
 </pre>
 
-    <h2 id="View-rendering">View Rendering</h2>
+    <h2 id="View-rendering">视图渲染</h2>
 
     <img class="figure" src="docs/images/intro-views.svg" alt="View rendering.">
 
     <p>
-      Each <b>View</b> manages the rendering and user interaction within its own
-      DOM element. If you're strict about not allowing views to reach outside
-      of themselves, it helps keep your interface flexible &mdash; allowing
-      views to be rendered in isolation in any place where they might be needed.
+      每个<b>视图</b>在自己的DOM元素上，都负责管理渲染和用户交互。如果你严格遵循不让你的视图插手别的view，这会保持你界面的灵活性 &mdash; 需要时，视图可以在任何地方隔离渲染。
     </p>
 
     <p>
-      Backbone remains unopinionated about the process used to render <b>View</b>
-      objects and their subviews into UI: you define how your models get translated
-      into HTML (or SVG, or Canvas, or something even more exotic).
-      It could be as prosaic as a simple
-      <a href="http://underscorejs.org/#template">Underscore template</a>, or as fancy as the
-      <a href="http://facebook.github.io/react/docs/tutorial.html">React virtual DOM</a>.
-      Some basic approaches to rendering views can be found
-      in the <a href="https://github.com/jashkenas/backbone/wiki/Backbone%2C-The-Primer">Backbone primer</a>.
+      Backbone没有规定渲染<b>视图</b>和它们的子视图到界面的流程：你需要定义你的模型是如何转换为HTML（或SVG，或Canvas，或其它方式）。可以使用简单的<a href="http://underscorejs.org/#template">Underscore template</a>，或酷炫的<a href="http://facebook.github.io/react/docs/tutorial.html">React virtual DOM</a>。一些渲染视图的基本方法可以查看<a href="https://github.com/jashkenas/backbone/wiki/Backbone%2C-The-Primer">Backbone primer</a>。
     </p>
 
-    <h2 id="Routing">Routing with URLs</h2>
+    <h2 id="Routing">URLs路由</h2>
 
     <img class="figure" src="docs/images/intro-routing.svg" alt="Routing">
 
     <p>
-      In rich web applications, we still want to provide linkable,
-      bookmarkable, and shareable URLs to meaningful locations within an app.
-      Use the <b>Router</b> to update the browser URL whenever the user
-      reaches a new "place" in your app that they might want to bookmark or share.
-      Conversely, the <b>Router</b> detects changes to the URL &mdash; say,
-      pressing the "Back" button &mdash; and can tell your application exactly where you
-      are now.
+      在富web应用中，我们仍希望提供可链接的，可书签化的，可分享的URLs，在一个应用中提供有意义的地址。使用<b>Router</b>来更新浏览器的URL，无论何时用户在你的应用中浏览一个他们可能需要添加书签或分享的新“地方”。相反，<b>Router</b>也会检测URL的变更 &mdash;  比如说，按下“回退”按钮 &mdash;  告诉你的应用你当前的位置。
     </p>
 
-    <h2 id="Events">Backbone.Events</h2>
+    <h2 id="Events">事件 - Backbone.Events</h2>
 
     <p>
       <b>Events</b> is a module that can be mixed in to any object, giving the
