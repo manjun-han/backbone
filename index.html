@@ -1392,6 +1392,7 @@ book.on("change", function() {
       hash which differ from the model. This can be used to figure out which
       portions of a view should be updated, or what calls
       need to be made to sync the changes to the server.
+      获取模型属性的一个hash，它是自上次调用<a href="#Model-set">set</a>以来变更的部分，如果没有任何变更则返回false。可以传入一个可选的外部<b>attributes</b> 的hashu，并返回该attributes中与模型的attributes不同的部分。
     </p>
 
     <p id="Model-previous">
