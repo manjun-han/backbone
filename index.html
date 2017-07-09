@@ -1321,22 +1321,13 @@ if (!one.isValid()) {
     </p>
 
     <p>
-      Delegates to <a href="#Collection-url">Collection#url</a> to generate the
-      URL, so make sure that you have it defined, or a <a href="#Model-urlRoot">urlRoot</a>
-      property, if all models of this class share a common root URL.
-      A model with an id of <tt>101</tt>, stored in a
-      <a href="#Collection">Backbone.Collection</a> with a <tt>url</tt> of <tt>"/documents/7/notes"</tt>,
-      would have this URL: <tt>"/documents/7/notes/101"</tt>
+      代理给<a href="#Collection-url">Collection#url</a>来生成URL，以确保你已经定义它，或者如果所有这个类的模型共享一个通用的root URL，则使用 <a href="#Model-urlRoot">urlRoot</a>属性。一个模型的id是<tt>101</tt>，它存储在<tt>url</tt>是<tt>"/documents/7/notes"</tt>的集合上，那么它会得到一个URL：<tt>"/documents/7/notes/101"</tt>
     </p>
 
     <p id="Model-urlRoot">
       <b class="header">urlRoot</b><code>model.urlRoot or model.urlRoot()</code>
       <br />
-      Specify a <tt>urlRoot</tt> if you're using a model <i>outside</i> of a collection,
-      to enable the default <a href="#Model-url">url</a> function to generate
-      URLs based on the model id. <tt>"[urlRoot]/id"</tt><br />
-      Normally, you won't need to define this.
-      Note that <tt>urlRoot</tt> may also be a function.
+      如果你在集合外面使用一个模型，你需要指定一个<tt>urlRoot</tt>，以使用默认的 <a href="#Model-url">url</a>函数生成一个基于模型id的URLs。通常情况下你不需要定义<tt>"[urlRoot]/id"</tt>。注意<tt>urlRoot</tt>也可以是个函数。
     </p>
 
 <pre class="runnable">
@@ -1350,20 +1341,12 @@ alert(solaris.url());
     <p id="Model-parse">
       <b class="header">parse</b><code>model.parse(response, options)</code>
       <br />
-      <b>parse</b> is called whenever a model's data is returned by the
-      server, in <a href="#Model-fetch">fetch</a>, and <a href="#Model-save">save</a>.
-      The function is passed the raw <tt>response</tt> object, and should return
-      the attributes hash to be <a href="#Model-set">set</a> on the model. The
-      default implementation is a no-op, simply passing through the JSON response.
-      Override this if you need to work with a preexisting API, or better namespace
-      your responses.
+      <b>parse</b>会在服务器使用<a href="#Model-fetch">fetch</a>或 <a href="#Model-save">save</a>返回模型的数据时调用。
+      此函数会传入未处理的<tt>response</tt>对象，并且应该返回一个可以用来<a href="#Model-set">set</a>到模型上的属性的hash。默认的实现是空的，只是简单的返回JSON响应。如果你需要使用已存的API，或使用更好的为响应提供命名空间，你可以覆盖此方法。
     </p>
 
     <p>
-      If you're working with a Rails backend that has a version prior to 3.1,
-      you'll notice that its default <tt>to_json</tt> implementation includes
-      a model's attributes under a namespace. To disable this behavior for
-      seamless Backbone integration, set:
+      如果你正在使用Rails做后端开发，并且它是3.1之前的版本，你需要注意它默认的 <tt>to_json</tt>实现它的模型属性是在一个命名空间下。要禁用此行为来无缝整合Backbone，只要设置：
     </p>
 
 <pre>
