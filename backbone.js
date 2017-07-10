@@ -1292,7 +1292,7 @@
   // 开启`Backbone.emulateHTTP`，将`PUT`和`DELETE`以`POST`格式发送，使用`_method`
   // 参数包含真正的HTTP方法，同时所有的请求体`model`为参数名称，以`application/x-www-form-urlencoded`格式而不是
   // `application/json`格式发送。在与像**PHP**这种服务器端交互时很有用，它在读取`PUT`请求体时比较困难。
-  // 
+  //
   Backbone.sync = function(method, model, options) {
     var type = methodMap[method];
 
@@ -1678,7 +1678,7 @@
     //
     // 如果你希望触发路由的回调（通常不会），可以在选项对象包含`trigger: true`,或者如果你希望在不添加历史记录的前提下
     // 修改当前的URL，就传入 `replace: true`。
-    // 
+    //
     navigate: function(fragment, options) {
       if (!History.started) return false;
       if (!options || options === true) options = {trigger: !!options};

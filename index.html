@@ -1432,11 +1432,7 @@ bill.set({name : "Bill Jones"});
     <p id="Collection-model">
       <b class="header">model</b><code>collection.model([attrs], [options])</code>
       <br />
-      Override this property to specify the model class that the collection
-      contains. If defined, you can pass raw attributes objects (and arrays) to
-      <a href="#Collection-add">add</a>, <a href="#Collection-create">create</a>,
-      and <a href="#Collection-reset">reset</a>, and the attributes will be
-      converted into a model of the proper type.
+      覆盖此属性，指定集合所包含的模型的类。定义后，你就能传递属性对象（和数组）到<a href="#Collection-add">add</a>， <a href="#Collection-create">create</a>和<a href="#Collection-reset">reset</a>方法中，这些属性会被转换为合适类型的模型对象。
     </p>
 
 <pre>
@@ -1446,8 +1442,7 @@ var Library = Backbone.Collection.extend({
 </pre>
 
     <p>
-      A collection can also contain polymorphic models by overriding this property
-      with a constructor that returns a model.
+      一个集合也可以包含多种模型，可以使用一个构造器函数覆盖此属性然后根据条件返回模型。
     </p>
 
 <pre>
@@ -1467,19 +1462,11 @@ var Library = Backbone.Collection.extend({
     <p id="Collection-modelId">
       <b class="header">modelId</b><code>collection.modelId(attrs)</code>
       <br />
-      Override this method to return the value the collection will use to
-      identify a model given its attributes. Useful for combining models from
-      multiple tables with different <a href="#Model-idAttribute"><tt>idAttribute</tt></a>
-      values into a single collection.
+      覆盖此方法，它接受模型的属性，并返回集合用来标识模型唯一性的值。用来合并模型，将不同表中带有不同<a href="#Model-idAttribute"><tt>idAttribute</tt></a>的值整合到单个集合中。
     </p>
 
     <p>
-      By default returns the value of the attributes'
-      <a href="#Model-idAttribute"><tt>idAttribute</tt></a>
-      from the collection's model class or failing that, <tt>id</tt>. If
-      your collection uses a <a href="#Collection-model">model factory</a> and
-      those models have an <tt>idAttribute</tt> other than <tt>id</tt> you must
-      override this method.
+      默认情况下此方法会返回集合中模型类的<a href="#Model-idAttribute"><tt>idAttribute</tt></a>属性的值，如果不存在则返回<tt>id</tt>属性的值。如果你的集合使用了<a href="#Collection-model">model factory</a>并且这些模型拥有<tt>idAttribute</tt>而没有<tt>id</tt>，你必须要覆盖此方法。
     </p>
 
 <pre class="runnable">
@@ -1502,14 +1489,7 @@ alert('dvd: ' + dvdId + ', vhs: ' + vhsId);
     <p id="Collection-constructor">
       <b class="header">constructor / initialize</b><code>new Backbone.Collection([models], [options])</code>
       <br />
-      When creating a Collection, you may choose to pass in the initial array
-      of <b>models</b>.  The collection's <a href="#Collection-comparator">comparator</a>
-      may be included as an option. Passing <tt>false</tt> as the
-      comparator option will prevent sorting. If you define an
-      <b>initialize</b> function, it will be invoked when the collection is
-      created. There are a couple of options that, if provided, are attached to
-      the collection directly: <tt>model</tt> and <tt>comparator</tt>.<br />
-      Pass <tt>null</tt> for <tt>models</tt> to create an empty Collection with <tt>options</tt>.
+      在创建集合时，你需要传入初始化的<b>models</b>数组。集合的<a href="#Collection-comparator">comparator</a>可以作为一个选项传入。<a href="#Collection-comparator">comparator</a>传入<tt>false</tt>，会阻止集合排序。如果你定义了<b>initialize</b>函数，它会在集合对象创建后调用。有些选项是可以作为属性直接添加到集合对象上的： <tt>model</tt> 和 <tt>comparator</tt>。传入值为<tt>null</tt>的<tt>models</tt>会创建一个空的集合对象。
     </p>
 
 <pre>
@@ -1522,21 +1502,13 @@ var spaces = new Backbone.Collection(null, {
     <p id="Collection-models">
       <b class="header">models</b><code>collection.models</code>
       <br />
-      Raw access to the JavaScript array of models inside of the collection. Usually you'll
-      want to use <tt>get</tt>, <tt>at</tt>, or the <b>Underscore methods</b>
-      to access model objects, but occasionally a direct reference to the array
-      is desired.
+      集合内部模型的JavaScript数组引用。通常你应该使用<tt>get</tt>， <tt>at</tt>，或<b>Underscore的方法</b>来访问模型对象，但偶尔也希望直接引用模型数组。
     </p>
 
     <p id="Collection-toJSON">
       <b class="header">toJSON</b><code>collection.toJSON([options])</code>
       <br />
-      Return an array containing the attributes hash of each model
-      (via <a href="#Model-toJSON">toJSON</a>) in the
-      collection. This can be used to serialize and persist the
-      collection as a whole. The name of this method is a bit confusing, because
-      it conforms to
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior">JavaScript's JSON API</a>.
+      返回集合中所有模型属性的hash(通过 <a href="#Model-toJSON">toJSON</a>返回)组成的数组。用来集合的序列化和持久化。这个方法的名称有点让人困惑，因为它与<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior">JavaScript's JSON API</a>的toJSON方法重名了。
     </p>
 
 <pre class="runnable">
@@ -1552,8 +1524,7 @@ alert(JSON.stringify(collection));
     <p id="Collection-sync">
       <b class="header">sync</b><code>collection.sync(method, collection, [options])</code>
       <br />
-      Uses <a href="#Sync">Backbone.sync</a> to persist the state of a
-      collection to the server.  Can be overridden for custom behavior.
+      使用<a href="#Sync">Backbone.sync</a> 来将集合的状态持久化到服务器中。可以覆盖或添加自定义行为。
     </p>
 
     <p id="Collection-Underscore-Methods">
