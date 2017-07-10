@@ -10,7 +10,7 @@
     body {
       font-size: 14px;
       line-height: 22px;
-      font-family: Helvetica Neue, Helvetica, Arial;
+      font-family: arial,sans-serif,YaHei, Helvetica Neue, Helvetica, Arial;
       background: #f4f4f4 url(docs/images/background.png);
     }
     .interface {
@@ -1386,20 +1386,13 @@ book.on("change", function() {
     <p id="Model-changedAttributes">
       <b class="header">changedAttributes</b><code>model.changedAttributes([attributes])</code>
       <br />
-      Retrieve a hash of only the model's attributes that have changed since the last
-      <a href="#Model-set">set</a>, or <tt>false</tt> if there are none. Optionally, an external
-      <b>attributes</b> hash can be passed in, returning the attributes in that
-      hash which differ from the model. This can be used to figure out which
-      portions of a view should be updated, or what calls
-      need to be made to sync the changes to the server.
-      获取模型属性的一个hash，它是自上次调用<a href="#Model-set">set</a>以来变更的部分，如果没有任何变更则返回false。可以传入一个可选的外部<b>attributes</b> 的hashu，并返回该attributes中与模型的attributes不同的部分。
+      获取模型属性的一个hash，它是自上次调用<a href="#Model-set">set</a>以来变更的部分，如果没有任何变更则返回false。可以传入一个可选的外部<b>attributes</b> 的hashu，并返回该attributes中与模型的attributes不同的部分。者可以用来计算view需要更新的部分，或者那些数据是需要同步到服务器端的
     </p>
 
     <p id="Model-previous">
       <b class="header">previous</b><code>model.previous(attribute)</code>
       <br />
-      During a <tt>"change"</tt> event, this method can be used to get the
-      previous value of a changed attribute.
+      在<tt>"change"</tt>时间中，此方法可以用来获取属性之前的值。
     </p>
 
 <pre class="runnable">
@@ -1417,35 +1410,23 @@ bill.set({name : "Bill Jones"});
     <p id="Model-previousAttributes">
       <b class="header">previousAttributes</b><code>model.previousAttributes()</code>
       <br />
-      Return a copy of the model's previous attributes. Useful for getting a
-      diff between versions of a model, or getting back to a valid state after
-      an error occurs.
+      返回一个模型上一个状态下属性的拷贝。用来计算模型数据不同版本间的差异，或者在校验失败后回到之前合法的状态下。
     </p>
 
-    <h2 id="Collection">Backbone.Collection</h2>
+    <h2 id="Collection">集合 - Backbone.Collection</h2>
 
     <p>
-      Collections are ordered sets of models. You can bind <tt>"change"</tt> events
-      to be notified when any model in the collection has been modified,
-      listen for <tt>"add"</tt> and <tt>"remove"</tt> events, <tt>fetch</tt>
-      the collection from the server, and use a full suite of
-      <a href="#Collection-Underscore-Methods">Underscore.js methods</a>.
+      Collections是模型的排序集合。你可以绑定<tt>"change"</tt>事件，集合上任意模型修改后，集合都会得到通知，还可以监听 <tt>"add"</tt>， <tt>"remove"</tt>事件，以及从服务器抓取集合的<tt>fetch</tt>事件，以及使用一整套的<a href="#Collection-Underscore-Methods">Underscore.js 方法</a>。
     </p>
 
     <p>
-      Any event that is triggered on a model in a collection will also be
-      triggered on the collection directly, for convenience.
-      This allows you to listen for changes to specific attributes in any
-      model in a collection, for example:
-      <tt>documents.on("change:selected", ...)</tt>
+      任何发生在集合里模型上的事件，也会直接在集合上触发，这样比较方便。者允许你在集合上监听任意特定属性的变更，比如：<tt>documents.on("change:selected", ...)</tt>
     </p>
 
     <p id="Collection-extend">
       <b class="header">extend</b><code>Backbone.Collection.extend(properties, [classProperties])</code>
       <br />
-      To create a <b>Collection</b> class of your own, extend <b>Backbone.Collection</b>,
-      providing instance <b>properties</b>, as well as optional <b>classProperties</b> to be attached
-      directly to the collection's constructor function.
+      要创建你自己的<b>集合</b>类，需要扩展<b>Backbone.Collection</b>，并提供实例<b>属性properties</b>，以及可选的直接附加到集合构造器上的<b>类属性classProperties</b>。
     </p>
 
     <p id="Collection-model">
