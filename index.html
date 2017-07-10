@@ -1530,14 +1530,11 @@ alert(JSON.stringify(collection));
     <p id="Collection-Underscore-Methods">
       <b class="header">Underscore Methods (46)</b>
       <br />
-      Backbone proxies to <b>Underscore.js</b> to provide 46 iteration functions
-      on <b>Backbone.Collection</b>. They aren't all documented here, but
-      you can take a look at the Underscore documentation for the full details&hellip;
+      Backbone代理了<b>Underscore.js</b>，并在<b>Backbone.Collection</b>上提供了46个迭代函数。它们没有都在这里记录，但你可以查看Underscore的文档来寻找详细的细节&hellip;
     </p>
 
     <p>
-      Most methods can take an object or string to support model-attribute-style
-      predicates or a function that receives the model instance as an argument.
+      多数的方法可以接受一个对象或一个字符串，以支持model-attribute-style的判断，或接收一个函数，函数的参数是模型的实例。
     </p>
 
     <ul class="small">
@@ -1596,15 +1593,7 @@ var randomThree = books.sample(3);
     <p id="Collection-add">
       <b class="header">add</b><code>collection.add(models, [options])</code>
       <br />
-      Add a model (or an array of models) to the collection, firing an <tt>"add"</tt>
-      event for each model, and an <tt>"update"</tt> event afterwards. If a <a href="#Collection-model">model</a> property is defined, you may also pass
-      raw attributes objects, and have them be vivified as instances of the model.
-      Returns the added (or preexisting, if duplicate) models.
-      Pass <tt>{at: index}</tt> to splice the model into the collection at the
-      specified <tt>index</tt>. If you're adding models to the collection that are
-      <i>already</i> in the collection, they'll be ignored, unless you pass
-      <tt>{merge: true}</tt>, in which case their attributes will be merged
-      into the corresponding models, firing any appropriate <tt>"change"</tt> events.
+      向集合中添加一个模型（或一个模型的数组），为每个模型触发一个<tt>"add"</tt>事件，之后会触发一个<tt>"update"</tt> 事件。如果定义了<a href="#Collection-model">model</a>属性，你可以传入原始属性对象，让它们当做是模型的实例。此方法返回添加后的（或已存在的，如果重复了）模型。传入<tt>{at: index}</tt>将你的模型在给定的<tt>index</tt>出加入到集合上。如果你添加的模型已存在与集合中，它们会被忽略掉，除非你传入<tt>{merge: true}</tt>选项，这会使得它们的属性合并到对应的模型上，并且会触发合适的<tt>"change"</tt>事件。
     </p>
 
 <pre class="runnable">
@@ -1621,40 +1610,23 @@ ships.add([
 </pre>
 
     <p class="warning">
-      Note that adding the same model (a model with the same <tt>id</tt>) to
-      a collection more than once <br /> is a no-op.
+      注意，多次添加相同的模型（模型的<tt>id</tt>相同）到集合中是没有效果的。
     </p>
 
     <p id="Collection-remove">
       <b class="header">remove</b><code>collection.remove(models, [options])</code>
       <br />
-      Remove a model (or an array of models) from the collection, and return
-      them. Each model can be a Model instance, an <tt>id</tt> string or a JS
-      object, any value acceptable as the <tt>id</tt> argument of
-      <a href="#Collection-get"><tt>collection.get</tt></a>.
-      Fires a <tt>"remove"</tt> event for each model, and a single
-      <tt>"update"</tt> event afterwards, unless <tt>{silent: true}</tt> is passed.
-      The model's index before removal is available to listeners as
-      <tt>options.index</tt>.
+      从集合中删除一个模型（或一组模型），并返回它们。每个模型可以是Model的实例，或一个<tt>id</tt>字符串，或一个JS对象，它们是<a href="#Collection-get"><tt>collection.get</tt></a>方法可接受的任何的<tt>id</tt>参数。在每个模型上都会触发一个<tt>"remove"</tt>事件，之后触发一个<tt>"update"</tt>事件，触发传入<tt>{silent: true}</tt> 选项。模型在删除前的索引可以在监听函数上以<tt>options.index</tt>的形式获取。
     </p>
 
     <p id="Collection-reset">
       <b class="header">reset</b><code>collection.reset([models], [options])</code>
       <br />
-      Adding and removing models one at a time is all well and good, but sometimes
-      you have so many models to change that you'd rather just update the collection
-      in bulk. Use <b>reset</b> to replace a collection with a new list
-      of models (or attribute hashes), triggering a single <tt>"reset"</tt> event
-      on completion, and <i>without</i> triggering any add or remove events on any models.
-      Returns the newly-set models.
-      For convenience, within a <tt>"reset"</tt> event, the list of any
-      previous models is available as <tt>options.previousModels</tt>.<br />
-      Pass <tt>null</tt> for <tt>models</tt> to empty your Collection with <tt>options</tt>.
+      一次添加和删除一个模型是不错的，但是有时你有许多模型要变更，以至于你希望在集合上执行批量更新。使用<b>reset</b>方法，用一个新的模型（或属性的hash）列表代理集合中已有的模型，在完成只有触发一个<tt>"reset"</tt>事件，而不是在每个添加或删除的模型上触发事件。此方法返回新设置的模型的列表。为了便于操作，在一个<tt>"reset"</tt>事件中，之前的模型都可以在<tt>options.previousModels</tt>上获取到。传入<tt>null</tt>到<tt>options</tt>的<tt>models</tt>属性上可以清空集合。
     </p>
 
     <p>
-      Here's an example using <b>reset</b> to bootstrap a collection during initial page load,
-      in a Rails application:
+      以下是一个在Rails应用中使用 <b>reset</b> 方法，在页面初始加载时创建集合的例子：
     </p>
 
 <pre>
@@ -1665,22 +1637,13 @@ ships.add([
 </pre>
 
     <p>
-      Calling <tt>collection.reset()</tt> without passing any models as arguments
-      will empty the entire collection.
+      在未传入任何模型的情况下调用<tt>collection.reset()</tt>会清空集合。
     </p>
 
     <p id="Collection-set">
       <b class="header">set</b><code>collection.set(models, [options])</code>
       <br />
-      The <b>set</b> method performs a "smart" update of the collection
-      with the passed list of models. If a model in the list isn't yet in the
-      collection it will be added; if the model is already in the collection
-      its attributes will be merged; and if the collection contains any models that
-      <i>aren't</i> present in the list, they'll be removed. All of the appropriate
-      <tt>"add"</tt>, <tt>"remove"</tt>, and <tt>"change"</tt> events are fired
-      as this happens. Returns the touched models in the collection.
-      If you'd like to customize the behavior, you can disable
-      it with options: <tt>{add: false}</tt>, <tt>{remove: false}</tt>, or <tt>{merge: false}</tt>.
+      传入一个模型的列表，<b>set</b> 方法会在集合上执行一个“智能”的更新。未存在于集合的模型会被加进去；已存在于集合中的模型属性会被合并；不在传入的列表中但却在当前集合中的模型会被删除。这些情况发生时，<tt>"add"</tt>, <tt>"remove"</tt>, 和 <tt>"change"</tt>事件都会适时触发。如果你希望自定义这种行为，你可以通过在选项中分别传入 <tt>{add: false}</tt>, <tt>{remove: false}</tt>, 或 <tt>{merge: false}</tt>来禁止它们。
     </p>
 
 <pre>
@@ -1696,8 +1659,7 @@ vanHalen.set([eddie, alex, stone, hagar]);
     <p id="Collection-get">
       <b class="header">get</b><code>collection.get(id)</code>
       <br />
-      Get a model from a collection, specified by an <a href="#Model-id">id</a>,
-      a <a href="#Model-cid">cid</a>, or by passing in a <b>model</b>.
+      给定一个<a href="#Model-id">id</a>或一个<a href="#Model-cid">cid</a>，或一个 <b>model</b>来从集合中获取对应的模型对象。
     </p>
 
 <pre>
@@ -1707,85 +1669,57 @@ var book = library.get(110);
     <p id="Collection-at">
       <b class="header">at</b><code>collection.at(index)</code>
       <br />
-      Get a model from a collection, specified by index. Useful if your collection
-      is sorted, and if your collection isn't sorted, <b>at</b> will still
-      retrieve models in insertion order. When passed a negative index, it
-      will retrieve the model from the back of the collection.
+      给定一个索引，从集合中获取一个模型。如果你的集合是排过序的这会很有用，否则 <b>at</b> 方法仍会按照插入顺序返回对应的模型。当传入一个负值索引，会从集合的后面开始返回对应的模型。
     </p>
 
     <p id="Collection-push">
       <b class="header">push</b><code>collection.push(model, [options])</code>
       <br />
-      Add a model at the end of a collection. Takes the same options as
-      <a href="#Collection-add">add</a>.
+      在集合的末尾添加一个模型。参与与<a href="#Collection-add">add</a>方法相同。
     </p>
 
     <p id="Collection-pop">
       <b class="header">pop</b><code>collection.pop([options])</code>
       <br />
-      Remove and return the last model from a collection. Takes the same options as
-      <a href="#Collection-remove">remove</a>.
+      从一个集合中删除并返回最后一个模型对象。参数与<a href="#Collection-remove">remove</a>方法相同。
     </p>
 
     <p id="Collection-unshift">
       <b class="header">unshift</b><code>collection.unshift(model, [options])</code>
       <br />
-      Add a model at the beginning of a collection. Takes the same options as
-      <a href="#Collection-add">add</a>.
+      在模型的开始处添加一个模型。参数与<a href="#Collection-add">add</a>方法相同。
     </p>
 
     <p id="Collection-shift">
       <b class="header">shift</b><code>collection.shift([options])</code>
       <br />
-      Remove and return the first model from a collection. Takes the same options as
-      <a href="#Collection-remove">remove</a>.
+      移除并返回一个集合的第一个模型对象。参数与<a href="#Collection-remove">remove</a>相同。
     </p>
 
     <p id="Collection-slice">
       <b class="header">slice</b><code>collection.slice(begin, end)</code>
       <br />
-      Return a shallow copy of this collection's models, using the same options as
-      native
-      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">Array#slice</a>.
+      返回一个集合模型的浅拷贝，参数与原生的<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/slice">Array#slice</a>方法相同。
     </p>
 
     <p id="Collection-length">
       <b class="header">length</b><code>collection.length</code>
       <br />
-      Like an array, a Collection maintains a <tt>length</tt> property, counting
-      the number of models it contains.
+      与数组相同，集合也维护了一个 <tt>length</tt>属性，记录了他所包含的模型的数量。
     </p>
 
     <p id="Collection-comparator">
       <b class="header">comparator</b><code>collection.comparator</code>
       <br />
-      By default there is no <b>comparator</b> for a collection.
-      If you define a comparator, it will be used to maintain
-      the collection in sorted order. This means that as models are added,
-      they are inserted at the correct index in <tt>collection.models</tt>.
-      A comparator can be defined as a
-      <a href="http://underscorejs.org/#sortBy">sortBy</a>
-      (pass a function that takes a single argument),
-      as a
-      <a href="https://developer.mozilla.org/JavaScript/Reference/Global_Objects/Array/sort">sort</a>
-      (pass a comparator function that expects two arguments),
-      or as a string indicating the attribute to sort by.
+      默认情况下集合没有<b>comparator</b>比较器。如果你定义了一个比较器，集合会用它来维护模型的顺序。这意味着，添加一个模型时，它会被插入到<tt>collection.models</tt>的正确的索引位置。比较器可以用<a href="http://underscorejs.org/#sortBy">sortBy</a>函数（传入一个接受唯一参数的函数）定义，或用<a href="https://developer.mozilla.org/JavaScript/Reference/Global_Objects/Array/sort">sort</a>函数（传入一个接受两个参数的比较器函数）定义，或一个标识用来排序属性的字符串。
     </p>
 
     <p>
-      "sortBy" comparator functions take a model and return a numeric or string
-      value by which the model should be ordered relative to others.
-      "sort" comparator functions take two models, and return <tt>-1</tt> if
-      the first model should come before the second, <tt>0</tt> if they are of
-      the same rank and <tt>1</tt> if the first model should come after.
-      <i>Note that Backbone depends on the arity of your comparator function to
-      determine between the two styles, so be careful if your comparator function
-      is bound.</i>
+      "sortBy"比较器函数接受一个模型，并返回一个数字或字符串，表明模型相对其它模型的排序位置。"sort"比较器接受两个模型，如果第一个应该排在第二个前面则返回<tt>-1</tt>，如果两个排序相等则返回<tt>0</tt>，如果第一个应该排在第二个后面则返回<tt>1</tt>。注意Backbone会依赖你比较器参数的个数来决定使用哪个形式，所以请注意你绑定的比较器函数。
     </p>
 
     <p>
-      Note how even though all of the chapters in this example are added backwards,
-      they come out in the proper order:
+      注意虽然本例中所有的章节是从后往前加的，但它们出来的顺序是正确的：
     </p>
 
 <pre class="runnable">
@@ -1802,26 +1736,19 @@ alert(chapters.pluck('title'));
 </pre>
 
     <p class="warning">
-      Collections with a comparator will not automatically re-sort if you
-      later change model attributes, so you may wish to call
-      <tt>sort</tt> after changing model attributes that would affect the order.
+      带有比较器的集合，如果稍后你改变了模型的属性，那么集合也不会自动重排序，所以如果你修改了会影响排序的模型的属性后，你需要调用<tt>sort</tt> 方法来重新排序。
     </p>
 
     <p id="Collection-sort">
       <b class="header">sort</b><code>collection.sort([options])</code>
       <br />
-      Force a collection to re-sort itself. You don't need to call this under
-      normal circumstances, as a collection with a <a href="#Collection-comparator">comparator</a>
-      will sort itself whenever a model is added. To disable sorting when adding
-      a model, pass <tt>{sort: false}</tt> to <tt>add</tt>. Calling <b>sort</b>
-      triggers a <tt>"sort"</tt> event on the collection.
+      强制集合重新排序。某些情况下你不需要调用本方法，因为带有<a href="#Collection-comparator">comparator</a>的集合在添加模型时会自动排序。添加模型时如若要禁用排序，请传入<tt>{sort: false}</tt>到<tt>add</tt>方法中。调用<tt>sort</tt>方法会触发一个<tt>"sort"</tt>事件。
     </p>
 
     <p id="Collection-pluck">
       <b class="header">pluck</b><code>collection.pluck(attribute)</code>
       <br />
-      Pluck an attribute from each model in the collection. Equivalent to calling
-      <tt>map</tt> and returning a single attribute from the iterator.
+      从集合的每个模型上剥去一个属性。等价于调用<tt>map</tt>并从迭代器上返回单个属性。
     </p>
 
 <pre class="runnable">
@@ -1839,8 +1766,7 @@ alert(JSON.stringify(names));
     <p id="Collection-where">
       <b class="header">where</b><code>collection.where(attributes)</code>
       <br />
-      Return an array of all the models in a collection that match the
-      passed <b>attributes</b>. Useful for simple cases of <tt>filter</tt>.
+      从集合上返回与传入的<b>attributes</b>相匹配的所有模型。可以用来当做<tt>filter</tt>。
     </p>
 
 <pre class="runnable">
@@ -1859,16 +1785,13 @@ alert(musketeers.length);
     <p id="Collection-findWhere">
       <b class="header">findWhere</b><code>collection.findWhere(attributes)</code>
       <br />
-      Just like <a href="#Collection-where">where</a>, but directly returns only
-      the first model in the collection that matches the passed <b>attributes</b>.
+      与<a href="#Collection-where">where</a>类似，但只返回集合上与传入<b>attributes</b>相匹配的第一个模型。
     </p>
 
     <p id="Collection-url">
       <b class="header">url</b><code>collection.url or collection.url()</code>
       <br />
-      Set the <b>url</b> property (or function) on a collection to reference
-      its location on the server. Models within the collection will use <b>url</b>
-      to construct URLs of their own.
+      在集合上设置<b>url</b>属性（或函数）来返回集合在服务器端上的定位。集合内部的模型也会使用<b>url</b>来构造它们自己的URLs。
     </p>
 
 <pre>
@@ -1888,13 +1811,7 @@ var Notes = Backbone.Collection.extend({
     <p id="Collection-parse">
       <b class="header">parse</b><code>collection.parse(response, options)</code>
       <br />
-      <b>parse</b> is called by Backbone whenever a collection's models are
-      returned by the server, in <a href="#Collection-fetch">fetch</a>.
-      The function is passed the raw <tt>response</tt> object, and should return
-      the array of model attributes to be <a href="#Collection-add">added</a>
-      to the collection. The default implementation is a no-op, simply passing
-      through the JSON response. Override this if you need to work with a
-      preexisting API, or better namespace your responses.
+      无论何时在<a href="#Collection-fetch">fetch</a>方法上，从服务器端返回集合上的模型都会调用<b>parse</b>。这个函数会接受原生的<tt>response</tt>对象，并返回要<a href="#Collection-add">添加</a>到集合上的模型的数组。默认的实现是空操作，只是简单的回传了返回的JSON响应。如果你需要与已存的API协作，那么需要覆盖它，或者最好为响应添加命名空间。
     </p>
 
 <pre>
@@ -1909,24 +1826,13 @@ var Tweets = Backbone.Collection.extend({
     <p id="Collection-clone">
       <b class="header">clone</b><code>collection.clone()</code>
       <br />
-      Returns a new instance of the collection with an identical list of models.
+      返回一个新的集合的实例，它的模型列表与当前集合的模型列表相等。
     </p>
 
     <p id="Collection-fetch">
       <b class="header">fetch</b><code>collection.fetch([options])</code>
       <br />
-      Fetch the default set of models for this collection from the server,
-      <a href="#Collection-set">setting</a> them on the collection when they arrive.
-      The <b>options</b> hash takes <tt>success</tt> and <tt>error</tt> callbacks
-      which will both be passed <tt>(collection, response, options)</tt> as arguments.
-      When the model data returns from the server, it uses <a href="#Collection-set">set</a>
-      to (intelligently) merge the fetched models, unless you pass <tt>{reset: true}</tt>,
-      in which case the collection will be (efficiently) <a href="#Collection-reset">reset</a>.
-      Delegates to <a href="#Sync">Backbone.sync</a>
-      under the covers for custom persistence strategies and returns a
-      <a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>.
-      The server handler for <b>fetch</b> requests should return a JSON array of
-      models.
+      从服务器端为集合抓取默认的模型列表，并在返回后将其<a href="#Collection-set">set</a>到集合上。<b>options</b>选项接<tt>success</tt> 和 <tt>error</tt> 回调，回调的都是<tt>(collection, response, options)</tt>。当服务器端的数据返回时，集合内部使用 <a href="#Collection-set">set</a>将抓取到的模型进行合并，如果你传入<tt>{reset: true}</tt>选项，那么集合会很高效的将抓取的模型<a href="#Collection-reset">reset</a>到自身。本方法代理了<a href="#Sync">Backbone.sync</a>并返回一个<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象。处理<b>fetch</b>请求的服务器，需要返回一个模型的JSON数组。
     </p>
 
 <pre class="runnable">
@@ -1941,48 +1847,25 @@ accounts.fetch();
 </pre>
 
     <p>
-      The behavior of <b>fetch</b> can be customized by using the available
-      <a href="#Collection-set">set</a> options. For example, to fetch a
-      collection, getting an <tt>"add"</tt> event for every new model, and
-      a <tt>"change"</tt> event for every changed existing model, without
-      removing anything: <tt>collection.fetch({remove: false})</tt>
+      <b>fetch</b>的行为可以使用<a href="#Collection-set">set</a>方法中的选项来自定义。比如抓取一个集合，每新增一个模型上都触发一个<tt>"add"</tt>事件，每个已存在模型的变更都触发一个<tt>"change"</tt>事件，但不会移除模型：<tt>collection.fetch({remove: false})</tt>
     </p>
 
     <p>
-      <b>jQuery.ajax</b> options can also be passed directly as <b>fetch</b> options,
-      so to fetch a specific page of a paginated collection:
-      <tt>Documents.fetch({data: {page: 3}})</tt>
+      <b>jQuery.ajax</b> 的选项也可以直接作为<b>fetch</b>的选项传入，所以抓取一个分页集合的特定页可以：<tt>Documents.fetch({data: {page: 3}})</tt>
     </p>
 
     <p>
-      Note that <b>fetch</b> should not be used to populate collections on
-      page load &mdash; all models needed at load time should already be
-      <a href="#FAQ-bootstrap">bootstrapped</a> in to place. <b>fetch</b> is
-      intended for lazily-loading models for interfaces that are not needed
-      immediately: for example, documents with collections of notes that may be
-      toggled open and closed.
+      注意<b>fetch</b>不应该用来在页面加载时填充集合 &mdash; 所有在加载时需要的模型应该已经在某个地方<a href="#FAQ-bootstrap">bootstrapped</a>了。<b>fetch</b>为了的是需要模型懒加载的界面，通常这部分界面不是马上就展示的：例如，带有笔记集合的文档，可能需要打开或关闭。
     </p>
 
     <p id="Collection-create">
       <b class="header">create</b><code>collection.create(attributes, [options])</code>
       <br />
-      Convenience to create a new instance of a model within a collection.
-      Equivalent to instantiating a model with a hash of attributes,
-      saving the model to the server, and adding the model to the set after being
-      successfully created. Returns the new model. If client-side validation
-      failed, the model will be unsaved, with validation errors.
-      In order for this to work, you should set the
-      <a href="#Collection-model">model</a> property of the collection.
-      The <b>create</b> method can accept either an attributes hash or an
-      existing, unsaved model object.
+      用来在集合中创建一个模型实例的快捷方法。等价于用一个属性的hash实例化一个模型，保存模型到服务器端，在成功创建后再讲模型设置到模型的列表上。返回新的模型对象。如果客户端校验失败，模型则不会保存，并返回校验失败的错误。为了此方法正常工作，你需要设置集合的<a href="#Collection-model">model</a>属性。本方法既可以接收一个属性的hash，也可以接收一个已存在的未保存的模型对象。
     </p>
 
     <p>
-      Creating a model will cause an immediate <tt>"add"</tt> event to be
-      triggered on the collection, a <tt>"request"</tt> event as the new model is
-      sent to the server, as well as a <tt>"sync"</tt> event, once the
-      server has responded with the successful creation of the model. Pass <tt>{wait: true}</tt>
-      if you'd like to wait for the server before adding the new model to the collection.
+      创建一个模型对象，集合会马上触发一个<tt>"add"</tt>事件，在将新模型发送到服务器端集合后会触发一个<tt>"request"</tt>事件，一旦服务器响应并成功创建了模型，集合会触发一个<tt>"sync"</tt>事件。如果你希望等待服务器响应后在将新模型加入到集合中，那么传入<tt>{wait: true}</tt>选项即可。
     </p>
 
 <pre>
