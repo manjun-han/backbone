@@ -1881,33 +1881,21 @@ var othello = nypl.create({
 });
 </pre>
 
-    <h2 id="Router">Backbone.Router</h2>
+    <h2 id="Router">路由 - Backbone.Router</h2>
 
     <p>
-      Web applications often provide linkable, bookmarkable, shareable URLs for
-      important locations in the app. Until recently, hash fragments
-      (<tt>#page</tt>) were used to provide these permalinks, but with the
-      arrival of the History API, it's now possible to use standard URLs (<tt>/page</tt>).
-      <b>Backbone.Router</b> provides methods for routing client-side pages, and
-      connecting them to actions and events. For browsers which don't yet support
-      the History API, the Router handles graceful fallback and transparent
-      translation to the fragment version of the URL.
+      Web应用程序经常在应用中提供可链接的，可书签花的，可分享的URLs。直到最近hash片段(<tt>#page</tt>) 才用来提供这些固定连接，但是由于History API的到来，现在可以使用标准的URLs（<tt>/page</tt>）。<b>Backbone.Router</b>提供了用来实现客户端路由，将它们与行为和事件联系起来。对于不支持History API的浏览器，路由处理会优雅降级并转换到使用hash片段的URL版本。
+      Web
     </p>
 
     <p>
-      During page load, after your application has finished creating all of its routers,
-      be sure to call <tt>Backbone.history.start()</tt> or
-      <tt>Backbone.history.start({pushState: true})</tt> to route the initial URL.
+      在页面加载过程中，在你的应用完成创建所有路由后，一定要调用 <tt>Backbone.history.start()</tt>或<tt>Backbone.history.start({pushState: true})</tt> 来初始化URL的路由。
     </p>
 
     <p id="Router-extend">
       <b class="header">extend</b><code>Backbone.Router.extend(properties, [classProperties])</code>
       <br />
-      Get started by creating a custom router class. Define actions that are
-      triggered when certain URL fragments are
-      matched, and provide a <a href="#Router-routes">routes</a> hash
-      that pairs routes to actions. Note that you'll want to avoid using a
-      leading slash in your route definitions:
+      创建自定义路由类。定义路由匹配时需要出发的动作，提供一个 <a href="#Router-routes">routes</a>的hash，包含了路由到action的映射。记住在定义路由时不要在开始处添加斜杠：
     </p>
 
 <pre>
@@ -1940,6 +1928,7 @@ var Workspace = Backbone.Router.extend({
       component between slashes; and splat parts <tt>*splat</tt>, which can match
       any number of URL components. Part of a route can be made optional by
       surrounding it in parentheses <tt>(/:optional)</tt>.
+      路由的hash将带有参数的URLs映射到你路由的函数上（）
     </p>
 
     <p>
