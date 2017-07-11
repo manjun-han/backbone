@@ -1379,7 +1379,7 @@
     this.initialize.apply(this, arguments);
   };
 
-  // 缓存的正则表达式，用来匹配路由字符串中具名参数部分和中间部分（splatted parts）。
+  // 缓存的正则表达式，用来匹配路由字符串中具名参数部分和通配部分（splatted parts）。
   var optionalParam = /\((.*?)\)/g;
   var namedParam    = /(\(\?)?:\w+/g;
   var splatParam    = /\*\w+/g;

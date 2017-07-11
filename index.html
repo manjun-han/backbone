@@ -1921,55 +1921,31 @@ var Workspace = Backbone.Router.extend({
     <p id="Router-routes">
       <b class="header">routes</b><code>router.routes</code>
       <br />
-      The routes hash maps URLs with parameters to functions on your router
-      (or just direct function definitions, if you prefer),
-      similar to the <a href="#View">View</a>'s <a href="#View-delegateEvents">events hash</a>.
-      Routes can contain parameter parts, <tt>:param</tt>, which match a single URL
-      component between slashes; and splat parts <tt>*splat</tt>, which can match
-      any number of URL components. Part of a route can be made optional by
-      surrounding it in parentheses <tt>(/:optional)</tt>.
-      路由的hash将带有参数的URLs映射到你路由的函数上（）
+      路由的hash将带有参数的URLs映射到你路由的方法上（如果你愿意，也可以直接定义路由映射的函数），与<a href="#View">View</a>的<a href="#View-delegateEvents">events hash</a>类似。路由字符串可以包含参数部分，<tt>:param</tt>，它会匹配URL中两个反斜杠之间的单个组件；可以包含通配符部分， <tt>*splat</tt>，它可以匹配URL中任意数量的组件。路由中的某部分也可以是可选的，只要将它用括号抱起来即可<tt>(/:optional)</tt>。
     </p>
 
     <p>
-      For example, a route of <tt>"search/:query/p:page"</tt> will match
-      a fragment of <tt>#search/obama/p2</tt>, passing <tt>"obama"</tt>
-      and <tt>"2"</tt> to the action.
+      比如，路由<tt>"search/:query/p:page"</tt> 会匹配<tt>#search/obama/p2</tt>，并将<tt>"obama"</tt>，和 <tt>"2"</tt>作为参数传入action中。
     </p>
 
     <p>
-      A route of <tt>"file/*path"</tt> will match
-      <tt>#file/folder/file.txt</tt>, passing
-      <tt>"folder/file.txt"</tt> to the action.
+      路由<tt>"file/*path"</tt>会匹配<tt>#file/folder/file.txt</tt>，并将<tt>"folder/file.txt"</tt>作为参数传入action中。
     </p>
 
     <p>
-      A route of <tt>"docs/:section(/:subsection)"</tt> will match
-      <tt>#docs/faq</tt> and <tt>#docs/faq/installing</tt>, passing
-      <tt>"faq"</tt> to the action in the first case, and passing <tt>"faq"</tt>
-      and <tt>"installing"</tt> to the action in the second.
+      路由<tt>"docs/:section(/:subsection)"</tt>会匹配<tt>#docs/faq</tt> 和<tt>#docs/faq/installing</tt>，第一种情况下传入 <tt>"faq"</tt>到action中，第二种情况下传入<tt>"faq"</tt>和 <tt>"installing"</tt>到action中。
     </p>
 
     <p>
-      A nested optional route of <tt>"docs(/:section)(/:subsection)"</tt> will match
-      <tt>#docs</tt>, <tt>#docs/faq</tt>, and <tt>#docs/faq/installing</tt>,
-      passing <tt>"faq"</tt> to the action in the second case, and passing <tt>"faq"</tt>
-      and <tt>"installing"</tt> to the action in the third.
+      嵌套路由<tt>"docs(/:section)(/:subsection)"</tt> 可以匹配 <tt>#docs</tt>，<tt>#docs/faq</tt>, 和 <tt>#docs/faq/installing</tt>，在第二种情况下传入<tt>"faq"</tt>到action中，第三种情况下传入<tt>"faq"</tt>和 <tt>"installing"</tt> 到action中。
     </p>
 
     <p>
-      Trailing slashes are treated as part of the URL, and (correctly) treated
-      as a unique route when accessed. <tt>docs</tt> and <tt>docs/</tt> will fire
-      different callbacks. If you can't avoid generating both types of URLs, you
-      can define a <tt>"docs(/)"</tt> matcher to capture both cases.
+      尾部的反斜杠会当做URL的一部分进行出阿里，在访问时会当做一个唯一的路由进行匹配。 <tt>docs</tt> and <tt>docs/</tt> 会触发不同的回调。如果你希望避免生成两种类型的URLs，你可以定义一个<tt>"docs(/)"</tt>路由来同时匹配两种情况。
     </p>
 
     <p>
-      When the visitor presses the back button, or enters a URL, and a particular
-      route is matched, the name of the action will be fired as an
-      <a href="#Events">event</a>, so that other objects can listen to the router,
-      and be notified. In the following example, visiting <tt>#help/uploading</tt>
-      will fire a <tt>route:help</tt> event from the router.
+      在用户点击回退按钮，或输入新的URL后，会匹配一个也顶的路由，action的名字会当做一个<a href="#Events">事件</a>触发，所以别的对象可以监听这个路由，并获得通知。以下例子中，访问<tt>#help/uploading</tt>会在路由对象上触发一个<tt>route:help</tt>事件。
     </p>
 
 <pre>
@@ -1990,22 +1966,13 @@ router.on("route:help", function(page) {
     <p id="Router-constructor">
       <b class="header">constructor / initialize</b><code>new Router([options])</code>
       <br />
-      When creating a new router, you may pass its
-      <a href="#Router-routes">routes</a> hash directly as an option, if you
-      choose. All <tt>options</tt> will also be passed to your <tt>initialize</tt>
-      function, if defined.
+      在创建一个新的路由对象时，你可以直接传入它的<a href="#Router-routes">路由</a>的hash作为选项。所有的 <tt>options</tt> 也将会传入到 <tt>initialize</tt>方法中。
     </p>
 
     <p id="Router-route">
       <b class="header">route</b><code>router.route(route, name, [callback])</code>
       <br />
-      Manually create a route for the router, The <tt>route</tt> argument may
-      be a <a href="#Router-routes">routing string</a> or regular expression.
-      Each matching capture from the route or regular expression will be passed as
-      an argument to the callback. The <tt>name</tt> argument will be triggered as
-      a <tt>"route:name"</tt> event whenever the route is matched.  If the
-      <tt>callback</tt> argument is omitted <tt>router[name]</tt> will be used
-      instead. Routes added later may override previously declared routes.
+      为路由对象手工创建一个路由，<tt>route</tt>参数可以是一个 <a href="#Router-routes">路由字符串</a>或正则表达式。每个从路由字符串或正则表达式捕获的匹配，都会当做参数传入回调中。<tt>name</tt> 参数会在路由匹配时触发一个 <tt>router[name]</tt>事件。如果<tt>callback</tt>没有定义，那么会替换为<tt>router[name]</tt>。后加入的路由可以覆盖之前定义的路由。
     </p>
 
 <pre>
@@ -2025,12 +1992,7 @@ open: function(id) { ... }
     <p id="Router-navigate">
       <b class="header">navigate</b><code>router.navigate(fragment, [options])</code>
       <br />
-      Whenever you reach a point in your application that you'd like to save
-      as a URL, call <b>navigate</b> in order to update the URL.
-      If you also wish to call the route function, set the <b>trigger</b>
-      option to <tt>true</tt>.
-      To update the URL without creating an entry in the browser's history,
-      set the <b>replace</b> option to <tt>true</tt>.
+      当你要到达一个状态时，你如果需要把它保存为一个URL，就调用<b>navigate</b>来更新URL。如果你希望调用路由函数，只要将选项<b>trigger</b>设为<tt>true</tt>即可。跟新URL但不创建浏览器历史记录，需要设置<b>replace</b>选项为 <tt>true</tt>。
     </p>
 
 <pre>
@@ -2051,12 +2013,7 @@ app.navigate("help/troubleshooting", {trigger: true, replace: true});
     <p id="Router-execute">
       <b class="header">execute</b><code>router.execute(callback, args, name)</code>
       <br />
-      This method is called internally within the router, whenever a route
-      matches and its corresponding <b>callback</b> is about to be executed.
-      Return <b>false</b> from execute to cancel the current transition.
-      Override it to perform custom parsing or wrapping of your routes, for
-      example, to parse query strings before handing them to your route
-      callback, like so:
+      当一个路由匹配，它对应的<b>callback</b>将要执行时，路由会在内部调用这个方法。如果需要取消当前的转换，这个方法需返回 <b>false</b> 。自定义解析流程或封装你自己的路由，需要覆盖此方法，比如，在路由回调处理查询参数前解析它们，如下：
     </p>
 
 <pre>
@@ -2072,70 +2029,40 @@ var Router = Backbone.Router.extend({
 });
 </pre>
 
-    <h2 id="History">Backbone.history</h2>
+    <h2 id="History">历史 - Backbone.history</h2>
 
     <p>
-      <b>History</b> serves as a global router (per frame) to handle <tt>hashchange</tt>
-      events or <tt>pushState</tt>, match the appropriate route, and trigger callbacks.
-      You shouldn't ever have to create one of these yourself since <tt>Backbone.history</tt>
-      already contains one.
+      <b>History</b>充当了一个全局路由的角色，用来处理 <tt>hashchange</tt>事件或 <tt>pushState</tt>事件，匹配合适的路由，只有触发回调。你不用自己来处理这些事，因为<tt>Backbone.history</tt>已经为你做了。
     </p>
 
     <p>
-      <b>pushState</b> support exists on a purely opt-in basis in Backbone.
-      Older browsers that don't support <tt>pushState</tt> will continue to use
-      hash-based URL fragments, and if a hash URL is visited by a
-      <tt>pushState</tt>-capable browser, it will be transparently upgraded to
-      the true URL. Note that using real URLs requires your web server to be
-      able to correctly render those pages, so back-end changes are required
-      as well. For example, if you have a route of <tt>/documents/100</tt>,
-      your web server must be able to serve that page, if the browser
-      visits that URL directly. For full search-engine crawlability, it's best to
-      have the server generate the complete HTML for the page ... but if it's a web
-      application, just rendering the same content you would have for the root URL,
-      and filling in the rest with Backbone Views and JavaScript works fine.
+      <b>pushState</b>在Backbone中作为一个纯碎的选项存在。不支持<tt>pushState</tt>的老的浏览器会继续使用hash-based URL片段的方式，如果在兼容<tt>pushState</tt>的浏览器中访问了带有hash的URL，那么它透明的升级为真正的URL。注意使用真实的URLs需要你的Web服务器能正确的渲染这些页面，所以也需要后台做些变动。比如，如果你定义了路由<tt>/documents/100</tt>，当浏览器直接访问了这个URL时，你的Web服务器必须能够返回这个页面。为了支持搜索引擎的排重，最好是你的服务器能为此页面生成完整的HTML...但如果一个Web应用，仅渲染了与root URL同样的内容，然后剩下的有JavaScript和Backbone的试图填满也是可以的。
     </p>
 
     <p id="History-start">
       <b class="header">start</b><code>Backbone.history.start([options])</code>
       <br />
-      When all of your <a href="#Router">Routers</a> have been created,
-      and all of the routes are set up properly, call <tt>Backbone.history.start()</tt>
-      to begin monitoring <tt>hashchange</tt> events, and dispatching routes.
-      Subsequent calls to <tt>Backbone.history.start()</tt> will throw an error,
-      and <tt>Backbone.History.started</tt> is a boolean value indicating whether
-      it has already been called.
+      当你创建了所有的<a href="#Router">Routers</a>，并正确的设置了所有的路由，就调用<tt>Backbone.history.start()</tt>开始监视<tt>hashchange</tt>事件，并触发路由。之后如果调用<tt>Backbone.history.start()</tt>则会抛出异常，<tt>Backbone.History.started</tt>是一个boolean值，用来标识是否此方法已调用过了。
     </p>
 
     <p>
-      To indicate that you'd like to use HTML5 <tt>pushState</tt> support in
-      your application, use <tt>Backbone.history.start({pushState: true})</tt>.
-      If you'd like to use <tt>pushState</tt>, but have browsers that don't support
-      it natively use full page refreshes instead, you can add
-      <tt>{hashChange: false}</tt> to the options.
+      如果你希望在你的应用中使用HTML5的<tt>pushState</tt>，需要使用 <tt>Backbone.history.start({pushState: true})</tt>。如果希望使用<tt>pushState</tt>，但如果浏览器不支持的化就使用页面刷新代替，你需要在选项中加入<tt>{hashChange: false}</tt>。
     </p>
 
     <p>
-      If your application is not being served from the root url <tt>/</tt> of your
-      domain, be sure to tell History where the root really is, as an option:
-      <tt>Backbone.history.start({pushState: true, root: "/public/search/"})</tt>
+      如果你的应用不是在你域名的<tt>/</tt> 下返回的，请一定要告诉History，root应该是什么，可以使用选项：<tt>Backbone.history.start({pushState: true, root: "/public/search/"})</tt>。
     </p>
 
     <p>
-      When called, if a route succeeds with a match for the current URL,
-      <tt>Backbone.history.start()</tt> returns <tt>true</tt>. If no defined
-      route matches the current URL, it returns <tt>false</tt>.
+      调用时，如果有路由匹配当前的URL，<tt>Backbone.history.start()</tt>会返回<tt>true</tt>。如果定义的路由没有匹配当前URL的，它会返回<tt>false</tt>。
     </p>
 
     <p>
-      If the server has already rendered the entire page, and you don't want the
-      initial route to trigger when starting History, pass <tt>silent: true</tt>.
+      如果你的服务器已经渲染了整个界面，而你不希望History开始时触发初始路由，就传入<tt>silent: true</tt>。
     </p>
 
     <p>
-      Because hash-based history in Internet Explorer relies on an
-      <tt>&lt;iframe&gt;</tt>, be sure to call <tt>start()</tt> only after the DOM
-      is ready.
+      因为在IE中hash-based的历史依赖一个<tt>&lt;iframe&gt;</tt>，请一定要在DOM准备后之后在调用<tt>start()</tt>。
     </p>
 
 <pre>
@@ -2146,51 +2073,36 @@ $(function(){
 });
 </pre>
 
-    <h2 id="Sync">Backbone.sync</h2>
+    <h2 id="Sync">同步 - Backbone.sync</h2>
 
     <p>
-      <b>Backbone.sync</b> is the function that Backbone calls every time it
-      attempts to read or save a model to the server. By default, it uses
-      <tt>jQuery.ajax</tt> to make a RESTful JSON request and returns a
-      <a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>. You can override
-      it in order to use a different persistence strategy, such as WebSockets,
-      XML transport, or Local Storage.
+      Backbone使用<b>Backbone.sync</b> 函数来保存一个模型到服务器端。默认情况下，它使用<tt>jQuery.ajax</tt>发送 RESTful JSON请求，并返回<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象。你可以覆盖它，使用不同的持久化策略，比如WebSockets，XML transport，或Local Storage。
     </p>
 
     <p>
-      The method signature of <b>Backbone.sync</b> is <tt>sync(method, model, [options])</tt>
+       <b>Backbone.sync</b>的特征是：<tt>sync(method, model, [options])</tt>
     </p>
 
     <ul>
-      <li><b>method</b> – the CRUD method (<tt>"create"</tt>, <tt>"read"</tt>, <tt>"update"</tt>, or <tt>"delete"</tt>)</li>
-      <li><b>model</b> – the model to be saved (or collection to be read)</li>
-      <li><b>options</b> – success and error callbacks, and all other jQuery request options</li>
+      <li><b>method</b> – CRUD 方法 (<tt>"create"</tt>, <tt>"read"</tt>, <tt>"update"</tt>, or <tt>"delete"</tt>)</li>
+      <li><b>model</b> – 要保存的模型 (或要读取的集合)</li>
+      <li><b>options</b> – success 和 error回调, 以及所有jQuery的请求选项</li>
     </ul>
 
     <p>
-      With the default implementation, when <b>Backbone.sync</b> sends up a request to save
-      a model, its attributes will be passed, serialized as JSON, and sent in the HTTP body
-      with content-type <tt>application/json</tt>. When returning a JSON response,
-      send down the attributes of the  model that have been changed by the server, and need
-      to be updated on the client. When responding to a <tt>"read"</tt> request from a collection
-      (<a href="#Collection-fetch">Collection#fetch</a>), send down an array
-      of model attribute objects.
+      在默认的实现中，<b>Backbone.sync</b>发送一个保存模型的请求时，会把模型的属性序列化为JSON传过去，同时HTTP的消息体会设置为<tt>application/json</tt>。当返回一个JSON响应时，会将服务器变更后的书序保存到模型中，只有在更新客户端。在响应一个来自集合中的 <tt>"read"</tt>请求（<a href="#Collection-fetch">Collection#fetch</a>）时，一个模型的属性对象的数组会被传入到集合中。
     </p>
 
     <p>
-      Whenever a model or collection begins a <b>sync</b> with the server, a
-      <tt>"request"</tt> event is emitted. If the request completes successfully
-      you'll get a <tt>"sync"</tt> event, and an <tt>"error"</tt> event if not.
+      无论何时一个模型或集合开始于服务器<b>同步（sync）</b> 时，都会触发一个<tt>"request"</tt> 事件。如果响应成成，会触发一个<tt>"sync"</tt>事件，否则触发一个<tt>"error"</tt>事件。
     </p>
 
     <p>
-      The <b>sync</b> function may be overridden globally as <tt>Backbone.sync</tt>,
-      or at a finer-grained level, by adding a <tt>sync</tt> function to a Backbone
-      collection or to an individual model.
+      <b>sync</b> 函数可以以<tt>Backbone.sync</tt>的形式在全局覆盖，也可以细粒度的覆盖Backbone的集合或单个模型的<tt>sync</tt>函数。
     </p>
 
     <p>
-      The default <b>sync</b> handler maps CRUD to REST like so:
+      默认的<b>sync</b>处理将CRUD映射成如下的REST风格：
     </p>
 
     <ul>
@@ -2202,8 +2114,7 @@ $(function(){
     </ul>
 
     <p>
-      As an example, a Rails 4 handler responding to an <tt>"update"</tt> call from
-      <tt>Backbone</tt> might look like this:
+      比如，在Rails4中处理来自<tt>Backbone</tt>de <tt>"update"</tt>调用代码如下：
     </p>
 
 <pre>
@@ -2216,28 +2127,19 @@ end
 </pre>
 
     <p>
-      One more tip for integrating Rails versions prior to 3.1 is to disable
-      the default namespacing for <tt>to_json</tt> calls on models by setting
-      <tt>ActiveRecord::Base.include_root_in_json = false</tt>
+      整合3.1版本之前的Rails需要注意为<tt>to_json</tt>的调用禁用默认的命名空间，可以设置<tt>ActiveRecord::Base.include_root_in_json = false</tt>。
     </p>
 
     <p id="Sync-ajax">
       <b class="header">ajax</b><code>Backbone.ajax = function(request) { ... };</code>
       <br />
-      If you want to use a custom AJAX function, or your endpoint doesn't support
-      the <a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax</a> API
-      and you need to tweak things, you can do so by setting <tt>Backbone.ajax</tt>.
+      如果你希望使用自定义的AJAX函数，或者你的后台不支持<a href="http://api.jquery.com/jQuery.ajax/">jQuery.ajax</a>接口，你需要做出某些调整，所有这些你都可以覆盖<tt>Backbone.ajax</tt>实现。
     </p>
 
     <p id="Sync-emulateHTTP">
       <b class="header">emulateHTTP</b><code>Backbone.emulateHTTP = true</code>
       <br />
-      If you want to work with a legacy web server that doesn't support Backbone's
-      default REST/HTTP approach, you may choose to turn on <tt>Backbone.emulateHTTP</tt>.
-      Setting this option will fake <tt>PUT</tt>, <tt>PATCH</tt> and <tt>DELETE</tt> requests with
-      a HTTP <tt>POST</tt>, setting the <tt>X-HTTP-Method-Override</tt> header
-      with the true method. If <tt>emulateJSON</tt> is also on, the true method
-      will be passed as an additional <tt>_method</tt> parameter.
+      如果你希望与不支持Backbone默认Rest/HTTP风格的老式Web服务器仪器工作，你可以选择关闭 <tt>Backbone.emulateHTTP</tt>。设置此选项为true，Backbone会将<tt>PUT</tt>, <tt>PATCH</tt> 和 <tt>DELETE</tt>请求伪装成HTTP <tt>POST</tt>，并设置<tt>X-HTTP-Method-Override</tt>为true。如果<tt>emulateJSON</tt>也打开，会传一个额外的<tt>_method</tt>参数携带此消息头。
     </p>
 
 <pre>
@@ -2249,11 +2151,7 @@ model.save();  // POST to "/collection/id", with "_method=PUT" + header.
     <p id="Sync-emulateJSON">
       <b class="header">emulateJSON</b><code>Backbone.emulateJSON = true</code>
       <br />
-      If you're working with a legacy web server that can't handle requests
-      encoded as <tt>application/json</tt>, setting <tt>Backbone.emulateJSON = true;</tt>
-      will cause the JSON to be serialized under a <tt>model</tt> parameter, and
-      the request to be made with a <tt>application/x-www-form-urlencoded</tt>
-      MIME type, as if from an HTML form.
+      如果你正工作在一个老式的Web服务器上，并且不能处理<tt>application/json</tt>编码的请求，设置<tt>Backbone.emulateJSON = true;</tt>会将JSON序列化为字符串添加到名为<tt>model</tt> 的参数，请求会以<tt>application/x-www-form-urlencoded</tt>MIME类型发送，就好像发送表单一样。
     </p>
 
     <h2 id="View">Backbone.View</h2>
