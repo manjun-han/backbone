@@ -2154,29 +2154,16 @@ model.save();  // POST to "/collection/id", with "_method=PUT" + header.
       如果你正工作在一个老式的Web服务器上，并且不能处理<tt>application/json</tt>编码的请求，设置<tt>Backbone.emulateJSON = true;</tt>会将JSON序列化为字符串添加到名为<tt>model</tt> 的参数，请求会以<tt>application/x-www-form-urlencoded</tt>MIME类型发送，就好像发送表单一样。
     </p>
 
-    <h2 id="View">Backbone.View</h2>
+    <h2 id="View">视图 - Backbone.View</h2>
 
     <p>
-      Backbone views are almost more convention than they are code &mdash; they
-      don't determine anything about your HTML or CSS for you, and can be used
-      with any JavaScript templating library.
-      The general idea is to organize your interface into logical views,
-      backed by models, each of which can be updated independently when the
-      model changes, without having to redraw the page. Instead of digging into
-      a JSON object, looking up an element in the DOM, and updating the HTML by hand,
-      you can bind your view's <tt>render</tt> function to the model's <tt>"change"</tt>
-      event &mdash; and now everywhere that
-      model data is displayed in the UI, it is always immediately up to date.
+      Backbone的视图的用户比较规则 &mdash; 它们不决定你的任何HTML或CSS，你可以使用任意的JavaScript模板。大致的流程是，你将界面组织成逻辑的视图，依靠模型，每当模型变更时视图会单独更新而不会重绘整个页面。相比较挖掘一个JSON对效果，在DOM中查询一个元素，然后手工更新HTML的做法，你可以将视图的<tt>render</tt> 函数绑定到模型的 <tt>"change"</tt>事件上 &mdash; 现在无论模型的数据展示在UI的什么地方，视图都会马上更新到最新。
     </p>
 
     <p id="View-extend">
       <b class="header">extend</b><code>Backbone.View.extend(properties, [classProperties])</code>
       <br />
-      Get started with views by creating a custom view class. You'll want to
-      override the <a href="#View-render">render</a> function, specify your
-      declarative <a href="#View-delegateEvents">events</a>, and perhaps the
-      <tt>tagName</tt>, <tt>className</tt>, or <tt>id</tt> of the View's root
-      element.
+      通过创建一个自定义的视图类来开始使用视图。你可能会覆盖<a href="#View-render">render</a>函数，声明式的执行你的<a href="#View-delegateEvents">events</a>，以及指定View根元素的<tt>tagName</tt>, <tt>className</tt>, 或 <tt>id</tt>属性。
     </p>
 
 <pre>
@@ -2204,9 +2191,7 @@ var DocumentRow = Backbone.View.extend({
 </pre>
 
     <p>
-      Properties like <tt>tagName</tt>, <tt>id</tt>, <tt>className</tt>,
-      <tt>el</tt>, and <tt>events</tt> may also be defined as a function, if
-      you want to wait to define them until runtime.
+      像属性<tt>tagName</tt>, <tt>id</tt>, <tt>className</tt>,<tt>el</tt>, 和 <tt>events</tt> 都可以定义成函数，然后等到运行期在真正定义它们。
     </p>
 
     <p id="View-constructor">
