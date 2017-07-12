@@ -2437,99 +2437,53 @@ Backbone.$ = require('jquery');
     <h2 id="faq">常见问题 - F.A.Q.</h2>
 
     <p id="FAQ-why-backbone">
-      <b class="header">Why use Backbone, not [other framework X]?</b>
+      <b class="header">为什么要用Backbone，而不是别的框架[other framework X]?</b>
       <br />
-      If your eye hasn't already been caught by the adaptability and elan on display
-      in the above <a href="#examples">list of examples</a>, we can get more specific:
-      Backbone.js aims to provide the common foundation that data-rich web applications
-      with ambitious interfaces require &mdash; while very deliberately avoiding
-      painting you into a corner by making any decisions that you're
-      better equipped to make yourself.
+      如果你看了下面的<a href="#examples">案例列表</a>，还未被Backbone的适应性和优雅所吸引，那就让我们说的更具体些：Backbone.js的目标是，面对重数据且界面复杂的Web应用，提供其所需的通用的基础 &mdash; 同时十分谨慎的避免将你逼入死角，为你做出任何的决定，而这些决定你可能自己做的更好。
     </p>
 
     <ul>
       <li>
-        The focus is on supplying you with
-        <a href="#Collection-Underscore-Methods">helpful methods to manipulate and
-        query your data</a>, not on HTML widgets or reinventing the JavaScript
-        object model.
+        重点是为你提供<a href="#Collection-Underscore-Methods">辅助方法来操作和查询你的数据</a>，而不是HTML工具或重塑JavaScript对象模型。
       </li>
       <li>
-        Backbone does not force you to use a single template engine. Views can bind
-        to HTML constructed in
-        <a href="http://underscorejs.org/#template">your</a>
-        <a href="http://guides.rubyonrails.org/layouts_and_rendering.html">favorite</a>
-        <a href="http://mustache.github.com">way</a>.
+        Backbone不强制你使用单一模板引擎。视图对象可以绑定到<a href="http://underscorejs.org/#template">你</a><a href="http://guides.rubyonrails.org/layouts_and_rendering.html">喜欢的</a><a href="http://mustache.github.com">方式</a>构造出的HTML上。
       </li>
       <li>
-        It's smaller. There are fewer kilobytes for your browser or phone to download,
-        and less <i>conceptual</i> surface area. You can read and understand
-        the source in an afternoon.
+        它更加轻量。你的浏览器或手机会节省更多流量，代码量更少。你可以花一个下午的时间阅读和搞懂它的源码。
       </li>
       <li>
-        It doesn't depend on stuffing application logic into your HTML.
-        There's no embedded JavaScript, template logic, or binding hookup code in
-        <tt>data-</tt> or <tt>ng-</tt> attributes, and no need to invent your own HTML tags.
+        它不依赖于在HTML中添加逻辑。没有内嵌的JavaScript代码，模板逻辑，或绑定到<tt>data-</tt> 或 <tt>ng-</tt>属性的钩子代码（hookup code）, 也不需要发明你自己的HTML标签。
       </li>
       <li>
-        <a href="#Events">Synchronous events</a> are used as the fundamental
-        building block, not a difficult-to-reason-about run loop, or by constantly
-        polling and traversing your data structures to hunt for changes. And if
-        you want a specific event to be asynchronous and aggregated,
-        <a href="http://underscorejs.org/#debounce">no problem</a>.
+        <a href="#Events">同步事件</a>是构建代码的基础，没有难于理解的run loop，或不断通过轮训或遍历你的数据结构来寻找变更。如果你希望一个异步的事件或聚合，<a href="http://underscorejs.org/#debounce">没问题</a>。
       </li>
       <li>
-        Backbone scales well, from <a href="http://disqus.com">embedded widgets</a>
-        to <a href="http://www.usatoday.com">massive apps</a>.
+        Backbone扩展性良好，从 <a href="http://disqus.com">嵌入式的小部件</a>到<a href="http://www.usatoday.com">大规模的应用</a>。
       </li>
       <li>
-        Backbone is a library, not a framework, and plays well with others.
-        You can embed Backbone widgets in Dojo apps without trouble, or use Backbone
-        models as the data backing for D3 visualizations (to pick two entirely
-        random examples).
+        Backbone是一个库，而不是一个框架，所以与其它的代码可以很好的融合。你可以在毫不费力的情况下在Dojo应用中嵌入Backbone的部件，或者使用Backbone的模型作为D3可视化的数据。
       </li>
       <li>
-        "Two-way data-binding" is avoided. While it certainly makes for a nifty
-        demo, and works for the most basic CRUD, it doesn't tend to be terribly
-        useful in your real-world app. Sometimes you want to update on
-        every keypress, sometimes on blur, sometimes when the panel is closed,
-        and sometimes when the "save" button is clicked. In almost all cases, simply
-        serializing the form to JSON is faster and easier. All that aside, if your
-        heart is set, <a href="http://rivetsjs.com">go</a>
-        <a href="http://nytimes.github.com/backbone.stickit/">for it</a>.
+        避免了数据的双向绑定（Two-way data-binding）。虽然双向绑定确实可以制作漂亮的demo，能够工作在多数基本的CURD上，但在现实的应用中它也不是特别的有用。有时你需要执行更新，或许因为键盘操作，或是失去焦点操作，有时也可能是面板关闭了，又有时是点击了保存按钮。所有的情况下，简单的表单序列化成JSON格式会更快更容易。所有这些加在一起，如果你仍希望双向绑定功能，请<a href="http://rivetsjs.com">参见</a>已有<a href="http://nytimes.github.com/backbone.stickit/">实现</a>吧。
       </li>
       <li>
-        There's no built-in performance penalty for choosing to structure your
-        code with Backbone. And if you do want to optimize further, thin models and
-        templates with flexible granularity make it easy to squeeze every last
-        drop of potential performance out of, say, IE8.
+        使用Backbone构建你的代码没有内置的性能算好。如果你希望进一步优化，痩模型和细粒度的模板，可以尽可能压缩直到去掉最后潜在的性能消耗代码，比如IE8。
       </li>
     </ul>
 
     <p id="FAQ-tim-toady">
-      <b class="header">There's More Than One Way To Do It</b>
+      <b class="header">方式不止一种</b>
       <br />
-      It's common for folks just getting started to treat the examples listed
-      on this page as some sort of gospel truth. In fact, Backbone.js is intended
-      to be fairly agnostic about many common patterns in client-side code.
-      For example...
+      人们通常会将本页列出的所有例子视为真理。事实上，Backbone.js对于许多常用的客户端代码模式是没有囊括的，比如...
     </p>
 
     <p>
-      <b>References between Models and Views</b> can be handled several ways.
-      Some people like to have direct pointers, where views correspond 1:1 with
-      models (<tt>model.view</tt> and <tt>view.model</tt>). Others prefer to have intermediate
-      "controller" objects that orchestrate the creation and organization of
-      views into a hierarchy. Others still prefer the evented approach, and always
-      fire events instead of calling methods directly. All of these styles work well.
+      <b>模型对象和视图对象的引用关系</b> 可以以多种方式处理。一些人喜欢直接引用，一个视图对应一个模型。另一些人选择使用”controller“对象指挥视图的创建以及组织视图层次。还有一些人仍偏向事件的方式，一直使用触发事件而不是直接调用方法。所有这些风格都能很好的工作。
     </p>
 
     <p>
-      <b>Batch operations</b> on Models are common, but often best handled differently
-      depending on your server-side setup. Some folks don't mind making individual
-      Ajax requests. Others create explicit resources for RESTful batch operations:
-      <tt>/notes/batch/destroy?ids=1,2,3,4</tt>. Others tunnel REST over JSON, with the
-      creation of "changeset" requests:
+      <b>批处理操作</b>在模型上很常见，但是根据服务器端的设置不同，处理方式也不同。一些人不介意使用单独的Ajax请求。另一些人为RESTful批处理操作创建显示的资源： <tt>/notes/batch/destroy?ids=1,2,3,4</tt>。还有些人创建”变更集“（”changeset“）请求，在REST隧道上使用JSON。
     </p>
 
 <pre>
@@ -2541,23 +2495,12 @@ Backbone.$ = require('jquery');
 </pre>
 
     <p>
-      <b>Feel free to define your own events.</b> <a href="#Events">Backbone.Events</a>
-      is designed so that you can mix it in to any JavaScript object or prototype.
-      Since you can use any string as an event, it's often handy to bind
-      and trigger your own custom events: <tt>model.on("selected:true")</tt> or
-      <tt>model.on("editing")</tt>
+      <b>任意的定义你的事件</b>。<a href="#Events">Backbone.Events</a>设计用来混入到任意的JavaScript对象或原型对象上。因为你可以使用任何的字符串作为事件名，很方便的就可以绑定和触发你自己的事件：<tt>model.on("selected:true")</tt> 或<tt>model.on("editing")</tt>。
     </p>
 
     <p>
-      <b>Render the UI</b> as you see fit. Backbone is agnostic as to whether you
-      use <a href="http://underscorejs.org/#template">Underscore templates</a>,
-      <a href="https://github.com/janl/mustache.js">Mustache.js</a>, direct DOM
-      manipulation, server-side rendered snippets of HTML, or
-      <a href="http://jqueryui.com/">jQuery UI</a> in your <tt>render</tt> function.
-      Sometimes you'll create a view for each model ... sometimes you'll have a
-      view that renders thousands of models at once, in a tight loop. Both can be
-      appropriate in the same app, depending on the quantity of data involved,
-      and the complexity of the UI.
+      <b>渲染界面UI</b>，如你所期望的那样。Backbone不知道你使用的是<a href="http://underscorejs.org/#template">Underscore templates</a>,
+      <a href="https://github.com/janl/mustache.js">Mustache.js</a>，直接的DOM操作，服务器端渲染的HTML片段，或是在<tt>render</tt>函数中使用<a href="http://jqueryui.com/">jQuery UI</a> 。有时你需要为每个模型创建视图...有时你定义一个在一个紧凑的循环中一次渲染上千个模型的视图。二者都可以用在同一个应用中，取决于涉及到的数据量，以及UI的复杂度。
     </p>
 
     <p id="FAQ-nested">
