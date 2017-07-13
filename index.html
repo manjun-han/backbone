@@ -2504,14 +2504,9 @@ Backbone.$ = require('jquery');
     </p>
 
     <p id="FAQ-nested">
-      <b class="header">Nested Models &amp; Collections</b>
+      <b class="header">嵌套模型 &amp;集合 -  Nested Models &amp; Collections</b>
       <br />
-      It's common to nest collections inside of models with Backbone. For example,
-      consider a <tt>Mailbox</tt> model that contains many <tt>Message</tt> models.
-      One nice pattern for handling this is have a <tt>this.messages</tt> collection
-      for each mailbox, enabling the lazy-loading of messages, when the mailbox
-      is first opened ... perhaps with <tt>MessageList</tt> views listening for
-      <tt>"add"</tt> and <tt>"remove"</tt> events.
+      在Backbone中通常很容易在模型中就嵌套了集合。比如，考虑一个<tt>Mailbox</tt> 模型，它包含了许多<tt>Message</tt>模型。一种处理这种情况的模式是在每个mailbox中包含一个<tt>this.messages</tt>集合，在mailbox第一次打开时，允许消息执行懒加载...可能是在<tt>MessageList</tt>视图上监听<tt>"add"</tt> 和 <tt>"remove"</tt>事件。
     </p>
 
 <pre>
@@ -2535,52 +2530,36 @@ inbox.messages.fetch({reset: true});
 </pre>
 
     <p>
-      If you're looking for something more opinionated, there are a number of
-      Backbone plugins that add sophisticated associations among models,
-      <a href="https://github.com/jashkenas/backbone/wiki/Extensions%2C-Plugins%2C-Resources">available on the wiki</a>.
+      如果你正在寻找一些更多的选项，外面有许多Backbone的插件来处理复杂的模型关联，可以<a href="https://github.com/jashkenas/backbone/wiki/Extensions%2C-Plugins%2C-Resources">在wiki上查看</a>。
     </p>
 
     <p>
-      Backbone doesn't include direct support for nested models and collections
-      or "has many" associations because there are a number
-      of good patterns for modeling structured data on the client side, and
-      <i>Backbone should provide the foundation for implementing any of them.</i>
-      You may want to&hellip;
+      Backbone不支持内嵌的模型或集合，或者”hash many“关联，因为在客户端已经有许多处理结构化数据的好的模式，Backbone应该是为它们提供基础。你可能想要&hellip;
     </p>
 
     <ul>
       <li>
-        Mirror an SQL database's structure, or the structure of a NoSQL database.
+        映射一个SQL数据库的结构或NoSQL数据库的结构。
       </li>
       <li>
         Use models with arrays of "foreign key" ids, and join to top level
         collections (a-la tables).
       </li>
       <li>
-        For associations that are numerous, use a range of ids instead of an
-        explicit list.
+        对于复杂的关系，使用一组ids而不是一组列表对象。
       </li>
       <li>
-        Avoid ids, and use direct references, creating a partial object graph
-        representing your data set.
+        避免ids，使用直接引用，创建一个代表你数据集合的对象图。
       </li>
       <li>
-        Lazily load joined models from the server, or lazily deserialize nested
-        models from JSON documents.
+        对于关联模型，要执行懒加载，或延迟从JSON翁当中范旭乐华模型。
       </li>
     </ul>
 
     <p id="FAQ-bootstrap">
-      <b class="header">Loading Bootstrapped Models</b>
+      <b class="header">加载启动数据</b>
       <br />
-      When your app first loads, it's common to have a set of initial models that
-      you know you're going to need, in order to render the page. Instead of
-      firing an extra AJAX request to <a href="#Collection-fetch">fetch</a> them,
-      a nicer pattern is to have their data already bootstrapped into the page.
-      You can then use <a href="#Collection-reset">reset</a> to populate your
-      collections with the initial data. At DocumentCloud, in the
-      <a href="http://en.wikipedia.org/wiki/ERuby">ERB</a> template for the
-      workspace, we do something along these lines:
+      当你的应用首次加载时，通常的情况是创建你所需的初始化数据的集合，一次来渲染应用。比较好的模式是在页面中你的数据已经加载好了，而不是再触发一个额外的Ajax请求来<a href="#Collection-fetch">抓取</a>它们。你可以使用<a href="#Collection-reset">reset</a> 方法将初始化数据填充到你的集合中。在DocumentCloud中，在我们工程的<a href="http://en.wikipedia.org/wiki/ERuby">ERB</a>模板里，我们会编译一些如下代码：
     </p>
 
 <pre>
@@ -2591,32 +2570,19 @@ inbox.messages.fetch({reset: true});
   projects.reset(&lt;%= @projects.to_json(:collaborators => true) %&gt;);
 &lt;/script&gt;
 </pre>
-
-    <p>You have to <a href="http://mathiasbynens.be/notes/etago">escape</a>
-    <tt>&lt;/</tt> within the JSON string, to prevent javascript injection
-    attacks.
-
+    <p>你必须使用在JSON字符串中用<a href="http://mathiasbynens.be/notes/etago">escape</a>转码<tt>&lt;/</tt>，以防止JavaScript注入攻击。</p>
     <p id="FAQ-extending">
-      <b class="header">Extending Backbone</b>
+      <b class="header">扩展Backbone</b>
       <br />
-      Many JavaScript libraries are meant to be insular and self-enclosed,
-      where you interact with them by calling their public API, but never peek
-      inside at the guts. Backbone.js is <i>not</i> that kind of library.
+      许多JavaScript库设计的都想一个孤岛并自我封闭，你只能通过调用它们公共的API来与其打交道，但从不能窥视其内部的实现。Backbone.js不是那样的库。
     </p>
 
     <p>
-      Because it serves as a foundation for your application, you're meant to
-      extend and enhance it in the ways you see fit &mdash; the entire source
-      code is <a href="docs/backbone.html">annotated</a> to make this easier
-      for you. You'll find that there's very little there apart from core
-      functions, and most of those can be overridden or augmented should you find
-      the need. If you catch yourself adding methods to <tt>Backbone.Model.prototype</tt>,
-      or creating your own base subclass, don't worry &mdash; that's how things are
-      supposed to work.
+      因为它只是充当你应用的基础，你可以按照你自己的方式扩展它，强化它 &mdash; 全部的代码都添加了注释，让你更加容易理解。你可以看到除了一些核心的函数，剩下的代码很少，你可以按你所需覆盖或增强它们当中的大多数。如果你能hold住，你可以向<tt>Backbone.Model.prototype</tt>添加方法，或创建你自己的基类，不用担心 &mdash; 所有这些你都可以实现。
     </p>
 
     <p id="FAQ-mvc">
-      <b class="header">How does Backbone relate to "traditional" MVC?</b>
+      <b class="header">Backbone与”传统的“MVC的关系</b>
       <br />
       Different implementations of the
       <a href="http://en.wikipedia.org/wiki/Model–View–Controller">Model-View-Controller</a>
