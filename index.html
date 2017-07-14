@@ -2584,63 +2584,38 @@ inbox.messages.fetch({reset: true});
     <p id="FAQ-mvc">
       <b class="header">Backbone与”传统的“MVC的关系</b>
       <br />
-      Different implementations of the
-      <a href="http://en.wikipedia.org/wiki/Model–View–Controller">Model-View-Controller</a>
-      pattern tend to disagree about the definition of a controller. If it helps any, in
-      Backbone, the <a href="#View">View</a> class can also be thought of as a
-      kind of controller, dispatching events that originate from the UI, with
-      the HTML template serving as the true view. We call it a View because it
-      represents a logical chunk of UI, responsible for the contents of a single
-      DOM element.
+      不同的<a href="http://en.wikipedia.org/wiki/Model–View–Controller">Model-View-Controller</a>模式的实现趋于争论控制器controller的定义。如果有用的化，在Backbone中，<a href="#View">View</a>应该充当控制前，派发UI产生的事件，而HTML模板充当真正的视图。我们之所以称之为view，是因为它代表了一个UI的逻辑块，并负责单个DOM元素内容的渲染。
     </p>
 
     <p>
-      Comparing the overall structure of Backbone to a server-side MVC framework
-      like <b>Rails</b>, the pieces line up like so:
+      将Backbone的所有结构与服务器端的MVC框架，比如<b>Rails</b>相比，得出以下对比：
     </p>
 
     <ul>
       <li>
-        <b>Backbone.Model</b> &ndash; Like a Rails model minus the class
-        methods. Wraps a row of data in business logic.
+        <b>Backbone.Model</b> &ndash; 就像Rails的模型加上类方法。封装业务逻辑中一组数据。
       </li>
       <li>
-        <b>Backbone.Collection</b> &ndash; A group of models on the client-side,
-        with sorting/filtering/aggregation logic.
+        <b>Backbone.Collection</b> &ndash; 客户端里一组模型，支持排序/过滤/聚合逻辑。
       </li>
       <li>
-        <b>Backbone.Router</b> &ndash; Rails <tt>routes.rb</tt> + Rails controller
-        actions. Maps URLs to functions.
+        <b>Backbone.Router</b> &ndash; Rails <tt>routes.rb</tt> + Rails 控制器的actions。将URLs映射到函数上。
       </li>
       <li>
-        <b>Backbone.View</b> &ndash; A logical, re-usable piece of UI. Often,
-        but not always, associated with a model.
+        <b>Backbone.View</b> &ndash; 一个逻辑可重用的UI块。通常会但也不总是与一个模型关联。
       </li>
       <li>
-        <b>Client-side Templates</b> &ndash; Rails <tt>.html.erb</tt> views,
-        rendering a chunk of HTML.
+        <b>Client-side Templates</b> &ndash; Rails <tt>.html.erb</tt> 视图，渲染一块HTML。
       </li>
     </ul>
 
     <p id="FAQ-this">
-      <b class="header">Binding "this"</b>
+      <b class="header">"this"绑定</b>
       <br />
-      Perhaps the single most common JavaScript "gotcha" is the fact that when
-      you pass a function as a callback, its value for <tt>this</tt> is lost.
-      When dealing with <a href="#Events">events</a> and callbacks in Backbone,
-      you'll often find it useful to rely on <a href="#Events-listenTo">listenTo</a>
-      or the optional <tt>context</tt> argument that many of Underscore
-      and Backbone's methods use to specify the <tt>this</tt>
-      that will be used when the callback is later invoked. (See
-      <a href="http://underscorejs.org/#each">_.each</a>,
-      <a href="http://underscorejs.org/#map">_.map</a>, and
-      <a href="#Events-on">object.on</a>, to name a few).
-      <a href="#View-delegateEvents">View events</a> are automatically bound to
-      the view's context for you.
-      You may also find it helpful to use
-      <a href="http://underscorejs.org/#bind">_.bind</a> and
-      <a href="http://underscorejs.org/#bindAll">_.bindAll</a>
-      from Underscore.js.
+      可能唯独只有在JavaScript中才会出现问题，就是你在传入函数作为回调时，它的<tt>this</tt>值丢掉了。在处理Backbone的<a href="#Events">events</a>和回调时，你通常会发现依靠 <a href="#Events-listenTo">listenTo</a>，以及在Underscore方法或Backbone方法中用来指定<tt>this</tt>的可选参数<tt>context</tt>，它在回调调用时会用到。（参见<a href="http://underscorejs.org/#each">_.each</a>，
+      <a href="http://underscorejs.org/#map">_.map</a>， 和
+      <a href="#Events-on">object.on</a> ）<a href="#View-delegateEvents">View events</a>是自动绑定到视图的context上的。你会发现使用Underscore.js的<a href="http://underscorejs.org/#bind">_.bind</a> 和
+      <a href="http://underscorejs.org/#bindAll">_.bindAll</a>也会比较用用。
     </p>
 
 <pre>
@@ -2663,18 +2638,13 @@ Inbox.messages.add(newMessage);
 </pre>
 
     <p id="FAQ-rails">
-      <b class="header">Working with Rails</b>
+      <b class="header">与Rails一起工作</b>
       <br />
-      Backbone.js was originally extracted from
-      <a href="http://www.documentcloud.org">a Rails application</a>; getting
-      your client-side (Backbone) Models to sync correctly with your server-side
-      (Rails) Models is painless, but there are still a few things to be aware of.
+      Backbone.js最开始是提取自<a href="http://www.documentcloud.org">一个Rails应用</a>；让你的客户端模型（Backbone）正确的与服务器端（Rails）同步是比较痛苦的事情，但是有几件事你需要注意：
     </p>
 
     <p>
-      By default, Rails versions prior to 3.1 add an extra layer of wrapping
-      around the JSON representation of models. You can disable this wrapping
-      by setting:
+      默认情况下，3.1版本前的Rails会添加一个封装模型JSON数据的而瓦努的层。你可以在你的配置文件中通过以下设置禁用此封装：
     </p>
 
 <pre>
@@ -2682,16 +2652,10 @@ ActiveRecord::Base.include_root_in_json = false
 </pre>
 
     <p>
-      ... in your configuration. Otherwise, override
-      <a href="#Model-parse">parse</a> to pull model attributes out of the
-      wrapper. Similarly, Backbone PUTs and POSTs direct JSON representations
-      of models, where by default Rails expects namespaced attributes. You can
-      have your controllers filter attributes directly from <tt>params</tt>, or
-      you can override <a href="#Model-toJSON">toJSON</a> in Backbone to add
-      the extra wrapping Rails expects.
+      否则，就覆盖<a href="#Model-parse">parse</a>将model的属性从封装中提取歘来。类似的，Backbone的PUTs 和 POSTs模型的JSON标识，这是Rails默认期望的命名空间属性。你可以让你的控制前直接从<tt>params</tt>上过滤属性，或者你可以覆盖Backbone的<a href="#Model-toJSON">toJSON</a>添加Rails期望的额外的封装。
     </p>
 
-    <h2 id="examples">Examples</h2>
+    <h2 id="examples">例子</h2>
 
     <p>
       The list of examples that follows, while long, is not exhaustive. If you've
