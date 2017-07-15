@@ -2652,7 +2652,7 @@ ActiveRecord::Base.include_root_in_json = false
 </pre>
 
     <p>
-      否则，就覆盖<a href="#Model-parse">parse</a>将model的属性从封装中提取歘来。类似的，Backbone的PUTs 和 POSTs模型的JSON标识，这是Rails默认期望的命名空间属性。你可以让你的控制前直接从<tt>params</tt>上过滤属性，或者你可以覆盖Backbone的<a href="#Model-toJSON">toJSON</a>添加Rails期望的额外的封装。
+      否则，就覆盖<a href="#Model-parse">parse</a>将model的属性从封装中提取出来。类似的，Backbone的PUTs 和 POSTs模型的JSON标识，这是Rails默认期望的命名空间属性。你可以让你的控制前直接从<tt>params</tt>上过滤属性，或者你可以覆盖Backbone的<a href="#Model-toJSON">toJSON</a>添加Rails期望的额外的封装。
     </p>
 
     <h2 id="examples">例子</h2>
@@ -4037,32 +4037,22 @@ ActiveRecord::Base.include_root_in_json = false
     <b class="header">0.9.0</b> &mdash; <small><i>Jan. 30, 2012</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.5.3...0.9.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.9.0/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Creating and destroying models with <tt>create</tt> and <tt>destroy</tt>
-        are now optimistic by default. Pass <tt>{wait: true}</tt> as an option
-        if you'd like them to wait for a successful server response to proceed.
+        使用<tt>create</tt> 和 <tt>destroy</tt>创建或销毁模型现在是开放式的了。传入<tt>{wait: true}</tt>选项，允许在服务器响应后在创建对象。
       </li>
       <li>
-        Two new properties on views: <tt>$el</tt> &mdash; a cached jQuery (or Zepto)
-        reference to the view's element, and <tt>setElement</tt>, which should
-        be used instead of manually setting a view's <tt>el</tt>. It will
-        both set <tt>view.el</tt> and <tt>view.$el</tt> correctly, as well as
-        re-delegating events on the new DOM element.
+        视图上添加了两个新属性：<tt>$el</tt> &mdash;一个视图元素的jQuery缓存对象，<tt>setElement</tt>，代替手工设置视图的<tt>el</tt>方式。它会正确的设置<tt>view.el</tt> 和 <tt>view.$el</tt>，以及在新的DOM对象上重新代理事件。
       </li>
       <li>
-        You can now bind and trigger multiple spaced-delimited events at once.
-        For example: <tt>model.on("change:name change:age", ...)</tt>
+        你现在可以一次绑定并触发多个有空白符分割的事件。比如： <tt>model.on("change:name change:age", ...)</tt>
       </li>
       <li>
-        When you don't know the key in advance, you may now call
-        <tt>model.set(key, value)</tt> as well as <tt>save</tt>.
+        在你不知道key的情况下，你可以调用<tt>model.set(key, value)</tt>或<tt>save</tt>。
       </li>
       <li>
-        Multiple models with the same <tt>id</tt> are no longer allowed in a
-        single collection.
+        在单个集合中不愿徐多个模型对象共用同一个<tt>id</tt> 。
       </li>
       <li>
-        Added a <tt>"sync"</tt> event, which triggers whenever a model's state
-        has been successfully synced with the server (create, save, destroy).
+        添加一个<tt>"sync"</tt>事件，模型的状态成功同服务器同步后调用（create, save, destroy）。
       </li>
       <li>
         <tt>bind</tt> and <tt>unbind</tt> have been renamed to <tt>on</tt>
@@ -4133,135 +4123,62 @@ ActiveRecord::Base.include_root_in_json = false
 
     <p>
       <b class="header">0.5.3</b> &mdash; <small><i>August 9, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.5.2...0.5.3">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.3/index.html">Docs</a><br />
-      A View's <tt>events</tt> property may now be defined as a function, as well
-      as an object literal, making it easier to programmatically define and inherit
-      events. <tt>groupBy</tt> is now proxied from Underscore as a method on Collections.
-      If the server has already rendered everything on page load, pass
-      <tt>Backbone.history.start({silent: true})</tt> to prevent the initial route
-      from triggering. Bugfix for pushState with encoded URLs.
+      View的 <tt>events</tt>属性现在可以定义为一个函数，或是一个对象字面量，这允许更容易以编程方式定义或继承事件。向集合中添加<tt>groupBy</tt>方法，代理的是Underscore的方法。如果服务器端已经渲染了整个页面就传入<tt>Backbone.history.start({silent: true})</tt>，阻止触发初始化执行的路由。编码后的URLs再传入pushSate的bug修复。
     </p>
 
     <p>
       <b class="header">0.5.2</b> &mdash; <small><i>July 26, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.5.1...0.5.2">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.2/index.html">Docs</a><br />
-      The <tt>bind</tt> function, can now take an optional third argument, to specify
-      the <tt>this</tt> of the callback function.
-      Multiple models with the same <tt>id</tt> are now allowed in a collection.
-      Fixed a bug where calling <tt>.fetch(jQueryOptions)</tt> could cause an
-      incorrect URL to be serialized.
-      Fixed a brief extra route fire before redirect, when degrading from
-      <tt>pushState</tt>.
+      <tt>bind</tt>函数现在可以接收一个可选的第三个参数，指定回调的<tt>this</tt>。多个模型在一个集合中共用同一id的情况是不允许的。修复调用<tt>.fetch(jQueryOptions)</tt>引发不正确的URL序列化问题。在使用<tt>pushState</tt>回调时，阻止一个额外的跳转。
     </p>
 
     <p>
       <b class="header">0.5.1</b> &mdash; <small><i>July 5, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.5.0...0.5.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.1/index.html">Docs</a><br />
-      Cleanups from the 0.5.0 release, to wit: improved transparent upgrades from
-      hash-based URLs to pushState, and vice-versa. Fixed inconsistency with
-      non-modified attributes being passed to <tt>Model#initialize</tt>. Reverted
-      a <b>0.5.0</b> change that would strip leading hashbangs from routes.
-      Added <tt>contains</tt> as an alias for <tt>includes</tt>.
+      0.5.0版本的清理，即：透明化的将基于hash的URLs升级到pushSate，反之亦然。改善向<tt>Model#initialize</tt>中传入未修改使用引起的不一致行为。恢复<b>0.5.0</b>版本的一个去掉路由中第一个#的改动。添加 <tt>includes</tt>的别名<tt>contains</tt>。
     </p>
 
     <p>
       <b class="header">0.5.0</b> &mdash; <small><i>July 1, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.0/index.html">Docs</a><br />
-      A large number of tiny tweaks and micro bugfixes, best viewed by looking
-      at <a href="https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0">the commit diff</a>.
-      HTML5 <tt>pushState</tt> support, enabled by opting-in with:
-      <tt>Backbone.history.start({pushState: true})</tt>.
-      <tt>Controller</tt> was renamed to <tt>Router</tt>, for clarity.
-      <tt>Collection#refresh</tt> was renamed to <tt>Collection#reset</tt> to emphasize
-      its ability to both reset the collection with new models, as well as empty
-      out the collection when used with no parameters.
-      <tt>saveLocation</tt> was replaced with <tt>navigate</tt>.
-      RESTful persistence methods (save, fetch, etc.) now return the jQuery deferred
-      object for further success/error chaining and general convenience.
-      Improved XSS escaping for <tt>Model#escape</tt>.
-      Added a <tt>urlRoot</tt> option to allow specifying RESTful urls without
-      the use of a collection.
-      An error is thrown if <tt>Backbone.history.start</tt> is called multiple times.
-      <tt>Collection#create</tt> now validates before initializing the new model.
-      <tt>view.el</tt> can now be a jQuery string lookup.
-      Backbone Views can now also take an <tt>attributes</tt> parameter.
-      <tt>Model#defaults</tt> can now be a function as well as a literal attributes
-      object.
+      大量的小调整和修复小的bug，最后查看 <a href="https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0">commit差异</a>来查看变更。支持HTML5的<tt>pushState</tt>，通过设置选项开启此功能：<tt>Backbone.history.start({pushState: true})</tt>。<tt>Controller</tt>重命名为<tt>Router</tt>，为的是表意清晰。<tt>Collection#refresh</tt>重命名为<tt>Collection#reset</tt>，用来强调它既能重置collection，也能在不传参数时清空collection。<tt>saveLocation</tt>被替换为<tt>navigate</tt>。RESTfull持久化方法（save, fetch等）现在反悔jQuery deferred对象，为了更进一步处理success/error链式调用，整体来说是为了便捷。改善<tt>Model#escape</tt>方法的XSS转码功能。在模型上添加<tt>urlRoot</tt>选项，在指定RESTfull urls时不必用集合。多次调用<tt>Backbone.history.start</tt>会抛出错误。<tt>Collection#create</tt>在初始化模型前调用。<tt>view.el</tt>现在可以是一个jQuery选择器。Backbone的views现在也接收一个<tt>attributes</tt>参数。<tt>Model#defaults</tt>现在既可以是函数，也可以是属性的对象字面量。
     </p>
 
     <p>
       <b class="header">0.3.3</b> &mdash; <small><i>Dec 1, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.3.2...0.3.3">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.3.3/index.html">Docs</a><br />
-      Backbone.js now supports <a href="http://zeptojs.com">Zepto</a>, alongside
-      jQuery, as a framework for DOM manipulation and Ajax support.
-      Implemented <a href="#Model-escape">Model#escape</a>, to efficiently handle
-      attributes intended for HTML interpolation. When trying to persist a model,
-      failed requests will now trigger an <tt>"error"</tt> event. The
-      ubiquitous <tt>options</tt> argument is now passed as the final argument
-      to all <tt>"change"</tt> events.
+      Backbone现在同时支持<a href="http://zeptojs.com">Zepto</a>和jQuery，作为DOM操作和Ajax的的框架。实现<a href="#Model-escape">Model#escape</a>方法，为了有效的处理要插入到HTML中的属性。在尝试持久化一个模型时，失败的请求现在会触发一个<tt>"error"</tt> 事件。无处不在的<tt>options</tt>对象，现在最终也会作为最后一个参数传入到所有的<tt>”change“</tt>事件中。
     </p>
 
     <p>
       <b class="header">0.3.2</b> &mdash; <small><i>Nov 23, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.3.1...0.3.2">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.3.2/index.html">Docs</a><br />
-      Bugfix for IE7 + iframe-based "hashchange" events. <tt>sync</tt> may now be
-      overridden on a per-model, or per-collection basis. Fixed recursion error
-      when calling <tt>save</tt> with no changed attributes, within a
-      <tt>"change"</tt> event.
+      修复IE7下基于iframe的"hashchange"事件的bug。现在 <tt>sync</tt>可以提前在模型或集合中覆盖。修复在<tt>"change"</tt>事件中，调用<tt>save</tt>时没有变更的属性引起的死循环。
     </p>
 
     <p>
       <b class="header">0.3.1</b> &mdash; <small><i>Nov 15, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.3.0...0.3.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.3.1/index.html">Docs</a><br />
-      All <tt>"add"</tt> and <tt>"remove"</tt> events are now sent through the
-      model, so that views can listen for them without having to know about the
-      collection. Added a <tt>remove</tt> method to <a href="#View">Backbone.View</a>.
-      <tt>toJSON</tt> is no longer called at all for <tt>'read'</tt> and <tt>'delete'</tt> requests.
-      Backbone routes are now able to load empty URL fragments.
+      所有的<tt>"add"</tt> 和 <tt>"remove"</tt>事件现在通过model发送，为的是便于视图监听这些事件而不必知道集合的存在。添加一个<tt>remove</tt> 方法到<a href="#View">Backbone.View</a>上。 <tt>'read'</tt> 和 <tt>'delete'</tt>氢气不在调用<tt>toJSON</tt>方法。Backbone现在可以加载空的URL片段。
     </p>
 
     <p>
       <b class="header">0.3.0</b> &mdash; <small><i>Nov 9, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.2.0...0.3.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.3.0/index.html">Docs</a><br />
-      Backbone now has <a href="#Controller">Controllers</a> and
-      <a href="#History">History</a>, for doing client-side routing based on
-      URL fragments.
-      Added <tt>emulateHTTP</tt> to provide support for legacy servers that don't
-      do <tt>PUT</tt> and <tt>DELETE</tt>.
-      Added <tt>emulateJSON</tt> for servers that can't accept <tt>application/json</tt>
-      encoded requests.
-      Added <a href="#Model-clear">Model#clear</a>, which removes all attributes
-      from a model.
-      All Backbone classes may now be seamlessly inherited by CoffeeScript classes.
+      Backbone现在添加了<a href="#Controller">Controllers</a> 和 <a href="#History">History</a>，用来处理基于URL片段的客户端路由。添加<tt>emulateHTTP</tt>，支持那些不能处理<tt>PUT</tt> 和 <tt>DELETE</tt>请求的老旧服务器。添加<tt>emulateJSON</tt>，支持那些不能接收<tt>application/json</tt>转码请求的老旧服务器。添加<a href="#Model-clear">Model#clear</a>方法，从一个模型上移除所有属性。所有的Backbone的类现在都支持继承CoffeeScript类。
     </p>
 
     <p>
       <b class="header">0.2.0</b> &mdash; <small><i>Oct 25, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.1.2...0.2.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.2.0/index.html">Docs</a><br />
-      Instead of requiring server responses to be namespaced under a <tt>model</tt>
-      key, now you can define your own <a href="#Model-parse">parse</a> method
-      to convert responses into attributes for Models and Collections.
-      The old <tt>handleEvents</tt> function is now named
-      <a href="#View-delegateEvents">delegateEvents</a>, and is automatically
-      called as part of the View's constructor.
-      Added a <a href="#Collection-toJSON">toJSON</a> function to Collections.
-      Added <a href="#Collection-chain">Underscore's chain</a> to Collections.
+      之前你需要在服务器响应的<tt>model</tt>命名空间下获取数据，现在你可以定义自己的 <a href="#Model-parse">parse</a>方法，将响应转换为模型或集合的属性。原来的<tt>handleEvents</tt> 函数现在命名为<a href="#View-delegateEvents">delegateEvents</a>，并且作为视图的构造函数的一部分调用。添加<a href="#Collection-toJSON">toJSON</a>函数到集合上。为集合添加<a href="#Collection-chain">Underscore's chain</a>语法。
     </p>
 
     <p>
       <b class="header">0.1.2</b> &mdash; <small><i>Oct 19, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.1.1...0.1.2">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.1.2/index.html">Docs</a><br />
-      Added a <a href="#Model-fetch">Model#fetch</a> method for refreshing the
-      attributes of single model from the server.
-      An <tt>error</tt> callback may now be passed to <tt>set</tt> and <tt>save</tt>
-      as an option, which will be invoked if validation fails, overriding the
-      <tt>"error"</tt> event.
-      You can now tell backbone to use the <tt>_method</tt> hack instead of HTTP
-      methods by setting <tt>Backbone.emulateHTTP = true</tt>.
-      Existing Model and Collection data is no longer sent up unnecessarily with
-      <tt>GET</tt> and <tt>DELETE</tt> requests. Added a <tt>rake lint</tt> task.
-      Backbone is now published as an <a href="http://npmjs.org">NPM</a> module.
+      添加一个<a href="#Model-fetch">Model#fetch</a>方法，从服务器中抓取数据刷新模型的属性。现在可以在<tt>set</tt> 和 <tt>save</tt>方法中传入<tt>error</tt>回调，如果校验失败就会调用它，覆盖了之前的<tt>"error"</tt>事件。设置<tt>Backbone.emulateHTTP = true</tt>，你现在可以告诉backbone使用<tt>_method</tt>技巧，而不是使用HTTP的方法。已存在的模型和集合数据就在不发送不必要的<tt>GET</tt> 和 <tt>DELETE</tt>请求。添加一个<tt>rake lint</tt>任务。Backbone现在发布成为一个<a href="http://npmjs.org">NPM</a>的模块。
     </p>
 
     <p>
       <b class="header">0.1.1</b> &mdash; <small><i>Oct 14, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.1.0...0.1.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.1.1/index.html">Docs</a><br />
-      Added a convention for <tt>initialize</tt> functions to be called
-      upon instance construction, if defined. Documentation tweaks.
+      添加一个约定，在构造器函数中调用<tt>initialize</tt>函数。Documentation定义的。
     </p>
 
     <p>
       <b class="header">0.1.0</b> &mdash; <small><i>Oct 13, 2010</i></small> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.1.0/index.html">Docs</a><br />
-      Initial Backbone release.
+      Backbone首个版本。
     </p>
 
     <p>
