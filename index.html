@@ -1202,7 +1202,7 @@ book.save({author: "Teddy"});
 </pre>
 
     <p>
-      <b>save</b>的选项接受<tt>success</tt> 和 <tt>error</tt>回调，它们会被传入参数 <tt>(model, response, options)</tt>。如果一个服务器端的校验失败了，会返回一个非<tt>200</tt>的响应码，以及一个文本格式或JSON格式的错误响应。
+      <b>save</b>的选项接收<tt>success</tt> 和 <tt>error</tt>回调，它们会被传入参数 <tt>(model, response, options)</tt>。如果一个服务器端的校验失败了，会返回一个非<tt>200</tt>的响应码，以及一个文本格式或JSON格式的错误响应。
     </p>
 
 <pre>
@@ -1212,7 +1212,7 @@ book.save("author", "F.D.R.", {error: function(){ ... }});
     <p id="Model-destroy">
       <b class="header">destroy</b><code>model.destroy([options])</code>
       <br />
-      通过代理<a href="#Sync">Backbone.sync</a>，并发送一个HTTP <tt>DELETE</tt> 请求到服务器端销毁一个模型。返回<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a> 对象，如果模型<a href="#Model-isNew">isNew</a>，则返回false。选项中接受<tt>success</tt> 和 <tt>error</tt> 回调，它们会被传入参数 <tt>(model, response, options)</tt>。在模型上触发一个<tt>"destroy"</tt> 事件，此事件会冒泡到包含模型的集合上，它发送Ajax请求到服务器端后会触发一个<tt>"request"</tt> 事件，在服务器成功删除了模型后，会触发一个<tt>"sync"</tt> 事件。如果你希望等待服务器响应后再把模型从集合中删除，就传入<tt>{wait: true}</tt> 。
+      通过代理<a href="#Sync">Backbone.sync</a>，并发送一个HTTP <tt>DELETE</tt> 请求到服务器端销毁一个模型。返回<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a> 对象，如果模型<a href="#Model-isNew">isNew</a>，则返回false。选项中接收<tt>success</tt> 和 <tt>error</tt> 回调，它们会被传入参数 <tt>(model, response, options)</tt>。在模型上触发一个<tt>"destroy"</tt> 事件，此事件会冒泡到包含模型的集合上，它发送Ajax请求到服务器端后会触发一个<tt>"request"</tt> 事件，在服务器成功删除了模型后，会触发一个<tt>"sync"</tt> 事件。如果你希望等待服务器响应后再把模型从集合中删除，就传入<tt>{wait: true}</tt> 。
     </p>
 
 <pre>
@@ -1249,7 +1249,7 @@ chapters.keys().join(', ');
       <br />
       此方法并没有定义在Backbone.Model上，你需要用任何自定义的校验逻辑覆盖它。默认情况下<tt>save</tt>在设置任何属性时会先检测<b>validate</b>，但你可以传入<tt>{validate: true}</tt>选项，告诉<tt>set</tt>验证新的属性。
       <br/>
-      <b>validate</b>接受模型的属性以及任何传入<tt>save</tt>或 <tt>save</tt>的选项。如果属性是合法的，<b>validate</b>方法不会返回任何值；否则返回你定义的错误。这个错误可以是一个简单的错误字符串信息，或一个完整的错误对象以编程形式描述错误。如果<tt>"invalid"</tt> 返回一个错误的话，<tt>save</tt> 不会继续执行，模型的属性也不会再服务器端修改。失败的校验会触发一个<tt>"invalid"</tt>事件，并设置<tt>validationError</tt>属性到模型上，值为这个方法的返回值。
+      <b>validate</b>接收模型的属性以及任何传入<tt>save</tt>或 <tt>save</tt>的选项。如果属性是合法的，<b>validate</b>方法不会返回任何值；否则返回你定义的错误。这个错误可以是一个简单的错误字符串信息，或一个完整的错误对象以编程形式描述错误。如果<tt>"invalid"</tt> 返回一个错误的话，<tt>save</tt> 不会继续执行，模型的属性也不会再服务器端修改。失败的校验会触发一个<tt>"invalid"</tt>事件，并设置<tt>validationError</tt>属性到模型上，值为这个方法的返回值。
     </p>
 
 <pre class="runnable">
@@ -1462,7 +1462,7 @@ var Library = Backbone.Collection.extend({
     <p id="Collection-modelId">
       <b class="header">modelId</b><code>collection.modelId(attrs)</code>
       <br />
-      覆盖此方法，它接受模型的属性，并返回集合用来标识模型唯一性的值。用来合并模型，将不同表中带有不同<a href="#Model-idAttribute"><tt>idAttribute</tt></a>的值整合到单个集合中。
+      覆盖此方法，它接收模型的属性，并返回集合用来标识模型唯一性的值。用来合并模型，将不同表中带有不同<a href="#Model-idAttribute"><tt>idAttribute</tt></a>的值整合到单个集合中。
     </p>
 
     <p>
@@ -1534,7 +1534,7 @@ alert(JSON.stringify(collection));
     </p>
 
     <p>
-      多数的方法可以接受一个对象或一个字符串，以支持model-attribute-style的判断，或接收一个函数，函数的参数是模型的实例。
+      多数的方法可以接收一个对象或一个字符串，以支持model-attribute-style的判断，或接收一个函数，函数的参数是模型的实例。
     </p>
 
     <ul class="small">
@@ -1616,7 +1616,7 @@ ships.add([
     <p id="Collection-remove">
       <b class="header">remove</b><code>collection.remove(models, [options])</code>
       <br />
-      从集合中删除一个模型（或一组模型），并返回它们。每个模型可以是Model的实例，或一个<tt>id</tt>字符串，或一个JS对象，它们是<a href="#Collection-get"><tt>collection.get</tt></a>方法可接受的任何的<tt>id</tt>参数。在每个模型上都会触发一个<tt>"remove"</tt>事件，之后触发一个<tt>"update"</tt>事件，触发传入<tt>{silent: true}</tt> 选项。模型在删除前的索引可以在监听函数上以<tt>options.index</tt>的形式获取。
+      从集合中删除一个模型（或一组模型），并返回它们。每个模型可以是Model的实例，或一个<tt>id</tt>字符串，或一个JS对象，它们是<a href="#Collection-get"><tt>collection.get</tt></a>方法可接收的任何的<tt>id</tt>参数。在每个模型上都会触发一个<tt>"remove"</tt>事件，之后触发一个<tt>"update"</tt>事件，触发传入<tt>{silent: true}</tt> 选项。模型在删除前的索引可以在监听函数上以<tt>options.index</tt>的形式获取。
     </p>
 
     <p id="Collection-reset">
@@ -1711,11 +1711,11 @@ var book = library.get(110);
     <p id="Collection-comparator">
       <b class="header">comparator</b><code>collection.comparator</code>
       <br />
-      默认情况下集合没有<b>comparator</b>比较器。如果你定义了一个比较器，集合会用它来维护模型的顺序。这意味着，添加一个模型时，它会被插入到<tt>collection.models</tt>的正确的索引位置。比较器可以用<a href="http://underscorejs.org/#sortBy">sortBy</a>函数（传入一个接受唯一参数的函数）定义，或用<a href="https://developer.mozilla.org/JavaScript/Reference/Global_Objects/Array/sort">sort</a>函数（传入一个接受两个参数的比较器函数）定义，或一个标识用来排序属性的字符串。
+      默认情况下集合没有<b>comparator</b>比较器。如果你定义了一个比较器，集合会用它来维护模型的顺序。这意味着，添加一个模型时，它会被插入到<tt>collection.models</tt>的正确的索引位置。比较器可以用<a href="http://underscorejs.org/#sortBy">sortBy</a>函数（传入一个接收唯一参数的函数）定义，或用<a href="https://developer.mozilla.org/JavaScript/Reference/Global_Objects/Array/sort">sort</a>函数（传入一个接收两个参数的比较器函数）定义，或一个标识用来排序属性的字符串。
     </p>
 
     <p>
-      "sortBy"比较器函数接受一个模型，并返回一个数字或字符串，表明模型相对其它模型的排序位置。"sort"比较器接受两个模型，如果第一个应该排在第二个前面则返回<tt>-1</tt>，如果两个排序相等则返回<tt>0</tt>，如果第一个应该排在第二个后面则返回<tt>1</tt>。注意Backbone会依赖你比较器参数的个数来决定使用哪个形式，所以请注意你绑定的比较器函数。
+      "sortBy"比较器函数接收一个模型，并返回一个数字或字符串，表明模型相对其它模型的排序位置。"sort"比较器接收两个模型，如果第一个应该排在第二个前面则返回<tt>-1</tt>，如果两个排序相等则返回<tt>0</tt>，如果第一个应该排在第二个后面则返回<tt>1</tt>。注意Backbone会依赖你比较器参数的个数来决定使用哪个形式，所以请注意你绑定的比较器函数。
     </p>
 
     <p>
@@ -1811,7 +1811,7 @@ var Notes = Backbone.Collection.extend({
     <p id="Collection-parse">
       <b class="header">parse</b><code>collection.parse(response, options)</code>
       <br />
-      无论何时在<a href="#Collection-fetch">fetch</a>方法上，从服务器端返回集合上的模型都会调用<b>parse</b>。这个函数会接受原生的<tt>response</tt>对象，并返回要<a href="#Collection-add">添加</a>到集合上的模型的数组。默认的实现是空操作，只是简单的回传了返回的JSON响应。如果你需要与已存的API协作，那么需要覆盖它，或者最好为响应添加命名空间。
+      无论何时在<a href="#Collection-fetch">fetch</a>方法上，从服务器端返回集合上的模型都会调用<b>parse</b>。这个函数会接收原生的<tt>response</tt>对象，并返回要<a href="#Collection-add">添加</a>到集合上的模型的数组。默认的实现是空操作，只是简单的回传了返回的JSON响应。如果你需要与已存的API协作，那么需要覆盖它，或者最好为响应添加命名空间。
     </p>
 
 <pre>
@@ -3623,85 +3623,62 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Added new hooks to Views to allow them to work without jQuery. See the
-        <a href="https://github.com/jashkenas/backbone/wiki/Using-Backbone-without-jQuery">wiki page</a>
-        for more info.
+        向View中添加新的钩子方法，允许在没有jQuery的情况下正常运行，参见<a href="https://github.com/jashkenas/backbone/wiki/Using-Backbone-without-jQuery">wiki page</a>了解更多信息。
       </li>
       <li>
-        As a neat side effect, Backbone.History no longer uses jQuery's
-        event methods for <tt>pushState</tt> and <tt>hashChange</tt> listeners.
-        We're native all the way.
+        Backbone.History不在使用jQuery的事件方法，来监听<tt>pushState</tt> 和 <tt>hashChange</tt>。我们现在使用原生方法。
       </li>
       <li>
-        Also on the subject of jQuery, if you're using Backbone with CommonJS (node, browserify, webpack)
-        Backbone will automatically try to load jQuery for you.
+        也是关于jQuery的，如果你现在在CommonJS（node, browserify, webpack）中使用Backbone，Backbone会自动尝试为你加载jQuery。
       </li>
       <li>
-        Views now always delegate their events in <a href="#View-setElement">setElement</a>.
-        You can no longer modify the events hash or your view's <tt>el</tt> property in
-        <tt>initialize</tt>.
+        Views现在总会在<a href="#View-setElement">setElement</a>方法中代理它们的事件。你不能再在<tt>initialize</tt>方法中，修改事件的hash或<tt>el</tt>属性了。
       </li>
       <li>
-        Added an <tt>"update"</tt> event that triggers after any amount of
-        models are added or removed from a collection. Handy to re-render lists
-        of things without debouncing.
+        添加一个<tt>"update"</tt> 事件，只要是集合中添加或删除了集合就会触发。便捷的在不抖动（debouncing）的情况下重新渲染列表。
       </li>
       <li>
-        <tt>Collection#at</tt> can take a negative index.
+        <tt>Collection#at</tt>可以接收负值索引。
       </li>
       <li>
-        Added <tt>modelId</tt> to Collection for generating unique ids on
-        polymorphic collections. Handy for cases when your model ids would
-        otherwise collide.
+        添加<tt>modelId</tt>到Collection中，为的是在多态的集合中生成模型的唯一id。在你模型的ids发生冲突时此方法很有用。
       </li>
       <li>
-        Added an overridable <tt>_isModel</tt> for more advanced
-        control of what's considered a model by your Collection.
+        添加一个可被覆盖的<tt>_isModel</tt> 方法，为了更高级的控制哪些对象会被认定是集合的模型。
       </li>
       <li>
-        The <tt>success</tt> callback passed to <tt>Model#destroy</tt> is always
-        called asynchronously now.
+        传入<tt>Model#destroy</tt>中的<tt>success</tt>回调现在一直是异步调用。
       </li>
       <li>
-        <tt>Router#execute</tt> passes back the route name as its third argument.
+        <tt>Router#execute</tt>现在会在第三个参数上回传路由的名字。
       </li>
       <li>
-        Cancel the current Router transition by returning <tt>false</tt> in
-        <tt>Router#execute</tt>. Great for checking logged-in status or other
-        prerequisites.
+        <tt>Router#execute</tt>返回<tt>false</tt>就取消当前路由的转换。用于检测登录状态或其它先置条件很不错。
       </li>
       <li>
-        Added <tt>getSearch</tt> and <tt>getPath</tt> methods to Backbone.History as
-        cross-browser and overridable ways of slicing up the URL.
+        添加<tt>getSearch</tt>和<tt>getPath</tt>方法到Backbone.History，用作跨浏览器覆盖分割URL的方式。
       </li>
       <li>
-        Added <tt>delegate</tt> and <tt>undelegate</tt> as finer-grained versions
-        of <tt>delegateEvents</tt> and <tt>undelegateEvents</tt>. Useful for plugin
-        authors to use a consistent events interface in Backbone.
+        添加<tt>delegate</tt> 和 <tt>undelegate</tt>作为更细粒度的<tt>delegateEvents</tt> 和 <tt>undelegateEvents</tt>。插件作者可以在Backbone中使用一直的事件接口。
       </li>
       <li>
-        A collection will only fire a "sort" event if its order was actually
-        updated, not on every <tt>set</tt>.
+        集合只有在顺序真正更新后才会触发"sort事件，而不是在每次调用<tt>set</tt>时都触发。
       </li>
       <li>
         Any passed <tt>options.attrs</tt> are now respected when saving a model with
         <tt>patch: true</tt>.
       </li>
       <li>
-        <tt>Collection#clone</tt> now sets the <tt>model</tt> and <tt>comparator</tt>
-        functions of the cloned collection to the new one.
+        <tt>Collection#clone</tt>现在会在新clone的集合对象上设置<tt>model</tt> 和 <tt>comparator</tt>方法。
       </li>
       <li>
-        Adding models to your Collection when specifying an <tt>at</tt> position
-        now sends the actual position of your model in the <tt>add</tt>
-        event, not just the one you've passed in.
+        向集合中添加模型并制定<tt>at</tt>位置时，现在会在<tt>add</tt>事件中发送所有模型当前的真实位置，而不是最起始那个的位置。
       </li>
       <li>
-        <tt>Collection#remove</tt> will now only return a list of models that
-        have actually been removed from the collection.
+        <tt>Collection#remove</tt>现在只会返回真正从集合中移除的模型的列表。
       </li>
       <li>
-        Fixed loading Backbone.js in strict ES6 module loaders.
+        修复在严格的ES6模块加载器中加载Backbone.js的问题。
       </li>
     </ul>
 
@@ -3711,326 +3688,240 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Backbone no longer tries to require jQuery in Node/CommonJS environments,
-        for better compatibility with folks using Browserify.
-        If you'd like to have Backbone use jQuery from Node, assign it like so:
-        <tt>Backbone.$ = require('jquery');</tt>
+        Backbone不在尝试在Node/CommonJS环境中require jQuery了，为了更好的兼容Browserify。如果你喜欢在Node中让Backbone使用jQuery，就这样赋值：<tt>Backbone.$ = require('jquery');</tt>。
       </li>
       <li>
-        Bugfix for route parameters with newlines in them.
+        修复路由参数中的换行符导致的bug。
       </li>
     </ul>
 
     <b class="header">1.1.1</b> &mdash; <small><i>Feb. 13, 2014</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/1.1.0...1.1.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/1.1.1/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Backbone now registers itself for AMD (Require.js), Bower and Component,
-        as well as being a CommonJS module and a regular (Java)Script. Whew.
+        Backbone现在支持AMD (Require.js)，Bower和Component，以及作为CommonJS模块和常规（Java）Script库。
       </li>
       <li>
-        Added an <tt>execute</tt> hook to the Router, which allows you to hook
-        in and custom-parse route arguments, like query strings, for example.
+        在Router上添加一个<tt>execute</tt>钩子，允许你自定义解析路由的参数，比如查询字符串（query stirngs）。
       </li>
       <li>
-        Performance fine-tuning for Backbone Events.
+        Backbone Events的性能调整。
       </li>
       <li>
-        Better matching for Unicode in routes, in old browsers.
+        老旧浏览器中，更好的匹配理由中的Unicode。
       </li>
       <li>
-        Backbone Routers now handle query params in route fragments, passing
-        them into the handler as the last argument.  Routes specified as
-        strings should no longer include the query string
-        (<tt>'foo?:query'</tt> should be <tt>'foo'</tt>).
+        Backbone Router现在处理路由片段中的查询参数时，将它们作为最后的参数传入处理函数中，定义为字符串形式的路由不在包含查询字符串（<tt>'foo?:query'</tt> 应该为 <tt>'foo'</tt>）。
       </li>
     </ul>
 
     <b class="header">1.1.0</b> &mdash; <small><i>Oct. 10, 2013</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/1.0.0...1.1.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/1.1.0/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Made the return values of Collection's <tt>set</tt>, <tt>add</tt>,
-        <tt>remove</tt>, and <tt>reset</tt> more useful. Instead of returning
-        <tt>this</tt>, they now return the changed (added, removed or updated)
-        model or list of models.
+        让集合的<tt>set</tt>， <tt>add</tt>，<tt>remove</tt>， 和 <tt>reset</tt>方法的返回值更有效。现在他们会返回变更的（added，removed 或 update）模型或模型的列表，而不是集合的<tt>this</tt>。
       </li>
       <li>
-        Backbone Views no longer automatically attach options passed to the constructor as
-        <tt>this.options</tt> and Backbone Models no longer attach <tt>url</tt> and
-        <tt>urlRoot</tt> options, but you can do it yourself if you prefer.
+        Backbone的Views现在不在自动将传入构造器的options添加为<tt>this.options</tt>，现在Backbone的Model也不在添加<tt>url</tt>和<tt>urlRoot</tt>选项，但你喜欢可以自己做。
       </li>
       <li>
-        All <tt>"invalid"</tt> events now pass consistent arguments. First the
-        model in question, then the error object, then options.
+        所有的<tt>"invalid"</tt>事件现在传入一直的参数。第一个是有问题的模型对象，之后是错误对象，最后是options对象。
       </li>
       <li>
-        You are no longer permitted to change the <b>id</b> of your model during
-        <tt>parse</tt>. Use <tt>idAttribute</tt> instead.
+        现在在<tt>parse</tt>中，你不能再改变泥模型的<b>id</b>。替换使用<tt>idAttribute</tt>。
       </li>
       <li>
-        On the other hand, <tt>parse</tt> is now an excellent place to extract
-        and vivify incoming nested JSON into associated submodels.
+        另一方便，<tt>parse</tt>现在是最好的提取和灵活的处理嵌套的JSON为关联的子模型。
       </li>
       <li>
-        Many tweaks, optimizations and bugfixes relating to Backbone 1.0,
-        including URL overrides, mutation of options, bulk ordering, trailing
-        slashes, edge-case listener leaks, nested model parsing...
+        大量有关relating to的微调，优化和bugfixed，包括URL重写，options的变化，大批量数据排序，尾部斜杠便捷监听器的遗漏，嵌套模型的解析...
       </li>
     </ul>
 
     <b class="header">1.0.0</b> &mdash; <small><i>March 20, 2013</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.10...1.0.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/1.0.0/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Renamed Collection's "update" to <a href="#Collection-set">set</a>, for
-        parallelism with the similar <tt>model.set()</tt>, and contrast with
-        <a href="#Collection-reset">reset</a>. It's now the default
-        updating mechanism after a <a href="#Collection-fetch">fetch</a>. If you'd
-        like to continue using "reset", pass <tt>{reset: true}</tt>.
+        重命名集合的"update"为<a href="#Collection-set">set</a>，为了向<tt>model.set()</tt>看起，而与<a href="#Collection-reset">reset</a>形成比对。现在是<a href="#Collection-fetch">fetch</a>后默认的更新机制。如果你喜欢继续使用”reset“，传入<tt>{reset: true}</tt>。
       </li>
       <li>
-        Your route handlers will now receive their URL parameters pre-decoded.
+        你的路由处理现在会接收它们解码后的URL参数。
       </li>
       <li>
-        Added <a href="#Events-listenToOnce">listenToOnce</a> as the analogue of
-        <a href="#Events-once">once</a>.
+        添加一个<a href="#Events-listenToOnce">listenToOnce</a>，与<a href="#Events-once">once</a>类似。
       </li>
       <li>
-        Added the <a href="#Collection-findWhere">findWhere</a> method to Collections,
-        similar to <a href="#Collection-where">where</a>.
+        添加<a href="#Collection-findWhere">findWhere</a>方法到结合上，与<a href="#Collection-where">where</a>类似。
       </li>
       <li>
-        Added the <tt>keys</tt>, <tt>values</tt>, <tt>pairs</tt>, <tt>invert</tt>,
-        <tt>pick</tt>, and <tt>omit</tt> Underscore.js methods to Backbone Models.
+        添加Underscore上的<tt>keys</tt>， <tt>values</tt>， <tt>pairs</tt>， <tt>invert</tt>，
+        <tt>pick</tt>和 <tt>omit</tt>方法到Backbone的模型上。
       </li>
       <li>
-        The routes in a Router's route map may now be function literals,
-        instead of references to methods, if you like.
+        如果你喜欢，Router的route map中的路由现在可以定义为函数字面量，而不是方法的引用。
       </li>
       <li>
-        <tt>url</tt> and <tt>urlRoot</tt> properties may now be passed as options
-        when instantiating a new Model.
+        <tt>url</tt> 和 <tt>urlRoot</tt>属性现在可以作为选项传入新实例化的模型对象上。
       </li>
     </ul>
 
     <b class="header">0.9.10</b> &mdash; <small><i>Jan. 15, 2013</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.9...0.9.10">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.9.10/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        A <tt>"route"</tt> event is triggered on the router in addition
-        to being fired on <tt>Backbone.history</tt>.
+        现在除了会在<tt>Backbone.history</tt>上触发<tt>"route"</tt>事件，路由对象上触发此事件。
       </li>
       <li>
-        Model validation is now only enforced by default in
-        <tt>Model#save</tt> and no longer enforced by default upon
-        construction or in <tt>Model#set</tt>, unless the <tt>{validate:true}</tt>
-        option is passed.
+        现在<tt>Model#save</tt>会强制执行模型校验，而不是在构造器或在<tt>Model#set</tt>上调用，触发传入<tt>{validate:true}</tt>选项。
       </li>
       <li>
-        <tt>View#make</tt> has been removed. You'll need to use <tt>$</tt> directly to
-        construct DOM elements now.
+        移除<tt>View#make</tt>。你现在需要直接使用<tt>$</tt>来构造DOM元素。
       </li>
       <li>
-        Passing <tt>{silent:true}</tt> on change will no longer delay individual
-        <tt>"change:attr"</tt> events, instead they are silenced entirely.
+        在change中传入<tt>{silent:true}</tt>不会延迟单个的<tt>"change:attr"</tt>事件，而是会不会再触发。
       </li>
       <li>
-        The <tt>Model#change</tt> method has been removed, as delayed attribute
-        changes are no longer available.
+        现在移除<tt>Model#change</tt>方法，因为不再支持延迟的属性变更。
       </li>
       <li>
-        Bug fix on <tt>change</tt> where attribute comparison uses <tt>!==</tt>
-        instead of <tt>_.isEqual</tt>.
+        修复<tt>change</tt>上的bug，属性的比较使用<tt>!==</tt>而不是<tt>_.isEqual</tt>。
       </li>
       <li>
-        Bug fix where an empty response from the server on save would not call
-        the success function.
+        修复在保存调用后，服务器返回空的响应时不会调用success函数的bug。
       </li>
       <li>
-        <tt>parse</tt> now receives <tt>options</tt> as its second argument.
+        <tt>parse</tt>现在接收<tt>options</tt>作为第二个参数。
       </li>
       <li>
-        Model validation now fires <tt>invalid</tt> event instead of
-        <tt>error</tt>.
+        模型校验现在会触发<tt>invalid</tt>事件而不触发<tt>error</tt>事件。
       </li>
     </ul>
 
     <b class="header">0.9.9</b> &mdash; <small><i>Dec. 13, 2012</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.2...0.9.9">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.9.9/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Added <a href="#Events-listenTo">listenTo</a>
-        and <a href="#Events-stopListening">stopListening</a> to Events. They
-        can be used as inversion-of-control flavors of <tt>on</tt> and <tt>off</tt>,
-        for convenient unbinding of all events an object is currently listening to.
-        <tt>view.remove()</tt> automatically calls <tt>view.stopListening()</tt>.
+        在Events中添加<a href="#Events-listenTo">listenTo</a>
+        和 <a href="#Events-stopListening">stopListening</a>方法。它们可以当做是<tt>on</tt> 和 <tt>off</tt>的反转操作，为的是解绑一个对象当前正在监听的所有事件。<tt>view.remove()</tt>会自动调用<tt>view.stopListening()</tt>。
       </li>
       <li>
-        When using <tt>add</tt> on a collection, passing <tt>{merge: true}</tt>
-        will now cause duplicate models to have their attributes merged in to
-        the existing models, instead of being ignored.
+        在集合上使用<tt>add</tt>方法时，传入 <tt>{merge: true}</tt>现在会将重复的模型的属性合并到已存在的模型上，而不是忽略掉。
       </li>
       <li>
-        Added <a href="#Collection-update">update</a> (which is also available as
-        an option to <tt>fetch</tt>) for "smart" updating of sets of models.
+        添加<a href="#Collection-update">update</a>事件，为了更巧妙的更新模型的属性。
       </li>
       <li>
-        HTTP <tt>PATCH</tt> support in <a href="#Model-save">save</a> by passing
-        <tt>{patch: true}</tt>.
+        通过传入<tt>{patch: true}</tt>，<a href="#Model-save">save</a>现在支持HTTP <tt>PATCH</tt>。
       </li>
       <li>
-        The <tt>Backbone</tt> object now extends <tt>Events</tt> so that you can
-        use it as a global event bus, if you like.
+        <tt>Backbone</tt>对象现在扩充了<tt>Events</tt> ，因此你可以将它当做全局的event bus使用。
       </li>
       <li>
-        Added a <tt>"request"</tt> event to <a href="#Sync">Backbone.sync</a>,
-        which triggers whenever a request begins to be made to the server.
-        The natural complement to the <tt>"sync"</tt> event.
+        在<a href="#Sync">Backbone.sync</a>上添加一个<tt>"request"</tt>事件，每次向服务器发送请丢都会触发。它是<tt>"sync"</tt>事件的补充，
       </li>
       <li>
-        Router URLs now support optional parts via parentheses, without having
-        to use a regex.
+        路由的URLs现在通过括号形式支持可选参数部分，而不必使用正则表达式。
       </li>
       <li>
-        Backbone events now supports <tt>once</tt>, similar to Node's <tt>once</tt>,
-        or jQuery's <tt>one</tt>.
+        Backbone的events现在支持<tt>once</tt>，与Node的<tt>once</tt>，或jQuery的<tt>one</tt>类似。
       </li>
       <li>
-        Backbone events now support jQuery-style event maps <tt>obj.on({click: action})</tt>.
+        Backbone的events现在支持jQuery风格的事件映射<tt>obj.on({click: action})</tt>。
       </li>
       <li>
-        While listening to a <tt>reset</tt> event, the list of previous models
-        is now available in <tt>options.previousModels</tt>, for convenience.
+        在监听<tt>reset</tt>事件时，之前的模型现在可以很方便的在<tt>options.previousModels</tt>上获取。
       </li>
       <li>
-        <a href="#Model-validate">Validation</a> now occurs even during "silent"
-        changes. This change means that the <tt>isValid</tt> method has
-        been removed. Failed validations also trigger an error, even if an error
-        callback is specified in the options.
+        <a href="#Model-validate">Validation</a>现在即使在"silent"事件里也会触发。这个变更以为这<tt>isValid</tt>方法已经被移除掉了。校验失败也会触发一个错误，即使是在options上定义error回调。
       </li>
       <li>
-        Consolidated <tt>"sync"</tt> and <tt>"error"</tt> events within
-        <a href="#Sync">Backbone.sync</a>. They are now triggered regardless
-        of the existence of <tt>success</tt> or <tt>error</tt> callbacks.
+        在<a href="#Sync">Backbone.sync</a>里，合并<tt>"sync"</tt> 和 <tt>"error"</tt>事件。不管是不是定义了<tt>success</tt> 和 <tt>error</tt>回调，它们都会触发。
       </li>
       <li>
-        For mixed-mode APIs, <tt>Backbone.sync</tt> now accepts
-        <tt>emulateHTTP</tt> and <tt>emulateJSON</tt> as inline options.
+        对于mixed-mode APIs，<tt>Backbone.sync</tt>现在接收<tt>emulateHTTP</tt> 和 <tt>emulateJSON</tt>作为内联选项。
       </li>
       <li>
-        Collections now also proxy Underscore method name aliases (collect,
-        inject, foldl, foldr, head, tail, take, and so on...)
+        现在集合也代理了Underscore的方法名字的别名（collect，
+        inject， foldl， foldr， head， tail， take，等等）。
       </li>
       <li>
-        Removed <tt>getByCid</tt> from Collections. <tt>collection.get</tt> now
-        supports lookup by both <tt>id</tt> and <tt>cid</tt>.
+        从集合上移除<tt>getByCid</tt> 。<tt>collection.get</tt>现在支持根据<tt>id</tt>和<tt>cid</tt>查询。
       </li>
       <li>
-        After fetching a model or a collection, <i>all</i> defined <tt>parse</tt>
-        functions will now be run. So fetching a collection and getting back new
-        models could cause both the collection to parse the list, and then each model
-        to be parsed in turn, if you have both functions defined.
+        在抓取一个模型或集合时，<i>所有</i>定义的<tt>parse</tt>现在也会执行。所以如果你在集合和模型上同时定义了<tt>parse</tt>，现在抓取一个集合设置新的模型会引发集合和模型都会顺序解析响应数据。
       </li>
       <li>
-        Bugfix for normalizing leading and trailing slashes in the Router
-        definitions. Their presence (or absence) should not affect behavior.
+        修复路由定义中的首部和尾部的反斜杠正常化时的bug。它们的出现（或缺失）不会影响正常的行为。
       </li>
       <li>
-        When declaring a View, <tt>options</tt>, <tt>el</tt>, <tt>tagName</tt>,
-        <tt>id</tt> and <tt>className</tt> may now be defined as functions, if
-        you want their values to be determined at runtime.
+        现在定义一个View时，tt>options</tt>， <tt>el</tt>， <tt>tagName</tt>，
+        <tt>id</tt> 和 <tt>className</tt> 现在可以定义为函数，只要你希望它们的值是在运行时确定的。
       </li>
       <li>
-        Added a <tt>Backbone.ajax</tt> hook for more convenient overriding of
-        the default use of <tt>$.ajax</tt>. If AJAX is too passé, set it to your
-        preferred method for server communication.
+        添加一个<tt>Backbone.ajax</tt>钩子函数，为了方便的覆盖默认的 <tt>$.ajax</tt>实现。如果AJAX比较老旧，你可以设置最有的方法来和服务器通信。
       </li>
       <li>
-        <tt>Collection#sort</tt> now triggers a <tt>sort</tt> event, instead
-        of a <tt>reset</tt> event.
+        <tt>Collection#sort</tt>现在触发<tt>sort</tt>事件，而不触发<tt>reset</tt>事件。
       </li>
       <li>
-        Calling <tt>destroy</tt> on a Model will now return <tt>false</tt> if
-        the model <tt>isNew</tt>.
+        在模型上调用<tt>destroy</tt>，如果模型<tt>isNew</tt>，现在会返回<tt>false</tt>。
       </li>
       <li>
-        To set what library Backbone uses for DOM manipulation and Ajax calls,
-        use <tt>Backbone.$ = ...</tt> instead of <tt>setDomLibrary</tt>.
+        设置Backbone所使用的用来操作DOM和Ajax调用的库，使用<tt>Backbone.$ = ...</tt>替代<tt>setDomLibrary</tt>。
       </li>
       <li>
-        Removed the <tt>Backbone.wrapError</tt> helper method. Overriding
-        <tt>sync</tt> should work better for those particular use cases.
+        移除<tt>Backbone.wrapError</tt>辅助方法。在这些特定情形下覆盖<tt>sync</tt>会更好。
       </li>
       <li>
-        To improve the performance of <tt>add</tt>, <tt>options.index</tt>
-        will no longer be set in the <tt>add</tt> event callback.
-        <tt>collection.indexOf(model)</tt> can be used to retrieve the index
-        of a model as necessary.
+        为了提升<tt>add</tt>的性能，<tt>add</tt>， <tt>options.index</tt>现在不会再<tt>add</tt>事件回调上添加了。<tt>collection.indexOf(model)</tt>可以用来按需获取模型的索引。
       </li>
       <li>
-        For semantic and cross browser reasons, routes will now ignore search
-        parameters.  Routes like <tt>search?query=…&amp;page=3</tt> should become
-        <tt>search/…/3</tt>.
+        为了语义化和跨浏览器原因，路由现在会忽略搜索参数。向<tt>search?query=…&amp;page=3</tt>这样的路由会变成<tt>search/…/3</tt>。
       </li>
       <li>
-        <tt>Model#set</tt> no longer accepts another model as an argument.  This leads
-        to subtle problems and is easily replaced with <tt>model.set(other.attributes)</tt>.
+        <tt>Model#set</tt> 现在不再接收两一个模型作为参数。这回引发一些小问题，但很容易使用<tt>model.set(other.attributes)</tt>替换。
       </li>
     </ul>
 
     <b class="header">0.9.2</b> &mdash; <small><i>March 21, 2012</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.1...0.9.2">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.9.2/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Instead of throwing an error when adding duplicate models to a collection,
-        Backbone will now silently skip them instead.
+        现在在集合中添加重复的模型对象不会再抛出异常，而是会静默的跳过它们。
       </li>
       <li>
-        Added <a href="#Collection-push">push</a>,
-        <a href="#Collection-pop">pop</a>,
-        <a href="#Collection-unshift">unshift</a>, and
-        <a href="#Collection-shift">shift</a> to collections.
+        添加 <a href="#Collection-push">push</a>，
+        <a href="#Collection-pop">pop</a>，
+        <a href="#Collection-unshift">unshift</a>， 和
+        <a href="#Collection-shift">shift</a> 方法到集合中.
       </li>
       <li>
-        A model's <a href="#Model-changed">changed</a> hash is now exposed for
-        easy reading of the changed attribute delta, since the model's last
-        <tt>"change"</tt> event.
+        现在模型的<a href="#Model-changed">changed</a>hash可以用来很方便的读取变更属性从上次<tt>"change"</tt>事件后的差异，
       </li>
       <li>
-        Added <a href="#Collection-where">where</a> to collections for simple
-        filtering.
+        添加<a href="#Collection-where">where</a>到集合中，用来执行过滤操作。
       </li>
       <li>
-        You can now use a single <a href="#Events-off">off</a> call
-        to remove all callbacks bound to a specific object.
+        可以使用 <a href="#Events-off">off</a>来移除绑定到给定对象上的所有回调。
       </li>
       <li>
-        Bug fixes for nested individual change events, some of which may be
-        "silent".
+        修复嵌套的单个change时间的bug，其中有些是"silent"事件。
       </li>
       <li>
-        Bug fixes for URL encoding in <tt>location.hash</tt> fragments.
+        修复<tt>location.hash</tt> fragments中的URL转码的bug。
       </li>
       <li>
-        Bug fix for client-side validation in advance of a <tt>save</tt> call
-        with <tt>{wait: true}</tt>.
+        修复在<tt>save</tt>调用中，传入<tt>{wait: true}</tt>选项，产生的客户端校验bug。
       </li>
       <li>
-        Updated / refreshed the example
-        <a href="examples/todos/index.html">Todo List</a> app.
+        更新实例<a href="examples/todos/index.html">Todo List</a> app.
       </li>
     </ul>
 
     <b class="header">0.9.1</b> &mdash; <small><i>Feb. 2, 2012</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.0...0.9.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.9.1/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        Reverted to 0.5.3-esque behavior for validating models. Silent changes
-        no longer trigger validation (making it easier to work with forms).
-        Added an <tt>isValid</tt> function that you can use to check if a model
-        is currently in a valid state.
+        恢复0.5.3版本的模型校验行为。Silent change事件不会再触发validation事件（更容易处理表单）。添加<tt>isValid</tt>方法，你可以使用它来检测模型对象是否是合法的状态。
       </li>
       <li>
-        If you have multiple versions of jQuery on the page, you can now tell
-        Backbone which one to use with <tt>Backbone.setDomLibrary</tt>.
+        如果你的页面有多个版本的jQuery，现在你可以使用<tt>Backbone.setDomLibrary</tt>方法确定到底使用哪一个。
       </li>
       <li>
-        Fixes regressions in <b>0.9.0</b> for routing with "root", saving with
-        both "wait" and "validate", and the order of nested "change" events.
+        恢复<b>0.9.0</b>版本带有"root"的路由的一个改动，保留"wait" and "validate"时间，以及嵌套的"change"事件的顺序。
       </li>
     </ul>
 
@@ -4055,69 +3946,48 @@ ActiveRecord::Base.include_root_in_json = false
         添加一个<tt>"sync"</tt>事件，模型的状态成功同服务器同步后调用（create, save, destroy）。
       </li>
       <li>
-        <tt>bind</tt> and <tt>unbind</tt> have been renamed to <tt>on</tt>
-        and <tt>off</tt> for clarity, following jQuery's lead.
-        The old names are also still supported.
+        <tt>bind</tt> 和 <tt>unbind</tt>已经重命名为<tt>on</tt>
+        和 <tt>off</tt>，这样更清晰，效仿了jQuery。老名字仍然可用。
       </li>
       <li>
-        A Backbone collection's <tt>comparator</tt> function may now behave
-        either like a <a href="http://underscorejs.org/#sortBy">sortBy</a>
-        (pass a function that takes a single argument),
-        or like a <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort</a>
-        (pass a comparator function that expects two arguments). The comparator
-        function is also now bound by default to the collection &mdash; so you
-        can refer to <tt>this</tt> within it.
+        Backbone集合的<tt>comparator</tt>函数现在可以当做<a href="http://underscorejs.org/#sortBy">sortBy</a>使用（传入接收单个参数的函数），或当做<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">sort</a>函数使用（传入接收两个参数的函数）。comparator函数同时默认绑定到了集合上 &mdash; 因此你可以在它内部引用<tt>this</tt>。
+      </li>
+
+      <li>
+        视图的<tt>events</tt>hash现在可以包含函数，也可以包含视图方法名字的字符串。
       </li>
       <li>
-        A view's <tt>events</tt> hash may now also contain direct function
-        values as well as the string names of existing view methods.
+        校验流程进行了一次大修改&mdash;模型<tt>validate</tt>函数现在及时是silent change下也能执行，现在在初始校验失败状态下也不能创建模型对象。
       </li>
       <li>
-        Validation has gotten an overhaul &mdash; a model's <tt>validate</tt> function
-        will now be run even for silent changes, and you can no longer create
-        a model in an initially invalid state.
+        在集合上添加<tt>shuffle</tt> 和 <tt>initial</tt>方法，代理了Underscore的同名方法。
       </li>
       <li>
-        Added <tt>shuffle</tt> and <tt>initial</tt> to collections, proxied
-        from Underscore.
+        <tt>Model#urlRoot</tt>现在既可以是函数类型也可以是字符串值。
       </li>
       <li>
-        <tt>Model#urlRoot</tt> may now be defined as a function as well as a
-        value.
+        <tt>View#attributes</tt>现在既可以是函数类型也可以是对象值。
       </li>
       <li>
-        <tt>View#attributes</tt> may now be defined as a function as well as a
-        value.
+        现在调用集合的<tt>fetch</tt> 会将所有抓取的JSON响应都通过集合上模型对象定义的 <tt>parse</tt>函数。
       </li>
       <li>
-        Calling <tt>fetch</tt> on a collection will now cause all fetched JSON
-        to be run through the collection's model's <tt>parse</tt> function, if
-        one is defined.
+        现在你可以告诉路由，调用<tt>navigate(fragment, {replace: true})</tt>方法，使用<tt>history.replaceState</tt>，或<tt>location.hash.replace</tt>，改变URL而不会添加历史记录。
       </li>
       <li>
-        You may now tell a router to <tt>navigate(fragment, {replace: true})</tt>,
-        which will either use <tt>history.replaceState</tt> or
-        <tt>location.hash.replace</tt>, in order to change the URL without adding
-        a history entry.
+        在集合的<tt>add</tt> 和 <tt>remove</tt>事件中，添加或删除的模型的索引现在可以在<tt>options.index</tt>上获取。
       </li>
       <li>
-        Within a collection's <tt>add</tt> and <tt>remove</tt> events, the index
-        of the model being added or removed is now available as <tt>options.index</tt>.
+        在视图上添加<tt>undelegateEvents</tt>方法，允许你手工移除所有代理的事件。
       </li>
       <li>
-        Added an <tt>undelegateEvents</tt> to views, allowing you to manually
-        remove all configured event delegations.
+        虽然你不应该在route中包含(<tt>/</tt>)，但是现在起始位置的(<tt>/</tt>)会被移除掉。
       </li>
       <li>
-        Although you shouldn't be writing your routes with them in any case &mdash;
-        leading slashes (<tt>/</tt>) are now stripped from routes.
+        现在调用模型的<tt>clone</tt>会复制attributes，而不会返回model本身的引用。
       </li>
       <li>
-        Calling <tt>clone</tt> on a model now only passes the attributes
-        for duplication, not a reference to the model itself.
-      </li>
-      <li>
-        Calling <tt>clear</tt> on a model now removes the <tt>id</tt> attribute.
+        模型上调用<tt>clear</tt> 现在会移除<tt>id</tt>属性。
       </li>
     </ul>
 
