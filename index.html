@@ -3519,42 +3519,34 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Added <tt>findIndex</tt> and <tt>findLastIndex</tt> Underscore methods to
-        <tt>Collection</tt>.
+        添加Underscore的<tt>findIndex</tt> 和 <tt>findLastIndex</tt>到<tt>Collection</tt>上。
       </li>
       <li>
-        Added <tt>options.changes</tt> to <tt>Collection</tt> "update" event which
-        includes added, merged, and removed models.
+        向<tt>Collection</tt>的”update“事件中添加<tt>options.changes</tt>选项，其中包含了added, merged, 和 removed的模型对象。
       </li>
       <li>
-        Ensured <tt>Collection#reduce</tt> and <tt>Collection#reduceRight</tt>
-        work without an initial <tt>accumulator</tt> value.
+        保证<tt>Collection#reduce</tt> 和 <tt>Collection#reduceRight</tt>在没有初始<tt>累加器</tt>时也能正常工作。
       </li>
       <li>
-        Ensured <tt>Collection#_removeModels</tt> always returns an array.
+        保证<tt>Collection#_removeModels</tt>总会返回一个数组。
       </li>
       <li>
-        Fixed a bug where <tt>Events.once</tt> with object syntax failed to bind
-        context.
+        修复一个bug，在<tt>Events.once</tt> 中使用对象语法不会绑定context。
       </li>
       <li>
-        Fixed <tt>Collection#_onModelEvent</tt> regression where triggering a
-        <tt>change</tt> event without a <tt>model</tt> would error.
+        修复一个<tt>Collection#_onModelEvent</tt>退化，在触发<tt>change</tt>事件而不指定 <tt>model</tt>时会报错。
       </li>
       <li>
-        Fixed <tt>Collection#set</tt> regression when <tt>parse</tt> returns a
-        falsy value.
+        修复一个<tt>Collection#set</tt>退化，<tt>parse</tt>会返回一个falsy值。
       </li>
       <li>
-        Fixed <tt>Model#id</tt> regression where <tt>id</tt> would be
-        unintentionally <tt>undefined</tt>.
+        修复<tt>Model#id</tt>的一个退化，<tt>id</tt>不能是一个无意义的<tt>undefined</tt>。
       </li>
       <li>
-        Fixed <tt>_removeModels</tt> regression which could cause an infinite loop
-        under certain conditions.
+        修复<tt>_removeModels</tt>的一个退化，在某些条件下会引发死循环。
       </li>
       <li>
-        Removed <tt>component</tt> package support.
+        不再支持<tt>component</tt>包。
       </li>
     </ul>
 
@@ -3564,8 +3556,7 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Fixed a minor regression in 1.2.2 that would cause an error when adding
-        a model to a collection <tt>at</tt> an out of bounds index.
+        修复1.2.2版本中的一个小的退化，添加模型到集合时，<tt>at</tt>超过边界后会抛出错误。
       </li>
     </ul>
 
@@ -3575,18 +3566,14 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Collection methods <tt>find</tt>, <tt>filter</tt>, <tt>reject</tt>, <tt>every</tt>,
-        <tt>some</tt>, and <tt>partition</tt> can now take a model-attributes-style predicate:
-        <tt>this.collection.reject({user: 'guybrush'})</tt>.
+        集合方法<tt>find</tt>， <tt>filter</tt>， <tt>reject</tt>， <tt>every</tt>，
+        <tt>some</tt>， 和 <tt>partition</tt>现在接受一个model-attributes-style 的断言：<tt>this.collection.reject({user: 'guybrush'})</tt>。
       </li>
       <li>
-        Backbone Events once again supports multiple-event maps
-        (<tt>obj.on({'error change': action})</tt>). This was a previously
-        undocumented feature inadvertently removed in 1.2.0.
+        Backbone的Events重新支持多事件映射（multiple-event maps）(<tt>obj.on({'error change': action})</tt>)。这是在1.2.0中文档说明的不小心删掉的功能。
       </li>
       <li>
-        Added <tt>Collection#includes</tt> as an alias of <tt>Collection#contains</tt>
-        and as a replacement for <tt>Collection#include</tt> in Underscore.js >= 1.8.
+        添加<tt>Collection#contains</tt>的别名<tt>Collection#includes</tt> ，替换Underscore>=1.8版本中的<tt>Collection#include</tt>。
       </li>
     </ul>
 
@@ -3596,24 +3583,22 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        <tt>Collection#add</tt> now avoids trying to parse a model instance when passed <tt>parse: false</tt>.
+        <tt>Collection#add</tt>在传入传入 <tt>parse: false</tt>后，就不会再尝试解析模型实例了。
       </li>
       <li>
-        Bug fix in <tt>Collection#remove</tt>. The removed models are now actually returned.
+        <tt>Collection#remove</tt>中的bug修复。移除掉的对象现在是真的删掉了。
       </li>
       <li>
-        <tt>Model#fetch</tt> no longer parses the response when passing <tt>patch: false</tt>.
+        <tt>Model#fetch</tt>在传入<tt>patch: false</tt>后，就不在解析响应对象了。
       </li>
       <li>
-        Bug fix for iframe-based History when used with JSDOM.
+        修复在使用JSDOM操作iframe-based History时的bug。
       </li>
       <li>
-        Bug fix where <tt>Collection#invoke</tt> was not taking additional arguments.
+        修复<tt>Collection#invoke</tt>没有接收额外参数的bug。
       </li>
       <li>
-        When using <tt>on</tt> with an event map, you can now pass the context as the
-        second argument. This was a previously undocumented feature inadvertently
-        removed in 1.2.0.
+        在<tt>on</tt>上使用event map时，现在你可以传入context作为第二个参数。这是之前在1.2.0版本中不小心删掉的功能，并且也没有在文档中指明。
       </li>
     </ul>
 
