@@ -595,7 +595,7 @@
     </p>
 
     <p>
-      使用Backbone，你用<a href="#Model">Models</a>代表你的数据，可以对模型执行创建，校验，销毁以及保存到服务器中。无论何时一个界面的action引起模型的属性变更，它都会触发一个“change”事件；所有的展示那么模型状态的<a href="#View">Views</a>都会收到变更通知，以便做出反应，根据新的信息重新渲染自己。在一个完整的Backbone应用中，你不必去写胶水代码去查询DOM，找到一个带有特殊<i>id</i>的元素，然后手工更新HTML — 当模型变更后，视图只要简单的更新它们自己即可。
+      使用Backbone，你用<a href="#Model">Models</a>代表你的数据，可以对模型执行创建，校验，销毁以及保存到服务器等操作。无论何时一个界面的action引起模型的属性变更，它都会触发一个“change”事件；所有的展示这个模型状态的<a href="#View">Views</a>都会收到变更通知，以便做出反应，根据新的信息重新渲染自己。在一个完整的Backbone应用中，你不必去写胶水代码来查询DOM，找到一个带有特殊<i>id</i>的元素，然后手工更新HTML — 当模型变更后，视图只要简单的更新它们自己即可。
     </p>
 
     <p>
@@ -642,7 +642,7 @@
     </p>
 
     <p>
-      一个<b>视图</b>就是一块原子的用户界面。它通常是用来渲染的数据，数据来自一个特定模型，或许多模型 - 但视图也可能是数据无关的单独的一块界面。模型通常不知道视图的存在。相反，视图监听模型的<tt>"change"</tt>事件，做出相应或适时的重新渲染它们自己。
+      一个<b>视图</b>就是一块原子的用户界面。它通常是用来渲染的数据，数据来自一个特定模型，或许多模型 - 但视图也可能是数据无关的单独的一块界面。模型通常不知道视图的存在。相反，视图监听模型的<tt>"change"</tt>事件，做出响应或适时的重新渲染它们自己。
     </p>
 
     <h2 id="Model-Collections">Collections</h2>
@@ -720,11 +720,11 @@ var Books = Backbone.Collection.extend({
     <img class="figure" src="docs/images/intro-views.svg" alt="View rendering.">
 
     <p>
-      每个<b>视图</b>在自己的DOM元素上，都负责管理渲染和用户交互。如果你严格遵循不让你的视图插手别的view，这会保持你界面的灵活性 &mdash; 需要时，视图可以在任何地方隔离渲染。
+      每个<b>视图</b>在自己的DOM元素上，都负责管理渲染和用户交互。如果你严格遵循不让你的视图插手别的视图的事情，这会保持你界面的灵活性 &mdash; 需要时，视图可以在任何地方隔离渲染。
     </p>
 
     <p>
-      Backbone没有规定渲染<b>视图</b>和它们的子视图到界面的流程：你需要定义你的模型是如何转换为HTML（或SVG，或Canvas，或其它方式）。可以使用简单的<a href="http://underscorejs.org/#template">Underscore template</a>，或酷炫的<a href="http://facebook.github.io/react/docs/tutorial.html">React virtual DOM</a>。一些渲染视图的基本方法可以查看<a href="https://github.com/jashkenas/backbone/wiki/Backbone%2C-The-Primer">Backbone primer</a>。
+      Backbone没有规定渲染<b>视图</b>和其子视图到界面的流程：你需要定义你的模型是如何转换为HTML（或SVG，或Canvas，或其它方式）。可以使用简单的<a href="http://underscorejs.org/#template">Underscore template</a>，或酷炫的<a href="http://facebook.github.io/react/docs/tutorial.html">React virtual DOM</a>。一些渲染视图的基本方法可以查看<a href="https://github.com/jashkenas/backbone/wiki/Backbone%2C-The-Primer">Backbone primer</a>。
     </p>
 
     <h2 id="Routing">URLs路由</h2>
@@ -768,7 +768,7 @@ book.on("change:title change:author", ...);
 </pre>
 
     <p>
-      绑定到<tt>"all"</tt>事件的回调，任意事件发生时它都会被触发，并且会把事件名称单做第一个参数传入。比如，在一个对象上代理另一个对象的所有事件：
+      绑定到<tt>"all"</tt>事件的回调，任意事件发生时它都会被触发，并且会把事件名称当做第一个参数传入。比如，在一个对象上代理另一个对象的所有事件：
     </p>
 
 <pre>
@@ -796,7 +796,7 @@ book.on({
     <p id="Events-off">
       <b class="header">off</b><code>object.off([event], [callback], [context])</code><span class="alias">别名: unbind</span>
       <br />
-      从一个对象上删除之前绑定的<b>回调</b>函数。如果没有给定<b>context</b>，所有的回调，不管context是都一样，都会被移除。如果没有给定回调函数，所有<b>event</b>的回调都会被移除。如果没有给定事件，所有事件的回调都会被移除。
+      从一个对象上删除之前绑定的<b>回调</b>函数。如果没有给定<b>context</b>，所有的回调，不管context是否一样，都会被移除。如果没有给定回调函数，所有<b>event</b>的回调都会被移除。如果没有给定事件，所有事件的回调都会被移除。
     </p>
 
 <pre>
@@ -829,7 +829,7 @@ object.off();
     <p id="Events-once">
       <b class="header">once</b><code>object.once(event, callback, [context])</code>
       <br />
-      和<a href="#Events-on">on</a>类似，但在移除前最多只会调用一次。方便用于类似于“下次X发生时，就这么做”的情况。当以空白分割传入多个事件时，每个事件都会触发一次，而不是所有事件只触发一次。
+      和<a href="#Events-on">on</a>类似，但在移除前最多只会调用一次。方便用于诸如“下次X发生时，就这么做”的情况。当以空白分割传入多个事件时，每个事件都会触发一次，而不是所有事件只触发一次。
     </p>
 
     <p id="Events-listenTo">
@@ -864,7 +864,7 @@ view.stopListening(model);
     <p id="Events-catalog">
       <b class="header">事件分类</b>
       <br />
-      以下是Backbone所有带有参数的内置事件的列表。你可以自由地触发你定在在模型，集合或视图上的事件，只要你觉得合适。<tt>Backbone</tt>对象本省就混入了<tt>Events</tt>的方法，所以可以用来在你的应用中触发任何全局事件。
+      以下是Backbone所有带有参数的内置事件的列表。你可以自由地触发你定义在模型，集合或视图上的事件，只要你觉得合适。<tt>Backbone</tt>对象本身就混入了<tt>Events</tt>的方法，所以可以用来在你的应用中触发任何全局事件。
     </p>
 
     <ul class="small">
@@ -879,15 +879,15 @@ view.stopListening(model);
       <li><b>"request"</b> (model_or_collection, xhr, options) &mdash; 当一个模型或集合开始向服务器请求数据时触发。</li>
       <li><b>"sync"</b> (model_or_collection, response, options) &mdash; 当一个模型或集合成功与服务器同步数据后触发。</li>
       <li><b>"error"</b> (model_or_collection, response, options) &mdash; 当一个模型或集合的请求失败后触发。</li>
-      <li><b>"invalid"</b> (model, error, options) &mdash; 当一个模型的<a href="#Model-validate">validation</a> 在客户端失败后触发。</li>
-      <li><b>"route:[name]"</b> (params) &mdash; 特定的路由匹配时由router触发。</li>
-      <li><b>"route"</b> (route, params) &mdash; 当任意路由匹配时由router触发。</li>
-      <li><b>"route"</b> (router, route, params) &mdash; 当<i>任意</i>路由匹配时有history触发。</li>
+      <li><b>"invalid"</b> (model, error, options) &mdash; 当一个模型的<a href="#Model-validate">validation</a> 在客户端校验失败后触发。</li>
+      <li><b>"route:[name]"</b> (params) &mdash; 匹配特定的路由时，由router触发。</li>
+      <li><b>"route"</b> (route, params) &mdash; 当任意路由匹配时，由router触发。</li>
+      <li><b>"route"</b> (router, route, params) &mdash; 当<i>任意</i>路由匹配时，由history触发。</li>
       <li><b>"all"</b> &mdash; 这个特殊的事件会在<i>任意</i>事件触发后触发，第一个参数是事件名称，剩下的是其它参数。</li>
     </ul>
 
     <p>
-      总的来说，当调用一个触发事件的函数时（<tt>model.set</tt>, <tt>collection.add</tt>等等...），如果你希望组织事件触发，只需要传入<tt>{silent: true}</tt>选项。注意这种情况很少是，可能永远不会是，一个好的用法。为事件回调，传入一个特殊的标记为到选项中，然后判断是否需要忽略此事件，这样可能会更好些。
+      总的来说，当调用一个触发事件的函数时（<tt>model.set</tt>, <tt>collection.add</tt>等等...），如果你希望阻止事件触发，只需要传入<tt>{silent: true}</tt>选项。注意这种情况很少是，可能永远不会是，一个好的用法。在事件回调中传入一个特殊的标记到选项中，然后判断是否需要忽略此事件，这样可能会更好些。
     </p>
 
     <h2 id="Model">模型 - Backbone.Model</h2>
@@ -926,7 +926,7 @@ sidebar.promptColor();
     </p>
 
     <p>
-      <b>extend</b>方法正确的构建原型链，所以用<b>extend</b>创建的子类，可以进一步扩展继续定义子类。
+      <b>extend</b>方法会正确的构建原型链，所以用<b>extend</b>创建的子类，可以进一步扩展继续定义其子类。
     </p>
 
 <pre>
@@ -954,7 +954,7 @@ var PrivateNote = Note.extend({
 </pre>
 
     <p class="warning">
-        关于<tt>super</tt>的旁白：JavaScript并没有提供简单调用super的方法 &mdash; 即原型链上更高一层的同名函数。如果你覆盖可一些可行方法，比如<tt>set</tt>, 或 <tt>save</tt>，你希望调用父类对象的实现，你不得不显示的调用父类方法，如下：
+        关于<tt>super</tt>的旁白：JavaScript并没有提供简单调用super的方法 &mdash; 即原型链上更高一层的同名函数。如果你覆盖一些核心方法，比如<tt>set</tt>, 或 <tt>save</tt>，你希望调用父类对象的实现，你不得不显示的调用父类方法，如下：
     </p>
 
 <pre>
@@ -969,7 +969,7 @@ var Note = Backbone.Model.extend({
     <p id="Model-constructor">
       <b class="header">constructor / initialize</b><code>new Model([attributes], [options])</code>
       <br />
-      在创建一个模型的实例时，你可以传入 <b>attributes</b>的初始值，它们会被<a href="#Model-set">设置</a>到模型对象上。如果你定义了一个<b>initialize</b>函数，它会在模型创建后调用。
+      在创建一个模型的实例时，你可以传入 <b>attributes</b>的初始值，它们会<a href="#Model-set">设置</a>到模型对象上。如果你定义了一个<b>initialize</b>函数，它会在模型创建后调用。
     </p>
 
 <pre>
@@ -997,11 +997,11 @@ var Library = Backbone.Model.extend({
 </pre>
 
     <p>
-      如果你传入<tt>{collection: ...}</tt>作为选项，那么模型就拥有了一个 <tt>collection</tt> 属性，这会用来表明模型属于哪个集合，同时也可以用来辅助计算模型的<a href="#Model-url">url</a>。当你第一次将一个模型加入到一个集合中时，会自从为模型添加<tt>model.collection</tt> 属性。注意反过来不成立，因为传入这个选项到构造器中不会自动将模型添加到集合中。有时这会很有用。
+      如果你传入<tt>{collection: ...}</tt>作为选项，那么模型就拥有了一个 <tt>collection</tt> 属性，这用来表明模型属于哪个集合，同时也可以用来辅助计算模型的<a href="#Model-url">url</a>。当你第一次将一个模型加入到一个集合中时，会自动为模型添加<tt>model.collection</tt> 属性。注意反过来不成立，因为传入这个选项到构造器中不会自动将模型添加到集合中。有时这会很有用。
     </p>
 
     <p>
-      如果传入<tt>{parse: true}</tt>作为<b>选项</b>，<b>attributes</b>受限会被<a href="#Model-parse">parse</a>转换，之后才会<a href="#Model-set">设置</a>到模型上。
+      如果传入<tt>{parse: true}</tt>作为<b>选项</b>，<b>attributes</b>首先会被<a href="#Model-parse">parse</a>转换，之后才会<a href="#Model-set">设置</a>到模型上。
     </p>
 
     <p id="Model-get">
