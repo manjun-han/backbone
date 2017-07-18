@@ -1421,7 +1421,7 @@ bill.set({name : "Bill Jones"});
     </p>
 
     <p>
-      任何发生在集合里模型上的事件，也会直接在集合上触发，这样比较方便。者允许你在集合上监听任意特定属性的变更，比如：<tt>documents.on("change:selected", ...)</tt>
+      任何发生在集合里模型上的事件，也会直接在集合上触发，这样比较方便。这允许你在集合上监听任意特定属性的变更，比如：<tt>documents.on("change:selected", ...)</tt>
     </p>
 
     <p id="Collection-extend">
@@ -1594,7 +1594,7 @@ var randomThree = books.sample(3);
     <p id="Collection-add">
       <b class="header">add</b><code>collection.add(models, [options])</code>
       <br />
-      向集合中添加一个模型（或一个模型的数组），为每个模型触发一个<tt>"add"</tt>事件，之后会触发一个<tt>"update"</tt> 事件。如果定义了<a href="#Collection-model">model</a>属性，你可以传入原始属性对象，让它们当做是模型的实例。此方法返回添加后的（或已存在的，如果重复了）模型。传入<tt>{at: index}</tt>将你的模型在给定的<tt>index</tt>出加入到集合上。如果你添加的模型已存在与集合中，它们会被忽略掉，除非你传入<tt>{merge: true}</tt>选项，这会使得它们的属性合并到对应的模型上，并且会触发合适的<tt>"change"</tt>事件。
+      向集合中添加一个模型（或一个模型的数组），为每个模型触发一个<tt>"add"</tt>事件，之后会触发一个<tt>"update"</tt> 事件。如果定义了<a href="#Collection-model">model</a>属性，你可以传入原始属性对象，让它们当做是模型的实例。此方法返回添加后的（或已存在的，如果重复了）模型。传入<tt>{at: index}</tt>将你的模型加入到集合中给定的<tt>index</tt>位置上。如果你添加的模型在集合中已存在，它们会被忽略掉，除非你传入<tt>{merge: true}</tt>选项，这会使得它们的属性合并到对应已存在的模型上，并且会触发合适的<tt>"change"</tt>事件。
     </p>
 
 <pre class="runnable">
@@ -1617,7 +1617,7 @@ ships.add([
     <p id="Collection-remove">
       <b class="header">remove</b><code>collection.remove(models, [options])</code>
       <br />
-      从集合中删除一个模型（或一组模型），并返回它们。每个模型可以是Model的实例，或一个<tt>id</tt>字符串，或一个JS对象，它们是<a href="#Collection-get"><tt>collection.get</tt></a>方法可接收的任何的<tt>id</tt>参数。在每个模型上都会触发一个<tt>"remove"</tt>事件，之后触发一个<tt>"update"</tt>事件，触发传入<tt>{silent: true}</tt> 选项。模型在删除前的索引可以在监听函数上以<tt>options.index</tt>的形式获取。
+      从集合中删除一个模型（或一组模型），并返回它们。每个模型可以是Model的实例，或一个<tt>id</tt>字符串，或一个JS对象，它们是<a href="#Collection-get"><tt>collection.get</tt></a>方法可接收的任何的<tt>id</tt>参数。除非传入<tt>{silent: true}</tt> 选项，否则会在每个模型上都会触发一个<tt>"remove"</tt>事件，之后触发一个<tt>"update"</tt>事件。模型在删除前的索引可以在监听函数上以<tt>options.index</tt>的形式获取。
     </p>
 
     <p id="Collection-reset">
