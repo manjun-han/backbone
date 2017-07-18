@@ -897,7 +897,7 @@ view.stopListening(model);
     </p>
 
     <p>
-      以下是一个人为的例子，但它展示了定义模型的过程，定义方法，设置属性，在特定的属性上触发变更事件。运行代码一次后，你的浏览器控制台就有了<tt>sidebar</tt>，所以你可以继续在它上面发挥。
+      以下是一个模拟的例子，但它展示了定义模型的过程，定义方法，设置属性，在特定的属性上触发变更事件。运行代码一次后，你的浏览器控制台就有了<tt>sidebar</tt>，所以你可以继续在它上面发挥。
     </p>
 
 <pre class="runnable">
@@ -980,7 +980,7 @@ new Book({
 </pre>
 
     <p>
-      极少情况下，如果你希望实现一些新奇的做法，你可能希望覆盖<b>constructor</b>，这会替换模型的实际构造函数。
+      极少情况下，如果你希望实现一些新奇的做法，可能你希望覆盖<b>constructor</b>，这会替换模型的实际构造函数。
     </p>
 
 <pre>
@@ -1025,7 +1025,7 @@ book.set("title", "A Scandal in Bohemia");
     <p id="Model-escape">
       <b class="header">escape</b><code>model.escape(attribute)</code>
       <br />
-      与<a href="#Model-get">get</a>类似，但返回的是模型属性值的HTML转义版本。如果你在讲模型的数据插入到HTML中，使用<b>escape</b> 来获取属性，会防止<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS</a>攻击。
+      与<a href="#Model-get">get</a>类似，但返回的是模型属性值的HTML转义版本。如果你打算将模型的数据插入到HTML中，使用<b>escape</b> 来获取属性，会防止<a href="http://en.wikipedia.org/wiki/Cross-site_scripting">XSS</a>攻击。
     </p>
 
 <pre class="runnable">
@@ -1064,7 +1064,7 @@ if (note.has("title")) {
     <p id="Model-id">
       <b class="header">id</b><code>model.id</code>
       <br />
-      模型的一个特殊属性，<b>id</b>可以是任意的字符串（数值id或UUID）。如果你在属性的hash上设置了<b>id</b>，它会被直接拷贝到模型对象上。模型在集合中可以根据id获取，模型情况下id用来生成模型的URLs。
+      模型的一个特殊属性，<b>id</b>可以是任意的字符串（数值id或UUID）。如果你在属性的hash上设置了<b>id</b>，它会被直接拷贝到模型对象上。模型在集合中可以根据id获取，默认情况下id用来生成模型的URLs。
     </p>
 
     <p id="Model-idAttribute">
@@ -1090,7 +1090,7 @@ alert("Cake id: " + cake.id);
     <p id="Model-attributes">
       <b class="header">attributes</b><code>model.attributes</code>
       <br />
-      <b>attributes</b>属性包含了模型状态的内部hash &mdash; 通常（但不总是必须的）是代表了服务器端模型数据的JSON对象。它通常简单是数据库中一行数据的序列化，但它也可能是客户端的计算状态。
+      <b>attributes</b>属性包含了模型状态的内部hash &mdash; 通常（但不总是必须的）是代表了服务器端模型数据的JSON对象。它通常是数据库中一行数据的序列化，但它也可能是客户端的计算状态。
     </p>
 
     <p>
@@ -1133,7 +1133,7 @@ alert("Dessert will be " + (new Meal).get('dessert'));
       <b class="header">toJSON</b><code>model.toJSON([options])</code>
       <br />
 
-      返回模型的<a href="#Model-attributes">attributes</a>的浅拷贝，用以转换为JSON字符串。这可以用来进行持久化，序列化，之后发送到服务器。此方法的名字有点让人困惑，因为它实际上没有返回一个JSON字符串 &mdash; 但恐怕这是<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior">JavaScript API 的 <b>JSON.stringify</b></a>方法能够正常工作的方式。
+      返回模型<a href="#Model-attributes">attributes</a>的浅拷贝，用以转换为JSON字符串。这可以用来进行持久化，序列化，之后发送到服务器。此方法的名字有点让人困惑，因为它实际上没有返回一个JSON字符串 &mdash; 但恐怕这是<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify#toJSON_behavior">JavaScript API 的 <b>JSON.stringify</b></a>方法能够正常工作的方式。
     </p>
 
 <pre class="runnable">
@@ -1155,7 +1155,8 @@ alert(JSON.stringify(artist));
 
     <p id="Model-fetch">
       <b class="header">fetch</b><code>model.fetch([options])</code>
-      通过代理<a href="#Sync">Backbone.sync</a>，将从服务器专区的属性合并到模型的状态里。返回一个<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象。用来填充模型数据，或保证模型与服务器的数据同步。如果服务器的状态与当前的属性不同，则触发一个<tt>"change"</tt>事件。<tt>fetch</tt>的选项中接收<tt>success</tt> 和 <tt>error</tt>回调，两个回调的参数都是<tt>(model, response, options)</tt>。
+      <br />
+      通过代理<a href="#Sync">Backbone.sync</a>，将从服务器抓取的属性合并到模型的状态里。返回一个<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象。用来填充模型数据，或保证模型与服务器的数据同步。如果服务器的状态与当前的属性不同，则触发一个<tt>"change"</tt>事件。<tt>fetch</tt>的选项中接收<tt>success</tt> 和 <tt>error</tt>回调，两个回调的参数都是<tt>(model, response, options)</tt>。
     </p>
 
 <pre>
@@ -1169,11 +1170,11 @@ setInterval(function() {
       <b class="header">save</b><code>model.save([attributes], [options])</code>
       <br />
       通过代理 <a href="#Sync">Backbone.sync</a>方法，将模型的数据保存到数据库（或另外的持久层）。如果校验成功则返回一个 <a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象，否则返回<tt>false</tt>。<b>attributes</b>应该包含能够修改的属性（如<a href="#Model-set">set</a>方法一样） &mdash; 没有提到的键是不会修改的 &mdash; 但是，一个<i>完整的</i>资源需要发送到服务器端。如<tt>set</tt>一样，你可以传入单独的keys和values，而不是一个hash对象。如果模型有一个<a href="#Model-validate">validate</a>方法，并且校验失败了，模型将不会存储。如果模型 <a href="#Model-isNew">isNew</a>，本次保存会是一个<tt>"create"</tt>
-      (HTTP <tt>POST</tt>)行为，如果模型已存在与服务器端，本次保存会是一个<tt>"update"</tt> (HTTP <tt>PUT</tt>)。
+      (HTTP <tt>POST</tt>)行为，如果模型已存在于服务器端，本次保存会是一个<tt>"update"</tt> (HTTP <tt>PUT</tt>)。
     </p>
 
     <p>
-      如果，你仅希望<i>变化的</i>的属性发送到服务器端，请调用<tt>model.save(attrs, {patch: true})</tt>。你会将传入的属性以一个HTTP
+      如果，你仅希望<i>变化的</i>的属性发送到服务器端，请调用<tt>model.save(attrs, {patch: true})</tt>。这会将传入的属性以一个HTTP
       <tt>PATCH</tt>请求形式发送到服务器端。
     </p>
 
@@ -1249,7 +1250,7 @@ chapters.keys().join(', ');
       <br />
       此方法并没有定义在Backbone.Model上，你需要用任何自定义的校验逻辑覆盖它。默认情况下<tt>save</tt>在设置任何属性时会先检测<b>validate</b>，但你可以传入<tt>{validate: true}</tt>选项，告诉<tt>set</tt>验证新的属性。
       <br/>
-      <b>validate</b>接收模型的属性以及任何传入<tt>save</tt>或 <tt>save</tt>的选项。如果属性是合法的，<b>validate</b>方法不会返回任何值；否则返回你定义的错误。这个错误可以是一个简单的错误字符串信息，或一个完整的错误对象以编程形式描述错误。如果<tt>"invalid"</tt> 返回一个错误的话，<tt>save</tt> 不会继续执行，模型的属性也不会再服务器端修改。失败的校验会触发一个<tt>"invalid"</tt>事件，并设置<tt>validationError</tt>属性到模型上，值为这个方法的返回值。
+      <b>validate</b>接收模型的属性以及任何传入<tt>set</tt>或 <tt>save</tt>的选项。如果属性是合法的，<b>validate</b>方法不会返回任何值；否则返回你定义的错误。这个错误可以是一个简单的错误字符串信息，或一个完整的错误对象以编程形式描述错误。如果<tt>"invalid"</tt> 返回一个错误的话，<tt>save</tt> 不会继续执行，模型的属性也不会在服务器端修改。失败的校验会触发一个<tt>"invalid"</tt>事件，并设置<tt>validationError</tt>属性到模型上，值为这个方法的返回值。
     </p>
 
 <pre class="runnable">
@@ -1317,11 +1318,11 @@ if (!one.isValid()) {
     <p id="Model-url">
       <b class="header">url</b><code>model.url()</code>
       <br />
-      返回一个相对URL，指向模型的资源在服务器端的位置。如果你的模型存储在别的地方，你需要以正确的逻辑覆盖此方法。通常URLs的格式：默认是<tt>"[collection.url]/[id]"</tt>，但你可以通过指定一个显示的<tt>urlRoot</tt>来覆盖它，这是在不用考虑模型的集合的情况下。
+      返回一个相对URL，指向模型资源在服务器端的位置。如果你的模型存储在别的地方，你需要以正确的逻辑覆盖此方法。通常URLs的格式：默认是<tt>"[collection.url]/[id]"</tt>，但你可以通过指定一个显示的<tt>urlRoot</tt>来覆盖它，这是在不用考虑模型的集合的情况下。
     </p>
 
     <p>
-      代理给<a href="#Collection-url">Collection#url</a>来生成URL，以确保你已经定义它，或者如果所有这个类的模型共享一个通用的root URL，则使用 <a href="#Model-urlRoot">urlRoot</a>属性。一个模型的id是<tt>101</tt>，它存储在<tt>url</tt>是<tt>"/documents/7/notes"</tt>的集合上，那么它会得到一个URL：<tt>"/documents/7/notes/101"</tt>
+      代理给<a href="#Collection-url">Collection#url</a>来生成URL，请确保你已经定义它，或者如果所有这个类的模型共享一个通用的root URL，则使用 <a href="#Model-urlRoot">urlRoot</a>属性。一个模型的id是<tt>101</tt>，它存储在<tt>url</tt>是<tt>"/documents/7/notes"</tt>的集合上，那么它会得到一个URL：<tt>"/documents/7/notes/101"</tt>
     </p>
 
     <p id="Model-urlRoot">
@@ -1346,7 +1347,7 @@ alert(solaris.url());
     </p>
 
     <p>
-      如果你正在使用Rails做后端开发，并且它是3.1之前的版本，你需要注意它默认的 <tt>to_json</tt>实现它的模型属性是在一个命名空间下。要禁用此行为来无缝整合Backbone，只要设置：
+      如果你正在使用Rails做后端开发，并且它是3.1之前的版本，你需要注意它默认的<tt>to_json</tt>实现，返回的模型是在一个命名空间下。要禁用此行为来无缝整合Backbone，只要设置：
     </p>
 
 <pre>
