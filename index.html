@@ -1993,7 +1993,7 @@ open: function(id) { ... }
     <p id="Router-navigate">
       <b class="header">navigate</b><code>router.navigate(fragment, [options])</code>
       <br />
-      当你要到达一个状态时，你如果需要把它保存为一个URL，就调用<b>navigate</b>来更新URL。如果你希望调用路由函数，只要将选项<b>trigger</b>设为<tt>true</tt>即可。跟新URL但不创建浏览器历史记录，需要设置<b>replace</b>选项为 <tt>true</tt>。
+      当你要到达一个状态时，你如果需要把它保存为一个URL，就调用<b>navigate</b>来更新URL。如果你希望调用路由函数，只要将选项<b>trigger</b>设为<tt>true</tt>即可。更新URL但不创建浏览器历史记录，需要设置<b>replace</b>选项为 <tt>true</tt>。
     </p>
 
 <pre>
@@ -2014,7 +2014,7 @@ app.navigate("help/troubleshooting", {trigger: true, replace: true});
     <p id="Router-execute">
       <b class="header">execute</b><code>router.execute(callback, args, name)</code>
       <br />
-      当一个路由匹配，它对应的<b>callback</b>将要执行时，路由会在内部调用这个方法。如果需要取消当前的转换，这个方法需返回 <b>false</b> 。自定义解析流程或封装你自己的路由，需要覆盖此方法，比如，在路由回调处理查询参数前解析它们，如下：
+      当匹配一个路由并且它对应的<b>callback</b>将要执行时，路由会在内部调用这个方法。如果需要取消当前的转换，这个方法需返回 <b>false</b> 。自定义解析流程或封装你自己的路由，需要覆盖此方法，比如，在路由回调处理查询参数之前就解析它们，如下：
     </p>
 
 <pre>
@@ -2033,21 +2033,21 @@ var Router = Backbone.Router.extend({
     <h2 id="History">历史 - Backbone.history</h2>
 
     <p>
-      <b>History</b>充当了一个全局路由的角色，用来处理 <tt>hashchange</tt>事件或 <tt>pushState</tt>事件，匹配合适的路由，只有触发回调。你不用自己来处理这些事，因为<tt>Backbone.history</tt>已经为你做了。
+      <b>History</b>充当了一个全局路由的角色，用来处理 <tt>hashchange</tt>事件或 <tt>pushState</tt>事件，匹配合适的路由，触发回调。你不用自己来处理这些事，因为<tt>Backbone.history</tt>已经为你做了。
     </p>
 
     <p>
-      <b>pushState</b>在Backbone中作为一个纯碎的选项存在。不支持<tt>pushState</tt>的老的浏览器会继续使用hash-based URL片段的方式，如果在兼容<tt>pushState</tt>的浏览器中访问了带有hash的URL，那么它透明的升级为真正的URL。注意使用真实的URLs需要你的Web服务器能正确的渲染这些页面，所以也需要后台做些变动。比如，如果你定义了路由<tt>/documents/100</tt>，当浏览器直接访问了这个URL时，你的Web服务器必须能够返回这个页面。为了支持搜索引擎的排重，最好是你的服务器能为此页面生成完整的HTML...但如果一个Web应用，仅渲染了与root URL同样的内容，然后剩下的有JavaScript和Backbone的试图填满也是可以的。
+      <b>pushState</b>在Backbone中作为一个纯碎的选项存在。不支持<tt>pushState</tt>的老的浏览器会继续使用hash-based URL片段的方式，如果在兼容<tt>pushState</tt>的浏览器中访问了带有hash的URL，那么它会透明的升级为真正的URL。注意使用真实的URLs需要你的Web服务器能正确的渲染这些页面，所以也需要后台做些变动。比如，如果你定义了路由<tt>/documents/100</tt>，当浏览器直接访问了这个URL时，你的Web服务器必须能够返回这个页面。为了支持搜索引擎的爬取，最好是你的服务器能为此页面生成完整的HTML...但如果一个Web应用，仅渲染了与root URL同样的内容，然后剩下的试图由JavaScript和Backbone填满也是可以的。
     </p>
 
     <p id="History-start">
       <b class="header">start</b><code>Backbone.history.start([options])</code>
       <br />
-      当你创建了所有的<a href="#Router">Routers</a>，并正确的设置了所有的路由，就调用<tt>Backbone.history.start()</tt>开始监视<tt>hashchange</tt>事件，并触发路由。之后如果调用<tt>Backbone.history.start()</tt>则会抛出异常，<tt>Backbone.History.started</tt>是一个boolean值，用来标识是否此方法已调用过了。
+      当你创建了所有的<a href="#Router">Routers</a>，并正确的设置了所有的路由，就调用<tt>Backbone.history.start()</tt>开始监视<tt>hashchange</tt>事件，并触发路由。之后如果再次调用<tt>Backbone.history.start()</tt>则会抛出异常，<tt>Backbone.History.started</tt>是一个boolean值，用来标识是否此方法已调用过了。
     </p>
 
     <p>
-      如果你希望在你的应用中使用HTML5的<tt>pushState</tt>，需要使用 <tt>Backbone.history.start({pushState: true})</tt>。如果希望使用<tt>pushState</tt>，但如果浏览器不支持的化就使用页面刷新代替，你需要在选项中加入<tt>{hashChange: false}</tt>。
+      如果你希望在你的应用中使用HTML5的<tt>pushState</tt>，需要使用 <tt>Backbone.history.start({pushState: true})</tt>。如果希望使用<tt>pushState</tt>，但如果浏览器不支持就使用页面刷新代替，你需要在选项中加入<tt>{hashChange: false}</tt>。
     </p>
 
     <p>
@@ -2063,7 +2063,7 @@ var Router = Backbone.Router.extend({
     </p>
 
     <p>
-      因为在IE中hash-based的历史依赖一个<tt>&lt;iframe&gt;</tt>，请一定要在DOM准备后之后在调用<tt>start()</tt>。
+      因为IEhash-based的历史依赖一个<tt>&lt;iframe&gt;</tt>，请一定要在DOM准备完成后在调用<tt>start()</tt>。
     </p>
 
 <pre>
@@ -2091,11 +2091,11 @@ $(function(){
     </ul>
 
     <p>
-      在默认的实现中，<b>Backbone.sync</b>发送一个保存模型的请求时，会把模型的属性序列化为JSON传过去，同时HTTP的消息体会设置为<tt>application/json</tt>。当返回一个JSON响应时，会将服务器变更后的书序保存到模型中，只有在更新客户端。在响应一个来自集合中的 <tt>"read"</tt>请求（<a href="#Collection-fetch">Collection#fetch</a>）时，一个模型的属性对象的数组会被传入到集合中。
+      在默认的实现中，<b>Backbone.sync</b>发送一个保存模型的请求时，会把模型的属性序列化为JSON传过去，同时HTTP的消息体会设置为<tt>application/json</tt>。当返回一个JSON响应时，会将服务器变更后的属性保存到模型中，并更新客户端。在响应来自集合中的 <tt>"read"</tt>请求（<a href="#Collection-fetch">Collection#fetch</a>）时，一个模型的属性对象的数组会被传入到集合中。
     </p>
 
     <p>
-      无论何时一个模型或集合开始于服务器<b>同步（sync）</b> 时，都会触发一个<tt>"request"</tt> 事件。如果响应成成，会触发一个<tt>"sync"</tt>事件，否则触发一个<tt>"error"</tt>事件。
+      模型或集合开始与服务器<b>同步（sync）</b>时 ，都会触发一个<tt>"request"</tt> 事件。如果响应成功，会触发一个<tt>"sync"</tt>事件，否则触发一个<tt>"error"</tt>事件。
     </p>
 
     <p>
@@ -2115,7 +2115,7 @@ $(function(){
     </ul>
 
     <p>
-      比如，在Rails4中处理来自<tt>Backbone</tt>de <tt>"update"</tt>调用代码如下：
+      比如，在Rails4中处理来自<tt>Backbone</tt>的<tt>"update"</tt>调用代码如下：
     </p>
 
 <pre>
@@ -2140,7 +2140,7 @@ end
     <p id="Sync-emulateHTTP">
       <b class="header">emulateHTTP</b><code>Backbone.emulateHTTP = true</code>
       <br />
-      如果你希望与不支持Backbone默认Rest/HTTP风格的老式Web服务器仪器工作，你可以选择关闭 <tt>Backbone.emulateHTTP</tt>。设置此选项为true，Backbone会将<tt>PUT</tt>, <tt>PATCH</tt> 和 <tt>DELETE</tt>请求伪装成HTTP <tt>POST</tt>，并设置<tt>X-HTTP-Method-Override</tt>为true。如果<tt>emulateJSON</tt>也打开，会传一个额外的<tt>_method</tt>参数携带此消息头。
+      如果你希望与不支持Backbone默认Rest/HTTP风格的老式Web服务器一起工作，你可以选择关闭 <tt>Backbone.emulateHTTP</tt>。设置此选项为true，Backbone会将<tt>PUT</tt>, <tt>PATCH</tt> 和 <tt>DELETE</tt>请求伪装成HTTP <tt>POST</tt>，并设置<tt>X-HTTP-Method-Override</tt>为true。如果<tt>emulateJSON</tt>也打开，会传一个额外的<tt>_method</tt>参数携带此消息头。
     </p>
 
 <pre>
@@ -2152,13 +2152,13 @@ model.save();  // POST to "/collection/id", with "_method=PUT" + header.
     <p id="Sync-emulateJSON">
       <b class="header">emulateJSON</b><code>Backbone.emulateJSON = true</code>
       <br />
-      如果你正工作在一个老式的Web服务器上，并且不能处理<tt>application/json</tt>编码的请求，设置<tt>Backbone.emulateJSON = true;</tt>会将JSON序列化为字符串添加到名为<tt>model</tt> 的参数，请求会以<tt>application/x-www-form-urlencoded</tt>MIME类型发送，就好像发送表单一样。
+      如果你正工作在一个老式的Web服务器上，并且不能处理<tt>application/json</tt>编码的请求，设置<tt>Backbone.emulateJSON = true;</tt>会将JSON序列化为字符串添加到名为<tt>model</tt> 的参数上，请求会以<tt>application/x-www-form-urlencoded</tt>MIME类型发送，就好像发送表单一样。
     </p>
 
     <h2 id="View">视图 - Backbone.View</h2>
 
     <p>
-      Backbone的视图的用户比较规则 &mdash; 它们不决定你的任何HTML或CSS，你可以使用任意的JavaScript模板。大致的流程是，你将界面组织成逻辑的视图，依靠模型，每当模型变更时视图会单独更新而不会重绘整个页面。相比较挖掘一个JSON对效果，在DOM中查询一个元素，然后手工更新HTML的做法，你可以将视图的<tt>render</tt> 函数绑定到模型的 <tt>"change"</tt>事件上 &mdash; 现在无论模型的数据展示在UI的什么地方，视图都会马上更新到最新。
+      Backbone的视图比较规则 &mdash; 它们不决定你的任何HTML或CSS，你可以使用任意的JavaScript模板。大致的流程是，你将界面组织成逻辑的视图，依靠模型，每当模型变更时视图会单独更新而不会重绘整个页面。相比较挖掘一个JSON对象，在DOM中查询一个元素，然后手工更新HTML的做法，你可以将视图的<tt>render</tt> 函数绑定到模型的 <tt>"change"</tt>事件上 &mdash; 现在无论模型的数据展示在UI的什么地方，视图都会马上更新到最新。
     </p>
 
     <p id="View-extend">
@@ -2219,7 +2219,7 @@ new DocumentRow({
 
     <p>
       <tt>this.el</tt> 可以是一个DOM选择器字符串或是一个DOM元素；否则它会从视图对象的<tt>tagName</tt>, <tt>className</tt>,
-      <tt>id</tt> 和 <a href="#View-attributes"><tt>attributes</tt></a> 属性上创建。如果没有指定的话，<tt>this.el</tt>就是一个空的<tt>div</tt>，通常情况下这没问题。<b>el</b>的引用也可以传入视图对象的构造器函数。
+      <tt>id</tt> 和 <a href="#View-attributes"><tt>attributes</tt></a> 属性上创建。如果没有指定的话，<tt>this.el</tt>就是一个空的<tt>div</tt>，通常情况下这都没问题。<b>el</b>的引用也可以传入视图对象的构造器函数。
     </p>
 
 <pre class="runnable">
@@ -2258,15 +2258,13 @@ listView.$el.append(itemView.el);
     <p id="View-attributes">
       <b class="header">attributes</b><code>view.attributes</code>
       <br />
-      A hash of attributes that will be set as HTML DOM element attributes on the
-      view's <tt>el</tt> (id, class, data-properties, etc.), or a function that
-      returns such a hash.
+      一个属性的hash或者返回属性hash函数，它会设置到视图的<tt>el</tt>DOM元素的HTML属性上(id， class， data-properties， 等等)。
     </p>
 
     <p id="View-dollar">
       <b class="header">$ (jQuery)</b><code>view.$(selector)</code>
       <br />
-      如果页面引用的jQuery，每个视图对象都会拥有一个 <b>$</b> 函数，用来在视图对象的DOM元素范围内执行元素查询。如果你使用此限定范围的jQuery函数，你就不用使用模型的ids作为查询的一部分，来引用特定的元素，这让你更多的依赖HTML的class属性。等价于运行<tt>view.$el.find(selector)</tt>。
+      如果页面引用了jQuery，每个视图对象都会拥有一个 <b>$</b> 函数，用来在视图对象的DOM元素范围内执行元素查询。如果你使用此限定范围的jQuery函数，你就不用使用模型的ids作为查询的一部分，来引用特定的元素，这让你更多的依赖HTML的class属性。等价于运行<tt>view.$el.find(selector)</tt>。
     </p>
 
 <pre>
@@ -2296,7 +2294,7 @@ var LibraryView = Backbone.View.extend({
     <p id="View-render">
       <b class="header">render</b><code>view.render()</code>
       <br />
-       <b>render</b> 函数的默认实现是一个空操作。用你自己的代码覆盖此方法，从模型的数据上渲染你的模板，之后使用新的HTML更新<tt>this.el</tt> 属性。一个好的约定是在<b>render</b>的后面返回<tt>return this</tt>，这样可以使用链式语法调用。
+       <b>render</b> 函数的默认实现是一个空操作。用你自己的代码覆盖此方法，从模型的数据上渲染你的模板，之后使用新的HTML更新<tt>this.el</tt> 属性。一个好的约定是在<b>render</b>的后面返回<tt>this</tt>，这样可以使用链式语法调用。
     </p>
 
 <pre>
@@ -2321,13 +2319,13 @@ var Bookmark = Backbone.View.extend({
     <p id="View-remove">
       <b class="header">remove</b><code>view.remove()</code>
       <br />
-      将试图对象以及他的<tt>el</tt>元素从DOM中移除。调用<a href="#Events-stopListening">stopListening</a>移除所有视图通过<a href="#Events-listenTo">listenTo</a>绑定的事件。
+      将视图对象以及它的<tt>el</tt>元素从DOM中移除，并调用<a href="#Events-stopListening">stopListening</a>移除所有视图通过<a href="#Events-listenTo">listenTo</a>绑定的事件。
     </p>
 
     <p id="View-events">
       <b class="header">events</b><code>view.events or view.events()</code>
       <br />
-      <b>events</b>hash对象（或函数）可以用来指定一个DOM事件的合集，它们会通过<a href="#View-delegateEvents">delegateEvents</a>绑定到视图对象的方法上。
+      <b>events</b> hash对象（或函数）可以用来指定一个DOM事件的合集，它们会通过<a href="#View-delegateEvents">delegateEvents</a>绑定到视图对象的方法上。
     </p>
 
     <p>
@@ -2361,11 +2359,11 @@ var InputView = Backbone.View.extend({
     </p>
 
     <p>
-      <tt>events</tt>属性也可以定位为函数，它返回一个<tt>events</tt>的hash，这使得以编程的形式定义你的事件更容易，同时也可以从父类继承事件。
+      <tt>events</tt>属性也可以定义为函数，它返回一个<tt>events</tt>的hash，这使得更容易以编程的形式定义你的事件，同时也可以从父类继承事件。
     </p>
 
     <p>
-      相比较直接使用jQuery在<a href="#View-render">render</a>函数里绑定事件到子元素上，<b>delegateEvents</b>提供了更多的优势。所有绑定的回调在用jQuery处理前已经绑定上下文到视图对象上，所以不管何时调用 它的<tt>this</tt>总是指向的是视图对象。当<b>delegateEvents</b>重新执行时，这时<tt>events</tt>可能是不同的，所有之前的回调都会移除，然后从新代理 &mdash; 这对于不同模式下表现不同的视图很有用。
+      相比较直接使用jQuery在<a href="#View-render">render</a>函数里绑定事件到子元素上，<b>delegateEvents</b>提供了更多的优势。所有绑定的回调在用jQuery处理前已经绑定上下文到视图对象上，所以不管何时调用，它的<tt>this</tt>总是指向的是视图对象。当<b>delegateEvents</b>重新执行时，这时<tt>events</tt>可能是不同的，所有之前的回调都会移除，然后从新代理 &mdash; 这对于不同模式下表现不同的视图很有用。
     </p>
 
     <p>
@@ -2440,7 +2438,7 @@ Backbone.$ = require('jquery');
     <p id="FAQ-why-backbone">
       <b class="header">为什么要用Backbone，而不是别的框架[other framework X]?</b>
       <br />
-      如果你看了下面的<a href="#examples">案例列表</a>，还未被Backbone的适应性和优雅所吸引，那就让我们说的更具体些：Backbone.js的目标是，面对重数据且界面复杂的Web应用，提供其所需的通用的基础 &mdash; 同时十分谨慎的避免将你逼入死角，为你做出任何的决定，而这些决定你可能自己做的更好。
+      如果你看了下面的<a href="#examples">案例列表</a>，还未被Backbone的适应性和优雅所吸引，那就让我们说的更具体些：Backbone.js的目标是，面对重数据且界面复杂的Web应用，提供其所需的通用的基础 &mdash; 同时十分谨慎的避免将你逼入死角，避免为你做出任何的决定，这些决定你可能自己做的更好。
     </p>
 
     <ul>
@@ -2460,7 +2458,7 @@ Backbone.$ = require('jquery');
         <a href="#Events">同步事件</a>是构建代码的基础，没有难于理解的run loop，或不断通过轮训或遍历你的数据结构来寻找变更。如果你希望一个异步的事件或聚合，<a href="http://underscorejs.org/#debounce">没问题</a>。
       </li>
       <li>
-        Backbone扩展性良好，从 <a href="http://disqus.com">嵌入式的小部件</a>到<a href="http://www.usatoday.com">大规模的应用</a>。
+        Backbone扩展性良好，从<a href="http://disqus.com">嵌入式的小部件</a>到<a href="http://www.usatoday.com">大规模的应用</a>。
       </li>
       <li>
         Backbone是一个库，而不是一个框架，所以与其它的代码可以很好的融合。你可以在毫不费力的情况下在Dojo应用中嵌入Backbone的部件，或者使用Backbone的模型作为D3可视化的数据。
@@ -2469,7 +2467,7 @@ Backbone.$ = require('jquery');
         避免了数据的双向绑定（Two-way data-binding）。虽然双向绑定确实可以制作漂亮的demo，能够工作在多数基本的CURD上，但在现实的应用中它也不是特别的有用。有时你需要执行更新，或许因为键盘操作，或是失去焦点操作，有时也可能是面板关闭了，又有时是点击了保存按钮。所有的情况下，简单的表单序列化成JSON格式会更快更容易。所有这些加在一起，如果你仍希望双向绑定功能，请<a href="http://rivetsjs.com">参见</a>已有<a href="http://nytimes.github.com/backbone.stickit/">实现</a>吧。
       </li>
       <li>
-        使用Backbone构建你的代码没有内置的性能算好。如果你希望进一步优化，痩模型和细粒度的模板，可以尽可能压缩直到去掉最后潜在的性能消耗代码，比如IE8。
+        Backbone中没有内置的用来构建高性能的结构。如果你希望进一步优化，痩模型和细粒度的模板，可以尽可能压缩直到去掉最后潜在的性能消耗代码，比如IE8。
       </li>
     </ul>
 
@@ -2553,14 +2551,14 @@ inbox.messages.fetch({reset: true});
         避免ids，使用直接引用，创建一个代表你数据集合的对象图。
       </li>
       <li>
-        对于关联模型，要执行懒加载，或延迟从JSON翁当中范旭乐华模型。
+        对于关联模型，要执行懒加载，或延迟从JSON文档中反序列化内嵌模型。
       </li>
     </ul>
 
     <p id="FAQ-bootstrap">
       <b class="header">加载启动数据</b>
       <br />
-      当你的应用首次加载时，通常的情况是创建你所需的初始化数据的集合，一次来渲染应用。比较好的模式是在页面中你的数据已经加载好了，而不是再触发一个额外的Ajax请求来<a href="#Collection-fetch">抓取</a>它们。你可以使用<a href="#Collection-reset">reset</a> 方法将初始化数据填充到你的集合中。在DocumentCloud中，在我们工程的<a href="http://en.wikipedia.org/wiki/ERuby">ERB</a>模板里，我们会编译一些如下代码：
+      当你的应用首次加载时，通常的情况是创建你所需的初始化数据的集合，以此来渲染应用。比较好的模式是在页面中你的数据已经加载好了，而不是再触发一个额外的Ajax请求来<a href="#Collection-fetch">抓取</a>它们。你可以使用<a href="#Collection-reset">reset</a> 方法将初始化数据填充到你的集合中。在DocumentCloud中，在我们工程的<a href="http://en.wikipedia.org/wiki/ERuby">ERB</a>模板里，我们会编译一些如下代码：
     </p>
 
 <pre>
@@ -2575,7 +2573,7 @@ inbox.messages.fetch({reset: true});
     <p id="FAQ-extending">
       <b class="header">扩展Backbone</b>
       <br />
-      许多JavaScript库设计的都想一个孤岛并自我封闭，你只能通过调用它们公共的API来与其打交道，但从不能窥视其内部的实现。Backbone.js不是那样的库。
+      许多JavaScript库设计的都向一个孤岛并自我封闭，你只能通过调用它们公共的API来与其打交道，但从不能窥视其内部的实现。Backbone.js不是那样的库。
     </p>
 
     <p>
@@ -2585,7 +2583,7 @@ inbox.messages.fetch({reset: true});
     <p id="FAQ-mvc">
       <b class="header">Backbone与”传统的“MVC的关系</b>
       <br />
-      不同的<a href="http://en.wikipedia.org/wiki/Model–View–Controller">Model-View-Controller</a>模式的实现趋于争论控制器controller的定义。如果有用的化，在Backbone中，<a href="#View">View</a>应该充当控制前，派发UI产生的事件，而HTML模板充当真正的视图。我们之所以称之为view，是因为它代表了一个UI的逻辑块，并负责单个DOM元素内容的渲染。
+      不同的<a href="http://en.wikipedia.org/wiki/Model–View–Controller">Model-View-Controller</a>模式的实现趋于争论控制器controller的定义。如果这种争论是有用的，那么在Backbone中，<a href="#View">View</a>应该充当控制器，派发UI产生的事件，而HTML模板充当真正的视图。我们之所以称之为view，是因为它代表了一个UI的逻辑块，并负责单个DOM元素内容的渲染。
     </p>
 
     <p>
@@ -2613,10 +2611,10 @@ inbox.messages.fetch({reset: true});
     <p id="FAQ-this">
       <b class="header">"this"绑定</b>
       <br />
-      可能唯独只有在JavaScript中才会出现问题，就是你在传入函数作为回调时，它的<tt>this</tt>值丢掉了。在处理Backbone的<a href="#Events">events</a>和回调时，你通常会发现依靠 <a href="#Events-listenTo">listenTo</a>，以及在Underscore方法或Backbone方法中用来指定<tt>this</tt>的可选参数<tt>context</tt>，它在回调调用时会用到。（参见<a href="http://underscorejs.org/#each">_.each</a>，
+      可能唯独只有在JavaScript中才会出现问题，就是你在传入函数作为回调时，它的<tt>this</tt>值丢掉了。在处理Backbone的<a href="#Events">events</a>和回调时，你通常会依靠 <a href="#Events-listenTo">listenTo</a>，以及在Underscore方法或Backbone方法中用来指定<tt>this</tt>的可选参数<tt>context</tt>，它在回调调用时会用到。（参见<a href="http://underscorejs.org/#each">_.each</a>，
       <a href="http://underscorejs.org/#map">_.map</a>， 和
       <a href="#Events-on">object.on</a> ）<a href="#View-delegateEvents">View events</a>是自动绑定到视图的context上的。你会发现使用Underscore.js的<a href="http://underscorejs.org/#bind">_.bind</a> 和
-      <a href="http://underscorejs.org/#bindAll">_.bindAll</a>也会比较用用。
+      <a href="http://underscorejs.org/#bindAll">_.bindAll</a>也会比较有用。
     </p>
 
 <pre>
@@ -2645,7 +2643,7 @@ Inbox.messages.add(newMessage);
     </p>
 
     <p>
-      默认情况下，3.1版本前的Rails会添加一个封装模型JSON数据的而瓦努的层。你可以在你的配置文件中通过以下设置禁用此封装：
+      默认情况下，3.1版本前的Rails会添加一个封装模型JSON数据的额外层。你可以在你的配置文件中通过以下设置禁用此封装：
     </p>
 
 <pre>
@@ -2653,7 +2651,7 @@ ActiveRecord::Base.include_root_in_json = false
 </pre>
 
     <p>
-      否则，就覆盖<a href="#Model-parse">parse</a>将model的属性从封装中提取出来。类似的，Backbone的PUTs 和 POSTs模型的JSON标识，这是Rails默认期望的命名空间属性。你可以让你的控制前直接从<tt>params</tt>上过滤属性，或者你可以覆盖Backbone的<a href="#Model-toJSON">toJSON</a>添加Rails期望的额外的封装。
+      否则，就覆盖<a href="#Model-parse">parse</a>将model的属性从封装中提取出来。类似的，Backbone的PUTs 和 POSTs模型的JSON标识，这是Rails默认期望的命名空间属性。你可以让你的控制器直接从<tt>params</tt>上过滤属性，或者你可以覆盖Backbone的<a href="#Model-toJSON">toJSON</a>添加Rails期望的额外的封装。
     </p>
 
     <h2 id="examples">例子</h2>
@@ -3571,7 +3569,7 @@ ActiveRecord::Base.include_root_in_json = false
         <tt>some</tt>， 和 <tt>partition</tt>现在接受一个model-attributes-style 的断言：<tt>this.collection.reject({user: 'guybrush'})</tt>。
       </li>
       <li>
-        Backbone的Events重新支持多事件映射（multiple-event maps）(<tt>obj.on({'error change': action})</tt>)。这是在1.2.0中文档说明的不小心删掉的功能。
+        Backbone的Events重新支持多事件映射（multiple-event maps）(<tt>obj.on({'error change': action})</tt>)。这是在1.2.0中，文档没有说明的不小心删掉的功能。
       </li>
       <li>
         添加<tt>Collection#contains</tt>的别名<tt>Collection#includes</tt> ，替换Underscore>=1.8版本中的<tt>Collection#include</tt>。
@@ -3621,7 +3619,7 @@ ActiveRecord::Base.include_root_in_json = false
         Views现在总会在<a href="#View-setElement">setElement</a>方法中代理它们的事件。你不能再在<tt>initialize</tt>方法中，修改事件的hash或<tt>el</tt>属性了。
       </li>
       <li>
-        添加一个<tt>"update"</tt> 事件，只要是集合中添加或删除了集合就会触发。便捷的在不抖动（debouncing）的情况下重新渲染列表。
+        添加一个<tt>"update"</tt> 事件，只要是集合中添加或删除了集合就会触发。方便在不抖动（debouncing）的情况下重新渲染列表。
       </li>
       <li>
         <tt>Collection#at</tt>可以接收负值索引。
@@ -3645,20 +3643,20 @@ ActiveRecord::Base.include_root_in_json = false
         添加<tt>getSearch</tt>和<tt>getPath</tt>方法到Backbone.History，用作跨浏览器覆盖分割URL的方式。
       </li>
       <li>
-        添加<tt>delegate</tt> 和 <tt>undelegate</tt>作为更细粒度的<tt>delegateEvents</tt> 和 <tt>undelegateEvents</tt>。插件作者可以在Backbone中使用一直的事件接口。
+        添加<tt>delegate</tt> 和 <tt>undelegate</tt>作为更细粒度的<tt>delegateEvents</tt> 和 <tt>undelegateEvents</tt>。插件作者可以在Backbone中使用一致的事件接口。
       </li>
       <li>
         集合只有在顺序真正更新后才会触发"sort事件，而不是在每次调用<tt>set</tt>时都触发。
       </li>
       <li>
         Any passed <tt>options.attrs</tt> are now respected when saving a model with
-        <tt>patch: true</tt>.
+        <tt>patch: true</tt>.        
       </li>
       <li>
         <tt>Collection#clone</tt>现在会在新clone的集合对象上设置<tt>model</tt> 和 <tt>comparator</tt>方法。
       </li>
       <li>
-        向集合中添加模型并制定<tt>at</tt>位置时，现在会在<tt>add</tt>事件中发送所有模型当前的真实位置，而不是最起始那个的位置。
+        向集合中添加模型并指定<tt>at</tt>位置时，现在会在<tt>add</tt>事件中发送所有模型当前的真实位置，而不是最起始那个的位置。
       </li>
       <li>
         <tt>Collection#remove</tt>现在只会返回真正从集合中移除的模型的列表。
@@ -3674,7 +3672,7 @@ ActiveRecord::Base.include_root_in_json = false
     <br />
     <ul style="margin-top: 5px;">
       <li>
-        Backbone不在尝试在Node/CommonJS环境中require jQuery了，为了更好的兼容Browserify。如果你喜欢在Node中让Backbone使用jQuery，就这样赋值：<tt>Backbone.$ = require('jquery');</tt>。
+        Backbone不再尝试在Node/CommonJS环境中require jQuery了，为了更好的兼容Browserify。如果你喜欢在Node中让Backbone使用jQuery，就这样赋值：<tt>Backbone.$ = require('jquery');</tt>。
       </li>
       <li>
         修复路由参数中的换行符导致的bug。
@@ -3693,10 +3691,10 @@ ActiveRecord::Base.include_root_in_json = false
         Backbone Events的性能调整。
       </li>
       <li>
-        老旧浏览器中，更好的匹配理由中的Unicode。
+        老旧浏览器中，更好的匹配路由中的Unicode。
       </li>
       <li>
-        Backbone Router现在处理路由片段中的查询参数时，将它们作为最后的参数传入处理函数中，定义为字符串形式的路由不在包含查询字符串（<tt>'foo?:query'</tt> 应该为 <tt>'foo'</tt>）。
+        Backbone Router现在处理路由片段中的查询参数时，将它们作为最后的参数传入处理函数中，定义为字符串形式的路由不再包含查询字符串（<tt>'foo?:query'</tt> 应该为 <tt>'foo'</tt>）。
       </li>
     </ul>
 
@@ -3706,26 +3704,26 @@ ActiveRecord::Base.include_root_in_json = false
         让集合的<tt>set</tt>， <tt>add</tt>，<tt>remove</tt>， 和 <tt>reset</tt>方法的返回值更有效。现在他们会返回变更的（added，removed 或 update）模型或模型的列表，而不是集合的<tt>this</tt>。
       </li>
       <li>
-        Backbone的Views现在不在自动将传入构造器的options添加为<tt>this.options</tt>，现在Backbone的Model也不在添加<tt>url</tt>和<tt>urlRoot</tt>选项，但你喜欢可以自己做。
+        Backbone的Views现在不在自动将传入构造器的options添加为<tt>this.options</tt>，现在Backbone的Model也不再添加<tt>url</tt>和<tt>urlRoot</tt>选项，但你喜欢可以自己做。
       </li>
       <li>
-        所有的<tt>"invalid"</tt>事件现在传入一直的参数。第一个是有问题的模型对象，之后是错误对象，最后是options对象。
+        所有的<tt>"invalid"</tt>事件现在传入一致的参数。第一个是有问题的模型对象，之后是错误对象，最后是options对象。
       </li>
       <li>
-        现在在<tt>parse</tt>中，你不能再改变泥模型的<b>id</b>。替换使用<tt>idAttribute</tt>。
+        现在在<tt>parse</tt>中，你不能再改变模型的<b>id</b>。替换使用<tt>idAttribute</tt>。
       </li>
       <li>
-        另一方便，<tt>parse</tt>现在是最好的提取和灵活的处理嵌套的JSON为关联的子模型。
+        另一方面，现在提取和灵活的处理嵌套的JSON为关联的子模型的地方就是<tt>parse</tt>方法。
       </li>
       <li>
-        大量有关relating to的微调，优化和bugfixed，包括URL重写，options的变化，大批量数据排序，尾部斜杠便捷监听器的遗漏，嵌套模型的解析...
+        大量相对于Backbone 1.0版本的微调，优化和bugfixed，包括URL重写，options的变化，大批量数据排序，尾部斜杠便捷监听器的遗漏，嵌套模型的解析...
       </li>
     </ul>
 
     <b class="header">1.0.0</b> &mdash; <small><i>March 20, 2013</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.10...1.0.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/1.0.0/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        重命名集合的"update"为<a href="#Collection-set">set</a>，为了向<tt>model.set()</tt>看起，而与<a href="#Collection-reset">reset</a>形成比对。现在是<a href="#Collection-fetch">fetch</a>后默认的更新机制。如果你喜欢继续使用”reset“，传入<tt>{reset: true}</tt>。
+        重命名集合的"update"为<a href="#Collection-set">set</a>，为了向<tt>model.set()</tt>看齐，而与<a href="#Collection-reset">reset</a>形成比对。现在是<a href="#Collection-fetch">fetch</a>后默认的更新机制。如果你喜欢继续使用”reset“，传入<tt>{reset: true}</tt>。
       </li>
       <li>
         你的路由处理现在会接收它们解码后的URL参数。
@@ -3734,7 +3732,7 @@ ActiveRecord::Base.include_root_in_json = false
         添加一个<a href="#Events-listenToOnce">listenToOnce</a>，与<a href="#Events-once">once</a>类似。
       </li>
       <li>
-        添加<a href="#Collection-findWhere">findWhere</a>方法到结合上，与<a href="#Collection-where">where</a>类似。
+        添加<a href="#Collection-findWhere">findWhere</a>方法到集合上，与<a href="#Collection-where">where</a>类似。
       </li>
       <li>
         添加Underscore上的<tt>keys</tt>， <tt>values</tt>， <tt>pairs</tt>， <tt>invert</tt>，
@@ -3751,16 +3749,16 @@ ActiveRecord::Base.include_root_in_json = false
     <b class="header">0.9.10</b> &mdash; <small><i>Jan. 15, 2013</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.9.9...0.9.10">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.9.10/index.html">Docs</a><br />
     <ul style="margin-top: 5px;">
       <li>
-        现在除了会在<tt>Backbone.history</tt>上触发<tt>"route"</tt>事件，路由对象上触发此事件。
+        现在除了会在<tt>Backbone.history</tt>上触发<tt>"route"</tt>事件，路由对象上也会触发此事件。
       </li>
       <li>
-        现在<tt>Model#save</tt>会强制执行模型校验，而不是在构造器或在<tt>Model#set</tt>上调用，触发传入<tt>{validate:true}</tt>选项。
+        现在<tt>Model#save</tt>会强制执行模型校验，而不是在构造器或在<tt>Model#set</tt>上调用，除非传入<tt>{validate:true}</tt>选项。
       </li>
       <li>
         移除<tt>View#make</tt>。你现在需要直接使用<tt>$</tt>来构造DOM元素。
       </li>
       <li>
-        在change中传入<tt>{silent:true}</tt>不会延迟单个的<tt>"change:attr"</tt>事件，而是会不会再触发。
+        在change中传入<tt>{silent:true}</tt>不会延迟单个的<tt>"change:attr"</tt>事件，而是不再触发。
       </li>
       <li>
         现在移除<tt>Model#change</tt>方法，因为不再支持延迟的属性变更。
@@ -3798,7 +3796,7 @@ ActiveRecord::Base.include_root_in_json = false
         <tt>Backbone</tt>对象现在扩充了<tt>Events</tt> ，因此你可以将它当做全局的event bus使用。
       </li>
       <li>
-        在<a href="#Sync">Backbone.sync</a>上添加一个<tt>"request"</tt>事件，每次向服务器发送请丢都会触发。它是<tt>"sync"</tt>事件的补充，
+        在<a href="#Sync">Backbone.sync</a>上添加一个<tt>"request"</tt>事件，每次向服务器发送请求都会触发。它是<tt>"sync"</tt>事件的补充，
       </li>
       <li>
         路由的URLs现在通过括号形式支持可选参数部分，而不必使用正则表达式。
@@ -3813,7 +3811,7 @@ ActiveRecord::Base.include_root_in_json = false
         在监听<tt>reset</tt>事件时，之前的模型现在可以很方便的在<tt>options.previousModels</tt>上获取。
       </li>
       <li>
-        <a href="#Model-validate">Validation</a>现在即使在"silent"事件里也会触发。这个变更以为这<tt>isValid</tt>方法已经被移除掉了。校验失败也会触发一个错误，即使是在options上定义error回调。
+        <a href="#Model-validate">Validation</a>现在即使在"silent"事件里也会触发。这个变更意味着<tt>isValid</tt>方法已经被移除掉了。校验失败也会触发一个错误，即使是在options上定义error回调。
       </li>
       <li>
         在<a href="#Sync">Backbone.sync</a>里，合并<tt>"sync"</tt> 和 <tt>"error"</tt>事件。不管是不是定义了<tt>success</tt> 和 <tt>error</tt>回调，它们都会触发。
@@ -3835,11 +3833,11 @@ ActiveRecord::Base.include_root_in_json = false
         修复路由定义中的首部和尾部的反斜杠正常化时的bug。它们的出现（或缺失）不会影响正常的行为。
       </li>
       <li>
-        现在定义一个View时，tt>options</tt>， <tt>el</tt>， <tt>tagName</tt>，
+        现在定义一个View时，<tt>options</tt>， <tt>el</tt>， <tt>tagName</tt>，
         <tt>id</tt> 和 <tt>className</tt> 现在可以定义为函数，只要你希望它们的值是在运行时确定的。
       </li>
       <li>
-        添加一个<tt>Backbone.ajax</tt>钩子函数，为了方便的覆盖默认的 <tt>$.ajax</tt>实现。如果AJAX比较老旧，你可以设置最有的方法来和服务器通信。
+        添加一个<tt>Backbone.ajax</tt>钩子函数，为了方便的覆盖默认的 <tt>$.ajax</tt>实现。如果AJAX比较老旧，你可以设置最优的方法来和服务器通信。
       </li>
       <li>
         <tt>Collection#sort</tt>现在触发<tt>sort</tt>事件，而不触发<tt>reset</tt>事件。
@@ -3860,7 +3858,7 @@ ActiveRecord::Base.include_root_in_json = false
         为了语义化和跨浏览器原因，路由现在会忽略搜索参数。向<tt>search?query=…&amp;page=3</tt>这样的路由会变成<tt>search/…/3</tt>。
       </li>
       <li>
-        <tt>Model#set</tt> 现在不再接收两一个模型作为参数。这回引发一些小问题，但很容易使用<tt>model.set(other.attributes)</tt>替换。
+        <tt>Model#set</tt> 现在不再接收另一个模型作为参数。这回引发一些小问题，但很容易替换为<tt>model.set(other.attributes)</tt>。
       </li>
     </ul>
 
@@ -3907,7 +3905,7 @@ ActiveRecord::Base.include_root_in_json = false
         如果你的页面有多个版本的jQuery，现在你可以使用<tt>Backbone.setDomLibrary</tt>方法确定到底使用哪一个。
       </li>
       <li>
-        恢复<b>0.9.0</b>版本带有"root"的路由的一个改动，保留"wait" and "validate"时间，以及嵌套的"change"事件的顺序。
+        恢复<b>0.9.0</b>版本带有"root"的路由的一个改动，保留"wait" and "validate"事件，以及嵌套的"change"事件的顺序。
       </li>
     </ul>
 
@@ -3920,13 +3918,13 @@ ActiveRecord::Base.include_root_in_json = false
         视图上添加了两个新属性：<tt>$el</tt> &mdash;一个视图元素的jQuery缓存对象，<tt>setElement</tt>，代替手工设置视图的<tt>el</tt>方式。它会正确的设置<tt>view.el</tt> 和 <tt>view.$el</tt>，以及在新的DOM对象上重新代理事件。
       </li>
       <li>
-        你现在可以一次绑定并触发多个有空白符分割的事件。比如： <tt>model.on("change:name change:age", ...)</tt>
+        你现在可以一次绑定并触发多个由空白符分割的事件。比如： <tt>model.on("change:name change:age", ...)</tt>
       </li>
       <li>
         在你不知道key的情况下，你可以调用<tt>model.set(key, value)</tt>或<tt>save</tt>。
       </li>
       <li>
-        在单个集合中不愿徐多个模型对象共用同一个<tt>id</tt> 。
+        在单个集合中不允许多个模型对象共用同一个<tt>id</tt> 。
       </li>
       <li>
         添加一个<tt>"sync"</tt>事件，模型的状态成功同服务器同步后调用（create, save, destroy）。
@@ -3943,7 +3941,7 @@ ActiveRecord::Base.include_root_in_json = false
         视图的<tt>events</tt>hash现在可以包含函数，也可以包含视图方法名字的字符串。
       </li>
       <li>
-        校验流程进行了一次大修改&mdash;模型<tt>validate</tt>函数现在及时是silent change下也能执行，现在在初始校验失败状态下也不能创建模型对象。
+        校验流程进行了一次大修改&mdash;模型<tt>validate</tt>函数现在即使是silent change下也能执行，现在在初始校验失败状态下也不能创建模型对象。
       </li>
       <li>
         在集合上添加<tt>shuffle</tt> 和 <tt>initial</tt>方法，代理了Underscore的同名方法。
@@ -3955,7 +3953,7 @@ ActiveRecord::Base.include_root_in_json = false
         <tt>View#attributes</tt>现在既可以是函数类型也可以是对象值。
       </li>
       <li>
-        现在调用集合的<tt>fetch</tt> 会将所有抓取的JSON响应都通过集合上模型对象定义的 <tt>parse</tt>函数。
+        现在调用集合的<tt>fetch</tt> 会将所有抓取的JSON响应都通过集合里模型对象定义的 <tt>parse</tt>函数。
       </li>
       <li>
         现在你可以告诉路由，调用<tt>navigate(fragment, {replace: true})</tt>方法，使用<tt>history.replaceState</tt>，或<tt>location.hash.replace</tt>，改变URL而不会添加历史记录。
@@ -3979,7 +3977,7 @@ ActiveRecord::Base.include_root_in_json = false
 
     <p>
       <b class="header">0.5.3</b> &mdash; <small><i>August 9, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.5.2...0.5.3">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.3/index.html">Docs</a><br />
-      View的 <tt>events</tt>属性现在可以定义为一个函数，或是一个对象字面量，这允许更容易以编程方式定义或继承事件。向集合中添加<tt>groupBy</tt>方法，代理的是Underscore的方法。如果服务器端已经渲染了整个页面就传入<tt>Backbone.history.start({silent: true})</tt>，阻止触发初始化执行的路由。编码后的URLs再传入pushSate的bug修复。
+      View的 <tt>events</tt>属性现在可以定义为一个函数，或是一个对象字面量，这更容易以编程方式定义或继承事件。向集合中添加<tt>groupBy</tt>方法，代理的是Underscore的方法。如果服务器端已经渲染了整个页面就传入<tt>Backbone.history.start({silent: true})</tt>，阻止触发初始化执行的路由。编码后的URLs再传入pushSate的bug修复。
     </p>
 
     <p>
@@ -3989,12 +3987,12 @@ ActiveRecord::Base.include_root_in_json = false
 
     <p>
       <b class="header">0.5.1</b> &mdash; <small><i>July 5, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.5.0...0.5.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.1/index.html">Docs</a><br />
-      0.5.0版本的清理，即：透明化的将基于hash的URLs升级到pushSate，反之亦然。改善向<tt>Model#initialize</tt>中传入未修改使用引起的不一致行为。恢复<b>0.5.0</b>版本的一个去掉路由中第一个#的改动。添加 <tt>includes</tt>的别名<tt>contains</tt>。
+      0.5.0版本的清理，即：透明化的将基于hash的URLs升级到pushSate，反之亦然。改善向<tt>Model#initialize</tt>中传入未修改属性引起的不一致行为。恢复<b>0.5.0</b>版本的一个去掉路由中第一个#的改动。添加 <tt>includes</tt>的别名<tt>contains</tt>。
     </p>
 
     <p>
       <b class="header">0.5.0</b> &mdash; <small><i>July 1, 2011</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.5.0/index.html">Docs</a><br />
-      大量的小调整和修复小的bug，最后查看 <a href="https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0">commit差异</a>来查看变更。支持HTML5的<tt>pushState</tt>，通过设置选项开启此功能：<tt>Backbone.history.start({pushState: true})</tt>。<tt>Controller</tt>重命名为<tt>Router</tt>，为的是表意清晰。<tt>Collection#refresh</tt>重命名为<tt>Collection#reset</tt>，用来强调它既能重置collection，也能在不传参数时清空collection。<tt>saveLocation</tt>被替换为<tt>navigate</tt>。RESTfull持久化方法（save, fetch等）现在反悔jQuery deferred对象，为了更进一步处理success/error链式调用，整体来说是为了便捷。改善<tt>Model#escape</tt>方法的XSS转码功能。在模型上添加<tt>urlRoot</tt>选项，在指定RESTfull urls时不必用集合。多次调用<tt>Backbone.history.start</tt>会抛出错误。<tt>Collection#create</tt>在初始化模型前调用。<tt>view.el</tt>现在可以是一个jQuery选择器。Backbone的views现在也接收一个<tt>attributes</tt>参数。<tt>Model#defaults</tt>现在既可以是函数，也可以是属性的对象字面量。
+      大量的小调整和修复小的bug，最好查看 <a href="https://github.com/jashkenas/backbone/compare/0.3.3...0.5.0">commit差异</a>来查看变更。支持HTML5的<tt>pushState</tt>，通过设置选项开启此功能：<tt>Backbone.history.start({pushState: true})</tt>。<tt>Controller</tt>重命名为<tt>Router</tt>，为的是表意清晰。<tt>Collection#refresh</tt>重命名为<tt>Collection#reset</tt>，用来强调它既能重置collection，也能在不传参数时清空collection。<tt>saveLocation</tt>被替换为<tt>navigate</tt>。RESTfull持久化方法（save, fetch等）现在返回jQuery deferred对象，为了更进一步处理success/error链式调用，整体来说是为了便捷。改善<tt>Model#escape</tt>方法的XSS转码功能。在模型上添加<tt>urlRoot</tt>选项，在指定RESTfull urls时不必用集合。多次调用<tt>Backbone.history.start</tt>会抛出错误。<tt>Collection#create</tt>在初始化模型前调用。<tt>view.el</tt>现在可以是一个jQuery选择器。Backbone的views现在也接收一个<tt>attributes</tt>参数。<tt>Model#defaults</tt>现在既可以是函数，也可以是属性的对象字面量。
     </p>
 
     <p>
@@ -4009,7 +4007,7 @@ ActiveRecord::Base.include_root_in_json = false
 
     <p>
       <b class="header">0.3.1</b> &mdash; <small><i>Nov 15, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.3.0...0.3.1">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.3.1/index.html">Docs</a><br />
-      所有的<tt>"add"</tt> 和 <tt>"remove"</tt>事件现在通过model发送，为的是便于视图监听这些事件而不必知道集合的存在。添加一个<tt>remove</tt> 方法到<a href="#View">Backbone.View</a>上。 <tt>'read'</tt> 和 <tt>'delete'</tt>氢气不在调用<tt>toJSON</tt>方法。Backbone现在可以加载空的URL片段。
+      所有的<tt>"add"</tt> 和 <tt>"remove"</tt>事件现在通过model发送，为的是便于视图监听这些事件而不必知道集合的存在。添加一个<tt>remove</tt> 方法到<a href="#View">Backbone.View</a>上。 <tt>'read'</tt> 和 <tt>'delete'</tt>请求不在调用<tt>toJSON</tt>方法。Backbone现在可以加载空的URL片段。
     </p>
 
     <p>
@@ -4024,7 +4022,7 @@ ActiveRecord::Base.include_root_in_json = false
 
     <p>
       <b class="header">0.1.2</b> &mdash; <small><i>Oct 19, 2010</i></small> &mdash; <a href="https://github.com/jashkenas/backbone/compare/0.1.1...0.1.2">Diff</a> &mdash; <a href="https://cdn.rawgit.com/jashkenas/backbone/0.1.2/index.html">Docs</a><br />
-      添加一个<a href="#Model-fetch">Model#fetch</a>方法，从服务器中抓取数据刷新模型的属性。现在可以在<tt>set</tt> 和 <tt>save</tt>方法中传入<tt>error</tt>回调，如果校验失败就会调用它，覆盖了之前的<tt>"error"</tt>事件。设置<tt>Backbone.emulateHTTP = true</tt>，你现在可以告诉backbone使用<tt>_method</tt>技巧，而不是使用HTTP的方法。已存在的模型和集合数据就在不发送不必要的<tt>GET</tt> 和 <tt>DELETE</tt>请求。添加一个<tt>rake lint</tt>任务。Backbone现在发布成为一个<a href="http://npmjs.org">NPM</a>的模块。
+      添加一个<a href="#Model-fetch">Model#fetch</a>方法，从服务器中抓取数据刷新模型的属性。现在可以在<tt>set</tt> 和 <tt>save</tt>方法中传入<tt>error</tt>回调，如果校验失败就会调用它，覆盖了之前的<tt>"error"</tt>事件。设置<tt>Backbone.emulateHTTP = true</tt>，你现在可以告诉backbone使用<tt>_method</tt>技巧，而不是使用HTTP的方法。已存在的模型和集合数据现在不发送不必要的<tt>GET</tt> 和 <tt>DELETE</tt>请求。添加一个<tt>rake lint</tt>任务。Backbone现在发布成为一个<a href="http://npmjs.org">NPM</a>的模块。
     </p>
 
     <p>
