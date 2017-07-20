@@ -1623,7 +1623,7 @@ ships.add([
     <p id="Collection-reset">
       <b class="header">reset</b><code>collection.reset([models], [options])</code>
       <br />
-      一次添加和删除一个模型是不错的，但是有时你有许多模型要变更，以至于你希望在集合上执行批量更新。使用<b>reset</b>方法，用一个新的模型（或属性的hash）列表代理集合中已有的模型，在完成只有触发一个<tt>"reset"</tt>事件，而不是在每个添加或删除的模型上触发事件。此方法返回新设置的模型的列表。为了便于操作，在一个<tt>"reset"</tt>事件中，之前的模型都可以在<tt>options.previousModels</tt>上获取到。传入<tt>null</tt>到<tt>options</tt>的<tt>models</tt>属性上可以清空集合。
+      一次添加和删除一个模型是不错的，但是有时你有许多模型要变更，以至于你希望在集合上执行批量更新。使用<b>reset</b>方法，用一个新的模型（或属性的hash）列表代替集合中已有的模型，在完成后会在集合上触发一个<tt>"reset"</tt>事件，而不是在每个添加或删除的模型上触发事件。此方法返回新设置的模型的列表。为了便于操作，在一个<tt>"reset"</tt>事件中，之前的模型都可以在<tt>options.previousModels</tt>上获取到。传入<tt>null</tt>到<tt>options</tt>的<tt>models</tt>属性上可以清空集合。
     </p>
 
     <p>
@@ -1676,7 +1676,7 @@ var book = library.get(110);
     <p id="Collection-push">
       <b class="header">push</b><code>collection.push(model, [options])</code>
       <br />
-      在集合的末尾添加一个模型。参与与<a href="#Collection-add">add</a>方法相同。
+      在集合的末尾添加一个模型。参数与<a href="#Collection-add">add</a>方法相同。
     </p>
 
     <p id="Collection-pop">
@@ -1706,7 +1706,7 @@ var book = library.get(110);
     <p id="Collection-length">
       <b class="header">length</b><code>collection.length</code>
       <br />
-      与数组相同，集合也维护了一个 <tt>length</tt>属性，记录了他所包含的模型的数量。
+      与数组相同，集合也维护了一个 <tt>length</tt>属性，记录了它所包含的模型的数量。
     </p>
 
     <p id="Collection-comparator">
@@ -1716,7 +1716,7 @@ var book = library.get(110);
     </p>
 
     <p>
-      "sortBy"比较器函数接收一个模型，并返回一个数字或字符串，表明模型相对其它模型的排序位置。"sort"比较器接收两个模型，如果第一个应该排在第二个前面则返回<tt>-1</tt>，如果两个排序相等则返回<tt>0</tt>，如果第一个应该排在第二个后面则返回<tt>1</tt>。注意Backbone会依赖你比较器参数的个数来决定使用哪个形式，所以请注意你绑定的比较器函数。
+      "sortBy"比较器函数接收一个模型，并返回一个数字或字符串，表明模型相对其它模型的排序位置。"sort"比较器接收两个模型，如果第一个应该排在第二个前面则返回<tt>-1</tt>，如果两个排序相等则返回<tt>0</tt>，如果第一个应该排在第二个后面则返回<tt>1</tt>。注意Backbone会根据你比较器参数的个数来决定使用哪个形式，所以请注意你绑定的比较器函数。
     </p>
 
     <p>
@@ -1833,7 +1833,7 @@ var Tweets = Backbone.Collection.extend({
     <p id="Collection-fetch">
       <b class="header">fetch</b><code>collection.fetch([options])</code>
       <br />
-      从服务器端为集合抓取默认的模型列表，并在返回后将其<a href="#Collection-set">set</a>到集合上。<b>options</b>选项接<tt>success</tt> 和 <tt>error</tt> 回调，回调的都是<tt>(collection, response, options)</tt>。当服务器端的数据返回时，集合内部使用 <a href="#Collection-set">set</a>将抓取到的模型进行合并，如果你传入<tt>{reset: true}</tt>选项，那么集合会很高效的将抓取的模型<a href="#Collection-reset">reset</a>到自身。本方法代理了<a href="#Sync">Backbone.sync</a>并返回一个<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象。处理<b>fetch</b>请求的服务器，需要返回一个模型的JSON数组。
+      从服务器端为集合抓取默认的模型列表，并在返回后将其<a href="#Collection-set">set</a>到集合上。<b>options</b>选项接<tt>success</tt> 和 <tt>error</tt> 回调，回调的参数都是<tt>(collection, response, options)</tt>。当服务器端的数据返回时，集合内部使用 <a href="#Collection-set">set</a>将抓取到的模型进行合并，如果你传入<tt>{reset: true}</tt>选项，那么集合会很高效的将抓取的模型<a href="#Collection-reset">reset</a>到自身。本方法代理了<a href="#Sync">Backbone.sync</a>并返回一个<a href="http://api.jquery.com/jQuery.ajax/#jqXHR">jqXHR</a>对象。处理<b>fetch</b>请求的服务器，需要返回一个模型的JSON数组。
     </p>
 
 <pre class="runnable">
@@ -1856,13 +1856,13 @@ accounts.fetch();
     </p>
 
     <p>
-      注意<b>fetch</b>不应该用来在页面加载时填充集合 &mdash; 所有在加载时需要的模型应该已经在某个地方<a href="#FAQ-bootstrap">bootstrapped</a>了。<b>fetch</b>为了的是需要模型懒加载的界面，通常这部分界面不是马上就展示的：例如，带有笔记集合的文档，可能需要打开或关闭。
+      注意<b>fetch</b>不应该用来在页面加载时填充集合 &mdash; 所有在加载时需要的模型应该已经在某个地方<a href="#FAQ-bootstrap">bootstrapped</a>了。<b>fetch</b>为的是需要模型懒加载的界面，通常这部分界面不是马上就展示的：例如，带有笔记集合的文档，可能需要打开或关闭。
     </p>
 
     <p id="Collection-create">
       <b class="header">create</b><code>collection.create(attributes, [options])</code>
       <br />
-      用来在集合中创建一个模型实例的快捷方法。等价于用一个属性的hash实例化一个模型，保存模型到服务器端，在成功创建后再讲模型设置到模型的列表上。返回新的模型对象。如果客户端校验失败，模型则不会保存，并返回校验失败的错误。为了此方法正常工作，你需要设置集合的<a href="#Collection-model">model</a>属性。本方法既可以接收一个属性的hash，也可以接收一个已存在的未保存的模型对象。
+      用来在集合中创建一个模型实例的快捷方法。等价于用一个属性的hash实例化一个模型，保存模型到服务器端，在成功创建后再将模型设置到模型的列表上。返回新的模型对象。如果客户端校验失败，模型则不会保存，并返回校验失败的错误。为了此方法正常工作，你需要设置集合的<a href="#Collection-model">model</a>属性。本方法既可以接收一个属性的hash，也可以接收一个已存在的未保存的模型对象。
     </p>
 
     <p>
@@ -1885,18 +1885,17 @@ var othello = nypl.create({
     <h2 id="Router">路由 - Backbone.Router</h2>
 
     <p>
-      Web应用程序经常在应用中提供可链接的，可书签花的，可分享的URLs。直到最近hash片段(<tt>#page</tt>) 才用来提供这些固定连接，但是由于History API的到来，现在可以使用标准的URLs（<tt>/page</tt>）。<b>Backbone.Router</b>提供了用来实现客户端路由，将它们与行为和事件联系起来。对于不支持History API的浏览器，路由处理会优雅降级并转换到使用hash片段的URL版本。
-      Web
+      Web应用程序经常在应用中提供可链接的，可书签化的，可分享的URLs。直到最近hash片段(<tt>#page</tt>) 才用来提供这些固定连接，但是由于History API的到来，现在可以使用标准的URLs（<tt>/page</tt>）。<b>Backbone.Router</b>用来实现客户端路由，将它们与行为和事件联系起来。对于不支持History API的浏览器，路由处理会优雅降级并转换到使用hash片段的URL版本。
     </p>
 
     <p>
-      在页面加载过程中，在你的应用完成创建所有路由后，一定要调用 <tt>Backbone.history.start()</tt>或<tt>Backbone.history.start({pushState: true})</tt> 来初始化URL的路由。
+      页面加载过程中，在你的应用完成创建所有路由后，一定要调用 <tt>Backbone.history.start()</tt>或<tt>Backbone.history.start({pushState: true})</tt> 来初始化URL的路由。
     </p>
 
     <p id="Router-extend">
       <b class="header">extend</b><code>Backbone.Router.extend(properties, [classProperties])</code>
       <br />
-      创建自定义路由类。定义路由匹配时需要出发的动作，提供一个 <a href="#Router-routes">routes</a>的hash，包含了路由到action的映射。记住在定义路由时不要在开始处添加斜杠：
+      创建自定义路由类。定义路由匹配时需要触发的动作，提供一个 <a href="#Router-routes">routes</a>的hash，包含了路由到action的映射。记住在定义路由时不要在开始处添加斜杠：
     </p>
 
 <pre>
@@ -1942,11 +1941,11 @@ var Workspace = Backbone.Router.extend({
     </p>
 
     <p>
-      尾部的反斜杠会当做URL的一部分进行出阿里，在访问时会当做一个唯一的路由进行匹配。 <tt>docs</tt> and <tt>docs/</tt> 会触发不同的回调。如果你希望避免生成两种类型的URLs，你可以定义一个<tt>"docs(/)"</tt>路由来同时匹配两种情况。
+      尾部的反斜杠会当做URL的一部分进行处理，在访问时会当做一个唯一的路由进行匹配。 <tt>docs</tt> and <tt>docs/</tt> 会触发不同的回调。如果你希望避免生成两种类型的URLs，你可以定义一个<tt>"docs(/)"</tt>路由来同时匹配两种情况。
     </p>
 
     <p>
-      在用户点击回退按钮，或输入新的URL后，会匹配一个也顶的路由，action的名字会当做一个<a href="#Events">事件</a>触发，所以别的对象可以监听这个路由，并获得通知。以下例子中，访问<tt>#help/uploading</tt>会在路由对象上触发一个<tt>route:help</tt>事件。
+      在用户点击回退按钮，或输入新的URL后，当匹配一个特定的路由时，会触发一个以action的名字为事件名的<a href="#Events">事件</a>，所以别的对象可以监听这个路由，并获得通知。以下例子中，访问<tt>#help/uploading</tt>会在路由对象上触发一个<tt>route:help</tt>事件。
     </p>
 
 <pre>
