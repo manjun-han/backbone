@@ -2653,24 +2653,14 @@ ActiveRecord::Base.include_root_in_json = false
       否则，就覆盖<a href="#Model-parse">parse</a>将model的属性从封装中提取出来。类似的，Backbone的PUTs 和 POSTs模型的JSON标识，这是Rails默认期望的命名空间属性。你可以让你的控制器直接从<tt>params</tt>上过滤属性，或者你可以覆盖Backbone的<a href="#Model-toJSON">toJSON</a>添加Rails期望的额外的封装。
     </p>
 
-    <h2 id="examples">例子</h2>
+    <h2 id="examples">例子 - Examples</h2>
 
     <p>
-      The list of examples that follows, while long, is not exhaustive. If you've
-      worked on an app that uses Backbone, please add it to the
-      <a href="https://github.com/jashkenas/backbone/wiki/Projects-and-Companies-using-Backbone">wiki page of Backbone apps</a>.
+      接下来下面的例子，虽然很长但却不够详尽。如果你在你的应用中使用了Backbone，请将它添加到<a href="https://github.com/jashkenas/backbone/wiki/Projects-and-Companies-using-Backbone">wiki page of Backbone apps</a>。
     </p>
 
     <p id="examples-todos">
-      <a href="http://jgn.me/">Jérôme Gravel-Niquet</a> has contributed a
-      <a href="examples/todos/index.html">Todo List application</a>
-      that is bundled in the repository as Backbone example. If you're wondering
-      where to get started with Backbone in general, take a moment to
-      <a href="docs/todos.html">read through the annotated source</a>. The app uses a
-      <a href="http://github.com/jeromegn/Backbone.localStorage">LocalStorage adapter</a>
-      to transparently save all of your todos within your browser, instead of
-      sending them to a server. Jérôme also has a version hosted at
-      <a href="http://localtodos.com/">localtodos.com</a>.
+      <a href="http://jgn.me/">Jérôme Gravel-Niquet</a>贡献了一个<a href="examples/todos/index.html">Todo List application</a>示例，它作为Backbone的示例被打包进仓库里。如果你还在徘徊，不知道如何入门Backbone，请花上几分钟来<a href="docs/todos.html">通读注释源码</a>。该应用使用<a href="http://github.com/jeromegn/Backbone.localStorage">LocalStorage adapter</a>，将所有的todos都保存在浏览器中，不会发送至服务器。Jérôme也有一个线上版本<a href="http://localtodos.com/">localtodos.com</a>.
     </p>
 
     <div style="text-align: center;">
@@ -2682,12 +2672,7 @@ ActiveRecord::Base.include_root_in_json = false
     <h2 id="examples-documentcloud">DocumentCloud</h2>
 
     <p>
-      The <a href="http://www.documentcloud.org/public/#search/">DocumentCloud workspace</a>
-      is built on Backbone.js, with <i>Documents</i>, <i>Projects</i>,
-      <i>Notes</i>, and <i>Accounts</i> all as Backbone models and collections.
-      If you're interested in history &mdash; both Underscore.js and Backbone.js
-      were originally extracted from the DocumentCloud codebase, and packaged
-      into standalone JS libraries.
+      <a href="http://www.documentcloud.org/public/#search/">DocumentCloud workspace</a>构建在Backbone.js智商，其中的文档，项目，笔记以及账户都使用Backbone的模型和集合表示。如果你对历史感兴趣 &mdash; Underscore.js和Backbone.js就是从DocumenCloud代码中萃取出来的，并打包成独立的JS库。
     </p>
 
     <div style="text-align: center;">
